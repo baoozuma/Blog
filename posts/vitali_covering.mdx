@@ -1,0 +1,41 @@
+---
+title: "The Vitali Covering Lemma"
+date: "2025-04-03"
+description: "Why the greedy algorithm gives factor 3, and why Besicovitch is needed for general measures."
+thumbnail: "/thumbnails/vitali.png"
+---
+## Setup
+
+Let $\mathcal{F}$ be a finite collection of balls in $\mathbb{R}^d$. 
+We want to find a disjoint subcollection $\mathcal{S} \subset \mathcal{F}$ such that
+
+$$
+\bigcup_{B \in \mathcal{F}} B \subset \bigcup_{B \in \mathcal{S}} 3B
+$$
+
+where $3B$ denotes the ball with the same center as $B$ but three times the radius.
+
+## The Greedy Algorithm
+
+The proof is constructive:
+
+1. Pick $B_1 \in \mathcal{F}$ with largest radius.
+2. Remove all balls intersecting $B_1$.
+3. Pick $B_2$ with largest radius among remaining balls.
+4. Repeat until $\mathcal{F}$ is empty.
+
+## Why Factor 3?
+
+If $B \in \mathcal{F}$ was removed because it intersects $B_i$, then:
+
+$$
+r(B) \leq r(B_i)
+$$
+
+since $B_i$ was chosen to have largest radius. Any point $x \in B$ satisfies:
+
+$$
+|x - c_i| \leq r(B) + r(B_i) \leq 2r(B_i)
+$$
+
+hence $B \subset 3B_i$. $\blacksquare$
