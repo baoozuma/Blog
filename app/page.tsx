@@ -168,7 +168,7 @@ export default function HomePage() {
             { icon: '∫', label: 'Mathematics', detail: 'Geometric analysis, GMT, minimal surfaces, gauge theory' },
             { icon: '♪', label: 'Music', detail: ' Ling Tosite Sigure, 7UPPERCUTS , Hitohira (ひとひら), ACDC' },
             { icon: '§', label: 'Philosophy', detail: 'Nietzsche, Marx, Kant, Arendt — existentialism & political theory' },
-            { icon: '⟁', label: 'Games', detail: 'Nier: Automata · Metal Gear Solid V · Red Dead Redemption 2' },
+            { icon: '⟁', label: 'Games', detail: 'Nier: Automata, Metal Gear Solid V, Red Dead Redemption 2' },
           ].map(({ icon, label, detail }) => (
             <div key={label} style={{
               padding: '1.25rem',
