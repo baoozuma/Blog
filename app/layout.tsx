@@ -4,9 +4,12 @@ import Splash from './components/Splash'
 
 
 export const metadata: Metadata = {
-  title: "Pure Mathematics",
+  title: "Aleksis Arendt",
   description: "Notes on measure theory, functional analysis, and geometry.",
-};
+  icons: {
+      icon: '/favicon.svg?v=2',
+    },
+}
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
