@@ -19,7 +19,7 @@ export default function Splash() {
 
   return (
     <div className="splash">
-      <span className="splash-text">welcome, Aleksis.</span>
+      <span className="splash-text">Hi, my name is Aleksis.</span>
       <span className="splash-text-2">hope you're doing well.</span>
     </div>
   )
