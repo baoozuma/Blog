@@ -9,6 +9,8 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@keystatic/core": "^0.5.50",
+    "@keystatic/next": "^5.0.4",
     "@tailwindcss/typography": "^0.5.19",
     "gray-matter": "^4.0.3",
     "katex": "^0.16.44",

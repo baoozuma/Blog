@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import Splash from './components/Splash'
+
 
 export const metadata: Metadata = {
   title: "Pure Mathematics",
@@ -10,35 +12,35 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body>
-        <nav style={{
-          position: 'fixed', top: 0, left: 0, right: 0, zIndex: 50,
-          borderBottom: '1px solid #2a2a2d',
-          background: 'rgba(14,14,15,0.9)',
-          backdropFilter: 'blur(12px)',
-        }}>
-          <div style={{
-            maxWidth: 720, margin: '0 auto', padding: '0 1.5rem',
-            height: 56, display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-          }}>
-            <a href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center' }}>
-  <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect width="36" height="36" rx="8" fill="#1a1608"/>
-    <rect width="36" height="36" rx="8" stroke="#c9a96e" strokeWidth="1" strokeOpacity="0.4"/>
-    <text x="50%" y="54%" dominantBaseline="middle" textAnchor="middle"
-      fontFamily="EB Garamond, Georgia, serif"
-      fontSize="22" fontWeight="500" fill="#c9a96e">∂</text>
-  </svg>
-</a>
-            <div style={{ display: 'flex', gap: '2rem' }}>
-              <a href="/blog" style={{ color: '#9b9895', textDecoration: 'none', fontSize: '0.95rem', fontFamily: "'JetBrains Mono', monospace" }}>blog</a>
-              <a href="/about" style={{ color: '#9b9895', textDecoration: 'none', fontSize: '0.95rem', fontFamily: "'JetBrains Mono', monospace" }}>about</a>
+        <nav>
+          <div className="nav-inner">
+            <a href="/" className="nav-logo">
+              <svg width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#60a5fa" />
+                  <stop offset="50%" stopColor="#e8e5f2" />
+                  <stop offset="100%" stopColor="#ffa600" />
+                </linearGradient>
+              </defs>
+              <text x="50%" y="56%" dominantBaseline="middle" textAnchor="middle"
+                fontFamily="EB Garamond, Georgia, serif"
+                fontSize="38" fontWeight="600" fill="url(#goldGrad)">∂</text>
+            </svg>
+                        </a>
+            <div className="nav-links">
+              <a href="/blog">blog</a>
+              <a href="/about">about</a>
             </div>
           </div>
         </nav>
-        <div style={{ maxWidth: 720, margin: '0 auto', padding: '5rem 1.5rem 4rem' }}>
+        <div className="page-content">
           {children}
         </div>
+      <Splash />
       </body>
+      
+
     </html>
   );
 }
