@@ -13,13 +13,12 @@ export default function HomePage() {
       {/* Hero */}
       <div className="hero">
         <div className="hero-text">
-          <p className="hero-label">undergraduate mathematics · hcmus</p>
+          <p className="hero-label">Pure Mathematics - HCMUS</p>
 
           <h1 className="hero-title">Aleksis Arendt</h1>
 
           <p className="hero-desc">
-            Working through measure theory, functional analysis,
-            and geometric analysis.
+              i don't mytholize math, it's just a job.
           </p>
 
           <div className="tags">
@@ -36,8 +35,8 @@ export default function HomePage() {
           <div className="social-row">
             {[
               { label: 'GitHub', href: 'https://github.com/baoozuma', icon: <FaGithub /> },
-              { label: 'Facebook', href: 'https://facebook.com/baoozuma', icon: <FaFacebook /> },
-              { label: 'Instagram', href: 'https://instagram.com/baoozuma', icon: <FaInstagram /> },
+              { label: 'Facebook', href: 'https://www.facebook.com/aleksis.arendt', icon: <FaFacebook /> },
+              { label: 'Instagram', href: 'https://www.instagram.com/aleksis.arendt/', icon: <FaInstagram /> },
               { label: 'Email', href: 'mailto:aleksisdg@gmail.com', icon: <HiOutlineMail /> },
             ].map(({ label, href, icon }) => (
               <a key={label} href={href} target="_blank" rel="noopener noreferrer" className="social-link">
@@ -55,21 +54,63 @@ export default function HomePage() {
           <div className="avatar-deco" />
         </div>
       </div>
-
-      {/* Interests */}
+<p style={{
+  marginTop: '-3rem',
+  marginBottom: '4rem',
+  color: 'var(--text-muted)',
+  fontSize: '1rem',
+  lineHeight: 1.8,
+  borderLeft: '2px solid var(--accent)',
+  paddingLeft: '1rem'
+}}>
+  I study pure mathematics at HCMUS, working toward a master's in Germany or Switzerland.
+  My long-term interest is geometric analysis — minimal surfaces, GMT, and mathematical physics.
+  Outside of math: J-Rock, Nietzsche, and story-driven games.
+</p>
+     {/* Interests */}
       <div className="section">
         <p className="section-label">interests</p>
         <div className="interests-grid">
           {[
-            { icon: '∫', label: 'Mathematics', detail: 'Geometric analysis, GMT, minimal surfaces, gauge theory' },
-            { icon: '♪', label: 'Music', detail: 'Ling Tosite Sigure, 7UPPERCUTS, Hitohira, ACDC' },
-            { icon: '§', label: 'Philosophy', detail: 'Nietzsche, Marx, Kant, Arendt — existentialism & political theory' },
-            { icon: '⟁', label: 'Games', detail: 'Nier: Automata, Metal Gear Solid V, Red Dead Redemption 2' },
-          ].map(({ icon, label, detail }) => (
-            <div key={label} className="interest-card">
-              <div className="interest-icon">{icon}</div>
-              <div className="interest-label">{label}</div>
-              <div className="interest-detail">{detail}</div>
+            {
+              icon: '∫',
+              label: 'Mathematics',
+              detail: 'Geometric analysis, GMT, minimal surfaces, Mathematical Physics',
+              accent: '#7c6af5',
+              sub: 'Pure & Applied',
+            },
+            {
+              icon: '♪',
+              label: 'Music',
+              detail: 'Ling Tosite Sigure, 7UPPERCUTS, Hitohira, ACDC',
+              accent: '#4ecdc4',
+              sub: 'J-Rock & Metal',
+            },
+            {
+              icon: '§',
+              label: 'Philosophy',
+              detail: 'Nietzsche, Marx, Kant, Arendt',
+              accent: '#e8a44a',
+              sub: 'Existentialism & Political Theory',
+            },
+            {
+              icon: '⟁',
+              label: 'Games',
+              detail: 'Nier: Automata, Metal Gear Solid V, Red Dead Redemption 2',
+              accent: '#f87171',
+              sub: 'Story-driven',
+            },
+          ].map(({ icon, label, detail, accent, sub }) => (
+            <div key={label} className="interest-card-v2" style={{ '--card-accent': accent } as React.CSSProperties}>
+              <div className="interest-card-top">
+                <span className="interest-icon-v2">{icon}</span>
+                <div>
+                  <div className="interest-label-v2">{label}</div>
+                  <div className="interest-sub">{sub}</div>
+                </div>
+              </div>
+              <div className="interest-divider" />
+              <p className="interest-detail-v2">{detail}</p>
             </div>
           ))}
         </div>

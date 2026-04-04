@@ -1,0 +1,52 @@
+---
+title: "Volume and Surface Area of the Unit Ball in ℝⁿ"
+date: "2025-04-05"
+description: "Two classical formulas — one recursive, one via Gaussian integrals — and why the volume vanishes as n → ∞."
+thumbnail: "/thumbnails/sphere.jpg"
+---
+
+## The Question
+
+What is the volume of the unit ball $B^n = \{x \in \mathbb{R}^n : \|x\| \leq 1\}$?
+
+In low dimensions we know:
+
+$$
+|B^1| = 2, \quad |B^2| = \pi, \quad |B^3| = \frac{4\pi}{3}
+$$
+
+The pattern is not obvious. The answer turns out to be
+
+$$
+|B^n| = \frac{\pi^{n/2}}{\Gamma\!\left(\frac{n}{2} + 1\right)}
+$$
+
+and the surface area of $S^{n-1} = \partial B^n$ is
+
+$$
+|\mathbb{S}^{n-1}| = \frac{2\pi^{n/2}}{\Gamma\!\left(\frac{n}{2}\right)}
+$$
+
+## Why This Is Surprising
+
+Two things deserve attention.
+
+**The volume peaks and then decays to zero.** Despite the ball growing in every direction, $|B^n| \to 0$ as $n \to \infty$. Most of the volume of a high-dimensional ball concentrates near its equator — a phenomenon called *concentration of measure* that underlies much of modern probability and functional analysis.
+
+**The Gaussian trick.** The cleanest derivation runs through the identity
+
+$$
+\int_{\mathbb{R}^n} e^{-\|x\|^2} \, dx = \pi^{n/2}
+$$
+
+Converting to spherical coordinates gives both formulas at once, via the Gamma function evaluated at half-integers.
+
+## What We Will Prove
+
+This post gives two proofs:
+
+**Proof 1 (recursive).** Express $|B^n|$ in terms of $|B^{n-2}|$ by slicing along one axis and integrating. This gives a clean recursion but requires tracking the Gamma function carefully.
+
+**Proof 2 (Gaussian integral).** Compute $\int_{\mathbb{R}^n} e^{-\|x\|^2} dx$ in two ways — as a product of 1D integrals, and in polar coordinates. The comparison yields the formula directly.
+
+Along the way we derive the surface area formula and verify it against the known cases in dimensions 1, 2, 3.

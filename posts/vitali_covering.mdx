@@ -1,41 +1,99 @@
 ---
-title: "The Vitali Covering Lemma"
-date: "2025-04-03"
-description: "Why the greedy algorithm gives factor 3, and why Besicovitch is needed for general measures."
+title: "Vitali Covering Theorem"
+date: "2025-04-04"
+description: "A proof of the Vitali covering theorem via Zorn's lemma and a 5B covering argument."
 thumbnail: "/thumbnails/vitali.png"
 ---
+
 ## Setup
 
-Let $\mathcal{F}$ be a finite collection of balls in $\mathbb{R}^d$. 
-We want to find a disjoint subcollection $\mathcal{S} \subset \mathcal{F}$ such that
+Let $(X, d)$ be a separable metric space and $\mathcal{F}$ a collection of closed balls.
+Define
 
 $$
-\bigcup_{B \in \mathcal{F}} B \subset \bigcup_{B \in \mathcal{S}} 3B
+R = \sup\{r \mid B(x,r) \in \mathcal{F}\}
 $$
 
-where $3B$ denotes the ball with the same center as $B$ but three times the radius.
-
-## The Greedy Algorithm
-
-The proof is constructive:
-
-1. Pick $B_1 \in \mathcal{F}$ with largest radius.
-2. Remove all balls intersecting $B_1$.
-3. Pick $B_2$ with largest radius among remaining balls.
-4. Repeat until $\mathcal{F}$ is empty.
-
-## Why Factor 3?
-
-If $B \in \mathcal{F}$ was removed because it intersects $B_i$, then:
+and partition $\mathcal{F}$ into layers by radius:
 
 $$
-r(B) \leq r(B_i)
+F_i = \{B(x,r) \in \mathcal{F} \mid R \cdot 2^{-i-1} \leq r \leq R \cdot 2^{-i}\}
 $$
 
-since $B_i$ was chosen to have largest radius. Any point $x \in B$ satisfies:
+## Constructing the Disjoint Subcollection
+
+Define a sequence of maximal disjoint subcollections $(G_n)$ inductively.
+
+**Base case.** Let $H_0 = F_0$ and define the poset
 
 $$
-|x - c_i| \leq r(B) + r(B_i) \leq 2r(B_i)
+P = \{F \subseteq H_0 \mid F \text{ pairwise disjoint}\}, \qquad F_1 \leq F_2 \iff F_1 \subseteq F_2
 $$
 
-hence $B \subset 3B_i$. $\blacksquare$
+**Zorn's condition.** Given a chain $F_1 \leq F_2 \leq \cdots$, let $F = \bigcup_{n=1}^\infty F_n$.
+For any $B_1, B_2 \in F$, there exists $k$ large enough so that $B_1, B_2 \in F_k$,
+hence $B_1 \cap B_2 = \varnothing$. Thus every chain has an upper bound in $P$,
+so by Zorn's lemma $P$ has a maximal element $G_0$.
+
+**Inductive step.** Given $G_1, \ldots, G_n$, set
+
+$$
+H_{n+1} = \{B \in F_{n+1} \mid B \cap C = \varnothing,\ \forall C \in G_1 \cup \cdots \cup G_n\}
+$$
+
+Apply Zorn's lemma again to obtain a maximal disjoint subcollection $G_{n+1} \subseteq H_{n+1}$.
+
+## Countability of $G$
+
+**Claim.** $G = \bigcup_{n=1}^\infty G_n$ is countable.
+
+Since $X$ is separable, it admits a countable cover by closed balls
+$\{B(y_i, R \cdot 2^{i-1})\}_{i \in \mathbb{N}}$.
+We claim each such ball contains **at most one center** of a ball in $G_i$.
+
+Suppose $B(x_1, r_1), B(x_2, r_2) \in G_i$ with $x_1, x_2 \in B(y, R \cdot 2^{i-2})$ for some $y$. Then
+
+$$
+\|x_1 - x_2\| \leq \|x_1 - y\| + \|y - x_2\| \leq R \cdot 2^{i-1} \leq r_1, r_2
+$$
+
+so $x_1 \in B(x_2, r_2)$ and $x_2 \in B(x_1, r_1)$, contradicting disjointness of $G_i$.
+Hence each $G_i$ is countable, and so is $G$. $\square$
+
+## The 5B Covering
+
+**Claim.** $\displaystyle\bigcup_{B \in \mathcal{F}} B \subseteq 5G := \bigcup_{B \in G} 5B$.
+
+Let $B(x_1, r_1) \in \mathcal{F}$. Then $B(x_1,r_1) \in F_i$ for some $i$, so
+
+$$
+R \cdot 2^{-i-1} < r_1 \leq R \cdot 2^{-i}
+$$
+
+If $B(x_1, r_1) \notin G_i$, by maximality of $G_i$ there exists $B(x_2, r_2) \in G_i$
+with $B(x_1, r_1) \cap B(x_2, r_2) \neq \varnothing$.
+
+For any $x \in B(x_1, r_1)$:
+
+$$
+\|x_2 - x\| \leq \|x_1 - x\| + \|x_2 - x_1\| \leq r_1 + r_1 + r_2 = 2r_1 + r_2
+$$
+
+To find the best constant $k$ such that $2r_1 + r_2 \leq k r_2$, note that both
+$r_1, r_2 \in (R \cdot 2^{-i-1}, R \cdot 2^{-i}]$, so
+
+$$
+\frac{2r_1}{r_2} + 1 \leq \frac{2 \cdot R \cdot 2^{-i}}{R \cdot 2^{-i-1}} + 1 = 4 + 1 = 5
+$$
+
+Therefore
+
+$$
+\|x_2 - x\| \leq 5r_2
+$$
+
+which gives $B(x_1, r_1) \subseteq 5B(x_2, r_2)$. Since $B(x_1,r_1) \in \mathcal{F}$ was arbitrary,
+
+$$
+\bigcup_{B \in \mathcal{F}} B \subseteq \bigcup_{B \in G} 5B = 5G \qquad \blacksquare
+$$

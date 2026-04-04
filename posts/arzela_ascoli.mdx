@@ -1,0 +1,37 @@
+---
+title: "Two Proofs of the Arzelà–Ascoli Theorem"
+date: "2025-04-05"
+description: "Equicontinuity, uniform boundedness, and why compactness in function spaces requires more than pointwise control."
+thumbnail: "/thumbnails/arzela.svg"
+---
+
+## The Problem
+
+In $\mathbb{R}^n$, the Bolzano–Weierstrass theorem says every bounded sequence has a convergent subsequence. Can we do the same for sequences of functions?
+
+The naive answer is no. The sequence $f_n(x) = \sin(nx)$ on $[0,1]$ is uniformly bounded — $|f_n(x)| \leq 1$ for all $n$ and $x$ — but admits no uniformly convergent subsequence.
+
+What additional structure do we need?
+
+## The Theorem
+
+**Arzelà–Ascoli.** Let $K$ be a compact metric space and $\mathcal{F} \subset C(K)$ a family of continuous functions. If $\mathcal{F}$ is:
+
+- **uniformly bounded**: $\sup_{f \in \mathcal{F}} \|f\|_\infty < \infty$
+- **equicontinuous**: for every $\varepsilon > 0$ there exists $\delta > 0$ such that $d(x,y) < \delta \Rightarrow |f(x) - f(y)| < \varepsilon$ for **all** $f \in \mathcal{F}$
+
+then every sequence in $\mathcal{F}$ has a uniformly convergent subsequence.
+
+## Equicontinuity Is the Key Condition
+
+Uniform boundedness alone is not enough — $\sin(nx)$ shows this. Equicontinuity is the condition that the functions in $\mathcal{F}$ do not oscillate too rapidly, uniformly across the family.
+
+Intuitively: equicontinuity + boundedness at each point → the functions cannot escape to infinity or oscillate wildly, so a convergent subsequence must exist.
+
+## Two Proofs
+
+**Proof 1 (diagonal argument).** Fix a countable dense subset $\{x_1, x_2, \ldots\} \subset K$. Extract subsequences by a diagonal procedure — first converge at $x_1$, then at $x_2$, and so on. Equicontinuity then promotes pointwise convergence to uniform convergence.
+
+**Proof 2 (total boundedness).** Show that $\mathcal{F}$ is totally bounded in $C(K)$ — for every $\varepsilon > 0$, $\mathcal{F}$ can be covered by finitely many $\varepsilon$-balls. Since $C(K)$ is complete, total boundedness is equivalent to precompactness.
+
+The two proofs illuminate different aspects: the first is constructive and explicit, the second is more conceptual and generalizes to abstract metric spaces.
