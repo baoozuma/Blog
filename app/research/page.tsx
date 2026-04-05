@@ -225,7 +225,21 @@ function ResearchContent() {
 
     return () => clearTimeout(timeout)
   }, [active, activeSub])
+  useEffect(() => {
+      researchData.forEach(r => {
+        const img1 = new window.Image()
+        img1.src = r.banner
+        const img2 = new window.Image()
+        img2.src = r.img
 
+        r.subareas.forEach(s => {
+          const img3 = new window.Image()
+          img3.src = s.banner
+          const img4 = new window.Image()
+          img4.src = s.img
+        })
+      })
+    }, [])
   const current = researchData.find((r) => r.tag === displayed)!
   const currentSub: Subarea | null = displayedSub
     ? current.subareas.find(s => s.name === displayedSub) ?? null
