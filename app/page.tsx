@@ -21,7 +21,7 @@ export default function HomePage() {
       <div className="hero">
   <div className="hero-text">
     <p className="hero-label">Pure Mathematics · HCMUS</p>
-    <h1 className="hero-title">Aleksis Arendt</h1>
+    <h1 className="hero-title">Alëksis Arendt</h1>
 
     <p className="hero-desc">
       I don't mytholize math, it's just a job.

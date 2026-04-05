@@ -3,7 +3,7 @@ import "./globals.css";
 
 import FeedbackPanel from './components/FeedbackPanel'
 export const metadata: Metadata = {
-  title: "Aleksis Arendt",
+  title: "Alëksis Arendt",
   description: "Notes on measure theory, functional analysis, and geometry.",
   icons: {
     icon: '/favicon.svg?v=2',
