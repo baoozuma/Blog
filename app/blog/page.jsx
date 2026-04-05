@@ -16,7 +16,7 @@ export default function BlogPage() {
       <div style={{
         display: 'grid',
         gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
-        gap: '1.5rem',
+        gap: '1rem',
       }}>
         {posts.map(post => (
           <PostCard key={post.slug} post={post} />

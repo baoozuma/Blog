@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 
 const tagData: Record<string, { desc: string; img: string }> = {
   'Geometric Measure Theory': {
@@ -14,7 +15,7 @@ const tagData: Record<string, { desc: string; img: string }> = {
   },
   'Mathematical Physics': {
     desc: 'Classical mechanics, electrodynamics, relativity — via the language of differential geometry and functional analysis.',
-    img: '/tags/physics.jpg', 
+    img: '/tags/physics.jpg',
   },
   'Analysis of PDEs': {
     desc: 'Elliptic, parabolic, hyperbolic equations — existence, regularity, Sobolev spaces, variational methods, boundary conditions.',
@@ -33,6 +34,7 @@ const tagData: Record<string, { desc: string; img: string }> = {
 export default function TagTooltip({ tag }: { tag: string }) {
   const [hovered, setHovered] = useState(false)
   const data = tagData[tag]
+  const router = useRouter()
 
   return (
     <div style={{ position: 'relative', display: 'inline-block' }}>
@@ -41,42 +43,34 @@ export default function TagTooltip({ tag }: { tag: string }) {
         style={{ cursor: 'pointer', transition: 'border-color 0.2s, color 0.2s' }}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
+        onClick={() => router.push(`/research?topic=${encodeURIComponent(tag)}`)}
       >
         {tag}
       </span>
 
-      {/* Tooltip — luôn render, dùng opacity + transform để animate */}
       {data && (
-        <div style={{
-          position: 'absolute',
-          bottom: 'calc(100% + 8px)',
-          left: '50%',
-          transform: hovered ? 'translateX(-50%) translateY(0)' : 'translateX(-50%) translateY(6px)',
-          width: 220,
-          background: '#1a1a1b',
-          border: '1px solid #2a2a2d',
-          borderRadius: '8px',
-          overflow: 'hidden',
-          zIndex: 100,
-          boxShadow: '0 8px 32px rgba(0,0,0,0.5)',
-          opacity: hovered ? 1 : 0,
-          pointerEvents: hovered ? 'auto' : 'none',
-          transition: 'opacity 0.25s ease, transform 0.25s ease',
-        }}>
-          <div style={{
-            width: '100%',
-            height: 100,
-            position: 'relative',
+        <div
+          onClick={() => router.push(`/research?topic=${encodeURIComponent(tag)}`)}
+          style={{
+            position: 'absolute',
+            bottom: 'calc(100% + 8px)',
+            left: '50%',
+            transform: hovered ? 'translateX(-50%) translateY(0)' : 'translateX(-50%) translateY(6px)',
+            width: 220,
+            background: '#1a1a1b',
+            border: '1px solid #2a2a2d',
+            borderRadius: '8px',
             overflow: 'hidden',
-          }}>
-            <Image
-              src={data.img}
-              alt={tag}
-              fill
-              sizes="220px"
-              loading="lazy"
-              style={{ objectFit: 'cover' }}
-            />
+            zIndex: 100,
+            boxShadow: '0 8px 32px rgba(0,0,0,0.5)',
+            opacity: hovered ? 1 : 0,
+            pointerEvents: hovered ? 'auto' : 'none',
+            transition: 'opacity 0.25s ease, transform 0.25s ease',
+            cursor: 'pointer',
+          }}
+        >
+          <div style={{ width: '100%', height: 100, position: 'relative', overflow: 'hidden' }}>
+            <Image src={data.img} alt={tag} fill sizes="220px" loading="lazy" style={{ objectFit: 'cover' }} />
           </div>
 
           <div style={{ padding: '0.75rem 1rem' }}>
@@ -90,16 +84,13 @@ export default function TagTooltip({ tag }: { tag: string }) {
             }}>
               {tag}
             </div>
-            <p style={{
-              fontSize: '0.78rem',
-              color: '#dcd7d2',
-              lineHeight: 1.5,
-              margin: 0,
-            }}>
+            <p style={{ fontSize: '0.78rem', color: '#dcd7d2', lineHeight: 1.5, margin: 0 }}>
               {data.desc}
             </p>
           </div>
 
+          {/* Click hint */}
+          
           <div style={{
             position: 'absolute',
             bottom: -5,
@@ -116,4 +107,4 @@ export default function TagTooltip({ tag }: { tag: string }) {
       )}
     </div>
   )
-}
+} 

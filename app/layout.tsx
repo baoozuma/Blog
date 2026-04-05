@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
-
+import FeedbackPanel from './components/FeedbackPanel'
 export const metadata: Metadata = {
   title: "Aleksis Arendt",
   description: "Notes on measure theory, functional analysis, and geometry.",
@@ -36,14 +36,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <div className="nav-links">
               <a href="/blog">blog</a>
               <a href="/about">about</a>
+              <a href="/research">research</a>
             </div>
           </div>
         </nav>
         <div className="page-content">
           {children}
         </div>
-
+      <FeedbackPanel />
       </body>
+      
     </html>
   );
 }

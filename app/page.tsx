@@ -4,6 +4,7 @@ import { getAllPosts } from '../lib/posts'
 import { FaGithub, FaFacebook, FaInstagram } from 'react-icons/fa'
 import { HiOutlineMail } from 'react-icons/hi'
 import TagTooltip from './components/TagTooltip'
+import CopyEmail from './components/CopyEmail'
 export default function HomePage() {
   const posts = getAllPosts().slice(0, 3)
 
@@ -18,128 +19,133 @@ export default function HomePage() {
       </div>
       {/* Hero */}
       <div className="hero">
-        <div className="hero-text">
-          <p className="hero-label">Pure Mathematics - HCMUS</p>
+  <div className="hero-text">
+    <p className="hero-label">Pure Mathematics · HCMUS</p>
+    <h1 className="hero-title">Aleksis Arendt</h1>
 
-          <h1 className="hero-title">Aleksis Arendt</h1>
+    <p className="hero-desc">
+      I treat mathematics as work, discipline, and a way of thinking.
+    </p>
 
-          <p className="hero-desc">
-              i don't mytholize math, it's just a job.
-          </p>
+    <div className="tags">
+      {['Metric Geometry', 'Geometric Measure Theory', 'Differential Geometry', 'Mathematical Physics'].map(tag => (
+        <TagTooltip key={tag} tag={tag} />
+      ))}
+    </div>
 
-          <div className="tags">
-            {['Geometric Measure Theory', 'Functional Analysis', 'Mathematical Physics', 'Analysis of PDEs','Differential Geometry', 'Metric Geometry'].map(tag => (
-              <TagTooltip key={tag} tag={tag} />
-            ))}
-          </div>
+    <div className="cta-row">
+      <Link href="/blog" className="btn-primary">Selected writings</Link>
+      <Link href="/about" className="btn-secondary">Profile</Link>
+    </div>
 
-          <div className="cta-row">
-            <Link href="/blog" className="btn-primary">read blog →</Link>
-            <Link href="/about" className="btn-secondary">about me</Link>
-          </div>
+    <div className="social-line">
+      <a href="https://github.com/baoozuma" target="_blank" rel="noopener noreferrer" className="social-link">GitHub</a>
+      <a href="https://www.facebook.com/aleksis.arendt" target="_blank" rel="noopener noreferrer" className="social-link">Facebook</a>
+      <a href="https://www.instagram.com/aleksis.arendt/" target="_blank" rel="noopener noreferrer"className="social-link">Instagram</a>
+      <CopyEmail />
+    </div>
+  </div>
 
-          <div className="social-row">
+  <div className="hero-avatar">
+    <div className="avatar-img">
+      <Image src="/avatar.jpg" alt="Aleksis" fill  style={{ objectFit: 'cover' }} />
+    </div>
+  </div>
+
+</div>
+  <div className="intro-wide">
+    <p className="section-label">Introduction</p>
+  <p>
+    I am an undergraduate student in pure mathematics at HCMUS. 
+    My current direction focuses on analysis and geometry, with long-term plans 
+    for graduate study in Europe, particularly in programs such as Bonn, LMU Munich, ETH Zürich, or EPFL.
+  </p>
+  
+  <p>
+    Before university, I studied in a mathematics specialized program and 
+    participated in national-level competitions and training programs, 
+    including intensive camps organized by VIASM in Da Lat and Hanoi.
+  </p>
+</div>  
+        <div className="section">
+          <p className="section-label">interests</p>
+
+          <div className="interest-list">
             {[
-              { label: 'GitHub', href: 'https://github.com/baoozuma', icon: <FaGithub /> },
-              { label: 'Facebook', href: 'https://www.facebook.com/aleksis.arendt', icon: <FaFacebook /> },
-              { label: 'Instagram', href: 'https://www.instagram.com/aleksis.arendt/', icon: <FaInstagram /> },
-              { label: 'Email', href: 'mailto:aleksisdg@gmail.com', icon: <HiOutlineMail /> },
-            ].map(({ label, href, icon }) => (
-              <a key={label} href={href} target="_blank" rel="noopener noreferrer" className="social-link">
-                <span>{icon}</span>
-                <span>{label}</span>
-              </a>
+              {
+                label: 'Coding',
+                sub: 'Technical practice',
+                detail: 'ReactJS, TypeScript, C++, LaTeX, MATLAB, Maple, website systems, PDF workflows.',
+              },
+              {
+                label: 'Music',
+                sub: 'Listening & aesthetic interest',
+                detail: 'Math rock, post-hardcore, Midwest emo, shoegaze, J-Rock, 2000s alternative scenes.',
+              },
+              {
+                label: 'Philosophy',
+                sub: 'Primary thinkers',
+                detail: 'Nietzsche, Marx, Kant, Arendt, Kierkegaard, existential and political thought.',
+              },
+              {
+                label: 'Games',
+                sub: 'Narrative media',
+                detail: 'Nier, Metal Gear Solid V, Red Dead Redemption 2, story-driven and atmospheric works.',
+              },
+            ].map(({ label, sub, detail }) => (
+              <div key={label} className="interest-row">
+                <div className="interest-meta">
+                  <h3 className="interest-title">{label}</h3>
+                  <p className="interest-sub">{sub}</p>
+                </div>
+                <p className="interest-detail">{detail}</p>
+              </div>
             ))}
           </div>
         </div>
-
-        <div className="hero-avatar">
-          <div className="avatar-img">
-            <Image src="/avatar.png" alt="Aleksis" fill sizes="156px" style={{ objectFit: 'cover' }} />
-          </div>
-          <div className="avatar-deco" />
-        </div>
-      </div>
-<p style={{
-  marginTop: '-3rem',
-  marginBottom: '4rem',
-  color: 'var(--text-muted)',
-  fontSize: '1rem',
-  lineHeight: 1.8,
-  borderLeft: '2px solid var(--accent)',
-  paddingLeft: '1rem'
-}}>
-  I study pure mathematics at HCMUS, working toward a master's in Germany or Switzerland.
-  My long-term interest is geometric analysis, minimal surfaces, GMT, and mathematical physics.
-</p>
-     {/* Interests */}
-      <div className="section">
-        <p className="section-label">interests</p>
-        <div className="interests-grid">
-          {[
-            {
-              icon: '∫',
-              label: 'Coding',
-              detail: 'ReactJS, Matlab, Maple, Latex, Typescript ',
-              accent: '#7c6af5',
-              sub: 'Website and PDF ',
-            },
-            {
-              icon: '♪',
-              label: 'Music',
-              detail: 'Math rock, Post hardcore, Midwest emo, Shoegaze',
-              accent: '#4ecdc4',
-              sub: 'J-Rock & 2000s',
-            },
-            {
-              icon: '§',
-              label: 'Philosophy',
-              detail: 'Nietzsche, Marx, Kant, Arendt, Kierkaard',
-              accent: '#e8a44a',
-              sub: 'Existentialism ',
-            },
-            {
-              icon: '⟁',
-              label: 'Games',
-              detail: 'Nier, Metal Gear Solid V , Red Dead Redemption 2',
-              accent: '#f87171',
-              sub: 'Story-driven',
-            },
-          ].map(({ icon, label, detail, accent, sub }) => (
-            <div key={label} className="interest-card-v2" style={{ '--card-accent': accent } as React.CSSProperties}>
-              <div className="interest-card-top">
-                <span className="interest-icon-v2">{icon}</span>
-                <div>
-                  <div className="interest-label-v2">{label}</div>
-                  <div className="interest-sub">{sub}</div>
-                </div>
-              </div>
-              <div className="interest-divider" />
-              <p className="interest-detail-v2">{detail}</p>
-            </div>
-          ))}
-        </div>
-      </div>
 
       {/* Currently studying */}
       <div className="section">
-        <p className="section-label">currently studying</p>
-        <div className="study-list">
-          {[
-            { topic: 'Measure Theory', text: 'Folland · Evans-Gariepy', status: 'active' },
-            { topic: 'Functional Analysis', text: 'Brezis', status: 'active' },
-            { topic: 'ODE Theory', text: 'Peano · Picard-Lindelöf · Lax-Milgram', status: 'active' },
-            { topic: 'Differential Geometry', text: 'Resuming in summer', status: 'upcoming' },
-            { topic: 'GMT', text: 'Evans-Gariepy · Leon Simon', status: 'upcoming' },
-          ].map(({ topic, text, status }, i) => (
-            <div key={topic} className={`study-row ${i === 0 ? 'first' : ''}`}>
-              <span className="study-topic">{topic}</span>
-              <span className="study-text">{text}</span>
-              <span className={`study-badge ${status}`}>{status}</span>
-            </div>
-          ))}
+  <p className="section-label">currently studying</p>
+
+  <div className="study-list-academic">
+    {[
+      {
+        topic: 'Measure Theory',
+        text: 'Folland; Evans–Gariepy',
+        note: 'current focus',
+      },
+      {
+        topic: 'Functional Analysis',
+        text: 'Brezis',
+        note: 'current focus',
+      },
+      {
+        topic: 'ODE Theory',
+        text: 'Peano, Picard–Lindelöf, Lax–Milgram',
+        note: 'current focus',
+      },
+      {
+        topic: 'Differential Geometry',
+        text: 'planned for summer',
+        note: 'upcoming',
+      },
+      {
+        topic: 'Geometric Measure Theory',
+        text: 'Evans–Gariepy; Leon Simon',
+        note: 'upcoming',
+      },
+    ].map(({ topic, text, note }, i) => (
+      <div key={topic} className={`study-row-academic ${i === 0 ? 'first' : ''}`}>
+        <div className="study-left">
+          <h3 className="study-topic-academic">{topic}</h3>
+          <p className="study-note-academic">{note}</p>
         </div>
+        <p className="study-text-academic">{text}</p>
       </div>
+    ))}
+  </div>
+</div>
 
       {/* Recent posts */}
       <div className="section">

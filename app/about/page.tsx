@@ -1,86 +1,85 @@
+import styles from './about.module.css'
+
 export default function AboutPage() {
   return (
-    <div>
-      <div style={{ marginBottom: '3rem', paddingBottom: '2rem', borderBottom: '1px solid #2a2a2d' }}>
-        <p style={{ color: '#c9a96e', fontFamily: "'JetBrains Mono', monospace", fontSize: '0.85rem', marginBottom: '1rem' }}>
-          about
-        </p>
-        <h1 style={{ fontSize: '2.5rem', fontWeight: 600, letterSpacing: '-0.04em', lineHeight: 1.1, marginBottom: '1.5rem' }}>
-          Aleksis Arendt
-        </h1>
-        <p style={{ color: '#9b9895', fontStyle: 'italic', fontSize: '1.05rem' }}>
-          Undergraduate mathematics, Ho Chi Minh City University of Science.
+    <div className={styles.page}>
+      {/* Header */}
+      <div className={styles.header}>
+        <p className={styles.label}>about</p>
+
+        <h1 className={styles.title}>Aleksis Arendt</h1>
+
+        <p className={styles.subtitle}>
+          Undergraduate in pure mathematics, Ho Chi Minh City University of Science.
         </p>
       </div>
 
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
+      {/* Content */}
+      <div className={styles.content}>
 
-        <section>
-          <h2 style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '0.8rem', color: '#c9a96e', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '1rem' }}>
-            Research Interests
-          </h2>
-          <p style={{ color: '#9b9895', lineHeight: 1.8 }}>
+        {/* Research */}
+        <section className={styles.section}>
+          <p className={styles.sectionLabel}>research interests</p>
+
+          <p className={styles.paragraph}>
             Geometric analysis, geometric measure theory, and calculus of variations.
-            Currently working toward a solid foundation in real analysis and functional analysis
+            Currently building a foundation in real analysis and functional analysis
             before moving into PDE theory and GMT proper.
           </p>
-          <p style={{ color: '#9b9895', lineHeight: 1.8, marginTop: '1rem' }}>
-            Long-term interest in minimal surfaces, harmonic maps, mean curvature flow,
-            and gauge theory — particularly Uhlenbeck-style Yang-Mills theory and
-            principal fiber bundles with connections.
+
+          <p className={styles.paragraph}>
+            Long-term interests include minimal surfaces, harmonic maps, mean curvature flow,
+            and gauge theory — particularly Yang-Mills theory and principal bundles.
           </p>
         </section>
 
-        <div style={{ borderTop: '1px solid #2a2a2d' }} />
+        {/* Current Focus */}
+        <section className={styles.section}>
+          <p className={styles.sectionLabel}>current study</p>
 
-        <section>
-          <h2 style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '0.8rem', color: '#c9a96e', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '1rem' }}>
-            Current Focus
-          </h2>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+          <div className={styles.studyList}>
             {[
-              ['Measure Theory', 'Folland, Evans-Gariepy'],
+              ['Measure Theory', 'Folland, Evans–Gariepy'],
               ['Functional Analysis', 'Brezis'],
-              ['ODE Theory', 'Peano existence, Picard-Lindelöf, Lax-Milgram'],
-              ['Differential Geometry', 'Starting again in summer'],
+              ['ODE Theory', 'Peano, Picard–Lindelöf'],
+              ['Differential Geometry', 'Resuming in summer'],
             ].map(([topic, detail]) => (
-              <div key={topic} style={{ display: 'grid', gridTemplateColumns: '180px 1fr', gap: '1rem', alignItems: 'baseline' }}>
-                <span style={{ color: '#e8e6e1', fontSize: '1rem' }}>{topic}</span>
-                <span style={{ color: '#6b6966', fontSize: '0.9rem', fontStyle: 'italic' }}>{detail}</span>
+              <div key={topic} className={styles.studyRow}>
+                <span className={styles.studyTopic}>{topic}</span>
+                <span className={styles.studyDetail}>{detail}</span>
               </div>
             ))}
           </div>
         </section>
 
-        <div style={{ borderTop: '1px solid #2a2a2d' }} />
+        {/* Path */}
+        <section className={styles.section}>
+          <p className={styles.sectionLabel}>academic path</p>
 
-        <section>
-          <h2 style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '0.8rem', color: '#c9a96e', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '1rem' }}>
-            Academic Path
-          </h2>
-          <p style={{ color: '#9b9895', lineHeight: 1.8 }}>
-            Targeting a master's program in Germany or Switzerland — Bonn, LMU Munich,
+          <p className={styles.paragraph}>
+            Planning for graduate study in Germany or Switzerland — Bonn, LMU Munich,
             or ETH Zürich — followed by a PhD in geometric analysis or GMT.
-            The recommended path is a German master's first, then PhD application
-            to ETH or EPFL with a strong thesis and supervisor letter.
+          </p>
+
+          <p className={styles.paragraph}>
+            The strategy is to complete a strong master’s program first, then apply
+            for doctoral positions with a focused thesis and strong supervision.
           </p>
         </section>
 
-        <div style={{ borderTop: '1px solid #2a2a2d' }} />
+        {/* Blog */}
+        <section className={styles.section}>
+          <p className={styles.sectionLabel}>about this blog</p>
 
-        <section>
-          <h2 style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '0.8rem', color: '#c9a96e', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '1rem' }}>
-            About This Blog
-          </h2>
-          <p style={{ color: '#9b9895', lineHeight: 1.8 }}>
-            These are working notes — written to consolidate understanding, not to present
-            polished results. Each post starts from a single problem or theorem,
-            explores it until exhausted, then connects it to the broader picture.
+          <p className={styles.paragraph}>
+            These are working notes — written to consolidate understanding rather than
+            present polished results. Each post starts from a single problem or theorem,
+            explores it deeply, and connects it to a broader structure.
           </p>
-          <p style={{ color: '#9b9895', lineHeight: 1.8, marginTop: '1rem' }}>
-            The writing process follows a simple rule borrowed from Halmos:
-            don't just read — fight it. Every hypothesis questioned,
-            every counterexample sought, every proof reproduced from scratch.
+
+          <p className={styles.paragraph}>
+            The process follows a simple principle: do not just read — reconstruct.
+            Every assumption questioned, every proof rebuilt from scratch.
           </p>
         </section>
 
