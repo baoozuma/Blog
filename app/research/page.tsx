@@ -316,7 +316,7 @@ function ResearchContent() {
         fill
         sizes="100vw"
         style={{ objectFit: 'cover' }}
-        priority
+        unoptimized
       />
       <div className={styles.bannerOverlay} />
     </div>
@@ -338,6 +338,7 @@ function ResearchContent() {
             alt={currentSub.name}
             fill
             style={{ objectFit: 'cover', objectPosition: 'center' }}
+            unoptimized
           />
         </div>
         <div className={styles.titleWrap}>
@@ -396,7 +397,7 @@ function ResearchContent() {
                 fill
                 sizes="100vw"
                 style={{ objectFit: 'cover' }}
-                priority
+                unoptimized
               />
               <div className={styles.bannerOverlay} />
             </div>
@@ -409,6 +410,7 @@ function ResearchContent() {
                     alt={current.tag}
                     fill
                     style={{ objectFit: 'cover', objectPosition: 'center' }}
+                    unoptimized
                   />
                 </div>
                 <div className={styles.titleWrap}>
