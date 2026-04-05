@@ -4,16 +4,21 @@ import { MDXRemote } from 'next-mdx-remote/rsc'
 import remarkMath from 'remark-math'
 import rehypeKatex from 'rehype-katex'
 import 'katex/dist/katex.min.css'
-
+import ExportPDF from '../../components/ExportPDF'
 export async function generateStaticParams() {
   const posts = getAllPosts()
   return posts.map(post => ({ slug: post.slug }))
 }
-
 export async function generateMetadata({ params }) {
   const { slug } = await params
   const post = getPostBySlug(slug)
-  return { title: post.title, description: post.description }
+  return {
+    title: post.title,
+    description: post.description,
+    other: {
+      'link': '<link rel="preload" href="/_next/static/css/katex.min.css" as="style"/>',
+    },
+  }
 }
 
 const options = {
@@ -29,7 +34,7 @@ export default async function PostPage({ params }) {
 
   return (
     <div>
-      <Link href="/blog" style={{
+      <Link href="/blog" className="back-link no-print" style={{
         display: 'inline-flex', alignItems: 'center', gap: '0.4rem',
         color: '#6b6966', textDecoration: 'none', fontSize: '0.85rem',
         fontFamily: "'JetBrains Mono', monospace", marginBottom: '2.5rem',
@@ -52,6 +57,18 @@ export default async function PostPage({ params }) {
       <article className="prose max-w-none">
         <MDXRemote source={post.content} options={options} />
       </article>
+
+      <div style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        marginBottom: '0.75rem',
+      }}>
+        <div style={{ color: 'var(--text-dim)', fontSize: '0.78rem', fontFamily: 'var(--font-mono)' }}>
+          {post.date}
+        </div>
+        <ExportPDF title={post.title} />
+      </div>
     </div>
   )
 }

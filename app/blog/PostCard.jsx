@@ -26,7 +26,7 @@ export default function PostCard({ post }) {
       >
         {post.thumbnail ? (
           <div style={{ position: 'relative', width: '100%', height: 180 }}>
-            <Image src={post.thumbnail} alt={post.title} fill style={{ objectFit: 'cover' }} />
+           <Image src={post.thumbnail} alt={post.title} fill sizes="(max-width: 640px) 100vw, 320px" style={{ objectFit: 'cover' }} />
           </div>
         ) : (
           <div style={{

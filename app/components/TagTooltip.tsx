@@ -74,6 +74,7 @@ export default function TagTooltip({ tag }: { tag: string }) {
               alt={tag}
               fill
               sizes="220px"
+              loading="lazy"
               style={{ objectFit: 'cover' }}
             />
           </div>

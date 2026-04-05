@@ -55,7 +55,7 @@ export default function HomePage() {
 
         <div className="hero-avatar">
           <div className="avatar-img">
-            <Image src="/avatar.png" alt="Aleksis" fill style={{ objectFit: 'cover' }} />
+            <Image src="/avatar.png" alt="Aleksis" fill sizes="156px" style={{ objectFit: 'cover' }} />
           </div>
           <div className="avatar-deco" />
         </div>

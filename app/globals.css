@@ -44,6 +44,12 @@
 
 /* ── Base ── */
 html { color-scheme: dark; scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
 
 body {
   background: var(--bg);
@@ -53,18 +59,21 @@ body {
   line-height: 1.8;
   min-height: 100vh;
 }
+body {
+  position: relative;
+  background-color: var(--bg);
+}
 
-/* ── Background effects ── */
-body::before {
+/* body::before {
   content: '';
   position: fixed;
   inset: 0;
-  background-image:
-    linear-gradient(rgba(201, 169, 110, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(201, 169, 110, 0.04) 1px, transparent 1px);
-  background-size: 72px 72px;
   pointer-events: none;
   z-index: 0;
+  background-image:
+    linear-gradient(rgba(201, 169, 110, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(201, 169, 110, 0.025) 1px, transparent 1px);
+  background-size: 96px 96px;
 }
 
 body::after {
@@ -72,18 +81,15 @@ body::after {
   position: fixed;
   inset: 0;
   background:
-    radial-gradient(ellipse 80% 60% at 0% 0%,   rgba(80, 140, 255, 0.13), transparent),
-    radial-gradient(ellipse 70% 60% at 100% 100%, rgba(201, 169, 110, 0.13), transparent),
-    radial-gradient(ellipse 60% 50% at 50% 50%,  rgba(14, 14, 15, 0.0), transparent);
+    radial-gradient(ellipse 80% 60% at 0% 0%, rgba(80, 140, 255, 0.08), transparent 70%),
+    radial-gradient(ellipse 70% 60% at 100% 100%, rgba(201, 169, 110, 0.08), transparent 70%);
   pointer-events: none;
   z-index: 0;
-  animation: ambientGlow 12s ease-in-out infinite alternate;
 }
-
 @keyframes ambientGlow {
   0%   { opacity: 0.85; }
   100% { opacity: 1; }
-}
+} */
 
 
 /* ── Floating symbol ── */
@@ -1032,5 +1038,75 @@ nav {
   /* Interests thành 4 cột */
   .interests-grid {
     grid-template-columns: repeat(4, 1fr);
+  }
+}
+/* ── Print / PDF export ── */
+@media print {
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+
+  body {
+    background: #0a0a0f !important;
+    color: #e2e0f0 !important;
+  }
+
+  .page-content {
+    background: #0a0a0f !important;
+  }
+
+  .prose p,
+  .prose li { color: #e2e0f0 !important; }
+  .prose h2 { color: #e2e0f0 !important; }
+  .prose strong { color: #e8a44a !important; }
+  .prose code {
+    background: #0f0f18 !important;
+    color: #7c6af5 !important;
+    border-color: #1e1e2e !important;
+  }
+  .prose blockquote {
+    background: #0f0f18 !important;
+    color: #9d9bb8 !important;
+  }
+  .katex-display {
+    background: #0f0f18 !important;
+    border-color: #1e1e2e !important;
+  }
+  h1 {
+    background: linear-gradient(125deg, #a78bfa 0%, #61ffff 45%, #ffb350 100%) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+  }
+     nav,
+  nav *,
+  .nav-inner,
+  .nav-links,
+  .nav-logo,
+  .back-link,
+  button {
+    display: none !important;
+    visibility: hidden !important;
+  }
+   html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #0a0a0f !important;
+  }
+
+  .page-content {
+    max-width: 100% !important;
+    padding: 2.5rem !important;
+    margin: 0 !important;
+    background: var(--bg) !important;
+  }
+  html {
+    background: var(--bg)!important;
+  }
+
+  body {
+    background: var(--bg) !important;
   }
 }
