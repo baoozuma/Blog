@@ -24,7 +24,7 @@ export default function HomePage() {
     <h1 className="hero-title">Aleksis Arendt</h1>
 
     <p className="hero-desc">
-      I treat mathematics as work, discipline, and a way of thinking.
+      I don't mytholize math, it's just a job.
     </p>
 
     <div className="tags">
