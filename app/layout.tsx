@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="vi">
       <head>
         {/* Preload fonts */}
 <link rel="preload" href="/fonts/Satoshi/Satoshi-Regular.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />

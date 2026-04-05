@@ -34,13 +34,16 @@
   --gold: #00ddff;
   --gold-dim: rgba(201, 169, 110, 0.15);
   --gold-glow: rgba(201, 169, 110, 0.06);
-  --font-serif: 'Satoshi', serif;
+  --font-serif: 'Inter';
   --font-sans: 'Inter', sans-serif;
-  --font-mono: 'Satoshi', monospace;
+  --font-mono: 'Inter', monospace;
   --content-width: 720px;
   --content-padding: 1.5rem;
 }
-
+h3 {
+  color: #fbff00; /* hoặc bất kỳ màu nào mày muốn */
+  font-weight: 500;
+}
 /* ── Reset ── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 

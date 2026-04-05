@@ -1,52 +1,319 @@
 ---
-title: "Volume and Surface Area of the Unit Ball in ℝⁿ"
+title: "Diện tích xung quanh và thể tích của quả cầu tròn trong không gian ℝⁿ"
 date: "2025-04-05"
-description: "Two classical formulas — one recursive, one via Gaussian integrals — and why the volume vanishes as n → ∞."
+description: "Phương pháp tính bằng hai cách, cách một bằng định lý Fubini và cách hai đổi sang tọa độ cầu, từ đó diện tích mặt cầu xuất hiện một cách tự nhiên trong đẳng thức."
 thumbnail: "/thumbnails/sphere.jpg"
 ---
+# Độ đo của mặt cầu và quả cầu trong $\mathbb{R}^n$
 
-## The Question
+## Động lực
 
-What is the volume of the unit ball $B^n = \{x \in \mathbb{R}^n : \|x\| \leq 1\}$?
-
-In low dimensions we know:
-
-$$
-|B^1| = 2, \quad |B^2| = \pi, \quad |B^3| = \frac{4\pi}{3}
-$$
-
-The pattern is not obvious. The answer turns out to be
+Như chúng ta đã biết, trong không gian hai chiều $\mathbb{R}^2$, chu vi và diện tích của đường tròn $S_1 = (O, r)$ được tính bởi công thức
 
 $$
-|B^n| = \frac{\pi^{n/2}}{\Gamma\!\left(\frac{n}{2} + 1\right)}
+|S_1| = 2\pi r \quad \text{và} \quad [S_1] = \pi r^2.
 $$
 
-and the surface area of $S^{n-1} = \partial B^n$ is
+Trong ba chiều, ta cũng có diện tích xung quanh và thể tích của hình cầu $S_2 = (O, r)$:
 
 $$
-|\mathbb{S}^{n-1}| = \frac{2\pi^{n/2}}{\Gamma\!\left(\frac{n}{2}\right)}
+|S_2| = 4\pi r^2 \quad \text{và} \quad [S_2] = \frac{4}{3}\pi r^3.
 $$
 
-## Why This Is Surprising
+Như vậy, một câu hỏi được đặt ra là: làm sao để tính được diện tích bề mặt (coarea) và thể tích (volume) của một quả cầu $S_{n-1}$ trong không gian $\mathbb{R}^n$ với $n \in \mathbb{N}$ bất kỳ?
 
-Two things deserve attention.
+---
 
-**The volume peaks and then decays to zero.** Despite the ball growing in every direction, $|B^n| \to 0$ as $n \to \infty$. Most of the volume of a high-dimensional ball concentrates near its equator — a phenomenon called *concentration of measure* that underlies much of modern probability and functional analysis.
+## Sơ lược về độ đo Lebesgue
 
-**The Gaussian trick.** The cleanest derivation runs through the identity
+Nhưng trước tiên, ta cần một định nghĩa chuẩn về diện tích hay thể tích của một tập bất kỳ. Trong bài viết này, mình sẽ sử dụng độ đo Lebesgue; các độ đo khác cũng có thể được tính bằng cách tương tự. Nhắc lại định nghĩa, gọi $\mathcal{P}(\mathbb{R}^n)$ là họ các tập con của $\mathbb{R}^n$, *một độ đo ngoài Lebesgue* là một hàm $\lambda^*: \mathcal{P}(\mathbb{R}^n) \to [0, +\infty]$ được định nghĩa như sau
 
 $$
-\int_{\mathbb{R}^n} e^{-\|x\|^2} \, dx = \pi^{n/2}
+\lambda^*(A) = \inf\left\{\sum |R_i| \;\Big|\; \{R_i\} \text{ là họ đếm được các nửa khối vuông phủ } A\right\}.
 $$
 
-Converting to spherical coordinates gives both formulas at once, via the Gamma function evaluated at half-integers.
+Một *nửa khối vuông* $C$ là một tích Cartesian bất kỳ có dạng $C = \prod_{i=1}^n [a_i, b_i)$ với $a_i < b_i$ là các số thực, và thể tích của nó là $|C| = \prod_{i=1}^n (b_i - a_i)$. Một tập $A$ được gọi là *đo được bằng Lebesgue* nếu
 
-## What We Will Prove
+$$
+\lambda^*(E) = \lambda^*(A \cap E) + \lambda^*(E \setminus A), \quad \text{với mọi } E \subseteq \mathbb{R}^n,
+$$
 
-This post gives two proofs:
+và ta viết $|A| = \lambda^*(A)$.
 
-**Proof 1 (recursive).** Express $|B^n|$ in terms of $|B^{n-2}|$ by slicing along one axis and integrating. This gives a clean recursion but requires tracking the Gamma function carefully.
+Các tính chất cũng như định lý về độ đo và tích phân Lebesgue sẽ được trình bày ở một bài viết khác. Chúng ta chỉ cần biết để đo một tập thì sẽ cần xấp xỉ ngoài tập đó bằng các nửa khối vuông với thể tích được cho bởi công thức trên, và các tích phân được sử dụng trong bài đều quy ước là tích phân Riemann. Ngoài ra, để tính được độ đo của một mặt (surface), ta sẽ quy nó về một không gian nhỏ chiều hơn — nếu không sẽ cho ra độ đo $0$ thì không có nghĩa với diện tích bề mặt.
 
-**Proof 2 (Gaussian integral).** Compute $\int_{\mathbb{R}^n} e^{-\|x\|^2} dx$ in two ways — as a product of 1D integrals, and in polar coordinates. The comparison yields the formula directly.
+---
 
-Along the way we derive the surface area formula and verify it against the known cases in dimensions 1, 2, 3.
+## Quy ước ký hiệu
+
+Bây giờ trở lại vấn đề. Ta nhận xét rằng khi di chuyển một tập bất kỳ thì thể tích (hay độ đo) của chúng không đổi, hay khi nhân các phần tử của tập đó cho một số thực $\alpha$ bất kỳ thì độ đo của nó sẽ tăng gấp $\alpha^n$ lần. Đây là một tính chất bất biến của độ đo Lebesgue và không hiển nhiên, sẽ được chứng minh kỹ sau. Nói chung, chỉ cần ta biết được độ đo của quả cầu đơn vị $B(0,1)$ trong $\mathbb{R}^n$ thì sẽ tính được độ đo của mọi quả cầu khác dễ dàng. Trong bài này, chúng ta sẽ thống nhất cách gọi
+
+$$
+B(0,1) = \{x \in \mathbb{R}^n \mid \|x\| < 1\}
+\quad \text{và} \quad
+\mathbb{S}^{n-1} = \{x \in \mathbb{R}^n \mid \|x\| = 1\}.
+$$
+
+Ta thấy một điều rất thú vị rằng $\mathbb{S}^{n-1}$ là tập những điểm biên (boundary) của $B(0,1)$.
+
+---
+
+## Các công cụ cần thiết
+
+Trước khi đi vào tính toán, ta cần chuẩn bị hai kết quả quan trọng sẽ xuất hiện rất tự nhiên trong bài.
+
+### Tích phân Gauss
+
+> **Bổ đề.** $\displaystyle\int_{-\infty}^\infty e^{-x^2}\,dx = \sqrt{\pi}$.
+
+**Chứng minh.** Đặt $I = \int_{-\infty}^\infty e^{-x^2}\,dx$. Vì hàm $e^{-x^2} > 0$ nên $I > 0$. Ta tính $I^2$ bằng cách viết tích của hai tích phân độc lập:
+
+$$
+I^2 = \left(\int_{-\infty}^\infty e^{-x^2}\,dx\right)\left(\int_{-\infty}^\infty e^{-y^2}\,dy\right) = \int_{\mathbb{R}^2} e^{-(x^2+y^2)}\,dx\,dy.
+$$
+
+Đây là tích phân trên $\mathbb{R}^2$ với hàm có đối xứng tròn, nên ta đổi sang tọa độ cực $x = r\cos\theta$, $y = r\sin\theta$ với Jacobian $r$:
+
+$$
+I^2 = \int_0^{2\pi}\int_0^\infty e^{-r^2}\,r\,dr\,d\theta = 2\pi\int_0^\infty r e^{-r^2}\,dr.
+$$
+
+Đặt $t = r^2$, suy ra $dt = 2r\,dr$, khi đó
+
+$$
+I^2 = 2\pi \cdot \frac{1}{2}\int_0^\infty e^{-t}\,dt = \pi\cdot\bigl[-e^{-t}\bigr]_0^\infty = \pi.
+$$
+
+Vì $I > 0$ nên $I = \sqrt{\pi}$. $\square$
+
+### Hàm Gamma
+
+Một công cụ nữa sẽ xuất hiện rất tự nhiên sau khi ta đổi biến trong phần tính toán chính, đó là hàm Gamma.
+
+> **Định nghĩa.** Với $s > 0$, *hàm Gamma* được định nghĩa bởi
+> $$
+> \Gamma(s) = \int_0^\infty t^{s-1} e^{-t}\,dt.
+> $$
+
+> **Bổ đề.** Hàm Gamma thỏa các tính chất sau:
+> 1. $\Gamma(1) = 1$.
+> 2. $\Gamma(s+1) = s\,\Gamma(s)$ với mọi $s > 0$.
+> 3. Hệ quả: với $n \in \mathbb{N}$, $\Gamma(n) = (n-1)!$
+> 4. $\Gamma\!\left(\tfrac{1}{2}\right) = \sqrt{\pi}$.
+
+**Chứng minh.**
+
+*(i)* Tính trực tiếp: $\Gamma(1) = \int_0^\infty e^{-t}\,dt = \bigl[-e^{-t}\bigr]_0^\infty = 1$.
+
+*(ii)* Tích phân từng phần với $u = t^s$ và $dv = e^{-t}\,dt$:
+
+$$
+\Gamma(s+1) = \int_0^\infty t^s e^{-t}\,dt = \bigl[-t^s e^{-t}\bigr]_0^\infty + s\int_0^\infty t^{s-1}e^{-t}\,dt.
+$$
+
+Số hạng biên triệt tiêu vì $t^s e^{-t} \to 0$ khi $t \to 0^+$ và $t \to \infty$. Vậy $\Gamma(s+1) = s\,\Gamma(s)$.
+
+*(iii)* Từ (i) và (ii), quy nạp cho $\Gamma(n+1) = n!$, tức là $\Gamma(n) = (n-1)!$.
+
+*(iv)* Đặt $t = x^2$ trong định nghĩa, ta được
+
+$$
+\Gamma\!\left(\tfrac{1}{2}\right) = \int_0^\infty t^{-1/2} e^{-t}\,dt = 2\int_0^\infty e^{-x^2}\,dx = \int_{-\infty}^\infty e^{-x^2}\,dx = \sqrt{\pi}.
+$$
+
+$\square$
+
+---
+
+## Tính $|\mathbb{S}^{n-1}|$
+
+Bây giờ ta đi tính $|\mathbb{S}^{n-1}|$ trước. Xét tích phân Gauss $n$ chiều
+
+$$
+I = \int_{\mathbb{R}^n} e^{-\|x\|^2}\,dx.
+$$
+
+Ta sẽ tính $I$ bằng hai cách.
+
+**Cách 1 (Fubini).** Sử dụng kết quả tích phân Gauss vừa chứng minh:
+
+$$
+\int_{\mathbb{R}^n} e^{-\|x\|^2}\,dx = \int_{\mathbb{R}^n} e^{-(x_1^2+\cdots+x_n^2)}\,dx_1\cdots dx_n = \left(\int_{-\infty}^\infty e^{-x^2}\,dx\right)^n = \pi^{n/2}.
+$$
+
+Thế là xong, rất đơn giản.
+
+**Cách 2 (Tọa độ cầu).** Chúng ta hay có một mẹo để giải tích phân nhiều biến khi không thể tính trực tiếp là đổi sang tọa độ cực hoặc cầu, khi đó diện tích mặt cầu $|\mathbb{S}^{n-1}|$ sẽ xuất hiện rất tự nhiên. Nhưng tọa độ cầu trong $\mathbb{R}^n$ được đổi như thế nào? Mình sẽ trình bày sau đây.
+
+### Tọa độ cầu trong $\mathbb{R}^n$
+
+Xét phương trình $x_1^2 + \cdots + x_n^2 = 1$. Để ý rằng $-1 \le x_1 \le 1$ nên có thể đặt $x_1 = \cos\theta_1$. Khi đó ta phải có $x_2^2 + \cdots + x_n^2 = \sin^2\theta_1$. Ta cứ bám vào đẳng thức $\sin^2\theta + \cos^2\theta = 1$ và liên tục đổi biến. Vì $-\sin\theta_1 \le x_2 \le \sin\theta_1$ nên đặt $x_2 = \sin\theta_1\cos\theta_2$, khi đó $x_3^2 + \cdots + x_n^2 = \sin^2\theta_1\sin^2\theta_2$. Tiếp tục, với mỗi $1 \le k \le n-1$, đặt $x_k = \sin\theta_1\cdots\sin\theta_{k-1}\cos\theta_k$, ta được hệ
+
+$$
+\begin{cases}
+x_1 = \cos\theta_1 \\
+x_2 = \sin\theta_1\cos\theta_2 \\
+\quad\vdots \\
+x_{n-1} = \sin\theta_1\cdots\sin\theta_{n-2}\cos\theta_{n-1} \\
+x_n = \sin\theta_1\cdots\sin\theta_{n-2}\sin\theta_{n-1}
+\end{cases}
+\quad \theta_1,\dots,\theta_{n-2} \in [0,\pi),\quad \theta_{n-1} \in [0,2\pi).
+$$
+
+### Jacobian của phép đổi biến
+
+Bây giờ vì các $\theta_i$ là tùy ý nên có thể gọi hàm $\sigma(\theta_1,\dots,\theta_{n-1}) = (x_1,\dots,x_n)$. Ta đổi được $x = r\sigma$, Jacobian của phép đổi biến này được tính bằng
+
+$$
+J(r\sigma)(r,\theta_1,\dots,\theta_{n-1}) = \det\begin{pmatrix}\dfrac{\partial x}{\partial r},\; \dfrac{\partial x}{\partial\theta_1},\;\dots,\; \dfrac{\partial x}{\partial\theta_{n-1}}\end{pmatrix} = r^{n-1}\det\begin{pmatrix}\sigma,\; \dfrac{\partial\sigma}{\partial\theta_1},\;\dots,\; \dfrac{\partial\sigma}{\partial\theta_{n-1}}\end{pmatrix}.
+$$
+
+Đến đây nếu khai triển tiếp thì việc tính toán sẽ khá phức tạp và gần như không thấy được một cấu trúc ẩn nào từ nó. Do đó ta sẽ dùng một mẹo: đặt $A = \left(\sigma,\; \frac{\partial\sigma}{\partial\theta_1},\;\dots,\; \frac{\partial\sigma}{\partial\theta_{n-1}}\right)$ rồi tính $A^T A$ thay vì khai triển $\det A$ trực tiếp.
+
+### Metric cảm sinh và phần tử diện tích
+
+Khi tích phân trên một mặt (hypersurface), phần tử diện tích $d\sigma$ được định nghĩa thông qua *metric cảm sinh* (induced metric) từ không gian bao quanh $\mathbb{R}^n$ — cụ thể là ta kéo lui (pullback) metric Euclid về miền tham số $U$ thông qua $\sigma$. Các vector tiếp tuyến của $\sigma$ tại một điểm là $\frac{\partial\sigma}{\partial\theta_i}$, và metric cảm sinh $G$ là ma trận $(n-1) \times (n-1)$ với các phần tử
+
+$$
+g_{ij} = \left\langle \frac{\partial\sigma}{\partial\theta_i},\, \frac{\partial\sigma}{\partial\theta_j}\right\rangle, \quad 1 \le i,j \le n-1.
+$$
+
+Đây chính là ma trận Gram của hệ vector tiếp tuyến. Về mặt hình học, $\sqrt{|\det G|}$ đo độ kéo giãn diện tích khi $\sigma$ biến một ô nhỏ $d\theta_1\cdots d\theta_{n-1}$ trong $U$ thành một mảnh trên $\mathbb{S}^{n-1}$. Đó là lý do phần tử diện tích trên mặt cầu viết được thành
+
+$$
+d\sigma = \sqrt{|\det G|}\; d\theta_1\cdots d\theta_{n-1}.
+$$
+
+Công thức này là hệ quả trực tiếp của Riemannian metric và sẽ được trình bày kỹ hơn sau. Bây giờ quay lại mẹo tính $A^T A$. Bởi vì $|\sigma| = 1$, nên $\langle\sigma, \sigma\rangle = 1$, và vi phân đẳng thức này theo $\theta_j$ cho
+
+$$
+\left\langle\sigma,\, \frac{\partial\sigma}{\partial\theta_j}\right\rangle = 0, \quad \forall\, 1 \le j \le n-1.
+$$
+
+Khi đó
+
+$$
+A^T A = \begin{bmatrix} 1 & 0 \\ 0 & G \end{bmatrix}
+\implies |\det A|^2 = \det(A^T A) = |\det G|,
+$$
+
+suy ra $|\det A| = \sqrt{|\det G|}$, đúng như đã dùng. Khi này vi phân đã có thể rút gọn mà không cần phải khai triển định thức phức tạp:
+
+$$
+dx = r^{n-1}\sqrt{|\det G|}\; dr\,d\theta_1\cdots d\theta_{n-1} = r^{n-1}\,dr\,d\sigma.
+$$
+
+### Rút ra công thức
+
+Gắn vào tích phân ban đầu, ta được
+
+$$
+I = \int_0^\infty\int_{\mathbb{S}^{n-1}} r^{n-1} e^{-r^2}\,d\sigma\,dr = |\mathbb{S}^{n-1}|\int_0^\infty r^{n-1} e^{-r^2}\,dr.
+$$
+
+Đổi biến một lần nữa $t = r^2$ với vi phân $dt = 2r\,dr$, ta thấy có sự xuất hiện của hàm Gamma:
+
+$$
+I = \frac{|\mathbb{S}^{n-1}|}{2}\int_0^\infty t^{(n-2)/2} e^{-t}\,dt = \frac{|\mathbb{S}^{n-1}|}{2}\,\Gamma(n/2).
+$$
+
+So sánh hai cách tính với nhau, ta rút ra được
+
+$$
+\boxed{|\mathbb{S}^{n-1}| = \frac{2\pi^{n/2}}{\Gamma(n/2)}}.
+$$
+
+---
+
+## Tính $|B(0,1)|$
+
+Bây giờ việc tính $|B(0,1)|$ sẽ khá đơn giản, ta cứ bám vào định nghĩa và đổi sang tọa độ cầu:
+
+$$
+|B(0,1)| = \int_{B(0,1)} dx = \int_0^1\int_{\mathbb{S}^{n-1}} r^{n-1}\,d\sigma\,dr = |\mathbb{S}^{n-1}|\int_0^1 r^{n-1}\,dr = \frac{|\mathbb{S}^{n-1}|}{n}.
+$$
+
+Dùng tính chất $\Gamma(n/2+1) = \frac{n}{2}\,\Gamma(n/2)$, ta rút gọn được
+
+$$
+|B(0,1)| = \frac{1}{n}\cdot\frac{2\pi^{n/2}}{\Gamma(n/2)} = \frac{\pi^{n/2}}{\frac{n}{2}\,\Gamma(n/2)}
+$$
+
+$$
+\boxed{|B(0,1)| = \frac{\pi^{n/2}}{\Gamma(n/2+1)}}.
+$$
+
+---
+
+## Kiểm tra với $n = 1, 2, 3, 4$
+
+Ta có thể thử với một vài trường hợp cụ thể và thấy khớp với chu vi, diện tích, thể tích của hình tròn đã được học.
+
+ $\Gamma(n/2)$ | $\|\mathbb{S}^{n-1}\|$ | $\|B(0,1)\|$ |
+
+$\Gamma(1/2) = \sqrt{\pi}$ | $2$ | $2$ |
+
+ $\Gamma(1) = 1$ | $2\pi$ | $\pi$ |
+
+ $\Gamma(3/2) = \frac{\sqrt{\pi}}{2}$ | $4\pi$ | $\frac{4\pi}{3}$ |
+
+ $\Gamma(2) = 1$ | $2\pi^2$ | $\frac{\pi^2}{2}$ |
+
+
+Trường hợp $n = 4$ khá thú vị: diện tích mặt cầu $3$-chiều là $2\pi^2$, một kết quả hoàn toàn không hiển nhiên từ hình học sơ cấp.
+
+---
+
+## Ứng dụng
+
+Sở dĩ ta cần tính độ đo của quả cầu trong không gian nhiều chiều vì nó xuất hiện vô số lần trong giải tích. Trong lý thuyết đo, các phân hoạch cầu đôi khi linh hoạt và dễ xử lý hơn phân hoạch khối vuông — mình sẽ trình bày những bài toán đó sau. Trong xác suất thống kê, phân phối Gauss
+
+$$
+\frac{1}{(2\pi)^{n/2}}e^{-\|x\|^2/2}
+$$
+
+là một hệ quả thiết yếu từ cách tính tích phân như trên. Ngoài ra kết quả này còn xuất hiện trong hình học vi phân ở công thức Gauss-Bonnet, các bất đẳng thức isoperimetric, và nhiều nơi khác mà mình sẽ đề cập dần.
+
+Như vậy mình đã trình bày xong cách tính độ đo của quả cầu trong không gian $\mathbb{R}^n$. Để luyện tập, mình đề xuất một vài bài tập sau.
+
+---
+
+## Bài tập
+
+> **Bài 1.** Không được đổi tọa độ, hãy định nghĩa số $\pi$ thông qua tích phân của hai hàm $y = \sqrt{1-x^2}$ và $y = -\sqrt{1-x^2}$.
+
+> **Bài 2.** Tính $|\mathbb{S}^{n-1}|$ và $|B(0,1)|$ tường minh với $n = 1, 2, 3, 4$ và kiểm tra với các công thức hình học đã biết. Gợi ý: với $n = 1$, tập $\mathbb{S}^0$ là gì?
+
+> **Bài 3.** Chứng minh rằng
+> $$
+> \Gamma\!\left(\frac{2k+1}{2}\right) = \frac{(2k-1)!!}{2^k}\sqrt{\pi}, \quad k \in \mathbb{N},
+> $$
+> trong đó $(2k-1)!! = 1 \cdot 3 \cdot 5 \cdots (2k-1)$ là giai thừa kép.
+
+> **Bài 4.** Chứng minh rằng quả cầu $B(0,1)$ trong không gian $\mathbb{R}^n$ là đo được bằng Lebesgue.
+
+> **Bài 5 (Feynman's trick).** Chứng minh rằng $\int_{-\infty}^\infty e^{-x^2}\,dx = \sqrt{\pi}$ bằng phương pháp vi phân dưới dấu tích phân. Cụ thể, xét
+> $$
+> F(t) = \left(\int_0^t e^{-x^2}\,dx\right)^2, \quad G(t) = \int_0^1 \frac{e^{-t^2(1+s^2)}}{1+s^2}\,ds
+> $$
+> và chứng minh $F(t) + G(t) = \pi/4$ với mọi $t \ge 0$.
+
+> **Bài 6 (Công thức truy hồi).** Đặt $\omega_n = |B(0,1)|$ trong $\mathbb{R}^n$. Chứng minh công thức truy hồi
+> $$
+> \omega_n = \omega_{n-2} \cdot \frac{2\pi}{n}, \quad \omega_1 = 2,\quad \omega_2 = \pi,
+> $$
+> mà không cần dùng hàm Gamma.
+
+> **Bài 7 (Diện tích là đạo hàm của thể tích).** Chứng minh rằng tỉ số giữa diện tích mặt cầu và thể tích quả cầu bán kính $r$ trong $\mathbb{R}^n$ thỏa
+> $$
+> \frac{|\mathbb{S}^{n-1}(r)|}{|B(0,r)|} = \frac{n}{r}.
+> $$
+> Giải thích tại sao hệ thức này tương đương với $\frac{d}{dr}|B(0,r)| = |\mathbb{S}^{n-1}(r)|$.
+
+> **Bài 8 (Lời nguyền chiều cao).** Chứng minh rằng $|B(0,1)| \to 0$ khi $n \to \infty$. Hơn nữa, tìm $n_0$ sao cho $|B(0,1)|$ đạt giá trị lớn nhất tại $n = n_0$.
+
+> **Bài 9.** Với $\varepsilon > 0$ cố định, chứng minh rằng
+> $$
+> \frac{|B(0,1) \setminus B(0,1-\varepsilon)|}{|B(0,1)|} = 1 - (1-\varepsilon)^n \to 1 \quad \text{khi } n \to \infty.
+> $$
+> Diễn giải: trong không gian nhiều chiều, hầu hết thể tích của quả cầu tập trung trong một lớp mỏng sát mặt biên. Đây là một trong những lý do cơ bản gây ra *curse of dimensionality* trong machine learning.

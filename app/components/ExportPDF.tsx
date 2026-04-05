@@ -37,4 +37,4 @@ export default function ExportPDF({ title }: { title: string }) {
       <span>export pdf</span>
     </button>
   )
-}
+}   
