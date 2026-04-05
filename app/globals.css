@@ -1158,6 +1158,7 @@ nav {
   .nav-links,
   .nav-logo,
   .back-link,
+  .no-print,
   button {
     display: none !important;
     visibility: hidden !important;

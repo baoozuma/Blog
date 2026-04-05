@@ -14,6 +14,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <head>
+        {/* Preload fonts */}
+<link rel="preload" href="/fonts/Satoshi/Satoshi-Regular.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+<link rel="preload" href="/fonts/Satoshi/Satoshi-Medium.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+<link rel="preload" href="/fonts/Satoshi/Satoshi-Bold.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
         {[
         // tags
         '/tags/analysis-icon.jpg',
@@ -73,7 +77,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <div className="page-content">
           {children}
         </div>
-      <FeedbackPanel />
+      <div className="no-print">
+        <FeedbackPanel />
+      </div>
       </body>
       
     </html>
