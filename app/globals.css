@@ -4,6 +4,24 @@
 @plugin "@tailwindcss/typography";
 
 /* ── Variables ── */
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/Satoshi/Satoshi-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/Satoshi/Satoshi-Medium.woff2') format('woff2');
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/Satoshi/Satoshi-Bold.woff2') format('woff2');
+  font-weight: 700;
+}
 :root {
   --bg: #0e0e0f;
   --bg-card: #141415;
@@ -14,8 +32,9 @@
   --gold: #c9a96e;
   --gold-dim: rgba(201, 169, 110, 0.15);
   --gold-glow: rgba(201, 169, 110, 0.06);
-  --font-serif: Georgia, serif;
-  --font-mono: 'JetBrains Mono', monospace;
+  --font-serif: 'Satoshi', serif;
+  --font-sans: 'Inter', sans-serif;
+  --font-mono: 'Satoshi', monospace;
   --content-width: 720px;
   --content-padding: 1.5rem;
 }
@@ -41,30 +60,31 @@ body::before {
   position: fixed;
   inset: 0;
   background-image:
-    linear-gradient(var(--gold-glow) 1px, transparent 1px),
-    linear-gradient(90deg, var(--gold-glow) 1px, transparent 1px);
+    linear-gradient(rgba(201, 169, 110, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(201, 169, 110, 0.04) 1px, transparent 1px);
   background-size: 72px 72px;
   pointer-events: none;
   z-index: 0;
 }
-
 
 body::after {
   content: '';
   position: fixed;
   inset: 0;
   background:
-    radial-gradient(circle at 20% 30%, rgba(201,169,110,0.05), transparent 40%),
-    radial-gradient(circle at 80% 70%, rgba(201,169,110,0.03), transparent 45%);
+    radial-gradient(ellipse 80% 60% at 0% 0%,   rgba(80, 140, 255, 0.13), transparent),
+    radial-gradient(ellipse 70% 60% at 100% 100%, rgba(201, 169, 110, 0.13), transparent),
+    radial-gradient(ellipse 60% 50% at 50% 50%,  rgba(14, 14, 15, 0.0), transparent);
   pointer-events: none;
   z-index: 0;
   animation: ambientGlow 12s ease-in-out infinite alternate;
 }
 
 @keyframes ambientGlow {
-  0% { opacity: 0.8; }
+  0%   { opacity: 0.85; }
   100% { opacity: 1; }
 }
+
 
 /* ── Floating symbol ── */
 .page-content::before {
@@ -99,10 +119,9 @@ nav {
   top: 0; left: 0; right: 0;
   z-index: 50;
   border-bottom: 1px solid var(--border);
-  background: rgba(14, 14, 15, 0.88);
-  backdrop-filter: blur(14px);
-}
-
+  background: rgba(14, 14, 15, 0.45);  /* 0.88 → 0.45 */
+  backdrop-filter: blur(8px);           /* 14px → 8px */
+} 
 .nav-inner {
   max-width: var(--content-width);
   margin: 0 auto;
@@ -287,49 +306,49 @@ nav {
   font-size: 0.85em;
 }
 
-/* ── Responsive ── */
-@media (max-width: 768px) {
-  :root {
-    --content-padding: 1.25rem;
-  }
 
-  body { font-size: 1rem; line-height: 1.75; }
-
-  .page-content {
-  max-width: var(--content-width);
-  margin: 0 auto;
-  padding: 6rem var(--content-padding) 4rem;
-  position: relative;
-  z-index: 1;
-}
-
-  .page-content::before { display: none; }
-
-  .katex-display {
-    overflow-x: auto !important;
-    padding: 1rem !important;
-  }
-}
-
-@media (max-width: 640px) {
-  :root {
-    --content-padding: 1rem;
-  }
-
-  body { font-size: 0.975rem; }
-
-  .nav-links { gap: 1.25rem; }
-  .nav-links a { font-size: 0.8rem; }
-
-  .social-link { font-size: 0.68rem; padding: 0.2rem 0.55rem; }
-
-  .prose h2 { font-size: 1.2rem; }
-
-  .katex { font-size: 0.95em !important; }
-}
 /* ── Homepage ── */
 .home { display: flex; flex-direction: column; gap: 0; }
 
+/* ── Home top padding ── */
+.home {
+  padding-top: 1rem; /* đẩy content xuống thêm */
+}
+
+/* ── Status pill ── */
+.status-pill-wrap {
+    margin-bottom:2em;
+}
+
+.status-pill {
+
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.3rem 0.85rem;
+  border: 1px solid rgba(201, 169, 110, 0.2);
+  border-radius: 999px;
+  background: rgba(201, 169, 110, 0.05);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  letter-spacing: 0.04em;
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #4ade80;
+  box-shadow: 0 0 6px rgba(74, 222, 128, 0.6);
+  flex-shrink: 0;
+  animation: pulse 2.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 6px rgba(74, 222, 128, 0.6); }
+  50%       { opacity: 0.5; box-shadow: 0 0 12px rgba(74, 222, 128, 0.3); }
+}
 .hero {
   display: grid;
   grid-template-columns: 1fr auto;
@@ -479,44 +498,62 @@ nav {
 
 .section-more:hover { color: var(--gold); }
 
+/* Grid layout for interests section */
 .interests-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
+  grid-template-columns: repeat(4, 1fr); /* desktop layout */
+  gap: 0.75rem;
+  align-items: start; /* prevent equal-height stretching */
 }
 
-.interest-card {
+/* Card container */
+.interest-card-v2 {
+  display: flex;
+  flex-direction: column;
   padding: 1.25rem;
-  border: 1px solid var(--border);
+  border-radius: 10px;
+  gap: 0.75rem;
+}
+
+/* Header section (icon + title) */
+.interest-card-top {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* Icon styling */
+.interest-icon-v2 {
+  width: 36px;
+  height: 36px;
+  font-size: 1.1rem;
   border-radius: 8px;
-  background: var(--bg-card);
-  transition: border-color 0.2s, transform 0.2s;
+  flex-shrink: 0;
 }
 
-.interest-card:hover {
-  border-color: var(--gold-dim);
-  transform: translateY(-2px);
+/* Divider element */
+.interest-divider {
+  margin: 0;
 }
 
-.interest-icon {
-  font-size: 1.6rem;
-  color: var(--gold);
-  margin-bottom: 0.75rem;
-  font-family: var(--font-serif);
-}
-
-.interest-label {
-  font-size: 0.95rem;
-  font-weight: 500;
-  color: var(--text);
-  margin-bottom: 0.35rem;
-}
-
-.interest-detail {
+/* Description text */
+.interest-detail-v2 {
   font-size: 0.82rem;
+  line-height: 1.55;
   color: var(--text-dim);
-  line-height: 1.5;
+}
 
+/* Responsive behavior */
+@media (max-width: 900px) {
+  .interests-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 500px) {
+  .interests-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* Study list */
@@ -636,6 +673,9 @@ nav {
   backdrop-filter: blur(12px);
   animation: splashFade 0.6s ease 1.6s forwards;
   pointer-events: none;
+}
+.no-splash .splash {
+  display: none !important;
 }
 
 .splash-text {
@@ -777,4 +817,220 @@ nav {
 
 @media (max-width: 640px) {
   .interests-grid { grid-template-columns: 1fr; }
+}
+/* ── Mobile responsive ── */
+@media (max-width: 768px) {
+
+  /* Nav */
+  .nav-links {
+    gap: 1rem;
+  }
+
+  .nav-links a {
+    font-size: 0.78rem;
+  }
+
+  /* Page padding */
+  :root {
+    --content-padding: 1rem;
+  }
+
+  /* Hero: stack avatar dưới text */
+  .hero {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    gap: 2rem;
+    margin-bottom: 3.5rem;
+    padding-bottom: 3rem;
+  }
+
+  /* Avatar lên trên hoặc xuống dưới tùy thích,
+     ở đây để xuống dưới (order: 2) */
+  .hero-avatar {
+    order: 2;
+    display: flex;
+    justify-content: center;
+  }
+
+  .hero-title {
+    font-size: 2.2rem;
+  }
+
+  .hero-desc {
+    max-width: 100%;
+    font-size: 0.975rem;
+  }
+
+  /* CTA row wrap */
+  .cta-row {
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  /* Study row: bỏ grid 3 cột, stack thành 2 dòng */
+  .study-row {
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto auto;
+    gap: 0.35rem 1rem;
+  }
+
+  .study-text {
+    grid-column: 1 / -1;
+    font-size: 0.8rem;
+  }
+
+  /* Post row */
+  .post-row {
+    grid-template-columns: 1fr;
+    gap: 0.4rem;
+  }
+
+  .post-row-date {
+    font-size: 0.7rem;
+  }
+
+  /* Interests grid đã có media query rồi, không cần thêm */
+
+  /* Floating symbol */
+  .page-content::before {
+    font-size: 5rem;
+    bottom: 1rem;
+    right: 1rem;
+  }
+
+  /* Splash text */
+  .splash-text {
+    font-size: 1.15rem;
+    text-align: center;
+    padding: 0 1.5rem;
+  }
+
+  .splash-text-2 {
+    font-size: 0.875rem;
+    text-align: center;
+    padding: 0 1.5rem;
+  }
+
+  /* Section spacing */
+  .section {
+    margin-bottom: 3.5rem;
+  }
+}
+
+/* Extra nhỏ (dưới 400px) */
+@media (max-width: 400px) {
+  .hero-title {
+    font-size: 1.85rem;
+  }
+
+  .avatar-img,
+  .avatar-deco {
+    width: 140px;
+    height: 140px;
+  }
+
+  .nav-links {
+    gap: 0.6rem;
+  }
+
+  .interests-grid {
+    gap: 0.6rem;
+  }
+}
+/* ── Side decorations ── */
+/* Xóa cái ::after cũ đi, thay bằng cái này */
+@media (min-width: 1200px) {
+  .page-content::after {
+    content: 'dx\A∇\A∂\Adt\A∮\Aλ';
+    white-space: pre;
+    position: fixed;
+    /* 360px = half of 720px content width */
+        left: calc(50% - 360px - 140px);  /* 60px → 140px */
+    transform: translateX(-100%);
+    top: 30%;
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    line-height: 3.2;
+    color: rgba(201, 169, 110, 0.1);
+    pointer-events: none;
+    z-index: 0;
+  }
+}
+
+.side-equations {
+  display: none;
+}
+
+@media (min-width: 1200px) {
+  .side-equations {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    position: fixed;
+    /* tương tự, đẩy ra ngoài content */
+    left: calc(50% + 360px + 140px);  /* 60px → 140px */
+    top: 25%;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: rgba(201, 169, 110, 0.1);
+    pointer-events: none;
+    z-index: 0;
+  }
+}
+.side-tracker { display: none; }
+
+@media (min-width: 1100px) {
+  .side-tracker {
+    display: block;
+    position: fixed;
+    left: calc(50% - 600px);
+    transform: translateX(-100%);
+    top: 20%;
+    height: 50vh;
+    padding-right: 1.5rem;
+  }
+
+  .tracker-line {
+    width: 1px;
+    height: 100%;
+    background: var(--border);
+    border-radius: 1px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .tracker-fill {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    background: var(--gold);
+    transition: height 0.1s linear;
+    border-radius: 1px;
+  }
+}
+:root {
+  --content-width: 720px;
+}
+
+@media (min-width: 1280px) {
+  :root {
+    --content-width: 960px;
+  }
+
+  /* Hero grid rộng hơn, avatar to hơn */
+  .hero {
+    grid-template-columns: 1fr 280px;
+    gap: 4rem;
+  }
+
+  .avatar-img,
+  .avatar-deco {
+    width: 220px;
+    height: 220px;
+  }
+
+  /* Interests thành 4 cột */
+  .interests-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }

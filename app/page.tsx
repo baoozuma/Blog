@@ -9,7 +9,13 @@ export default function HomePage() {
 
   return (
     <div className="home">
-
+      {/* Status pill */}
+      <div className="status-pill-wrap">
+        <span className="status-pill">
+          <span className="status-dot" />
+          Available for research collaboration
+        </span>
+      </div>
       {/* Hero */}
       <div className="hero">
         <div className="hero-text">
@@ -49,7 +55,7 @@ export default function HomePage() {
 
         <div className="hero-avatar">
           <div className="avatar-img">
-            <Image src="/avatar.jpg" alt="Aleksis" fill style={{ objectFit: 'cover' }} />
+            <Image src="/avatar.png" alt="Aleksis" fill style={{ objectFit: 'cover' }} />
           </div>
           <div className="avatar-deco" />
         </div>
@@ -64,8 +70,7 @@ export default function HomePage() {
   paddingLeft: '1rem'
 }}>
   I study pure mathematics at HCMUS, working toward a master's in Germany or Switzerland.
-  My long-term interest is geometric analysis — minimal surfaces, GMT, and mathematical physics.
-  Outside of math: J-Rock, Nietzsche, and story-driven games.
+  My long-term interest is geometric analysis, minimal surfaces, GMT, and mathematical physics.
 </p>
      {/* Interests */}
       <div className="section">
@@ -74,29 +79,29 @@ export default function HomePage() {
           {[
             {
               icon: '∫',
-              label: 'Mathematics',
-              detail: 'Geometric analysis, GMT, minimal surfaces, Mathematical Physics',
+              label: 'Coding',
+              detail: 'ReactJS, Matlab, Maple, Latex, Typescript ',
               accent: '#7c6af5',
-              sub: 'Pure & Applied',
+              sub: 'Website and PDF ',
             },
             {
               icon: '♪',
               label: 'Music',
-              detail: 'Ling Tosite Sigure, 7UPPERCUTS, Hitohira, ACDC',
+              detail: 'Math rock, Post hardcore, Midwest emo, Shoegaze',
               accent: '#4ecdc4',
-              sub: 'J-Rock & Metal',
+              sub: 'J-Rock & 2000s',
             },
             {
               icon: '§',
               label: 'Philosophy',
-              detail: 'Nietzsche, Marx, Kant, Arendt',
+              detail: 'Nietzsche, Marx, Kant, Arendt, Kierkaard',
               accent: '#e8a44a',
-              sub: 'Existentialism & Political Theory',
+              sub: 'Existentialism ',
             },
             {
               icon: '⟁',
               label: 'Games',
-              detail: 'Nier: Automata, Metal Gear Solid V, Red Dead Redemption 2',
+              detail: 'Nier, Metal Gear Solid V , Red Dead Redemption 2',
               accent: '#f87171',
               sub: 'Story-driven',
             },
