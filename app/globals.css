@@ -34,9 +34,9 @@
   --gold: #00ddff;
   --gold-dim: rgba(201, 169, 110, 0.15);
   --gold-glow: rgba(201, 169, 110, 0.06);
-  --font-serif: 'Inter';
+  --font-serif: 'Satoshi', serif;
   --font-sans: 'Inter', sans-serif;
-  --font-mono: 'Inter', monospace;
+  --font-mono: 'Satoshi', monospace;
   --content-width: 720px;
   --content-padding: 1.5rem;
 }
