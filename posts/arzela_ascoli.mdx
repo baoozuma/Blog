@@ -1,5 +1,5 @@
 ---
-title: "Two Proofs of the Arzelà–Ascoli Theorem"
+title: "Proof of the Arzelà–Ascoli Theorem"
 date: "2025-04-05"
 description: "Equicontinuity, uniform boundedness, and why compactness in function spaces requires more than pointwise control."
 thumbnail: "/thumbnails/arzela.svg"
@@ -28,10 +28,70 @@ Uniform boundedness alone is not enough — $\sin(nx)$ shows this. Equicontinuit
 
 Intuitively: equicontinuity + boundedness at each point → the functions cannot escape to infinity or oscillate wildly, so a convergent subsequence must exist.
 
-## Two Proofs
+## Proof
 
-**Proof 1 (diagonal argument).** Fix a countable dense subset $\{x_1, x_2, \ldots\} \subset K$. Extract subsequences by a diagonal procedure — first converge at $x_1$, then at $x_2$, and so on. Equicontinuity then promotes pointwise convergence to uniform convergence.
-
-**Proof 2 (total boundedness).** Show that $\mathcal{F}$ is totally bounded in $C(K)$ — for every $\varepsilon > 0$, $\mathcal{F}$ can be covered by finitely many $\varepsilon$-balls. Since $C(K)$ is complete, total boundedness is equivalent to precompactness.
-
-The two proofs illuminate different aspects: the first is constructive and explicit, the second is more conceptual and generalizes to abstract metric spaces.
+ 
+**Step 1:** $X$ is separable. Let $n \in \mathbb{N}$ be arbitrary; the collection $\{B(x,\frac{1}{n})\}_{x \in X}$ is an open cover of $X$, and by compactness it has a finite subcover $\{B(x_i,\frac{1}{n})\}_{i \in I_n}$. We will show that the set
+ 
+$$
+S = \bigcup_{n=1}^\infty \bigcup_{i \in I_n} \{x_i\}
+$$
+ 
+is dense in $X$. Let $y \in X$ and $\varepsilon > 0$; choose $n \in \mathbb{N}$ such that $\frac{1}{n} < \varepsilon$. Since $\{B(x_i,\frac{1}{n})\}_{i \in I_n}$ covers $X$, there exists $i \in I_n$ such that $d(x_i,y) < \frac{1}{n} < \varepsilon$ and $y \in B(x_i,\frac{1}{n})$. Then $x_i \in B(y,\frac{1}{n}) \subseteq B(y,\varepsilon)$. As we have
+ 
+$$
+B(y,\varepsilon) \cap S \neq \varnothing
+$$
+ 
+for all $y \in X$ and any $\varepsilon > 0$, $S$ is dense in $X$, and hence $X$ is separable.
+ 
+**Step 2:** Recall the Bolzano–Weierstrass theorem:
+ 
+**Theorem.** Let $(x_n) \subseteq \mathbb{R}$ be a bounded sequence. Then there exists a subsequence $(x_{n_k})$ that converges in $\mathbb{R}$.
+ 
+We enumerate $S = \{x_1, x_2, \dots\}$ and define the subsequence $\{f_{n,k}\}$ inductively in $k$ as follows.
+ 
+*$k = 1$.* Since $\{f_n(x_1)\}$ is bounded, Bolzano–Weierstrass gives a subsequence of functions $\{f_{n,1}\} \subseteq \{f_n\}$ such that $\{f_{n,1}(x_1)\}$ converges in $\mathbb{R}$.
+ 
+*$k \geq 2$.* Suppose the subsequence $\{f_{n,k-1}\} \subseteq \{f_{n,k-2}\}$ is defined such that $\{f_{n,k-1}(x_{k-1})\}$ converges. Since $\{f_{n,k-1}(x_k)\}$ is bounded, there is a subsequence of functions $\{f_{n,k}\} \subseteq \{f_{n,k-1}\}$ such that $\{f_{n,k}(x_k)\}$ converges in $\mathbb{R}$.
+ 
+Define $g_n = f_{n,n}$ for all $n \in \mathbb{N}$. We claim that $g_n(x_i)$ converges for all $x_i \in S$. Indeed, since $\{g_n(x_i)\}_{n \geq i} \subseteq \{f_{n,i}(x_i)\}$, and a subsequence of a convergent sequence converges, $g_n(x_i)$ converges in $\mathbb{R}$ and is moreover Cauchy.
+ 
+**Step 3:** We show that $\{g_n\}$ converges uniformly on $X$. Let $\varepsilon > 0$ be arbitrary. Since $\{g_n\}$ is equicontinuous, there exists $\delta_\varepsilon > 0$ such that
+ 
+$$
+|g_n(x) - g_n(y)| < \frac{\varepsilon}{3}
+$$
+ 
+whenever $d(x,y) < \delta_\varepsilon$ and for all $n \in \mathbb{N}$. Since $X$ is compact, there is a finite set $S_\varepsilon \subseteq S$ such that $\{B(x_i, \delta_\varepsilon)\}_{x_i \in S_\varepsilon}$ covers $X$. Since $\{g_n\}$ converges pointwise on $S$, for each $x_i \in S_\varepsilon$ there exists $N_i$ such that
+ 
+$$
+|g_m(x_i) - g_n(x_i)| < \frac{\varepsilon}{3}
+$$
+ 
+for all $m, n \geq N_i$. Let $N_\varepsilon = \max\{N_i\}$. For any $x \in X$, one can choose $s \in S_\varepsilon$ such that $d(x,s) < \delta_\varepsilon$, so
+ 
+$$
+|g_n(s) - g_n(x)| < \frac{\varepsilon}{3}.
+$$
+ 
+Applying the triangle inequality,
+ 
+$$
+|g_n(x) - g_m(x)| \leq |g_n(x) - g_n(s)| + |g_n(s) - g_m(s)| + |g_m(s) - g_m(x)| \leq \frac{\varepsilon}{3} + \frac{\varepsilon}{3} + \frac{\varepsilon}{3} = \varepsilon
+$$
+ 
+for all $m, n \geq N_\varepsilon$ and all $x \in X$. Hence $\{g_n\}$ is uniformly Cauchy, and therefore converges uniformly. $\blacksquare$
+ ## Exercises
+ 
+ **Exercise 1.** Let $f_n : [0,1] \to \mathbb{R}$ be defined by $f_n(x) = x^n$. Show that $\{f_n\}$ is uniformly bounded but not equicontinuous, and identify the pointwise limit. Does $\{f_n\}$ have a uniformly convergent subsequence on $[0,1]$?
+ 
+ **Exercise 2.** Let $\{f_n\}$ be a sequence of differentiable functions on $[a,b]$ such that $|f_n(x)| \leq M$ and $|f_n'(x)| \leq M$ for all $n \in \mathbb{N}$ and all $x \in [a,b]$. Show that $\{f_n\}$ is equicontinuous, and conclude that it has a uniformly convergent subsequence.
+ 
+ **Exercise 3.** Let $\{f_n\}$ be a sequence of functions on $[0,1]$ defined by
+ $$
+ f_n(x) = \frac{nx}{1 + n^2 x^2}.
+ $$
+ Show that $\{f_n\}$ is uniformly bounded. Is it equicontinuous? Find the pointwise limit and determine whether any subsequence converges uniformly.
+ 
+ **Exercise 4.** Give an example of a sequence $\{f_n\} \subset C([0,1])$ that is equicontinuous but has no uniformly convergent subsequence. What hypothesis of the theorem does your example violate?
