@@ -1,0 +1,376 @@
+---
+title: "Linear map scaling property on Lebesgue measure"
+date: "2025-04-06"
+description: "How the determinant controls volume distortion, and why translation invariance uniquely characterizes Lebesgue measure up to a scalar."
+thumbnail: "/thumbnails/lebesgue.jpg"
+---
+Let $\Phi: \mathbb{R}^n \to \mathbb{R}^n$ be a Lipchitz map, meaning that there is a $C > 0$ such that
+
+$$ 
+    |\Phi(x) - \Phi(y)| \leq C|x - y|, \text{ for all } x,y \in \mathbb{R}^n.
+$$
+
+Let $E \subseteq \mathbb{R}^n$ be any set. We must determine the measure $|\Phi(E)|$ or investigate how $\Phi$ affects the measure of $E$. If $\Phi$ is linear, one intuitive conclusion is that 
+$$ 
+    |\Phi(E)| = |\det\Phi||E|.
+$$  
+However, why does this make sense? We will demonstrate this fact in detail using two proofs: one extensively relies on analysis computation, and one is more elegant when we just want a few properties from the algebra of measure.
+
+# First Proof
+
+> **Claim.** Suppose $\Phi: \mathbb{R}^n \to \mathbb{R}^n$ is a Lipschitz mapping. If $E \subseteq \mathbb{R}^n$ is Lebesgue measurable, then $\Phi(E)$ is measurable.
+
+**Proof of the claim.**
+
+**Step 1:** If $|E| = 0$, then $|\Phi(E)| = 0$. Let $\varepsilon > 0$ be arbitrary; there exist cubes $\{C_i\}$ covering $E$ such that
+
+$$
+\sum_{i} |C_i| < \frac{2^n}{\omega_n \sqrt{n} C}\varepsilon,
+$$
+
+where $\omega_n = \frac{\pi^{n/2}}{\Gamma(n/2+1)}$ is the volume of the unit ball $B(0,1) \subseteq \mathbb{R}^n$ and $C_i = [a_i, b_i]^n$. We have
+
+$$
+\operatorname{diam} C_i = \sqrt{n(b_i - a_i)^2} = \sqrt{n}(b_i - a_i).
+$$
+
+From the definition of diameter,
+
+$$
+\operatorname{diam} \Phi(C_i) = \sup\{\|x - y\| \mid x,y \in \Phi(C_i)\} = \sup\{\|\Phi(x) - \Phi(y)\| \mid x,y \in C_i\} \leq C \operatorname{diam}(C_i) = \sqrt{n}C(b_i - a_i).
+$$
+
+Since $\Phi(C_i)$ is contained in a ball of radius $\frac{\operatorname{diam} C_i}{2}$,
+
+$$
+|\Phi(C_i)| \leq \omega_n \left(\frac{\operatorname{diam}(C_i)}{2}\right)^n \leq \frac{\omega_n \sqrt{n} C}{2^n}(b_i - a_i)^n = \frac{\omega_n \sqrt{n} C}{2^n}|C_i|.
+$$
+
+Since $\{\Phi(C_i)\}$ covers $\Phi(E)$,
+
+$$
+|\Phi(E)| \leq \sum_i |\Phi(C_i)| \leq \frac{\omega_n \sqrt{n} C}{2^n} \sum_i |C_i| \leq \varepsilon.
+$$
+
+Since $\varepsilon$ is arbitrary, $|\Phi(E)| = 0$.
+
+**Step 2:** If $F \subseteq \mathbb{R}^n$ is compact, then $\Phi(F)$ is compact.
+
+Let $(x_n) \subseteq \Phi(F)$ such that $x_n \to x \in \mathbb{R}^n$. For each $n$, choose $y_n \in F$ such that $\Phi(y_n) = x_n$. Since $F$ is compact, there is a subsequence $(y_{n_k})$ converging to $y \in F$. Then $x_{n_k} \to \Phi(y) \in \Phi(F)$. As the limit is unique, $x = \Phi(y) \in \Phi(F)$. Hence $\Phi(F)$ is compact.
+
+**Step 3:** Let $H$ be an $F_\sigma$ set in $\mathbb{R}^n$; then $\Phi(H)$ is an $F_\sigma$ set in $\mathbb{R}^n$.
+
+Write $H = \bigcup_{i=1}^\infty F_i$, where $F_i$ are closed. For each $i$, define $K_{ij} = F_i \cap \overline{B(0,j)}$, so that
+
+$$
+F_i = \bigcup_{j=1}^\infty K_{ij}.
+$$
+
+Since $F_i$ is closed, $K_{ij}$ is a closed subset of the compact set $\overline{B(0,j)}$, hence compact. It follows that $\Phi(K_{ij})$ is compact for all $i,j$, and one can write
+
+$$
+\Phi(H) = \bigcup_{i,j=1}^\infty \Phi(K_{ij}).
+$$
+
+Therefore $\Phi(H)$ is $F_\sigma$.
+
+**Step 4:** Let $A$ be measurable. By inner regularity of Lebesgue measure,
+
+$$
+|A| = \sup\{|K| \mid K \subseteq A,\ K \text{ compact}\}.
+$$
+
+For each $n$, choose a compact subset $K_n \subseteq A$ such that
+
+$$
+|K_n| > |A| - \frac{1}{n}.
+$$
+
+Set $H = \bigcup_{n=1}^\infty K_n$; then $H$ is $F_\sigma$. Since $H \subseteq A$, one has $|H| \leq |A|$, and
+
+$$
+|H| \geq |K_n| \geq |A| - \frac{1}{n}
+$$
+
+for all $n$, so $|H| = |A|$. Then $|A \setminus H| = 0$, so $N = A \setminus H$ is a null set.
+
+**Step 5:** Write $E = H \cup N$, where $H$ is $F_\sigma$ and $N$ is a null set. Let $A \subseteq \mathbb{R}^n$ be any subset. Since $\Phi(H) \subseteq \Phi(E)$, we have $\Phi(E)^c \subseteq \Phi(H)^c$. Since $H$ is $F_\sigma$, it follows from Step 3 that $\Phi(H)$ is $F_\sigma$, hence Borel and therefore measurable. We have the estimate
+
+$$
+|\Phi(E)^c \cap A| \leq |\Phi(H)^c \cap A|.
+$$
+
+By Step 1, $\Phi$ maps null sets to null sets, so $|\Phi(N)| = 0$. Then
+
+$$
+|\Phi(E) \cap A| = |[\Phi(H) \cup \Phi(N)] \cap A| \leq |\Phi(H) \cap A| + |\Phi(N) \cap A| \leq |\Phi(H) \cap A| + |\Phi(N)| = |\Phi(H) \cap A|.
+$$
+
+Since $\Phi(H)$ is measurable, combining yields
+
+$$
+|\Phi(E) \cap A| + |\Phi(E)^c \cap A| \leq |\Phi(H) \cap A| + |\Phi(H)^c \cap A| = |A|.
+$$
+
+The reverse inequality follows by monotonicity of outer measure. Hence $\Phi(E)$ satisfies the Carathéodory condition. $\square$
+
+---
+
+Now let $A: \mathbb{R}^n \to \mathbb{R}^n$ be any linear map. We show $A$ is Lipschitz. Writing $x = \sum_{i=1}^n x_i e^i$,
+
+$$
+\|Ax\| = \left\|\sum_{i=1}^n x_i Ae^i\right\| \leq \sum_{i=1}^n |x_i| \|Ae^i\|.
+$$
+
+Applying Cauchy–Schwarz,
+
+$$
+\|Ax\| \leq \left(\sum_i \|Ae^i\|^2\right)^{1/2} \left(\sum_i x_i^2\right)^{1/2} = C\|x\|,
+$$
+
+where $C = \left(\sum_i \|Ae^i\|^2\right)^{1/2} < \infty$. Thus $A$ is Lipschitz.
+
+We state the SVD theorem, to be proved later using the spectral theorem.
+
+> **Theorem (SVD).** Let $A \in M_{m \times n}(\mathbb{R})$. Then there exist $U \in O(m)$, $V \in O(n)$, and a diagonal matrix $\Sigma$ with nonnegative entries such that $A = U\Sigma V^T$.
+
+With this theorem, it suffices to verify the result when $\Phi$ is a translation, rotation, or diagonal (scaling) matrix.
+
+---
+
+**Case 1:** $\Phi$ is a rotation, i.e. $\Phi \in \{A: \mathbb{R}^n \to \mathbb{R}^n \mid A \cdot A^* = I_n\}$.
+
+*Step 1: $\Phi$ is an isometry.* For $x, y \in \mathbb{R}^n$,
+
+$$
+\langle \Phi x, \Phi y \rangle = (\Phi x)^T(\Phi y) = x^T \Phi^T \Phi y = x^T y = \langle x, y \rangle.
+$$
+
+This implies $\|\Phi x\| = \|x\|$. Since $\Phi$ is invertible, $\Phi^{-1} \in O(n)$ and thus $\Phi^{-1}$ is also an isometry.
+
+*Step 2: $\Phi(B(x_i, r)) = B(\Phi(x_i), r)$ and covers are preserved.* Since $\Phi$ is invertible,
+
+$$
+\Phi(B(x_i, r)) = \{\Phi x \mid \|x - x_i\| < r\} = \{x \mid \|\Phi^{-1}(x) - x_i\| < r\} = \{x \mid \|x - \Phi x_i\| < r\} = B(\Phi(x_i), r).
+$$
+
+It follows that $\{B(x_i, r)\}$ covers $E$ if and only if $\{B(\Phi(x_i), r)\}$ covers $\Phi(E)$.
+
+*Step 3: $|\Phi(E)| = |E|$.* Let $\varepsilon > 0$. Choose open balls $\{B(x_i, r_1)\}$ covering $E$ such that
+
+$$
+\sum_i |B(x_i, r_1)| < |E| + \varepsilon.
+$$
+
+Then $\{B(\Phi(x_i), r_1)\}$ covers $\Phi(E)$. Since $\Phi$ is an isometry, $|B(\Phi(x_i), r_1)| = |B(x_i, r_1)|$, so
+
+$$
+|\Phi(E)| \leq \sum_i |B(\Phi(x_i), r_1)| = \sum_i |B(x_i, r_1)| \leq |E| + \varepsilon.
+$$
+
+Now choose open balls $\{B(y_i, r_2)\}$ covering $\Phi(E)$ such that $\sum_i |B(y_i, r_2)| < |\Phi(E)| + \varepsilon$. Then $\{B(\Phi^{-1}(y_i), r_2)\}$ covers $E$. Since $\Phi^{-1} \in O(n)$ is also an isometry, $|B(\Phi^{-1}(y_i), r_2)| = |B(y_i, r_2)|$, so
+
+$$
+|E| \leq \sum_i |B(\Phi^{-1}(y_i), r_2)| = \sum_i |B(y_i, r_2)| < |\Phi(E)| + \varepsilon.
+$$
+
+Since $\varepsilon$ is arbitrary, $|\Phi(E)| = |E|$.
+
+---
+
+**Case 2:** $\Phi = \operatorname{diag}[\sigma_1, \dots, \sigma_n]$. Let $R = \prod_{i=1}^n (a_i, b_i]$ be any rectangle. Then
+
+$$
+\Phi(R) = \prod_{i=1}^n (\sigma_i a_i, \sigma_i b_i].
+$$
+
+One can assume $\sigma_i > 0$: if $\sigma_i = 0$ the image collapses to lower dimension giving $|\Phi(E)| = 0$, and $\sigma_i < 0$ merely flips and scales $R$ without affecting the measure calculation. Since $\Phi(R)$ is a rectangle,
+
+$$
+|\Phi(R)| = \prod_{i=1}^n (\sigma_i b_i - \sigma_i a_i) = |\det \Phi| \cdot |R|.
+$$
+
+Since $\Phi$ is bijective, $\{R_i\}$ covers $E$ if and only if $\{\Phi(R_i)\}$ covers $\Phi(E)$. Therefore
+
+$$
+|\Phi(E)| = \inf\left\{\sum |R_i| \;\middle|\; \{R_i\} \text{ covers } \Phi(E)\right\} = \inf\left\{\sum |\det\Phi| \cdot |\Phi^{-1}(R_i)| \;\middle|\; \{\Phi^{-1}(R_i)\} \text{ covers } E\right\} = |\det\Phi| \cdot |E|.
+$$
+
+---
+
+**Case 3:** $\Phi(x) = x + x_0$, where $x_0 = (x_1, \dots, x_n) \in \mathbb{R}^n$. Let $R = \prod_{i=1}^n (a_i, b_i]$ be any rectangle. Then
+
+$$
+\Phi(R) = \prod_{i=1}^n (a_i + x_i, b_i + x_i],
+$$
+
+and since $\Phi(R)$ is a rectangle,
+
+$$
+|\Phi(R)| = \prod_{i=1}^n (b_i + x_i - a_i - x_i) = |R|.
+$$
+
+Since $\Phi$ is bijective, $\{R_i\}$ covers $E$ if and only if $\{\Phi(R_i)\}$ covers $\Phi(E)$. Therefore
+
+$$
+|\Phi(E)| = \inf\left\{\sum |R_i| \;\middle|\; \{R_i\} \text{ covers } E + x_0\right\} = \inf\left\{\sum |R_i - x_0| \;\middle|\; \{R_i - x_0\} \text{ covers } E\right\} = |E|.
+$$
+
+---
+
+**Conclusion.** For any linear map $\Phi: \mathbb{R}^n \to \mathbb{R}^n$, the SVD theorem gives $\Phi = U\Sigma V^T$ with $U, V \in O(n)$ and $\Sigma$ diagonal. Let $E \subseteq \mathbb{R}^n$ be measurable. Since $U, V$ are isometries,
+
+$$
+|\Phi(E)| = |U\Sigma V^T(E)| = |\Sigma V^T(E)| = |\det\Sigma| \cdot |V^T(E)| = |\det\Sigma| \cdot |E|.
+$$
+
+Since $|\det U| = |\det V| = 1$, we have $|\det\Phi| = |\det\Sigma|$. Hence
+
+$$
+\boxed{|\Phi(E)| = |\det\Phi| \cdot |E|.}
+$$
+
+---
+# Second Proof
+In this section, we need to define some special algebras that work quite effective on measure.
+ **Definition.** A nonempty collection of subsets $\mathcal{P} \subset 2^X$ is a **$\pi$-system** if
+ $$
+ A, B \in \mathcal{P} \quad \Rightarrow \quad A \cap B \in \mathcal{P}.
+ $$
+ 
+ **Definition.** A collection of subsets $\mathcal{L} \subseteq 2^X$ is a **$\lambda$-system** if
+ 1. $X \in \mathcal{L}$.
+ 2. $A, B \in \mathcal{L}$ and $A \subseteq B$ implies $B \setminus A \in \mathcal{L}$.
+ 3. If $\{A_k\} \subseteq \mathcal{L}$ and $A_k \subseteq A_{k+1}$ for all $k$, then $\bigcup_{k=1}^\infty A_k \in \mathcal{L}$.
+ 
+---
+ 
+ **Theorem ($\pi$-$\lambda$ theorem).** If $\mathcal{P}$ is a $\pi$-system and $\mathcal{L}$ is a $\lambda$-system with $\mathcal{P} \subseteq \mathcal{L}$, then $\sigma(\mathcal{P}) \subseteq \mathcal{L}$.
+ 
+**Proof.** Let
+$$
+\mathcal{S} = \bigcap_{\substack{\mathcal{L}' \supseteq \mathcal{P} \\ \mathcal{L}' \text{ is a } \lambda\text{-system}}} \mathcal{L}'
+$$
+be the smallest $\lambda$-system containing $\mathcal{P}$. Then $\mathcal{P} \subseteq \mathcal{S} \subseteq \mathcal{L}$, and $\mathcal{S}$ is itself a $\lambda$-system by construction.
+ 
+**Claim:** $\mathcal{S}$ is a $\pi$-system.
+ 
+Fix any $A \in \mathcal{S}$ and define
+$$
+\mathcal{A} = \{C \subseteq X \mid A \cap C \in \mathcal{S}\}.
+$$
+One can verify directly that $\mathcal{A}$ is a $\lambda$-system. Moreover, $\mathcal{A}$ contains $\mathcal{P}$: for any $P \in \mathcal{P}$, since $A \in \mathcal{S}$ and $\mathcal{S}$ is the smallest $\lambda$-system containing $\mathcal{P}$, we need to check $A \cap P \in \mathcal{S}$. 
+ 
+*Step 1:* First take $A \in \mathcal{P}$. For any $P \in \mathcal{P}$, since $\mathcal{P}$ is a $\pi$-system, $A \cap P \in \mathcal{P} \subseteq \mathcal{S}$, so $P \in \mathcal{A}$. Hence $\mathcal{P} \subseteq \mathcal{A}$, and since $\mathcal{S}$ is the smallest $\lambda$-system containing $\mathcal{P}$, we get $\mathcal{S} \subseteq \mathcal{A}$. This means $A \cap C \in \mathcal{S}$ for all $A \in \mathcal{P}$ and all $C \in \mathcal{S}$.
+ 
+*Step 2:* Now take any $A \in \mathcal{S}$. By Stage 1, for any $P \in \mathcal{P}$, $A \cap P \in \mathcal{S}$, so $P \in \mathcal{A}$. Hence $\mathcal{P} \subseteq \mathcal{A}$, and again $\mathcal{S} \subseteq \mathcal{A}$. In particular, for any $B \in \mathcal{S}$, $B \in \mathcal{A}$, which means $A \cap B \in \mathcal{S}$.
+ 
+Hence $\mathcal{S}$ is closed under finite intersections, i.e., a $\pi$-system.
+ 
+**$\mathcal{S}$ is a $\sigma$-algebra.** Since $\mathcal{S}$ is a $\lambda$-system, $X \in \mathcal{S}$ and $X \setminus X = \varnothing \in \mathcal{S}$. If $A \in \mathcal{S}$, then $A^c = X \setminus A \in \mathcal{S}$. For countable unions: given $\{A_k\} \subseteq \mathcal{S}$, set $B_k = A_1 \cup \cdots \cup A_k$. Since $\mathcal{S}$ is a $\pi$-system, it is closed under finite unions (by De Morgan and closure under complements and finite intersections), so $B_k \in \mathcal{S}$. Since $B_k \nearrow \bigcup_k A_k$ and $\mathcal{S}$ is a $\lambda$-system, $\bigcup_k A_k \in \mathcal{S}$. Hence $\mathcal{S}$ is a $\sigma$-algebra.
+ 
+Therefore $\sigma(\mathcal{P}) \subseteq \sigma(\mathcal{S}) = \mathcal{S} \subseteq \mathcal{L}$. $\blacksquare$
+ 
+---
+ 
+ **Lemma.** Let $A \subseteq \mathbb{R}^n$ be a compact subset whose intersection with $\{c\} \times \mathbb{R}^{n-1}$ has $(n-1)$-dimensional measure zero for every $c \in \mathbb{R}$. Then $A$ has measure zero.
+ 
+**Proof.** Since $A$ is compact, there exists a closed interval $[a,b]$ such that $A \subseteq [a,b] \times \mathbb{R}^{n-1}$. For each $c \in [a,b]$, denote $A_c = \{x \in \mathbb{R}^{n-1} \mid (c,x) \in A\}$.
+ 
+Let $\varepsilon > 0$ be arbitrary. Since $|A_c|_{n-1} = 0$, there exist finitely many $(n-1)$-dimensional open cubes $\{C_1, \dots, C_k\}$ covering $A_c$ with $\sum_i |C_i| < \varepsilon$. Set $U_c = C_1 \cup \cdots \cup C_k$.
+ 
+**Claim:** There exists an open interval $J_c \ni c$ such that
+$$
+A \cap (J_c \times \mathbb{R}^{n-1}) \subseteq J_c \times U_c.
+$$
+ 
+Suppose not. Then there exists a sequence $(c_i, x_i) \in A$ with $c_i \to c$ and $x_i \notin U_c$. Since $A$ is compact, passing to a subsequence, $(c_i, x_i) \to (c, x)$ for some $(c,x) \in A$. In particular $x \in A_c$. But $U_c$ is open and $x_i \notin U_c$ for all $i$, so $x \notin U_c$, contradicting $A_c \subseteq U_c$. This proves the claim.
+ 
+Since $\{J_c\}_{c \in [a,b]}$ is an open cover of the compact set $[a,b]$, it admits a finite subcover $\{J_{c_1}, \dots, J_{c_m}\}$. If necessary, we can shrink overlapping parts so that the total length satisfies $\sum_k |J_{c_k}| \leq 2(b-a)$. Then
+ 
+$$
+|A| \leq \sum_{k=1}^m |J_{c_k} \times U_{c_k}| = \sum_{k=1}^m |J_{c_k}| \cdot |U_{c_k}| \leq 2(b-a)\varepsilon.
+$$
+ 
+Since $\varepsilon$ is arbitrary, $|A| = 0$. $\blacksquare$
+ 
+---
+ 
+ **Lemma.** Every proper affine subspace of $\mathbb{R}^n$ has Lebesgue measure zero in $\mathbb{R}^n$.
+ 
+**Proof.** Let $V$ be a proper affine subspace of $\mathbb{R}^n$. If $V$ is empty, it trivially has measure zero. Otherwise, there exist $a = (a_1, \dots, a_n) \neq 0$ and $b \in \mathbb{R}$ such that
+$$
+V = \{x \in \mathbb{R}^n \mid a \cdot x = b\}.
+$$
+Fix $1 \leq i \leq n$ such that $a_i \neq 0$. For any $x \in V$,
+$$
+x_i = \frac{1}{a_i}\left(b - \sum_{j \neq i} a_j x_j\right) =: F(x_1, \dots, x_{i-1}, x_{i+1}, \dots, x_n).
+$$
+So $V$ is the graph of the continuous function $F: \mathbb{R}^{n-1} \to \mathbb{R}$. We apply the previous lemma: for any $c \in \mathbb{R}$, the slice $V \cap (\{c\} \times \mathbb{R}^{n-1})$ consists of at most one point (since $x_i$ is uniquely determined by the remaining coordinates), which has $(n-1)$-dimensional measure zero. Since $V$ is closed and every closed set is a countable union of compact sets, and each compact slice has $(n-1)$-measure zero, it follows that $V$ has Lebesgue measure zero. $\blacksquare$
+ 
+ 
+ **Theorem (Affine Invariant Theorem).** Let $F: \mathbb{R}^n \to \mathbb{R}^n$ be an affine map $F(x) = Ax + b$, where $A \in M_n(\mathbb{R})$ and $b \in \mathbb{R}^n$. Then
+ $$
+ \lambda^*(F(U)) = |\det(A)|\,\lambda^*(U) \qquad \text{for all } U \subseteq \mathbb{R}^n.
+ $$
+ 
+**Proof.**
+ 
+**Reduction.** Since $F(U) = A(U) + b$ and Lebesgue measure is translation invariant, $\lambda^*(A(U) + b) = \lambda^*(A(U))$. So it suffices to prove
+$$
+\lambda^*(A(U)) = |\det(A)|\,\lambda^*(U) \qquad \text{for all } U \subseteq \mathbb{R}^n.
+$$
+ 
+**Case 1: $\det(A) = 0$.** Then $\operatorname{im}(A)$ is a proper affine subspace of $\mathbb{R}^n$, which has measure zero by the previous lemma. Since $A(U) \subseteq \operatorname{im}(A)$, monotonicity gives $\lambda^*(A(U)) = 0 = |\det(A)|\,\lambda^*(U)$.
+ 
+**Case 2: $\det(A) \neq 0$.** Then $A$ is invertible. We proceed in five steps.
+ 
+**Step 1: Define a candidate measure $\nu$.** Let $\nu: \mathcal{B}(\mathbb{R}^n) \to [0, +\infty]$ be defined by $\nu(U) = \lambda^*(A(U))$. We verify $\nu$ is a Borel measure. Clearly $\nu(\varnothing) = 0$. For any countable disjoint collection $\{U_i\} \subseteq \mathcal{B}(\mathbb{R}^n)$, since $A$ is a bijection,
+$$
+\nu\!\left(\bigsqcup_i U_i\right) = \lambda^*\!\left(\bigsqcup_i A(U_i)\right) = \sum_i \lambda^*(A(U_i)) = \sum_i \nu(U_i).
+$$
+Hence $\nu$ is a measure on $\mathcal{B}(\mathbb{R}^n)$.
+ 
+**Step 2: $\nu$ is translation invariant.** For any $U \in \mathcal{B}(\mathbb{R}^n)$ and $x \in \mathbb{R}^n$, since $A$ is linear,
+$$
+\nu(U + x) = \lambda^*(A(U + x)) = \lambda^*(A(U) + Ax) = \lambda^*(A(U)) = \nu(U),
+$$
+where the third equality uses translation invariance of $\lambda$.
+ 
+**Step 3: $\nu$ agrees with $|\det A|\,\lambda$ on half-open cubes.**
+ 
+ **Claim.** For any half-open cube $Q = \prod_{i=1}^n [a_i, b_i)$ of side length $s$, one has $\nu(Q) = |\det A|\,\lambda(Q)$.
+ 
+Write $Q = a + s \cdot [0,1)^n$. By Step 2, $\nu(Q) = \nu(s \cdot [0,1)^n)$. Tile $[0,1)^n$ by $m^n$ disjoint half-open cubes $\{Q_j\}$ of side $\frac{1}{m}$. By translation invariance, all $\nu(Q_j)$ are equal, so
+$$
+\nu([0,1)^n) = m^n \,\nu\!\left(\left[0,\tfrac{1}{m}\right)^n\right).
+$$
+A scaling argument then gives $\nu([0,s)^n) = s^n\,\nu([0,1)^n)$ for rational $s$, and monotonicity extends this to all $s > 0$. It remains to pin down $\nu([0,1)^n) = \lambda^*(A([0,1)^n))$: the image $A([0,1)^n)$ is a parallelepiped whose volume is $|\det A|$ by the geometric interpretation of the determinant. Hence
+$$
+\nu(Q) = s^n\,|\det A| = |\det A|\,\lambda(Q). \quad \square
+$$
+ 
+**Step 4: Conclude $\nu = |\det A|\,\lambda$ on $\mathcal{B}(\mathbb{R}^n)$.** Both $\nu$ and $|\det A|\,\lambda$ are $\sigma$-finite Borel measures that agree on all half-open cubes. Half-open cubes form a $\pi$-system generating $\mathcal{B}(\mathbb{R}^n)$. Define
+$$
+\mathcal{D} = \{U \in \mathcal{B}(\mathbb{R}^n) \mid \nu(U) = |\det A|\,\lambda(U)\}.
+$$
+One checks that $\mathcal{D}$ is a $\lambda$-system: $\mathbb{R}^n \in \mathcal{D}$ by Step 3; if $U \subseteq V$ are in $\mathcal{D}$ and both have finite measure then $V \setminus U \in \mathcal{D}$ by additivity; and $\mathcal{D}$ is closed under increasing unions by monotone convergence. Since $\mathcal{D}$ contains the $\pi$-system of half-open cubes, the $\pi$-$\lambda$ theorem gives $\mathcal{B}(\mathbb{R}^n) = \sigma(\text{half-open cubes}) \subseteq \mathcal{D}$. Hence
+$$
+\nu(U) = |\det A|\,\lambda(U) \qquad \text{for all } U \in \mathcal{B}(\mathbb{R}^n).
+$$
+ 
+**Step 5: Extend to all subsets.** For arbitrary $U \subseteq \mathbb{R}^n$,
+$$
+\lambda^*(U) = \inf\{\lambda(V) \mid V \supseteq U,\ V \in \mathcal{B}(\mathbb{R}^n)\}.
+$$
+Since $A$ is a bijection, $A$ maps Borel sets to Borel sets and $U \subseteq V \Rightarrow A(U) \subseteq A(V)$. Therefore
+$$
+\lambda^*(A(U)) = \inf\{\lambda(A(V)) \mid V \supseteq U,\ V \in \mathcal{B}(\mathbb{R}^n)\} = \inf\{|\det A|\,\lambda(V) \mid V \supseteq U,\ V \in \mathcal{B}(\mathbb{R}^n)\} = |\det A|\,\lambda^*(U).
+$$
+
+This completes the proof. 
+## References
+
+[1] J. Serra, *Analysis II*, ETH Zürich lecture notes.
+
+[2] J. M. Lee, *Introduction to Smooth Manifolds*, 2nd ed., Grad. Texts in Math., vol. 218, Springer, New York, 2013.
