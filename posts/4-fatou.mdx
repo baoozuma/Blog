@@ -1,0 +1,286 @@
+---
+title: Fatou's Lemma and applications 
+date: "2025-04-07"
+description: We discuss Fatou's lemma, a fundamental inequality that allows interchange of limits and integrals for nonnegative measurable functions, together with its classical applications to MCT, DCT and completeness of Lp space.
+thumbnail: "/thumbnails/fatou.jpg"
+---
+
+## Fatou's Lemma
+
+**Lemma (Fatou's Lemma).** Let $(X,\mu)$ be a measure space and let $\{f_n\}: X \to [0,+\infty]$ be $\mu$-measurable sequence of functions. Then one has
+
+$$
+\int \liminf_{n \to +\infty} f_n \, d\mu \leq \liminf_{n \to +\infty} \int f_n \, d\mu.
+$$
+
+**Proof.**
+Let $g: X \to [0,+\infty]$ be any simple function such that $g \leq \liminf_{n \to+\infty} f_n$, $\mu$.a.e. We write
+
+$$
+g = \sum_{i=1}^N \mathbf{1}_{E_i} a_i,
+$$
+
+where $\{E_i\}_i$ are disjoint and their union is $X$.
+
+**Step 1.** The condition $g \leq \liminf f_n$ gives no direct pointwise comparison between $g$ and individual $f_n$. To obtain this, let $0 < t < 1$ be arbitrary, then one has
+
+$$
+tg < g \leq \liminf_{n \to+\infty} f_n, \quad \mu\text{.a.e } x.
+$$
+
+Since the sequence $\{\inf_{k \geq n} f_k\}_n$ is increasing to $\liminf_{n \to +\infty} f_n$, there exists $N_x > 0$ such that
+
+$$
+f_n \geq \inf_{k \geq n} f_k \geq tg, \quad \forall n \geq N_x,\ \mu\text{.a.e},\ x.
+$$
+
+**Step 2.** Define the set
+
+$$
+B_{i,n} = \{x \in E_i \mid f_k(x) > ta_i,\ \forall k \geq n\}.
+$$
+
+Notice $B_{i,n} \subseteq B_{i,n+1}$ for all $i,n$. We will show that $\bigcup_{n=1}^\infty B_{i,n} = E_i$. Let $x \in E_i$, then $tg(x) = ta_i$, we choose $N_x$ as above and obtain
+
+$$
+f_n \geq ta_i = tg(x), \quad \forall n \geq N_x,\ \mu\text{.a.e.}
+$$
+
+Thus $x \in B_{i,n}$ for all $n \geq N_x$. Therefore $E_i \subseteq \bigcup_{n=1}^\infty B_{i,n}$ and since $B_{i,n}$ is monotone by $n$, we obtain $\lim_{n\to+\infty} \mu(B_{i,n}) = \mu(E_i)$. The reverse side follows automatically since each $B_{i,n}$ is a subset of $E_i$.
+
+**Step 3.** We already know that to prove $a \leq b$, when it's hard to find the relation of $a$ and $b$, we can instead prove $ca \leq b$ for all $0 < c < 1$ and let $c \to 1^-$. Following this trick, we start estimating from the right side
+
+$$
+\int f_n \, d\mu = \sum_{k=1}^N \int_{E_k} f_n \, d\mu \geq \sum_{k=1}^N \int_{B_{k,n}} f_n \, d\mu \geq \sum_{k=1}^N ta_k\,\mu(B_{k,n}). \tag{1}
+$$
+
+Since $B_{k,n}$ is increasing by $n$, we have
+
+$$
+\liminf_{n \to +\infty} \mu(B_{k,n}) = \lim_{n\to+\infty} \inf_{i \geq n} \mu(B_{k,i}) = \lim_{n\to+\infty} \mu(B_{k,n}).
+$$
+
+Calculating the right side of $(1)$
+
+$$
+\liminf_{n \to +\infty} \sum_{k=1}^N ta_k\,\mu(B_{k,n}) = \lim_{n\to+\infty} \sum_{k=1}^N ta_k\,\mu(B_{k,n}) = \sum_{k=1}^N ta_k\,\mu(E_k).
+$$
+
+Taking $\liminf_{n \to +\infty}$ both sides from $(1)$
+
+$$
+\liminf_{n \to +\infty} \int f_n \, d\mu \geq t \sum_{k=1}^N a_k\,\mu(E_k) = t\int g \, d\mu.
+$$
+
+As $g$ is arbitrary simple function less than $\liminf_{n\to +\infty} f_n$ and $0 < t < 1$ is any number, taking $t \to 1^-$, and taking supremum over all such simple $g$, we obtain the Fatou's inequality
+
+$$
+\liminf_{n \to +\infty} \int f_n \, d\mu \geq \int \liminf_{n \to +\infty} f_n \, d\mu. \qquad \blacksquare
+$$
+
+---
+
+In this section, we introduce some significant applications of Fatou's Lemma.
+
+
+
+## Monotone Convergence Theorem
+
+**Theorem (Monotone Convergence Theorem).** Let $\{f_n\}: X \to [0,+\infty]$ be increasing, $\mu$-measurable sequence. Then
+
+$$
+\lim_{n\to+\infty} \int f_n \, d\mu = \int \lim_{n\to+\infty} f_n \, d\mu.
+$$
+
+**Proof.**
+Since $\{f_n\}$ is increasing, we have
+
+$$
+f_k \leq \lim_{n\to+\infty} f_n \quad \forall k \in \mathbb{N}.
+$$
+
+Taking integral both sides
+
+$$
+\int f_k \, d\mu \leq \int \lim_{n\to+\infty} f_n \, d\mu \quad \forall k \in \mathbb{N}.
+$$
+
+Since the left side holds for all $k$ and since $\{\int f_n\}$ is also increasing by the monotone property of integral, we obtain
+
+$$
+\liminf_{n \to +\infty} \int f_n \, d\mu = \lim_{n\to+\infty} \int f_n \, d\mu \leq \int \lim_{n\to+\infty} f_n \, d\mu.
+$$
+
+Applying Fatou's lemma and note that both $\{f_n\}$ and $\{\int f_n\}$ are increasing
+
+$$
+\int \lim_{n\to+\infty} f_n \, d\mu = \int \liminf_{n \to +\infty} f_n \, d\mu \leq \liminf_{n \to +\infty} \int f_n \, d\mu = \lim_{n\to+\infty} \int f_n \, d\mu.
+$$
+
+Hence, the equality holds. $\blacksquare$
+
+---
+
+## Dominated Convergence Theorem
+
+**Theorem (Dominated Convergence Theorem).** Let $g \in L^1$ be nonnegative, and $f, \{f_n\}$ are measurable. Suppose $f_n \to f$ and $|f_n| \leq g$, for all $n$, $\mu$.a.e. Then one has
+
+$$
+\lim_{n\to+\infty} \int |f_n - f| \, d\mu = 0.
+$$
+
+**Proof.**
+By Fatou's lemma, we have
+
+$$
+\begin{aligned}
+\int 2g \, d\mu &= \int \liminf_{n \to +\infty}(2g - |f - f_n|) \, d\mu \leq \liminf_{n \to +\infty} \int 2g - |f - f_n| \, d\mu \\
+&= \int 2g - \limsup_{n \to +\infty} \int |f - f_n| \, d\mu.
+\end{aligned}
+$$
+
+Hence,
+
+$$
+\lim_{n\to+\infty} \int |f_n - f| \, d\mu \leq \limsup_{n \to +\infty} \int |f - f_n| \, d\mu = 0. \qquad \blacksquare
+$$
+
+---
+
+## $L^p$ Space
+
+**Definition.** Let $(X,\mathcal{A},\mu)$ be a measure space and $1 \leq p < \infty$. Let $\mathcal{M}(X)$ be the space of all $\mu$-measurable functions $f: X \to \mathbb{R}$ such that
+
+$$
+\int_X |f|^p \, d\mu < \infty.
+$$
+
+And let $\mathcal{R}$ be the equivalent relation
+
+$$
+f \sim g \iff f = g,\ \mu\text{.a.e} \quad f, g \in \mathcal{M}(X).
+$$
+
+The $L^p(\mu)$ space is a quotient space defined by
+
+$$
+L^p(\mu) := \mathcal{M}(X) / \mathcal{R},
+$$
+
+with the norm
+
+$$
+\|f\|_{L^p} := \left(\int_X |f|^p \, d\mu\right)^{1/p}.
+$$
+
+---
+
+## Riesz–Fischer Theorem
+
+**Theorem (Riesz–Fischer).** The $L^p$ space is complete, i.e every Cauchy sequence in $L^p$ converges to an element in $L^p$.
+
+**Proof.**
+Let $(f_n) \subseteq L^p$ be Cauchy, then we can choose a subsequence $(f_{n_k})$ satisfying
+
+$$
+\|f_{n_{k+1}} - f_{n_k}\|_{L^p} < \frac{1}{2^k}.
+$$
+
+**Step 1.** Let $g = \sum_{i=1}^\infty |f_{n_{i+1}} - f_{n_i}|$ be the dominating function. By Minkowski's inequality
+
+$$
+\|g\|_{L^p} \leq \sum_{i=1}^\infty \|f_{n_{i+1}} - f_{n_i}\|_{L^p} \leq \sum_{i=1}^\infty 2^{-i} = 1 < \infty.
+$$
+
+We obtain $g \in L^p$, follows that $g < \infty$, $\mu$.a.e, the series $\sum_{i=1}^\infty (f_{n_{i+1}} - f_{n_i})$ absolutely converges, it thus converges, $\mu$.a.e pointwise. Thus we can write $f = \lim_{n\to+\infty} f_{n_k}$, where
+
+$$
+f_{n_k} = f_{n_1} + \sum_{i=1}^k (f_{n_{i+1}} - f_{n_i})
+$$
+
+is a convergent series, $\mu$.a.e.
+
+**Step 2.** The function $f = \lim_{n\to+\infty} f_{n_k}$ is measurable. Applying the triangle inequality
+
+$$
+|f_{n_k}| \leq |f_{n_1}| + \sum_{i=1}^k |f_{n_{i+1}} - f_{n_i}| \leq |f_{n_1}| + g < \infty, \quad \mu\text{.a.e.} \tag{$*$}
+$$
+
+Since the pointwise limit of measurable functions is measurable and finite, $\mu$.a.e, it follows that $\lim_{n\to+\infty} f_{n_k} = f < \infty$ pointwise, $\mu$.a.e, follows that $f$ is measurable.
+
+**Step 3.** $f \in L^p$. We have the estimate
+
+$$
+\|f_{n_k}\|_{L^p} \leq \|f_{n_1}\|_{L^p} + \sum_{i=1}^k \|f_{n_{i+1}} - f_{n_i}\|_{L^p} \leq \|f_{n_1}\|_{L^p} + \sum_{i=1}^k \frac{1}{2^i} \leq (1 + \|f_{n_1}\|_{L^p}).
+$$
+
+Note that $f_{n_k} \to f$ implies $|f_{n_k}|^p \to |f|^p$ and
+
+$$
+\liminf_{k\to+\infty} |f_{n_k}|^p = \lim_{k\to+\infty} |f_{n_k}|^p = |f|^p.
+$$
+
+Apply Fatou lemma, one has
+
+$$
+\begin{aligned}
+\|f\|_{L^p}^p &= \int |f|^p \, d\mu = \int \lim_{n\to+\infty} \inf |f_{n_k}|^p \, d\mu \\
+&\leq \lim_{n\to+\infty} \inf \int |f_{n_k}|^p \, d\mu \\
+&= \lim_{n\to+\infty} \inf \|f_{n_k}\|_{L^p}^p \\
+&\leq (1 + \|f_{n_1}\|_{L^p})^p \\
+&< \infty.
+\end{aligned}
+$$
+
+Therefore $f \in L^p$.
+
+**Step 4.** $f_n$ converges to $f$ in $L^p$. Since $f_{n_k} \to f$ $\mu$-a.e, we have
+
+$$
+|f_{n_k} - f|^p \to 0, \quad \mu\text{.a.e.}
+$$
+
+From $(*)$,
+
+$$
+|f_{n_k}| \leq |f_{n_1}| + g, \quad \mu\text{.a.e.}
+$$
+
+Taking $k \to +\infty$ yields
+
+$$
+|f| \leq |f_{n_1}| + g, \quad \mu\text{.a.e.}
+$$
+
+So
+
+$$
+|f_{n_k} - f|^p \leq (|f| + |f_{n_k}|)^p \leq 2^p(|f_{n_1}| + g)^p \implies |f_{n_k} - f|^p \in L^p.
+$$
+
+Since $g, f_{n_1} \in L^p$, then $2^p(|f_{n_1}| + g)^p \in L^p$, implies that $2^p(|f_{n_1}| + g)^p \in L^1$. Apply the DCT theorem with the sequence $|f_{n_k} - f|^p \to 0$ bounded by the function $2^p(|f_{n_1}| + g)^p \in L^1$, we obtain
+
+$$
+\|f_{n_k} - f\|_{L^p} = \left(\int |f_{n_k} - f|^p \, d\mu\right)^{1/p} \to 0.
+$$
+
+Since $(f_n)$ is Cauchy in $L^p$ and $f_{n_k} \to f$ in $L^p$, we conclude that $f_n \to f$ in $L^p$. Indeed, for any $\varepsilon > 0$, choose $N$ large enough such that
+
+$$
+\|f_n - f_m\|_{L^p} < \frac{\varepsilon}{2}, \quad \forall\, n, m \geq N.
+$$
+
+Choose $k$ large enough so that $n_k \geq N$ and $\|f_{n_k} - f\|_{L^p} < \frac{\varepsilon}{2}$. Then for all $n \geq N$,
+
+$$
+\|f_n - f\|_{L^p} \leq \|f_n - f_{n_k}\|_{L^p} + \|f_{n_k} - f\|_{L^p} < \frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon.
+$$
+
+Hence $\|f_n - f\|_{L^p} \to 0$. $\blacksquare$
+
+---
+
+## References
+
+[1] L. Evans, R. Gariepy — *Measure Theory and Fine Properties of Functions*, Revised edition., CRC Press (2015).
+[2] H. Brezis — *Functional Analysis, Sobolev Spaces and Partial Differential Equations*, Springer (2011).

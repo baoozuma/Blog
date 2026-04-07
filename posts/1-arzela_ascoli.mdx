@@ -18,16 +18,13 @@ What additional structure do we need?
 **Arzelà–Ascoli.** Let $K$ be a compact metric space and $\mathcal{F} \subset C(K)$ a family of continuous functions. If $\mathcal{F}$ is:
 
 - **uniformly bounded**: $\sup_{f \in \mathcal{F}} \|f\|_\infty < \infty$
-- **equicontinuous**: for every $\varepsilon > 0$ there exists $\delta > 0$ such that $d(x,y) < \delta \Rightarrow |f(x) - f(y)| < \varepsilon$ for **all** $f \in \mathcal{F}$
+- **equicontinuous**: for every $\varepsilon > 0$ there exists $\delta > 0$ such that $d(x,y) < \delta \Rightarrow |f(x) - f(y)| < \varepsilon$ for all $f \in \mathcal{F}$
 
 then every sequence in $\mathcal{F}$ has a uniformly convergent subsequence.
 
 ## Equicontinuity Is the Key Condition
 
-Uniform boundedness alone is not enough — $\sin(nx)$ shows this. Equicontinuity is the condition that the functions in $\mathcal{F}$ do not oscillate too rapidly, uniformly across the family.
-
-Intuitively: equicontinuity + boundedness at each point → the functions cannot escape to infinity or oscillate wildly, so a convergent subsequence must exist.
-
+Uniform boundedness alone is not enough, $\sin(nx)$ shows this. Equicontinuity is the condition that the functions in $\mathcal{F}$ do not oscillate too rapidly, uniformly across the family.
 ## Proof
 
  
