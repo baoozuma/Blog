@@ -5,95 +5,146 @@ description: "A proof of the Vitali covering theorem via Zorn's lemma and a 5B c
 thumbnail: "/thumbnails/vitali.jpg"
 ---
 
-## Setup
 
-Let $(X, d)$ be a separable metric space and $\mathcal{F}$ a collection of closed balls.
-Define
 
-$$
-R = \sup\{r \mid B(x,r) \in \mathcal{F}\}
-$$
 
-and partition $\mathcal{F}$ into layers by radius:
+**Lemma (Vitali's Covering Lemma).** Let $(X,d)$ be a separable metric space. Suppose $\mathcal{F}$ is any collection of closed balls in $X$ such that
 
 $$
-F_i = \{B(x,r) \in \mathcal{F} \mid R \cdot 2^{-i-1} \leq r \leq R \cdot 2^{-i}\}
+R = \sup\{\mathrm{rad}(B) \mid B \in \mathcal{F}\} < \infty.
 $$
 
-## Constructing the Disjoint Subcollection
-
-Define a sequence of maximal disjoint subcollections $(G_n)$ inductively.
-
-**Base case.** Let $H_0 = F_0$ and define the poset
+Then there exists a countable subcollection $\{B_n(x_n, r_n)\} \subseteq \mathcal{F}$ such that
 
 $$
-P = \{F \subseteq H_0 \mid F \text{ pairwise disjoint}\}, \qquad F_1 \leq F_2 \iff F_1 \subseteq F_2
+\bigcup_{B \in \mathcal{F}} B \subseteq \bigcup_{n=1}^\infty B_n(x_n, 5r_n).
 $$
 
-**Zorn's condition.** Given a chain $F_1 \leq F_2 \leq \cdots$, let $F = \bigcup_{n=1}^\infty F_n$.
-For any $B_1, B_2 \in F$, there exists $k$ large enough so that $B_1, B_2 \in F_k$,
-hence $B_1 \cap B_2 = \varnothing$. Thus every chain has an upper bound in $P$,
-so by Zorn's lemma $P$ has a maximal element $G_0$.
+---
 
-**Inductive step.** Given $G_1, \ldots, G_n$, set
+## Proof
 
-$$
-H_{n+1} = \{B \in F_{n+1} \mid B \cap C = \varnothing,\ \forall C \in G_1 \cup \cdots \cup G_n\}
-$$
+We use Zorn's Lemma to construct a countably maximal subcollection of $\mathcal{F}$.
 
-Apply Zorn's lemma again to obtain a maximal disjoint subcollection $G_{n+1} \subseteq H_{n+1}$.
+**Zorn's Lemma.** Let $S$ be an ordered set in which every chain has an upper bound. Then $S$ has at least one maximal element.
 
-## Countability of $G$
-
-**Claim.** $G = \bigcup_{n=1}^\infty G_n$ is countable.
-
-Since $X$ is separable, it admits a countable cover by closed balls
-$\{B(y_i, R \cdot 2^{i-1})\}_{i \in \mathbb{N}}$.
-We claim each such ball contains **at most one center** of a ball in $G_i$.
-
-Suppose $B(x_1, r_1), B(x_2, r_2) \in G_i$ with $x_1, x_2 \in B(y, R \cdot 2^{i-2})$ for some $y$. Then
+Divide $\mathcal{F} = \bigcup_{n=0}^\infty \mathcal{F}_n$, where
 
 $$
-\|x_1 - x_2\| \leq \|x_1 - y\| + \|y - x_2\| \leq R \cdot 2^{i-1} \leq r_1, r_2
+\mathcal{F}_n = \{B \in \mathcal{F} \mid 2^{-n-1}R < \mathrm{rad}(B) \leq 2^{-n}R\}.
 $$
 
-so $x_1 \in B(x_2, r_2)$ and $x_2 \in B(x_1, r_1)$, contradicting disjointness of $G_i$.
-Hence each $G_i$ is countable, and so is $G$. $\square$
-
-## The 5B Covering
-
-**Claim.** $\displaystyle\bigcup_{B \in \mathcal{F}} B \subseteq 5G := \bigcup_{B \in G} 5B$.
-
-Let $B(x_1, r_1) \in \mathcal{F}$. Then $B(x_1,r_1) \in F_i$ for some $i$, so
+Let $(P_n, \leq)$ be the ordered set defined by
 
 $$
-R \cdot 2^{-i-1} < r_1 \leq R \cdot 2^{-i}
+P_n = \{\mathcal{P} \subseteq \mathcal{F}_n \mid A \cap B = \varnothing,\ \forall A, B \in \mathcal{P}\},
 $$
 
-If $B(x_1, r_1) \notin G_i$, by maximality of $G_i$ there exists $B(x_2, r_2) \in G_i$
-with $B(x_1, r_1) \cap B(x_2, r_2) \neq \varnothing$.
-
-For any $x \in B(x_1, r_1)$:
+with the order relation
 
 $$
-\|x_2 - x\| \leq \|x_1 - x\| + \|x_2 - x_1\| \leq r_1 + r_1 + r_2 = 2r_1 + r_2
+\mathcal{P}_1 \leq \mathcal{P}_2 \iff \mathcal{P}_1 \subseteq \mathcal{P}_2, \quad \forall \mathcal{P}_1, \mathcal{P}_2 \in P_n.
 $$
 
-To find the best constant $k$ such that $2r_1 + r_2 \leq k r_2$, note that both
-$r_1, r_2 \in (R \cdot 2^{-i-1}, R \cdot 2^{-i}]$, so
+### Step 1: $P_n$ has at least one maximal element
+
+Let $\{\mathcal{T}_i\}_{i \in I}$ be any chain in $P_n$, and set $\mathcal{T} = \bigcup_{i \in I} \mathcal{T}_i$. Clearly $\mathcal{T}$ is an upper bound of $\{\mathcal{T}_i\}_{i \in I}$. We show that no two elements of $\mathcal{T}$ intersect, so that $\mathcal{T} \in P_n$.
+
+Suppose for contradiction that there exist $A, B \in \mathcal{T}$ with $A \cap B \neq \varnothing$. If $A$ and $B$ both lie in a single $\mathcal{T}_i$, then $\mathcal{T}_i \notin P_n$, a contradiction. Otherwise, suppose $\mathcal{T}_a, \mathcal{T}_b \in \{\mathcal{T}_i\}_{i \in I}$ contain $A$ and $B$ respectively. Since $\{\mathcal{T}_i\}$ is a chain, either $\mathcal{T}_a \leq \mathcal{T}_b$ or $\mathcal{T}_b \leq \mathcal{T}_a$, so $A$ and $B$ both belong to one of them — contradicting that collection being in $P_n$. Therefore $\mathcal{T}$ has no two elements intersecting.
+
+By Zorn's Lemma, $P_n$ has at least one maximal element, say $K_n \in P_n$, for each $n \in \mathbb{N}$.
+
+### Step 2: Construction of $G$
+
+For $n = 0$, let $G_0 = K_0$. For $n = 1$, let
 
 $$
-\frac{2r_1}{r_2} + 1 \leq \frac{2 \cdot R \cdot 2^{-i}}{R \cdot 2^{-i-1}} + 1 = 4 + 1 = 5
+G_1 = K_1 \cap \{B \in \mathcal{F} \mid B \cap C = \varnothing,\ C \in G_0\}.
 $$
 
-Therefore
+For $n > 1$, let
 
 $$
-\|x_2 - x\| \leq 5r_2
+G_n = K_n \cap \{B \in \mathcal{F} \mid B \cap C = \varnothing,\ C \in G_0 \cup \cdots \cup G_{n-1}\}.
 $$
 
-which gives $B(x_1, r_1) \subseteq 5B(x_2, r_2)$. Since $B(x_1,r_1) \in \mathcal{F}$ was arbitrary,
+Set $G = \bigcup_{n=0}^\infty G_n$. Then $G$ is a collection of disjoint closed balls in $\mathcal{F}$.
+
+---
+<div style={{ display: 'flex', flexDirection: 'column', gap: '2rem', margin: '2rem 0' }}>
+  <img src="/1.jpg" alt="Subcase 1: r = 2r₁, externally tangent" />
+</div>
+
+---
+
+### Step 3: $G$ is countable
+
+Fix $n \in \mathbb{N}$. Since $(X,d)$ is separable, there exists a countable dense set $S \subseteq X$. Let $\varepsilon = 2^{-n-1}R$, and let $I_n \subseteq X$ be the set of centers of balls in $G_n$.
+
+For each $x \in I_n$ with $B(x, r_x) \in G_n$, we have $\varepsilon < r_x$. Since $S$ is dense in $X$, there exists $s_x \in S$ such that $s_x \in B(x, \varepsilon) \subseteq B(x, r_x)$.
+
+We claim $s_x \neq s_y$ for all $x \neq y$ in $I_n$. Indeed, if $s_x = s_y$, then $B(x, r_x) \cap B(y, r_y) \neq \varnothing$, contradicting disjointness of $G_n$. So the map $x \mapsto s_x$ is injective from $I_n$ into $S$, hence $I_n$ is countable, and therefore $G_n$ is countable. Since $G = \bigcup_{n=0}^\infty G_n$ is a countable union of countable sets, $G$ is countable.
+
+### Step 4: Covering estimate
+
+Let $B(x,r) \in \mathcal{F}$. Then there is $n \in \mathbb{N}$ such that $B(x,r) \in \mathcal{F}_n$. We show $B(x,r) \subseteq \bigcup_{B(c,p) \in G} B(c, 5p)$.
+
+**Case 1: $B(x,r) \notin K_n$.**
+
+Then $B(x,r)$ must intersect some ball in $K_n$, otherwise $\{B(x,r)\} \cup K_n$ would be a larger disjoint collection in $P_n$, contradicting maximality of $K_n$. Let $B(y, r_1) \in K_n$ intersect $B(x,r)$.
+
+*Subcase $B(y, r_1) \in G_n$:* Since $R2^{-n-1} < r_1 \leq R2^{-n}$, multiplying by $2$ gives $R2^{-n} < 2r_1 \leq R2^{-n+1}$, so $r < 2r_1$. For all $t \in B(x,r)$,
 
 $$
-\bigcup_{B \in \mathcal{F}} B \subseteq \bigcup_{B \in G} 5B = 5G \qquad \blacksquare
+d(t, y) \leq d(t,x) + d(x,y) \leq r + (r + r_1) < 2r_1 + 2r_1 + r_1 = 5r_1.
 $$
+
+Hence $B(x,r) \subseteq B(y, 5r_1)$.
+
+*Subcase $B(y, r_1) \notin G_n$:* There exists $B(z, r_2) \in G_i$ with $B(y, r_1) \cap B(z, r_2) \neq \varnothing$ for some $i < n$. Taking $i = n-1$, since $R2^{-n-1} < r, r_1 \leq R2^{-n}$ and $R2^{-n} < r_2 \leq R2^{-n+1}$, we have $r < r_2$ and $r_1 < r_2$.
+
+We show $B(z, 5r_2)$ contains both $B(y, r_1)$ and $B(x,r)$:
+
+$$
+d(z, y) \leq r_1 + r_2 \leq 2r_2.
+$$
+
+For all $t \in B(y, r_1)$:
+
+$$
+d(z,t) \leq d(z,y) + d(y,t) \leq 2r_2 + r_1 \leq 3r_2 < 5r_2.
+$$
+
+So $B(y, r_1) \subseteq B(z, 5r_2)$. In addition,
+
+$$
+d(z, x) \leq d(z,y) + d(y,x) \leq 2r_2 + r_1 + r \leq 2r_2 + r_2 + r_2 = 4r_2.
+$$
+
+For all $t \in B(x,r)$:
+
+$$
+d(z,t) \leq d(z,x) + d(x,t) \leq 4r_2 + r \leq 5r_2.
+$$
+
+Hence $B(x,r) \subseteq B(z, 5r_2)$.
+
+**Case 2: $B(x,r) \in K_n$.**
+
+If $B(x,r) \in G_n$ we are done. Otherwise $B(x,r) \in K_n \setminus G_n$, so there exists $B(y, r_1) \in G_i$ intersecting $B(x,r)$ for some $i < n$. Taking $i = n-1$, we have $R2^{-n-1} < r \leq R2^{-n}$ and $R2^{-n} < r_1 \leq R2^{-n+1}$, so $r < r_1$. For all $t \in B(x,r)$:
+
+$$
+d(t, y) \leq d(t,x) + d(x,y) \leq r + r_1 + r < r_1 + r_1 + r_1 = 3r_1 < 5r_1.
+$$
+
+Therefore $B(x,r) \subseteq B(y, 5r_1)$.
+
+In all cases, every ball in $\mathcal{F}$ is contained in a $5$-dilate of some ball in $G$, which shows
+
+$$
+\bigcup_{B \in \mathcal{F}} B \subseteq \bigcup_{B(c,p) \in G} B(c, 5p).
+$$
+
+**Reference:** 
+
+[1] Lawrence C. Evans and Ronald F. Gariepy, *Measure Theory and Fine Properties of Functions*, Revised Edition, CRC Press.
