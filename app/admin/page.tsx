@@ -45,7 +45,7 @@ export default function AdminPage() {
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
 
-  const [tab, setTab] = useState<'feedback' | 'comments'>('comments')
+  const [tab, setTab] = useState<'feedback' | 'comments' | 'analytics'>('comments')
   const [feedback, setFeedback] = useState<FeedbackEntry[]>([])
   const [comments, setComments] = useState<CommentsBySlug>({})
   const [slugs, setSlugs] = useState<string[]>([])
