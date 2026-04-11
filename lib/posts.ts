@@ -4,23 +4,30 @@ import matter from 'gray-matter'
 
 const postsDirectory = path.join(process.cwd(), 'posts')
 
+function readingTime(content: string): string {
+  const words = content.trim().split(/\s+/).length
+  const minutes = Math.ceil(words / 200)
+  return `${minutes} min read`
+}
+
 export function getAllPosts() {
   const fileNames = fs.readdirSync(postsDirectory)
-  
+
   const posts = fileNames
     .filter((fn: string) => fn.endsWith('.mdx'))
     .map((fileName: string) => {
       const slug = fileName.replace(/\.mdx$/, '')
       const fullPath = path.join(postsDirectory, fileName)
       const fileContents = fs.readFileSync(fullPath, 'utf8')
-      const { data } = matter(fileContents)
-      
+      const { data, content } = matter(fileContents)
+
       return {
         slug,
         title: data.title as string,
         date: data.date as string,
         description: data.description as string,
         thumbnail: data.thumbnail as string | undefined,
+        readingTime: readingTime(content),
       }
     })
 
@@ -31,13 +38,14 @@ export function getPostBySlug(slug: string) {
   const fullPath = path.join(postsDirectory, `${slug}.mdx`)
   const fileContents = fs.readFileSync(fullPath, 'utf8')
   const { data, content } = matter(fileContents)
-  
+
   return {
     slug,
     title: data.title as string,
     date: data.date as string,
     description: data.description as string,
     thumbnail: data.thumbnail as string | undefined,
+    readingTime: readingTime(content),
     content,
   }
 }

@@ -2,10 +2,13 @@
 
 export default function ExportPDF({ title }: { title: string }) {
   const handlePrint = () => {
-    document.title = title
-    window.print()
-  }
-
+  document.title = title
+  const theme = document.documentElement.getAttribute('data-theme') || 'dark'
+  console.log('theme:', theme)
+  document.documentElement.setAttribute('data-print-theme', theme)
+  console.log('data-print-theme:', document.documentElement.getAttribute('data-print-theme'))
+  window.print()
+}
   return (
     <button
       onClick={handlePrint}

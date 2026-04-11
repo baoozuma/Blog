@@ -5,12 +5,13 @@ description: We discuss the Picard-Lindelöf theorem on local existence and uniq
 thumbnail: "/thumbnails/picard.jpg"
 ---
 
-
 ## Approach
 
-**Lemma.** Let $K$ be a compact metric space and $(E,\|\cdot\|)$ be a Banach space. Then the space $C(K,E)$ equipped with a supremum norm $\|f\|_{\infty} = \sup_{x \in K}\|f(x)\|$ is a Banach space.
+<Lemma>
+Let $K$ be a compact metric space and $(E,\|\cdot\|)$ be a Banach space. Then the space $C(K,E)$ equipped with a supremum norm $\|f\|_{\infty} = \sup_{x \in K}\|f(x)\|$ is a Banach space.
+</Lemma>
 
-**Proof.**
+<Proof>
 Let $\varepsilon > 0$ be arbitrary and $(f_n) \subseteq C(K,E)$ be a Cauchy sequence, then there exists $N \in \mathbb{N}$ such that $\|f_n - f_m\|_{\infty} < \varepsilon$ whenever $n,m > N$. Fix $x \in K$, then we have
 
 $$
@@ -39,21 +40,24 @@ $$
 \end{aligned}
 $$
 
-Since $x_0 \in K$ was arbitrary, then $f \in C(K,E)$, which implies that $C(K,E)$ with the supremum norm is a Banach space. $\blacksquare$
+Since $x_0 \in K$ was arbitrary, then $f \in C(K,E)$, which implies that $C(K,E)$ with the supremum norm is a Banach space.
+</Proof>
 
 ---
 
 ## Banach Fixed Point Theorem
 
-**Theorem (Banach Fixed Point Theorem).** Let $(X,d)$ be a complete metric space, $q \in [0,1)$ and $T: X \to X$ be a mapping on $X$ satisfying
+<Theorem label="Banach Fixed Point Theorem">
+Let $(X,d)$ be a complete metric space, $q \in [0,1)$ and $T: X \to X$ be a mapping on $X$ satisfying
 
 $$
 d(T(x),T(y)) \leq q\,d(x,y) \quad \text{for all } x,y.
 $$
 
 Then $T$ admits a unique fixed point $x^*$ in $X$.
+</Theorem>
 
-**Proof.**
+<Proof>
 Let $x_0 \in X$ be arbitrary and let $(x_n)$ be the sequence defined by $x_n = T(x_{n-1})$ for all $n \geq 1$. We first establish the estimate
 
 $$
@@ -84,13 +88,15 @@ $$
 d(p_1,p_2) = d(T(p_1),T(p_2)) \leq q\,d(p_1,p_2) < d(p_1,p_2),
 $$
 
-which is a contradiction, as desired. $\blacksquare$
+which is a contradiction, as desired.
+</Proof>
 
 ---
 
 ## Grönwall Inequality
 
-**Theorem (Grönwall Inequality).** Let $u: [t_0,T] \to [0,\infty)$ be a continuous function, $C, L \geq 0$ and we have
+<Theorem label="Grönwall Inequality">
+Let $u: [t_0,T] \to [0,\infty)$ be a continuous function, $C, L \geq 0$ and we have
 
 $$
 u(t) \leq C + L\int_{t_0}^t u(s)\,ds \quad \text{for all } t \in [t_0,T].
@@ -101,8 +107,9 @@ Then we have the estimate
 $$
 u(t) \leq Ce^{L(t-t_0)} \quad \text{for all } t \in [t_0,T].
 $$
+</Theorem>
 
-**Proof.**
+<Proof>
 Let $v(t) = C + L\int_{t_0}^t u(s)\,ds$, then we have $u(t) \leq v(t)$ and $v'(t) = Lu(t) \leq Lv(t)$. Consider $w(t) = e^{-L(t-t_0)}v(t)$, differentiating $w$ yields
 
 $$
@@ -115,13 +122,15 @@ $$
 u(t) \leq v(t) \leq Ce^{L(t-t_0)}.
 $$
 
-Hence we are done. $\blacksquare$
+Hence we are done.
+</Proof>
 
 ---
 
 ## Picard–Lindelöf Theorem
 
-**Theorem (Picard–Lindelöf).** Consider the Cauchy problem
+<Theorem label="Picard–Lindelöf">
+Consider the Cauchy problem
 
 $$
 \begin{cases}
@@ -137,8 +146,9 @@ $$
 $$
 
 for all $(t,x),(t,y) \in K$. Then there exists an interval $I$ containing $t_0$ and a unique solution $x \in C^1(I, \mathbb{R}^n)$.
+</Theorem>
 
-**Proof.**
+<Proof>
 Let $a, r \in \mathbb{R}$ such that $r > 0$ and $W = [t_0 - a, t_0 + a] \times \overline{B(x_0,r)} \subseteq U$. Since $W$ is closed and bounded, it is compact. Then $F$ is bounded on $W$.
 
 Let $M = \sup_{(t,x) \in W}\|F(t,x)\|$, $b = r$, $h = \min\left\{\frac{b}{M}, \frac{1}{2L}, a\right\}$ and $I = [t_0 - h, t_0 + h]$. We define the metric space $(X, \|\cdot\|_{\infty})$
@@ -189,11 +199,13 @@ $$
 \|x_1(t) - x_2(t)\| = \|(Tx_1)(t) - (Tx_2)(t)\| \leq L\int_{t_0}^t \|x_1(s) - x_2(s)\|\,ds.
 $$
 
-If $t < t_0$, the integral $\int_{t_0}^t = -\int_t^{t_0}$ is nonpositive while the left side is nonnegative, so both sides must vanish, which implies $\|x_1(t) - x_2(t)\| = 0$, i.e. $x_1(t) = x_2(t)$. If $t \geq t_0$, apply the Grönwall inequality for the function $u(t) = \|x_1(t) - x_2(t)\|$ with $C = 0$, we obtain $u(t) \leq 0$ for all $t \geq t_0$, thus $u(t) = 0$. Therefore $x_1(t) = x_2(t)$ for all $t \in I$, it follows that the solution $x^*$ in $C^1(I,\mathbb{R}^n)$ is unique. $\blacksquare$
+If $t < t_0$, the integral $\int_{t_0}^t = -\int_t^{t_0}$ is nonpositive while the left side is nonnegative, so both sides must vanish, which implies $\|x_1(t) - x_2(t)\| = 0$, i.e. $x_1(t) = x_2(t)$. If $t \geq t_0$, apply the Grönwall inequality for the function $u(t) = \|x_1(t) - x_2(t)\|$ with $C = 0$, we obtain $u(t) \leq 0$ for all $t \geq t_0$, thus $u(t) = 0$. Therefore $x_1(t) = x_2(t)$ for all $t \in I$, it follows that the solution $x^*$ in $C^1(I,\mathbb{R}^n)$ is unique.
+</Proof>
 
 ---
 
 ## References
-[1] H. Brezis — *Functional Analysis, Sobolev Spaces and Partial Differential Equations*, Springer (2011).
 
-[2] G. Teschl — *Ordinary Differential Equations and Dynamical Systems*, Graduate Studies in Mathematics, Vol. 140, American Mathematical Society (2012).
+[1] H. Brezis, *Functional Analysis, Sobolev Spaces and Partial Differential Equations*, Springer (2011).
+
+[2] G. Teschl, *Ordinary Differential Equations and Dynamical Systems*, Graduate Studies in Mathematics, Vol. 140, American Mathematical Society (2012).

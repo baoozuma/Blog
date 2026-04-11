@@ -9,7 +9,7 @@ export default function HomePage() {
   const posts = getAllPosts().slice(0, 3)
 
   return (
-    <div className="home">
+    <div className="home" >
       {/* Status pill */}
       <div className="status-pill-wrap">
         <span className="status-pill">

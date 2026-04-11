@@ -1,5 +1,8 @@
 import { getAllPosts } from '../../lib/posts'
 import PostCard from './PostCard'
+import Search from '../components/Search'
+
+export const revalidate = 3600
 
 export default function BlogPage() {
   const posts = getAllPosts()
@@ -13,13 +16,17 @@ export default function BlogPage() {
         </p>
       </div>
 
+      <div style={{ marginBottom: '2rem' }}>
+        <Search posts={posts} />
+      </div>
+
       <div style={{
         display: 'grid',
         gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
         gap: '1rem',
       }}>
         {posts.map(post => (
-          <PostCard key={post.slug} post={post} />
+          <PostCard key={post.slug} post={post} views={0} />
         ))}
       </div>
     </div>

@@ -15,12 +15,14 @@ What additional structure do we need?
 
 ## The Theorem
 
-**Arzelà–Ascoli.** Let $K$ be a compact metric space and $\mathcal{F} \subset C(K)$ a family of continuous functions. If $\mathcal{F}$ is:
-
+<Theorem label="Arzelà–Ascoli">
+Let $K$ be a compact metric space and $\mathcal{F} \subset C(K)$ a family of continuous functions. If $\mathcal{F}$ is:
+ 
 - **uniformly bounded**: $\sup_{f \in \mathcal{F}} \|f\|_\infty < \infty$
-- **equicontinuous**: for every $\varepsilon > 0$ there exists $\delta > 0$ such that $d(x,y) < \delta \Rightarrow |f(x) - f(y)| < \varepsilon$ for all $f \in \mathcal{F}$
-
+- **equicontinuous**: for every $\varepsilon > 0$ there exists $\delta_\varepsilon > 0$ such that $d(x,y) < \delta_\varepsilon\Rightarrow |f(x) - f(y)| < \varepsilon$ for all $f \in \mathcal{F}$
+ 
 then every sequence in $\mathcal{F}$ has a uniformly convergent subsequence.
+</Theorem>
 
 ## Equicontinuity Is the Key Condition
 
@@ -97,4 +99,4 @@ for all $m, n \geq N_\varepsilon$ and all $x \in X$. Hence $\{g_n\}$ is uniforml
  
 ## References
  
-[1] T. Bühler and D. A. Salamon, *Functional Analysis*, ETH Zürich, 2017.
+[1] T. Bühler and D. A. Salamon, Functional Analysis, ETH Zürich, 2017.

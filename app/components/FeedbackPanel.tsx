@@ -13,7 +13,7 @@ export default function FeedbackPanel() {
     if (!msg.trim()) return
     setStatus('sending')
     try {
-      const res = await fetch('https://formspree.io/f/xlgoovrp', {
+      const res = await fetch('/api/feedback', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name: name || 'Anonymous', message: msg }),
@@ -25,7 +25,6 @@ export default function FeedbackPanel() {
 
   return (
     <>
-      {/* Trigger button — fixed bottom center */}
       <button
         onClick={() => setOpen(true)}
         style={{
@@ -39,7 +38,7 @@ export default function FeedbackPanel() {
           gap: '0.4rem',
           padding: '0.4rem 1rem',
           background: 'var(--bg-card)',
-          border: '1px solid var(--border-light)',
+          border: '1px solid var(--border)',
           borderRadius: '999px',
           color: 'var(--text-dim)',
           fontFamily: 'var(--font-mono)',
@@ -50,11 +49,11 @@ export default function FeedbackPanel() {
           backdropFilter: 'blur(8px)',
         }}
         onMouseEnter={e => {
-          e.currentTarget.style.borderColor = 'var(--accent)'
-          e.currentTarget.style.color = 'var(--accent)'
+          e.currentTarget.style.borderColor = 'var(--gold)'
+          e.currentTarget.style.color = 'var(--gold)'
         }}
         onMouseLeave={e => {
-          e.currentTarget.style.borderColor = 'var(--border-light)'
+          e.currentTarget.style.borderColor = 'var(--border)'
           e.currentTarget.style.color = 'var(--text-dim)'
         }}
       >
@@ -62,7 +61,6 @@ export default function FeedbackPanel() {
         <span>feedback</span>
       </button>
 
-      {/* Backdrop */}
       {open && (
         <div
           onClick={() => setOpen(false)}
@@ -72,12 +70,10 @@ export default function FeedbackPanel() {
             background: 'rgba(10,10,15,0.6)',
             backdropFilter: 'blur(4px)',
             zIndex: 98,
-            animation: 'fadeUp 0.2s ease forwards',
           }}
         />
       )}
 
-      {/* Panel */}
       <div style={{
         position: 'fixed',
         bottom: 0,
@@ -86,7 +82,7 @@ export default function FeedbackPanel() {
         width: '100%',
         maxWidth: 'var(--content-width)',
         background: 'var(--bg-card)',
-        border: '1px solid var(--border-light)',
+        border: '1px solid var(--border)',
         borderBottom: 'none',
         borderRadius: '12px 12px 0 0',
         padding: '2rem var(--content-padding) 2.5rem',
@@ -94,11 +90,9 @@ export default function FeedbackPanel() {
         transition: 'transform 0.35s cubic-bezier(0.32, 0.72, 0, 1)',
       }}>
 
-        {/* Handle */}
         <div style={{
-          width: 36,
-          height: 4,
-          background: 'var(--border-light)',
+          width: 36, height: 4,
+          background: 'var(--border)',
           borderRadius: '999px',
           margin: '0 auto 1.75rem',
           cursor: 'pointer',
@@ -106,38 +100,23 @@ export default function FeedbackPanel() {
 
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '1.5rem' }}>
           <p style={{
-            fontFamily: 'var(--font-mono)',
-            fontSize: '0.68rem',
-            color: 'var(--text-dim)',
-            letterSpacing: '0.1em',
-            textTransform: 'uppercase',
+            fontFamily: 'var(--font-mono)', fontSize: '0.68rem',
+            color: 'var(--text-dim)', letterSpacing: '0.1em', textTransform: 'uppercase',
           }}>
             leave a note
           </p>
-          <button
-            onClick={() => setOpen(false)}
-            style={{
-              background: 'none',
-              border: 'none',
-              color: 'var(--text-dim)',
-              fontFamily: 'var(--font-mono)',
-              fontSize: '0.68rem',
-              cursor: 'pointer',
-              padding: 0,
-            }}
-          >
+          <button onClick={() => setOpen(false)} style={{
+            background: 'none', border: 'none', color: 'var(--text-dim)',
+            fontFamily: 'var(--font-mono)', fontSize: '0.68rem', cursor: 'pointer', padding: 0,
+          }}>
             esc ×
           </button>
         </div>
 
         {status === 'sent' ? (
           <p style={{
-            fontFamily: 'var(--font-serif)',
-            fontSize: '1rem',
-            color: 'var(--accent)',
-            fontStyle: 'italic',
-            textAlign: 'center',
-            padding: '2rem 0',
+            fontFamily: 'var(--font-serif)', fontSize: '1rem',
+            color: 'var(--gold)', fontStyle: 'italic', textAlign: 'center', padding: '2rem 0',
           }}>
             received. thank you.
           </p>
@@ -148,19 +127,14 @@ export default function FeedbackPanel() {
               onChange={e => setName(e.target.value)}
               placeholder="your name (optional)"
               style={{
-                background: 'var(--bg)',
-                border: '1px solid var(--border-light)',
-                borderRadius: '6px',
-                padding: '0.5rem 0.85rem',
-                color: 'var(--text)',
-                fontFamily: 'var(--font-serif)',
-                fontSize: '0.9rem',
-                outline: 'none',
-                transition: 'border-color 0.2s',
-                width: '220px',
+                background: 'var(--bg)', border: '1px solid var(--border)',
+                borderRadius: '6px', padding: '0.5rem 0.85rem',
+                color: 'var(--text)', fontFamily: 'var(--font-serif)',
+                fontSize: '0.9rem', outline: 'none',
+                transition: 'border-color 0.2s', width: '220px',
               }}
-              onFocus={e => e.target.style.borderColor = 'var(--accent)'}
-              onBlur={e => e.target.style.borderColor = 'var(--border-light)'}
+              onFocus={e => e.target.style.borderColor = 'var(--gold)'}
+              onBlur={e => e.target.style.borderColor = 'var(--border)'}
             />
 
             <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
@@ -170,36 +144,27 @@ export default function FeedbackPanel() {
                 placeholder="questions, corrections, thoughts..."
                 rows={3}
                 style={{
-                  flex: 1,
-                  background: 'var(--bg)',
-                  border: '1px solid var(--border-light)',
-                  borderRadius: '6px',
-                  padding: '0.6rem 0.85rem',
-                  color: 'var(--text)',
-                  fontFamily: 'var(--font-serif)',
-                  fontSize: '0.9rem',
-                  lineHeight: 1.6,
-                  resize: 'none',
-                  outline: 'none',
-                  transition: 'border-color 0.2s',
+                  flex: 1, background: 'var(--bg)', border: '1px solid var(--border)',
+                  borderRadius: '6px', padding: '0.6rem 0.85rem',
+                  color: 'var(--text)', fontFamily: 'var(--font-serif)',
+                  fontSize: '0.9rem', lineHeight: 1.6, resize: 'none',
+                  outline: 'none', transition: 'border-color 0.2s',
                 }}
-                onFocus={e => e.target.style.borderColor = 'var(--accent)'}
-                onBlur={e => e.target.style.borderColor = 'var(--border-light)'}
+                onFocus={e => e.target.style.borderColor = 'var(--gold)'}
+                onBlur={e => e.target.style.borderColor = 'var(--border)'}
               />
               <button
                 type="submit"
                 disabled={status === 'sending' || !msg.trim()}
                 style={{
                   padding: '0.6rem 1rem',
-                  background: status === 'sending' ? 'transparent' : 'var(--accent)',
-                  border: '1px solid var(--accent)',
+                  background: status === 'sending' ? 'transparent' : 'var(--gold)',
+                  border: '1px solid var(--gold)',
                   borderRadius: '6px',
-                  color: status === 'sending' ? 'var(--accent)' : '#fff',
-                  fontFamily: 'var(--font-mono)',
-                  fontSize: '0.72rem',
+                  color: status === 'sending' ? 'var(--gold)' : 'var(--bg)',
+                  fontFamily: 'var(--font-mono)', fontSize: '0.72rem',
                   cursor: status === 'sending' ? 'not-allowed' : 'pointer',
-                  transition: 'all 0.2s',
-                  whiteSpace: 'nowrap',
+                  transition: 'all 0.2s', whiteSpace: 'nowrap',
                   opacity: !msg.trim() ? 0.4 : 1,
                 }}
               >

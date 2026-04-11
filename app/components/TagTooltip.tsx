@@ -57,8 +57,8 @@ export default function TagTooltip({ tag }: { tag: string }) {
             left: '50%',
             transform: hovered ? 'translateX(-50%) translateY(0)' : 'translateX(-50%) translateY(6px)',
             width: 220,
-            background: '#1a1a1b',
-            border: '1px solid #2a2a2d',
+            background: 'var(--bg-card)',
+            border: '1px solid var(--border)',
             borderRadius: '8px',
             overflow: 'hidden',
             zIndex: 100,
@@ -77,14 +77,14 @@ export default function TagTooltip({ tag }: { tag: string }) {
             <div style={{
               fontSize: '0.7rem',
               fontFamily: 'JetBrains Mono, monospace',
-              color: '#c9a96e',
+              color: 'var(--gold)',
               marginBottom: '0.4rem',
               letterSpacing: '0.06em',
               textTransform: 'uppercase',
             }}>
               {tag}
             </div>
-            <p style={{ fontSize: '0.78rem', color: '#dcd7d2', lineHeight: 1.5, margin: 0 }}>
+            <p style={{ fontSize: '0.78rem', color: 'var(--text-dim)', lineHeight: 1.5, margin: 0 }}>
               {data.desc}
             </p>
           </div>
@@ -98,8 +98,8 @@ export default function TagTooltip({ tag }: { tag: string }) {
             transform: 'translateX(-50%) rotate(45deg)',
             width: 10,
             height: 10,
-            background: '#1a1a1b',
-            border: '1px solid #2a2a2d',
+            background: 'var(--bg-card)',
+            border: '1px solid var(--border)',
             borderTop: 'none',
             borderLeft: 'none',
           }} />
