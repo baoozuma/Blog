@@ -61,19 +61,21 @@ export default function FeedbackPanel() {
         <span>feedback</span>
       </button>
 
-      {open && (
-        <div
-          onClick={() => setOpen(false)}
-          style={{
-            position: 'fixed',
-            inset: 0,
-            background: 'rgba(10,10,15,0.6)',
-            backdropFilter: 'blur(4px)',
-            zIndex: 98,
-          }}
-        />
-      )}
+      {/* Overlay — luôn render, fade bằng opacity */}
+      <div
+        onClick={() => setOpen(false)}
+        style={{
+          position: 'fixed',
+          inset: 0,
+          background: 'rgba(10,10,15,0.7)',
+          zIndex: 98,
+          opacity: open ? 1 : 0,
+          pointerEvents: open ? 'auto' : 'none',
+          transition: 'opacity 0.2s ease',
+        }}
+      />
 
+      {/* Panel */}
       <div style={{
         position: 'fixed',
         bottom: 0,
@@ -88,6 +90,7 @@ export default function FeedbackPanel() {
         padding: '2rem var(--content-padding) 2.5rem',
         zIndex: 99,
         transition: 'transform 0.35s cubic-bezier(0.32, 0.72, 0, 1)',
+        willChange: 'transform',
       }}>
 
         <div style={{
