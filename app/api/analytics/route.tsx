@@ -18,7 +18,7 @@ export async function GET(req: NextRequest) {
   try {
     // Get last 30 days of events
     const since = Date.now() - 30 * 24 * 60 * 60 * 1000
-    const raw = await redis.zrangebyscore(`analytics:${slug}`, since, '+inf')
+    const raw = await redis.zrange(`analytics:${slug}`, since, '+inf', { byScore: true })
     const events = raw.map(item => typeof item === 'string' ? JSON.parse(item) : item)
     return NextResponse.json({ events })
   } catch (err) {
