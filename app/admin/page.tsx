@@ -67,7 +67,7 @@ export default function AdminPage() {
       .catch(() => {})
   }, [])
 
-  async function login() {
+async function login() {
   if (loading) return
   setLoading(true)
   setError('')
@@ -77,10 +77,7 @@ export default function AdminPage() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ action: 'admin-login', password }),
     })
-    if (!res.ok) {
-      setError('Wrong password.')
-      return
-    }
+    if (!res.ok) { setError('Wrong password.'); return }
     const data = await res.json()
     setFeedback(data.entries ?? [])
 
@@ -91,21 +88,24 @@ export default function AdminPage() {
       all[slug] = d.comments ?? []
     }))
     setComments(all)
+
+    // analytics — phải nằm trong try
+    const analyticsData: Analytics = {}
+    await Promise.all(slugs.map(async slug => {
+      const r = await fetch(`/api/views?slug=${slug}`)
+      const d = await r.json()
+      const eventsRaw = await fetch(`/api/analytics?password=${encodeURIComponent(password)}&slug=${slug}`)
+      const eventsData = await eventsRaw.json()
+      analyticsData[slug] = { views: d.views, events: eventsData.events ?? [] }
+    }))
+    setAnalytics(analyticsData)
+
     setAuthed(true)
   } catch {
     setError('Failed to connect.')
   } finally {
     setLoading(false)
   }
-  const analyticsData: Analytics = {}
-  await Promise.all(slugs.map(async slug => {
-    const r = await fetch(`/api/views?slug=${slug}`)
-    const d = await r.json()
-    const eventsRaw = await fetch(`/api/analytics?password=${encodeURIComponent(password)}&slug=${slug}`)
-    const eventsData = await eventsRaw.json()
-    analyticsData[slug] = { views: d.views, events: eventsData.events ?? [] }
-  }))
-  setAnalytics(analyticsData)
 }
 
   async function deleteComment(slug: string, id: string) {
