@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
-
+import { SpeedInsights } from '@vercel/speed-insights/next'
 import FeedbackPanel from './components/FeedbackPanel'
 import ThemeToggle from './components/ThemeToggle'
 import NavLogo from './components/NavLogo'
-
+import { Analytics } from "@vercel/analytics/next"
 export const metadata: Metadata = {
   title: "Alëksis Arendt",
   description: "Notes on measure theory, functional analysis, and geometry.",
@@ -30,6 +30,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preload" href="/fonts/Satoshi/Satoshi-Medium.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
         <link rel="preload" href="/fonts/Satoshi/Satoshi-Bold.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
       </head>
+      <SpeedInsights />
+      <Analytics/>
       <body>
         <nav>
           <div className="nav-inner">
