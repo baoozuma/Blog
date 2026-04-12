@@ -97,7 +97,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
         <div style={{ color: 'var(--text-dim)', fontSize: '0.78rem', fontFamily: 'var(--font-mono)' }}>
           {post.date}
         </div>
-        {/*<ExportPDF title={post.title} />*/}
+        <ExportPDF title={post.title}/>
       </div>
 
       <Comments slug={slug} />
