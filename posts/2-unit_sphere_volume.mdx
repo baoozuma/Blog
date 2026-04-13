@@ -4,6 +4,7 @@ date: "2025-04-06"
 description: "The method of calculation in two ways, the first using Fubini's theorem and the second by switching to spherical coordinates, from which the surface area of the sphere appears naturally in the equation."
 thumbnail: "/thumbnails/sphere.jpg"
 ---
+
 ## Motivation
 
 As we know, in the two-dimensional space $\mathbb{R}^2$, the circumference and area of the circle $2 S_1 = (O, r)$ is calculated using the formula
@@ -24,24 +25,21 @@ Thus, a question arises: how can we calculate the surface area (coarea) and volu
 
 ## Overview of Lebesgue Measure
 
-But first, we need a standard definition of the area or volume of any set. In this article, I will use the Lebesgue measure, other measures can also be calculated in a similar way. Let $\mathcal{P}(\mathbb{R}^n)$ be the collection of subsets of $\mathbb{R}^n$, *an outer Lebesgue measure* is a function $\lambda^ *: \mathcal{P}(\mathbb{R}^n) \to [0, +\infty]$ is defined as follows
+But first, we need a standard definition of the area or volume of any set. In this article, I will use the Lebesgue measure, other measures can also be calculated in a similar way. Let $\mathcal{P}(\mathbb{R}^n)$ be the collection of subsets of $\mathbb{R}^n$, *an outer Lebesgue measure* is a function $\lambda^*: \mathcal{P}(\mathbb{R}^n) \to [0, +\infty]$ is defined as follows
 
 $$
 \lambda^*(A) = \inf\left\{\sum |R_i| \;\Big|\; \{R_i\} \text{ is a countable collection covering } A\right\}.
 $$
 
-
-
-A *half cube* $C$ is any Cartesian product of the form $C = \prod_{i=1} ^ n [a_i, b_i)$ with $a_i < b_i$ are real numbers, and its volume is $|C| = \prod_{i=1}^ n (b_i - a_i)$. A set $A$ is called *Lebesgue measurable* if
+A *half cube* $C$ is any Cartesian product of the form $C = \prod_{i=1}^n [a_i, b_i)$ with $a_i < b_i$ are real numbers, and its volume is $|C| = \prod_{i=1}^n (b_i - a_i)$. A set $A$ is called *Lebesgue measurable* if
 
 $$
 \lambda^*(E) = \lambda^*(A \cap E) + \lambda^*(E \setminus A), \quad \text{for all } E \subseteq \mathbb{R}^n,
 $$
 
 and we write $|A| = \lambda^*(A)$.
-   
 
-The properties as well as theorems about Lebesgue measure and integration will be presented in another article. We only need to know that to measure a set, we may approximate outside that set with half cubes whose volume is given by the above formula, and the integrals used in the article are conventionally Riemann integrals. Additionally, to calculate the measure of a surface, we will reduce it to a lower-dimensional space — otherwise, it would yield a measure of $0$, which does not make sense for surface area.    
+The properties as well as theorems about Lebesgue measure and integration will be presented in another article. We only need to know that to measure a set, we may approximate outside that set with half cubes whose volume is given by the above formula, and the integrals used in the article are conventionally Riemann integrals. Additionally, to calculate the measure of a surface, we will reduce it to a lower-dimensional space — otherwise, it would yield a measure of $0$, which does not make sense for surface area.
 
 Now back to the main problem. We observe that when moving any set, its volume (or measure) remains unchanged, or when multiplying the elements of that set by any real number $\alpha$, its measure will increase by a factor of $|\alpha|^n$. This is an invariant property of the Lebesgue measure and is not immediately obvious; it will be proven in detail later. In general, if we know the measure of the unit ball $B(0,1)$ in $\mathbb{R}^n$, we can easily calculate the measure of any other ball. In this article, we will standardize the terminology.
 
@@ -55,21 +53,26 @@ We see something very interesting that $\mathbb{S}^{n-1}$ is the set of boundary
 
 ---
 
-## Necessary tools 
+## Necessary Tools
 
 Before diving into the calculations, we need to prepare two important results that will appear very naturally in this article.
 
 ### Gaussian Integral
 
- **Lemma.** $\displaystyle\int_{-\infty}^\infty e^{-x^2}\,dx = \sqrt{\pi}$.
+<Lemma label="Gaussian Integral">
+$$
+\int_{-\infty}^\infty e^{-x^2}\,dx = \sqrt{\pi}.
+$$
+</Lemma>
 
-**Proof.** Let $I = \int_{-\infty}^\infty e^{-x^2}\,dx$. Since $e^{-x^2} > 0$, then $I > 0$. We calculate $I^2$ by writing the product of two independent integrals:
+<Proof>
+Let $I = \int_{-\infty}^\infty e^{-x^2}\,dx$. Since $e^{-x^2} > 0$, then $I > 0$. We calculate $I^2$ by writing the product of two independent integrals:
 
 $$
 I^2 = \left(\int_{-\infty}^\infty e^{-x^2}\,dx\right)\left(\int_{-\infty}^\infty e^{-y^2}\,dy\right) = \int_{\mathbb{R}^2} e^{-(x^2+y^2)}\,dx\,dy.
 $$
 
-This is an integral over $\mathbb{R}^2$ with a function that has circular symmetry, so we switch to polar coordinates $x = r\cos\theta$, $y = r\sin\theta$ with the Jacobian $r$:   
+This is an integral over $\mathbb{R}^2$ with a function that has circular symmetry, so we switch to polar coordinates $x = r\cos\theta$, $y = r\sin\theta$ with the Jacobian $r$:
 
 $$
 I^2 = \int_0^{2\pi}\int_0^\infty e^{-r^2}\,r\,dr\,d\theta = 2\pi\int_0^\infty r e^{-r^2}\,dr.
@@ -80,25 +83,30 @@ Let $t = r^2$, then $dt = 2r\,dr$, so
 $$
 I^2 = 2\pi \cdot \frac{1}{2}\int_0^\infty e^{-t}\,dt = \pi\cdot\bigl[-e^{-t}\bigr]_0^\infty = \pi.
 $$
-Because $I > 0$, we have $I = \sqrt{\pi}$. $\square$
 
-# The Gamma Function
+Because $I > 0$, we have $I = \sqrt{\pi}$.
+</Proof>
 
-Another tool that will appear very naturally after a change of variables in the main computation is the Gamma function.
+### The Gamma Function
 
- **Definition.** For $s > 0$, the *Gamma function* is defined by
- $$
- \Gamma(s) = \int_0^\infty t^{s-1} e^{-t}\,dt.
- $$
+<Definition label="Gamma Function">
+For $s > 0$, the *Gamma function* is defined by
 
- **Lemma.** The Gamma function satisfies the following properties:
- 1. $\Gamma(1) = 1$.
- 2. $\Gamma(s+1) = s\,\Gamma(s)$ for all $s > 0$.
- 3. Consequently, for $n \in \mathbb{N}$, $\Gamma(n) = (n-1)!$
- 4. $\Gamma\!\left(\tfrac{1}{2}\right) = \sqrt{\pi}$.
+$$
+\Gamma(s) = \int_0^\infty t^{s-1} e^{-t}\,dt.
+$$
+</Definition>
 
-**Proof.**
+<Lemma label="Properties of the Gamma Function">
+The Gamma function satisfies the following properties:
 
+1. $\Gamma(1) = 1$.
+2. $\Gamma(s+1) = s\,\Gamma(s)$ for all $s > 0$.
+3. Consequently, for $n \in \mathbb{N}$, $\Gamma(n) = (n-1)!$
+4. $\Gamma\!\left(\tfrac{1}{2}\right) = \sqrt{\pi}$.
+</Lemma>
+
+<Proof>
 *(i)* Direct computation: $\Gamma(1) = \int_0^\infty e^{-t}\,dt = \bigl[-e^{-t}\bigr]_0^\infty = 1$.
 
 *(ii)* Integration by parts with $u = t^s$ and $dv = e^{-t}\,dt$:
@@ -116,8 +124,7 @@ The boundary term vanishes since $t^s e^{-t} \to 0$ as $t \to 0^+$ and $t \to \i
 $$
 \Gamma\!\left(\tfrac{1}{2}\right) = \int_0^\infty t^{-1/2} e^{-t}\,dt = 2\int_0^\infty e^{-x^2}\,dx = \int_{-\infty}^\infty e^{-x^2}\,dx = \sqrt{\pi}.
 $$
-
-$\square$
+</Proof>
 
 ---
 
@@ -137,9 +144,7 @@ $$
 \int_{\mathbb{R}^n} e^{-\|x\|^2}\,dx = \int_{\mathbb{R}^n} e^{-(x_1^2+\cdots+x_n^2)}\,dx_1\cdots dx_n = \left(\int_{-\infty}^\infty e^{-x^2}\,dx\right)^n = \pi^{n/2}.
 $$
 
-That's it, straightforward.
-
-**Method 2 (Spherical coordinates).** A standard trick for multivariable integrals that resist direct computation is to switch to polar or spherical coordinates, at which point the surface area $|\mathbb{S}^{n-1}|$ appears very naturally. But how does one actually set up spherical coordinates in $\mathbb{R}^n$? Let me walk through it.
+**Method 2 (Spherical coordinates).** A standard trick for multivariable integrals that resist direct computation is to switch to polar or spherical coordinates, at which point the surface area $|\mathbb{S}^{n-1}|$ appears very naturally.
 
 ### Spherical Coordinates in $\mathbb{R}^n$
 
@@ -193,7 +198,7 @@ A^T A = \begin{bmatrix} 1 & 0 \\ 0 & G \end{bmatrix}
 \implies |\det A|^2 = \det(A^T A) = |\det G|,
 $$
 
-so $|\det A| = \sqrt{|\det G|}$, exactly as needed. The volume element now simplifies cleanly without any messy determinant expansion:
+so $|\det A| = \sqrt{|\det G|}$, exactly as needed. The volume element now simplifies cleanly:
 
 $$
 dx = r^{n-1}\sqrt{|\det G|}\; dr\,d\theta_1\cdots d\theta_{n-1} = r^{n-1}\,dr\,d\sigma.
@@ -251,52 +256,53 @@ $$
 
 is an essential consequence of exactly the kind of computation done above. The result also appears in differential geometry via the Gauss-Bonnet formula, in isoperimetric inequalities, and in many other places I will get to in due course.
 
-That wraps up the computation of the measure of balls in $\mathbb{R}^n$. For practice, here are some exercises.
-
 ---
 
 ## Exercises
 
- **Exercise 1.** Without any change of coordinates, define the number $\pi$ as an integral involving the functions $y = \sqrt{1-x^2}$ and $y = -\sqrt{1-x^2}$.
+**Exercise 1.** Without any change of coordinates, define the number $\pi$ as an integral involving the functions $y = \sqrt{1-x^2}$ and $y = -\sqrt{1-x^2}$.
 
- **Exercise 2.** Compute $|\mathbb{S}^{n-1}|$ and $|B(0,1)|$ explicitly for $n = 1, 2, 3, 4$ and verify against the geometric formulas you already know. Hint: for $n = 1$, what is $\mathbb{S}^0$?
+**Exercise 2.** Compute $|\mathbb{S}^{n-1}|$ and $|B(0,1)|$ explicitly for $n = 1, 2, 3, 4$ and verify against the geometric formulas you already know. Hint: for $n = 1$, what is $\mathbb{S}^0$?
 
- **Exercise 3.** Prove that
- $$
- \Gamma\!\left(\frac{2k+1}{2}\right) = \frac{(2k-1)!!}{2^k}\sqrt{\pi}, \quad k \in \mathbb{N},
- $$
- where $(2k-1)!! = 1 \cdot 3 \cdot 5 \cdots (2k-1)$ is the double factorial.
+**Exercise 3.** Prove that
+$$
+\Gamma\!\left(\frac{2k+1}{2}\right) = \frac{(2k-1)!!}{2^k}\sqrt{\pi}, \quad k \in \mathbb{N},
+$$
+where $(2k-1)!! = 1 \cdot 3 \cdot 5 \cdots (2k-1)$ is the double factorial.
 
- **Exercise 4.** Prove that the unit ball $B(0,1)$ in $\mathbb{R}^n$ is Lebesgue measurable.
+**Exercise 4.** Prove that the unit ball $B(0,1)$ in $\mathbb{R}^n$ is Lebesgue measurable.
 
- **Exercise 5.** Prove that $\int_{-\infty}^\infty e^{-x^2}\,dx = \sqrt{\pi}$ using differentiation under the integral sign. Specifically, consider
- $$
- F(t) = \left(\int_0^t e^{-x^2}\,dx\right)^2, \quad G(t) = \int_0^1 \frac{e^{-t^2(1+s^2)}}{1+s^2}\,ds
- $$
- and prove that $F(t) + G(t) = \pi/4$ for all $t \ge 0$.
+**Exercise 5.** Prove that $\int_{-\infty}^\infty e^{-x^2}\,dx = \sqrt{\pi}$ using differentiation under the integral sign. Specifically, consider
+$$
+F(t) = \left(\int_0^t e^{-x^2}\,dx\right)^2, \quad G(t) = \int_0^1 \frac{e^{-t^2(1+s^2)}}{1+s^2}\,ds
+$$
+and prove that $F(t) + G(t) = \pi/4$ for all $t \ge 0$.
 
- **Exercise 6.** Let $\omega_n = |B(0,1)|$ in $\mathbb{R}^n$. Prove the recurrence
- $$
- \omega_n = \omega_{n-2} \cdot \frac{2\pi}{n}, \quad \omega_1 = 2,\quad \omega_2 = \pi,
- $$
- without using the Gamma function.
+**Exercise 6.** Let $\omega_n = |B(0,1)|$ in $\mathbb{R}^n$. Prove the recurrence
+$$
+\omega_n = \omega_{n-2} \cdot \frac{2\pi}{n}, \quad \omega_1 = 2,\quad \omega_2 = \pi,
+$$
+without using the Gamma function.
 
- **Exercise 7.** Prove that the ratio between the surface area of the sphere and the volume of the ball of radius $r$ in $\mathbb{R}^n$ satisfies
- $$
- \frac{|\mathbb{S}^{n-1}(r)|}{|B(0,r)|} = \frac{n}{r}.
- $$
- Explain why this identity is equivalent to $\frac{d}{dr}|B(0,r)| = |\mathbb{S}^{n-1}(r)|$.
+**Exercise 7.** Prove that the ratio between the surface area of the sphere and the volume of the ball of radius $r$ in $\mathbb{R}^n$ satisfies
+$$
+\frac{|\mathbb{S}^{n-1}(r)|}{|B(0,r)|} = \frac{n}{r}.
+$$
+Explain why this identity is equivalent to $\frac{d}{dr}|B(0,r)| = |\mathbb{S}^{n-1}(r)|$.
 
- **Exercise 8.** Prove that $|B(0,1)| \to 0$ as $n \to \infty$. Moreover, find the dimension $n_0$ at which $|B(0,1)|$ achieves its maximum.
+**Exercise 8.** Prove that $|B(0,1)| \to 0$ as $n \to \infty$. Moreover, find the dimension $n_0$ at which $|B(0,1)|$ achieves its maximum.
 
- **Exercise 9.** For fixed $\varepsilon > 0$, prove that
- $$
- \frac{|B(0,1) \setminus B(0,1-\varepsilon)|}{|B(0,1)|} = 1 - (1-\varepsilon)^n \to 1 \quad \text{as } n \to \infty.
- $$
+**Exercise 9.** For fixed $\varepsilon > 0$, prove that
+$$
+\frac{|B(0,1) \setminus B(0,1-\varepsilon)|}{|B(0,1)|} = 1 - (1-\varepsilon)^n \to 1 \quad \text{as } n \to \infty.
+$$
+
+---
+
 ## References
- 
-[1] G. B. Folland, Real Analysis: Modern Techniques and Their Applications, 2nd ed., John Wiley & Sons, New York, 1999.
- 
-[2] J. H. Hubbard and B. B. Hubbard, Vector Calculus, Linear Algebra, and Differential Forms: A Unified Approach, 5th ed., Matrix Editions, Ithaca, 2015.
- 
-[3] J. M. Lee, Introduction to Smooth Manifolds, 2nd ed., Grad. Texts in Math., vol. 218, Springer, New York, 2013.
+
+[1] G. B. Folland, *Real Analysis: Modern Techniques and Their Applications*, 2nd ed., John Wiley & Sons, New York, 1999.
+
+[2] J. H. Hubbard and B. B. Hubbard, *Vector Calculus, Linear Algebra, and Differential Forms: A Unified Approach*, 5th ed., Matrix Editions, Ithaca, 2015.
+
+[3] J. M. Lee, *Introduction to Smooth Manifolds*, 2nd ed., Grad. Texts in Math., vol. 218, Springer, New York, 2013.

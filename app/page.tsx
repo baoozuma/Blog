@@ -24,7 +24,7 @@ export default function HomePage() {
     <h1 className="hero-title">Alëksis Arendt</h1>
 
     <p className="hero-desc">
-      I don't mytholize math, it's just a job.
+      I don't mytholize math, it's just a job. 
     </p>
 
     <div className="tags">

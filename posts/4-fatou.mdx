@@ -7,13 +7,15 @@ thumbnail: "/thumbnails/fatou.jpg"
 
 ## Fatou's Lemma
 
-**Lemma (Fatou's Lemma).** Let $(X,\mu)$ be a measure space and let $\{f_n\}: X \to [0,+\infty]$ be $\mu$-measurable sequence of functions. Then one has
+<Lemma label="Fatou's Lemma">
+Let $(X,\mu)$ be a measure space and let $\{f_n\}: X \to [0,+\infty]$ be $\mu$-measurable sequence of functions. Then one has
 
 $$
 \int \liminf_{n \to +\infty} f_n \, d\mu \leq \liminf_{n \to +\infty} \int f_n \, d\mu.
 $$
+</Lemma>
 
-**Proof.**
+<Proof>
 Let $g: X \to [0,+\infty]$ be any simple function such that $g \leq \liminf_{n \to+\infty} f_n$, $\mu$.a.e. We write
 
 $$
@@ -75,24 +77,25 @@ $$
 As $g$ is arbitrary simple function less than $\liminf_{n\to +\infty} f_n$ and $0 < t < 1$ is any number, taking $t \to 1^-$, and taking supremum over all such simple $g$, we obtain the Fatou's inequality
 
 $$
-\liminf_{n \to +\infty} \int f_n \, d\mu \geq \int \liminf_{n \to +\infty} f_n \, d\mu. \qquad \blacksquare
+\liminf_{n \to +\infty} \int f_n \, d\mu \geq \int \liminf_{n \to +\infty} f_n \, d\mu.
 $$
+</Proof>
 
 ---
 
 In this section, we introduce some significant applications of Fatou's Lemma.
 
-
-
 ## Monotone Convergence Theorem
 
-**Theorem (Monotone Convergence Theorem).** Let $\{f_n\}: X \to [0,+\infty]$ be increasing, $\mu$-measurable sequence. Then
+<Theorem label="Monotone Convergence Theorem">
+Let $\{f_n\}: X \to [0,+\infty]$ be increasing, $\mu$-measurable sequence. Then
 
 $$
 \lim_{n\to+\infty} \int f_n \, d\mu = \int \lim_{n\to+\infty} f_n \, d\mu.
 $$
+</Theorem>
 
-**Proof.**
+<Proof>
 Since $\{f_n\}$ is increasing, we have
 
 $$
@@ -117,19 +120,22 @@ $$
 \int \lim_{n\to+\infty} f_n \, d\mu = \int \liminf_{n \to +\infty} f_n \, d\mu \leq \liminf_{n \to +\infty} \int f_n \, d\mu = \lim_{n\to+\infty} \int f_n \, d\mu.
 $$
 
-Hence, the equality holds. $\blacksquare$
+Hence, the equality holds.
+</Proof>
 
 ---
 
 ## Dominated Convergence Theorem
 
-**Theorem (Dominated Convergence Theorem).** Let $g \in L^1$ be nonnegative, and $f, \{f_n\}$ are measurable. Suppose $f_n \to f$ and $|f_n| \leq g$, for all $n$, $\mu$.a.e. Then one has
+<Theorem label="Dominated Convergence Theorem">
+Let $g \in L^1$ be nonnegative, and $f, \{f_n\}$ are measurable. Suppose $f_n \to f$ and $|f_n| \leq g$, for all $n$, $\mu$.a.e. Then one has
 
 $$
 \lim_{n\to+\infty} \int |f_n - f| \, d\mu = 0.
 $$
+</Theorem>
 
-**Proof.**
+<Proof>
 By Fatou's lemma, we have
 
 $$
@@ -142,14 +148,16 @@ $$
 Hence,
 
 $$
-\lim_{n\to+\infty} \int |f_n - f| \, d\mu \leq \limsup_{n \to +\infty} \int |f - f_n| \, d\mu = 0. \qquad \blacksquare
+\lim_{n\to+\infty} \int |f_n - f| \, d\mu \leq \limsup_{n \to +\infty} \int |f - f_n| \, d\mu = 0.
 $$
+</Proof>
 
 ---
 
 ## $L^p$ Space
 
-**Definition.** Let $(X,\mathcal{A},\mu)$ be a measure space and $1 \leq p < \infty$. Let $\mathcal{M}(X)$ be the space of all $\mu$-measurable functions $f: X \to \mathbb{R}$ such that
+<Definition label="Lp Space">
+Let $(X,\mathcal{A},\mu)$ be a measure space and $1 \leq p < \infty$. Let $\mathcal{M}(X)$ be the space of all $\mu$-measurable functions $f: X \to \mathbb{R}$ such that
 
 $$
 \int_X |f|^p \, d\mu < \infty.
@@ -172,14 +180,17 @@ with the norm
 $$
 \|f\|_{L^p} := \left(\int_X |f|^p \, d\mu\right)^{1/p}.
 $$
+</Definition>
 
 ---
 
 ## Riesz–Fischer Theorem
 
-**Theorem (Riesz–Fischer).** The $L^p$ space is complete, i.e every Cauchy sequence in $L^p$ converges to an element in $L^p$.
+<Theorem label="Riesz–Fischer">
+The $L^p$ space is complete, i.e every Cauchy sequence in $L^p$ converges to an element in $L^p$.
+</Theorem>
 
-**Proof.**
+<Proof>
 Let $(f_n) \subseteq L^p$ be Cauchy, then we can choose a subsequence $(f_{n_k})$ satisfying
 
 $$
@@ -240,7 +251,7 @@ $$
 |f_{n_k} - f|^p \to 0, \quad \mu\text{.a.e.}
 $$
 
-From $(*)$,
+From $(*{})$,
 
 $$
 |f_{n_k}| \leq |f_{n_1}| + g, \quad \mu\text{.a.e.}
@@ -276,11 +287,13 @@ $$
 \|f_n - f\|_{L^p} \leq \|f_n - f_{n_k}\|_{L^p} + \|f_{n_k} - f\|_{L^p} < \frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon.
 $$
 
-Hence $\|f_n - f\|_{L^p} \to 0$. $\blacksquare$
+Hence $\|f_n - f\|_{L^p} \to 0$.
+</Proof>
 
 ---
 
 ## References
 
-[1] L. Evans, R. Gariepy — Measure Theory and Fine Properties of Functions, Revised edition, CRC Press (2015).
-[2] H. Brezis — Functional Analysis, Sobolev Spaces and Partial Differential Equations, Springer (2011).
+[1] L. Evans, R. Gariepy, *Measure Theory and Fine Properties of Functions*, Revised edition, CRC Press (2015).
+
+[2] H. Brezis, *Functional Analysis, Sobolev Spaces and Partial Differential Equations*, Springer (2011).
