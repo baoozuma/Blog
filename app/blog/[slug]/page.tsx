@@ -8,6 +8,13 @@ import ExportPDF from '../../components/ExportPDF'
 import Comments from '../../components/Comments'
 import ViewCounter from '../../components/ViewCounter'
 import { Theorem, Lemma, Corollary, Definition, Proof, Remark } from '../../components/MathBlocks'
+import {
+  FigureOverlap,
+  FigureCaseK,
+  FigureCaseIK,
+  FigureGraphColoring,
+  FigureAnnuli,
+} from '../../components/figures/BesicovitchFigures'
 
 const SITE_URL = 'https://aleksis.dev'
 
@@ -45,7 +52,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   }
 }
 
-const components = { Theorem, Lemma, Corollary, Definition, Proof, Remark }
+const components = { Theorem, Lemma, Corollary, Definition, Proof, Remark, FigureOverlap,
+  FigureCaseK,
+  FigureCaseIK,
+  FigureGraphColoring,
+  FigureAnnuli,}
 
 const options = {
   mdxOptions: {

@@ -27,6 +27,7 @@ export function getAllPosts() {
         date: data.date as string,
         description: data.description as string,
         thumbnail: data.thumbnail as string | undefined,
+        tags: (data.tags as string[]) ?? [],
         readingTime: readingTime(content),
       }
     })
@@ -45,7 +46,16 @@ export function getPostBySlug(slug: string) {
     date: data.date as string,
     description: data.description as string,
     thumbnail: data.thumbnail as string | undefined,
+    tags: (data.tags as string[]) ?? [],
     readingTime: readingTime(content),
     content,
   }
+}
+
+export function getRecentPosts(n = 3) {
+  return getAllPosts().slice(0, n)
+}
+
+export function getPostsByTag(tag: string) {
+  return getAllPosts().filter(p => p.tags.includes(tag))
 }

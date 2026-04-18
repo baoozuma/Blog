@@ -108,21 +108,20 @@ async function login() {
   }
 }
 
-  async function deleteComment(slug: string, id: string) {
-    if (!confirm('Delete this comment?')) return
-    const res = await fetch(`/api/comments?password=${encodeURIComponent(password)}`, {
-      method: 'DELETE',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ slug, id }),
-    })
-    if (res.ok) {
-      setComments(prev => ({
-        ...prev,
-        [slug]: prev[slug].filter(c => c.id !== id),
-      }))
-    }
+ async function deleteComment(slug: string, id: string) {
+  if (!confirm('Delete this comment?')) return
+  const res = await fetch(`/api/comments?password=${encodeURIComponent(password)}`, {
+    method: 'DELETE',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ slug, id }),
+  })
+  if (res.ok) {
+    // Fetch lại từ server thay vì filter state
+    const r = await fetch(`/api/comments?slug=${slug}`)
+    const d = await r.json()
+    setComments(prev => ({ ...prev, [slug]: d.comments ?? [] }))
   }
-
+}
   async function submitReply() {
     if (!replyTo || !replyMsg.trim()) return
     setReplying(true)

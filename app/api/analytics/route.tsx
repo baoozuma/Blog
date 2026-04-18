@@ -1,10 +1,7 @@
-import { Redis } from '@upstash/redis'
+import { redis } from '@/lib/redis'
 import { NextRequest, NextResponse } from 'next/server'
 
-const redis = new Redis({
-  url: process.env.KV_REST_API_URL!,
-  token: process.env.KV_REST_API_TOKEN!,
-})
+
 
 export async function GET(req: NextRequest) {
   const password = req.nextUrl.searchParams.get('password')

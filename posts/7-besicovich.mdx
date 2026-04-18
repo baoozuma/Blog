@@ -1,0 +1,188 @@
+---
+title: "Proof of the Besicovitch Covering Theorem"
+date: "2025-04-13"
+description: "Greedy ball selection, a graph coloring argument, and why Besicovitch covers with the original balls — no enlargement needed."
+thumbnail: "/thumbnails/besicovitch.jpg"
+tags: ['GMT', 'Measure Theory']
+---
+
+
+## The Problem
+
+Vitali's Covering Theorem handles Lebesgue measure cleanly: enlarge each ball by a factor of 5, extract a disjoint subcollection, and you're done. But if $\mu$ is an arbitrary Radon measure, there is no systematic way to control $\mu(\hat{B})$ in terms of $\mu(B)$. Enlarging balls breaks everything.
+
+Besicovitch's theorem is the fix. It covers $A$ using the original balls in $\mathcal{F}$ — no enlargement — by decomposing them into finitely many disjoint subfamilies. The price is a more delicate proof.
+
+## The Theorem
+
+<Theorem label="Besicovitch's Covering Theorem">
+Let $A \subseteq \mathbb{R}^n$ and $\mathcal{F}$ be a nondegenerate collection of closed balls in $\mathbb{R}^n$ with centers in $A$ such that
+$$
+\sup\{\operatorname{diam} B \mid B \in \mathcal{F}\} < \infty.
+$$
+There exists a constant $N_n$ depending only on $n$, and collections $\mathcal{G}_1, \dots, \mathcal{G}_{N_n}$ of balls in $\mathcal{F}$, such that each $\mathcal{G}_i$ is disjoint and
+$$
+A \subseteq \bigcup_{i=1}^{N_n} \bigcup_{B \in \mathcal{G}_i} B.
+$$
+</Theorem>
+
+## Why the Proof Works
+
+The argument has three independent moving parts, each with its own flavor.
+
+**Greedy selection** (Steps 1–5) builds a sequence of balls $\{B_k\}$ by always picking a ball whose center is not yet covered, with radius close to the current supremum. This forces $r_k \to 0$ and guarantees $A \subseteq \bigcup_k B_k$.
+
+**Overlap control** (Steps 6–12) shows each $B_k$ intersects fewer than $M_n$ earlier balls. This splits into two cases by ball size, handled by a volume argument and an angle argument respectively.
+
+**Graph coloring** (Steps 13–15) turns the overlap bound into disjoint families: build a graph on $\{B_k\}$, color it greedily with $K_n = M_n + 1$ colors. Each color class is a disjoint subfamily.
+
+## Proof
+
+Let $D = \sup\{\operatorname{diam} B \mid B \in \mathcal{F}\}$. We first suppose $A$ is bounded.
+
+**Step 1: Greedy ball selection.**
+
+1. Choose $B_1 = B(a_1, r_1) \in \mathcal{F}$ with $r_1 \geq \frac{3}{4} \cdot \frac{D}{2}$.
+2. For $k > 1$, let $A_k = A \setminus \bigcup_{i=1}^{k-1} B_i$ and $L_k = \{r \mid B(x,r) \in \mathcal{F},\, x \in A_k\}$. If $A_k = \varnothing$, stop and set $J = k-1$. Otherwise choose $B_k = B(a_k, r_k) \in \mathcal{F}$ with $a_k \in A_k$ and
+$$
+r_k \geq \frac{3}{4} \sup L_k.
+$$
+If $A_k \neq \varnothing$ for all $k$, set $J = \infty$.
+
+**Step 2 (Claim): For $i < j$, one has $r_i \geq \frac{3}{4} r_j$.**
+
+Since $\{A_k\}$ is decreasing, $a_j \in A_j \subseteq A_i$, so $r_j \in L_i$. Therefore
+$$
+r_i \geq \frac{3}{4} \sup L_i \geq \frac{3}{4} r_j.
+$$
+
+**Step 3 (Claim): The collection $\left\{B\!\left(a_i, \frac{r_i}{3}\right)\right\}$ is disjoint.**
+
+For $i < j$, since $a_j \in A_j$ we have $a_j \notin \bigcup_{l=1}^{j-1} B_l$, so $a_j \notin B_i$, giving $|a_i - a_j| > r_i$. By Step 2, $r_i \geq \frac{3}{4} r_j$, so
+$$
+|a_i - a_j| > r_i = \frac{r_i}{3} + \frac{2}{3} r_i \geq \frac{r_i}{3} + \frac{2}{3} \cdot \frac{3r_j}{4} > \frac{r_i}{3} + \frac{r_j}{3}.
+$$
+
+**Step 4 (Claim): If $J = \infty$, then $r_i \to 0$.**
+
+Since $A$ is bounded, there exists $B(x, r) \supseteq A$. For $t \in B(a_i, r_i/3)$,
+$$
+|x - t| \leq |x - a_i| + |a_i - t| \leq r + \frac{r_i}{3} \leq r + \frac{D}{6},
+$$
+so $B(a_i, r_i/3) \subseteq B(x, r + D/6)$ for all $i$. By disjointness and countable additivity,
+$$
+\left|B\!\left(x, r + \tfrac{D}{6}\right)\right| \geq \sum_{i=1}^\infty \omega_n \left(\frac{r_i}{3}\right)^n.
+$$
+The series converges, so $(r_i/3)^n \to 0$, hence $r_i \to 0$.
+
+**Step 5 (Claim): $A \subseteq \bigcup_{i=1}^J B_i$.**
+
+Suppose $x \in A$ and $x \notin \bigcup_{i=1}^J B_i$. Then $B(x, r) \in \mathcal{F}$ for some $r > 0$, so $r \in L_i$ for all $i$, giving $r_i \geq \frac{3}{4} r$ for all $i$. But $r_i \to 0$, contradiction.
+
+**Step 6: Overlap decomposition.**
+
+Fix $k \in \mathbb{N}$ and let
+$$
+I = \{i < k \mid B(a_i, r_i) \cap B(a_k, r_k) \neq \varnothing\}, \quad K = I \cap \{i \mid r_i \leq 3r_k\}.
+$$
+We bound $\operatorname{Card}(I)$ by handling $K$ and $I \setminus K$ separately.
+
+
+
+**Step 7 (Claim): $\operatorname{Card}(K) \leq 20^n$.**
+
+For $x \in B(a_i, r_i/3)$ with $i \in K$:
+$$
+|a_k - x| \leq |a_k - a_i| + |a_i - x| \leq (r_k + r_i) + \frac{r_i}{3} = r_k + \frac{4r_i}{3} \leq 5r_k,
+$$
+so $\bigcup_{i \in K} B(a_i, r_i/3) \subseteq B(a_k, 5r_k)$. By Step 2, $r_i \geq \frac{3}{4} r_k$ for all $i \in K$, so $r_i/3 \geq r_k/4$. Since $\{B(a_i, r_i/3)\}_{i \in K}$ is disjoint,
+$$
+\omega_n (5r_k)^n \geq \sum_{i \in K} \omega_n \left(\frac{r_i}{3}\right)^n \geq \operatorname{Card}(K) \cdot \omega_n \left(\frac{r_k}{4}\right)^n,
+$$
+giving $\operatorname{Card}(K) \leq 20^n$.
+
+
+
+**Step 8: Setup for $I \setminus K$.**
+
+Let $i, j \in I \setminus K$ with $i \neq j$. Assume $a_k = 0$ and $|a_j| \geq |a_i|$. Since $a_k \notin B_i \cup B_j$ and both balls intersect $B_k$:
+$$
+\begin{cases}
+|a_j| \geq |a_i|,\\
+3r_k < r_i \leq |a_i| \leq r_i + r_k,\\
+3r_k < r_j \leq |a_j| \leq r_j + r_k.
+\end{cases}
+$$
+Let $\theta$ be the angle between $a_i$ and $a_j$.
+
+**Step 9 (Claim): If $\cos\theta \geq \frac{5}{6}$, then $a_i \in B_j$.**
+
+Suppose $a_i \notin B_j$, so $|a_i - a_j| > r_j$. By the law of cosines,
+$$
+\cos\theta = \frac{|a_i|^2 + |a_j|^2 - |a_i - a_j|^2}{2|a_i||a_j|}.
+$$
+If $|a_j| \leq |a_i - a_j|$, then $\cos\theta \leq \frac{|a_i|}{2|a_j|} \leq \frac{1}{2} < \frac{5}{6}$.
+
+If $|a_j| \geq |a_i - a_j|$, then
+$$
+\cos\theta \leq \frac{1}{2} + \frac{|a_j| - |a_i - a_j|}{|a_i|} \leq \frac{1}{2} + \frac{r_k}{r_i} < \frac{1}{2} + \frac{r_k}{3r_k} = \frac{5}{6}.
+$$
+Both cases contradict the hypothesis, so $a_i \in B_j$.
+
+**Step 10 (Claim): If $a_i \in B_j$, then $\cos\theta \leq \frac{61}{64}$.**
+
+Since $a_i \in B_j$ implies $i < j$, we have $a_j \notin B_i$ and $|a_i - a_j| > r_i$. The triangle inequality gives $|a_j| \leq |a_i - a_j| + |a_i|$, so
+$$
+0 \leq \frac{|a_i - a_j| + |a_i| - |a_j|}{|a_j|} \leq \frac{2|a_i|(1 - \cos\theta)}{|a_i - a_j|} \leq \frac{8}{3}(1 - \cos\theta).
+$$
+For the lower bound, using $|a_i - a_j| \geq r_i$, $|a_i| \geq r_i$, $|a_j| \leq r_j + r_k$, and $r_i \geq \frac{3}{4}r_j$:
+$$
+\frac{|a_i - a_j| + |a_i| - |a_j|}{|a_j|} \geq \frac{2r_i - r_j - r_k}{|a_j|} \geq \frac{\tfrac{1}{2}r_j - r_k}{|a_j|} \geq \frac{r_j}{6(r_j + \frac{1}{3}r_j)} = \frac{1}{8}.
+$$
+Therefore $\frac{1}{8} \leq \frac{8}{3}(1 - \cos\theta)$, giving $\cos\theta \leq \frac{61}{64}$.
+
+**Step 11 (Claim): $\operatorname{Card}(I \setminus K) \leq L_n$.**
+
+Combining Steps 9–10: if $\cos\theta > \frac{5}{6}$ then $a_i \in B_j$ which forces $\cos\theta \leq \frac{61}{64} < \frac{5}{6}$, a contradiction. So for all distinct $i, j \in I \setminus K$,
+$$
+\theta \geq \theta_0 := \arccos\frac{61}{64} > 0.
+$$
+Choose $r_0 > 0$ so that any two points in $B(x, r_0) \cap \mathbb{S}^{n-1}$ subtend angle $< \theta_0$. Define $L_n$ as the minimum number of balls of radius $r_0$ centered on $\mathbb{S}^{n-1}$ needed to cover $\mathbb{S}^{n-1}$. Since any two rays from $a_k$ into $I \setminus K$ subtend angle $\geq \theta_0$, no covering ball contains two such rays, so $\operatorname{Card}(I \setminus K) \leq L_n$.
+
+
+**Step 12: Total overlap bound.**
+
+$$
+\operatorname{Card}(I) = \operatorname{Card}(K) + \operatorname{Card}(I \setminus K) \leq 20^n + L_n =: M_n.
+$$
+
+**Step 13: Graph coloring.**
+
+Set $K_n = M_n + 1$. Build a graph $G$ on $\{B_k\}$ with an edge between $B_i$ and $B_j$ whenever $B_i \cap B_j \neq \varnothing$. For $1 \leq k \leq K_n$ assign color $k$ to $B_k$. For $k > K_n$, since $\deg(B_k) \leq M_n < K_n$, a free color always exists by pigeonhole.
+
+For each $1 \leq j \leq K_n$ let $\mathcal{G}_j = \{B_k \mid B_k \text{ has color } j\}$. Each $\mathcal{G}_j$ is disjoint by construction, and $\bigcup_{j=1}^{K_n} \bigcup_{B \in \mathcal{G}_j} B \supseteq A$.
+
+
+
+**Step 14: Extension to unbounded $A$.**
+
+For $k \geq 1$ let $A_k = \{x \mid 3D(k-1) \leq |x| < 3Dk\} \cap A$ and apply Step 13 to each $A_k$. For $B_l \in \mathcal{G}_k^{2i}$ and $B_t \in \mathcal{G}_k^{2j}$ with $i < j$:
+$$
+|x_t - x_l| \geq 3D(2j-1) - 3D(2i) = 3D(2j - 2i - 1) \geq 3D > r_t + r_l,
+$$
+so $\mathcal{G}_k^{2i}$ and $\mathcal{G}_k^{2j}$ are disjoint. The odd case is identical.
+
+
+
+**Step 15: Final assembly.**
+
+$$
+\mathcal{G}_k = \bigcup_{i=1}^\infty \mathcal{G}_k^{2i} \quad (1 \leq k \leq K_n), \qquad \mathcal{G}_k = \bigcup_{j=1}^\infty \mathcal{G}_{k-K_n}^{2j-1} \quad (K_n + 1 \leq k \leq 2K_n).
+$$
+Set $N_n = 2K_n$. Then $\bigcup_{k=1}^{N_n} \bigcup_{B \in \mathcal{G}_k} B \supseteq A$. $\blacksquare$
+
+## References
+
+[1] L. C. Evans and R. F. Gariepy, *Measure Theory and Fine Properties of Functions*, revised ed., CRC Press, 2015.
+
+[2] Z. Füredi and P. A. Loeb, On the best constant for the Besicovitch covering theorem, *Proc. Amer. Math. Soc.* **121** (1994), 1063–1073.

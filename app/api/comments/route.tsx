@@ -1,12 +1,8 @@
-import { Redis } from '@upstash/redis'
+import { redis } from '@/lib/redis'
 import { NextRequest, NextResponse } from 'next/server'
 import { Resend } from 'resend'
 import { rateLimit } from '@/lib/ratelimit'
 
-const redis = new Redis({
-  url: process.env.KV_REST_API_URL!,
-  token: process.env.KV_REST_API_TOKEN!,
-})
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
