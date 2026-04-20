@@ -25,7 +25,7 @@
 
 /* ── Variables: Dark (default) ── */
 :root {
-  --bg: #111111;
+  --bg: #1f1d1d;
   --bg-card: #222226;
   --border: #35353a;
   --text: #ffffff;
@@ -43,13 +43,13 @@
 
 /* ── Variables: Light ── */
 [data-theme="light"] {
-  --bg: #eeece5;
-  --bg-card: #edeade;
+  --bg: #efeee9;
+  --bg-card: #f6f4ee;
   --border: #d4d0c8;
   --text: #1a1a1a;
   --text-muted: #1a1a1a;
   --text-dim: #4a4845;
-  --gold: #0077aa;
+  --gold: #0077aa;  
   --gold-dim: rgba(0, 119, 170, 0.15);
   --gold-glow: rgba(0, 119, 170, 0.06);
   color-scheme: light;
@@ -329,16 +329,16 @@ nav {
 }
 
 /* Dark mode */
-.math-theorem   { border: 2px solid #00ddff; background: rgba(0, 221, 255, 0.08); }
-.math-lemma     { border: 2px solid #e9fa8b; background: rgba(250, 248, 139, 0.08); }
-.math-corollary { border: 2px solid #34d399; background: rgba(52, 211, 153, 0.08); }
+.math-theorem   { border: 2px solid #00ddff; }
+.math-lemma     { border: 2px solid #e9fa8b; }
+.math-corollary { border: 2px solid #34d399; }
 .math-definition{ border: 2px solid #fb923c; background: rgba(251, 146, 60, 0.08); }
 
 /* Light mode */
-[data-theme="light"] .math-theorem   { border: 2px solid #29bfff; background: rgba(0, 119, 170, 0.1); }
-[data-theme="light"] .math-lemma     { border: 2px solid #697e08; background: rgba(212, 255, 0, 0.552); }
-[data-theme="light"] .math-corollary { border: 2px solid #059669; background: rgba(5, 150, 105, 0.08); }
-[data-theme="light"] .math-definition{ border: 2px solid #d97706; background: rgba(217, 119, 6, 0.08); }
+[data-theme="light"] .math-theorem   { border: 2px solid #29bfff;  }
+[data-theme="light"] .math-lemma     { border: 2px solid #697e08;  }
+[data-theme="light"] .math-corollary { border: 2px solid #059669; }
+[data-theme="light"] .math-definition{ border: 2px solid #d97706; }
 
 .math-block-tag {
   display: block;

@@ -56,20 +56,13 @@ export default function HomePage() {
   return (
     <div className="home">
 
-      {/* Status pill */}
-      <div className="status-pill-wrap">
-        <span className="status-pill">
-          <span className="status-dot" />
-          Available for research collaboration
-        </span>
-      </div>
 
       {/* Hero */}
       <div className="hero">
         <div className="hero-text">
           <p className="hero-label">Pure Mathematics · HCMUS</p>
           <h1 className="hero-title">Alëksis Arendt</h1>
-          <p className="hero-desc">I don't mytholize math, it's just a job.</p>
+          <p className="hero-desc">I don't mythologize math, it's just a job.</p>
 
           <div className="tags">
             {TAGS.map(tag => <TagTooltip key={tag} tag={tag} />)}
@@ -101,14 +94,13 @@ export default function HomePage() {
       <div className="intro-wide">
         <p className="section-label">Introduction</p>
         <p>
-          I am an undergraduate student in pure mathematics at HCMUS.
-          My current direction focuses on analysis and geometry, with long-term plans
-          for graduate study in Europe, particularly in programs such as Bonn, LMU Munich, ETH Zürich, or EPFL.
+          This site collects notes, drafts, and selected writing from my study in pure mathematics.
+          It is primarily a working space for organizing ideas, tracing difficult arguments,
+          and recording what I am seriously learning.
         </p>
         <p>
-          Before university, I studied in a mathematics specialized program and
-          participated in national-level competitions and training programs,
-          including intensive camps organized by VIASM in Da Lat and Hanoi.
+          Most posts begin from a theorem, a proof, or a structural question, then develop
+          through reconstruction, examples, and longer analytical notes.
         </p>
       </div>
 

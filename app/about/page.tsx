@@ -3,7 +3,6 @@ import styles from './about.module.css'
 export default function AboutPage() {
   return (
     <div className={styles.page}>
-      {/* Header */}
       <div className={styles.header}>
         <p className={styles.label}>about</p>
 
@@ -14,35 +13,33 @@ export default function AboutPage() {
         </p>
       </div>
 
-      {/* Content */}
       <div className={styles.content}>
 
-        {/* Research */}
         <section className={styles.section}>
           <p className={styles.sectionLabel}>research interests</p>
 
           <p className={styles.paragraph}>
-            Geometric analysis, geometric measure theory, and calculus of variations.
-            Currently building a foundation in real analysis and functional analysis
-            before moving into PDE theory and GMT proper.
+            Harmonic analysis, geometric measure theory, and partial differential equations,
+            with a growing interest in combinatorial methods inside geometric and analytic problems.
           </p>
 
           <p className={styles.paragraph}>
-            Long-term interests include minimal surfaces, harmonic maps, mean curvature flow,
-            and gauge theory — particularly Yang-Mills theory and principal bundles.
+            I am especially drawn to questions where Fourier-analytic ideas, geometric structure,
+            and discrete or combinatorial arguments meet — particularly in problems related to
+            oscillation, dimension, incidence, and singular behavior.
           </p>
         </section>
 
-        {/* Current Focus */}
         <section className={styles.section}>
           <p className={styles.sectionLabel}>current study</p>
 
           <div className={styles.studyList}>
             {[
-              ['Measure Theory', 'Folland, Evans–Gariepy'],
+              ['Measure Theory', 'Evans–Gariepy, Cohn'],
+              ['Fourier Analysis', 'Stein–Shakarchi'],
               ['Functional Analysis', 'Brezis'],
-              ['ODE Theory', 'Peano, Picard–Lindelöf'],
-              ['Differential Geometry', 'Resuming in summer'],
+              ['PDE Theory', 'Elliptic and variational foundations'],
+              ['Geometric Measure Theory', 'Building steadily from analysis'],
             ].map(([topic, detail]) => (
               <div key={topic} className={styles.studyRow}>
                 <span className={styles.studyTopic}>{topic}</span>
@@ -52,34 +49,51 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* Path */}
         <section className={styles.section}>
           <p className={styles.sectionLabel}>academic path</p>
 
           <p className={styles.paragraph}>
-            Planning for graduate study in Germany or Switzerland — Bonn, LMU Munich,
-            or ETH Zürich — followed by a PhD in geometric analysis or GMT.
+            My present graduate trajectory is centered first on Pisa, followed by Copenhagen,
+            Helsinki, and Vienna. The goal is to build a strong master’s foundation in analysis
+            before moving toward more specialized research in harmonic analysis, GMT, and related PDE.
           </p>
 
           <p className={styles.paragraph}>
-            The strategy is to complete a strong master’s program first, then apply
-            for doctoral positions with a focused thesis and strong supervision.
+            Long-term, I want to work in areas where analytic techniques interact with geometry
+            and combinatorial structure, while keeping enough breadth to move between pure analysis,
+            geometric problems, and modern Fourier-analytic methods.
           </p>
         </section>
 
-        {/* Blog */}
+        <section className={styles.section}>
+          <p className={styles.sectionLabel}>broader direction</p>
+
+          <p className={styles.paragraph}>
+            Beyond core analysis, I am interested in the interface between harmonic analysis,
+            geometric phenomena, and combinatorial ideas — especially the kind of problems where
+            local structure, scale, and decomposition matter as much as formal computation.
+          </p>
+
+          <p className={styles.paragraph}>
+            This direction is still evolving, but the general aim is clear: rigorous analysis first,
+            then deeper movement into modern problems where geometry, Fourier methods, and sharp estimates
+            genuinely interact.
+          </p>
+        </section>
+
         <section className={styles.section}>
           <p className={styles.sectionLabel}>about this blog</p>
 
           <p className={styles.paragraph}>
-            These are working notes — written to consolidate understanding rather than
-            present polished results. Each post starts from a single problem or theorem,
-            explores it deeply, and connects it to a broader structure.
+            These notes are part of an ongoing attempt to study seriously and write clearly.
+            Most entries begin with a theorem, an estimate, or a structural question, and then
+            develop outward through proofs, counterexamples, and related ideas.
           </p>
 
           <p className={styles.paragraph}>
-            The process follows a simple principle: do not just read — reconstruct.
-            Every assumption questioned, every proof rebuilt from scratch.
+            The purpose is not to produce polished exposition too early, but to document real
+            understanding in progress: reconstructing arguments, isolating key mechanisms,
+            and tracing how different parts of analysis connect.
           </p>
         </section>
 
