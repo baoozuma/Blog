@@ -1,16 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { getRecentPosts } from '../lib/posts'
-import TagTooltip from './components/TagTooltip'
 import CopyEmail from './components/CopyEmail'
-
-// ── Static data ──
-const TAGS = [
-  'Metric Geometry',
-  'Geometric Measure Theory',
-  'Differential Geometry',
-  'Mathematical Physics',
-] as const
 
 const SOCIAL = [
   { href: 'https://github.com/baoozuma', label: 'GitHub' },
@@ -18,55 +9,21 @@ const SOCIAL = [
   { href: 'https://www.instagram.com/aleksis.arendt/', label: 'Instagram' },
 ] as const
 
-const INTERESTS = [
-  {
-    label: 'Coding',
-    sub: 'Technical practice',
-    detail: 'ReactJS, TypeScript, C++, LaTeX, MATLAB, Maple, website systems, PDF workflows.',
-  },
-  {
-    label: 'Music',
-    sub: 'Listening & aesthetic interest',
-    detail: 'Math rock, post-hardcore, Midwest emo, shoegaze, J-Rock, 2000s alternative scenes.',
-  },
-  {
-    label: 'Philosophy',
-    sub: 'Primary thinkers',
-    detail: 'Nietzsche, Marx, Kant, Arendt, Kierkegaard, existential and political thought.',
-  },
-  {
-    label: 'Games',
-    sub: 'Narrative media',
-    detail: 'Nier, Metal Gear Solid V, Red Dead Redemption 2, story-driven and atmospheric works.',
-  },
-] as const
-
-const STUDY = [
-  { topic: 'Measure Theory',         text: 'Folland; Evans–Gariepy',                    note: 'current focus' },
-  { topic: 'Functional Analysis',    text: 'Brezis',                                    note: 'current focus' },
-  { topic: 'ODE Theory',             text: 'Peano, Picard–Lindelöf, Lax–Milgram',       note: 'current focus' },
-  { topic: 'Differential Geometry',  text: 'planned for summer',                         note: 'upcoming'      },
-  { topic: 'Geometric Measure Theory', text: 'Evans–Gariepy; Leon Simon',               note: 'upcoming'      },
-] as const
-
-// ── Component ──
 export default function HomePage() {
   const posts = getRecentPosts(3)
 
   return (
     <div className="home">
-
-
-      {/* Hero */}
       <div className="hero">
         <div className="hero-text">
-          <p className="hero-label">Pure Mathematics · HCMUS</p>
-          <h1 className="hero-title">Alëksis Arendt</h1>
-          <p className="hero-desc">I don't mythologize math, it's just a job.</p>
-
-          <div className="tags">
-            {TAGS.map(tag => <TagTooltip key={tag} tag={tag} />)}
-          </div>
+          <p className="hero-label">Pure Mathematics · Analysis · Geometry</p>
+          <h1 className="hero-title">
+            Alëksis Arendt
+            <span className="name-alt">（ファム・バオ）</span>
+          </h1>
+          <p className="hero-desc">
+            I don't mythologize math, it's just a job.
+          </p>
 
           <div className="cta-row">
             <Link href="/blog" className="btn-primary">Selected writings</Link>
@@ -85,61 +42,69 @@ export default function HomePage() {
 
         <div className="hero-avatar">
           <div className="avatar-img">
-            <Image src="/avatar.jpg" alt="Aleksis" fill style={{ objectFit: 'cover' }} />
+            <Image src="/avatar.png" alt="Aleksis" fill style={{ objectFit: 'cover' }} />
           </div>
         </div>
       </div>
 
-      {/* Introduction */}
-      <div className="intro-wide">
-        <p className="section-label">Introduction</p>
-        <p>
-          This site collects notes, drafts, and selected writing from my study in pure mathematics.
-          It is primarily a working space for organizing ideas, tracing difficult arguments,
-          and recording what I am seriously learning.
-        </p>
-        <p>
-          Most posts begin from a theorem, a proof, or a structural question, then develop
-          through reconstruction, examples, and longer analytical notes.
-        </p>
-      </div>
-
-      {/* Interests */}
       <div className="section">
-        <p className="section-label">interests</p>
-        <div className="interest-list">
-          {INTERESTS.map(({ label, sub, detail }) => (
-            <div key={label} className="interest-row">
-              <div className="interest-meta">
-                <h3 className="interest-title">{label}</h3>
-                <p className="interest-sub">{sub}</p>
-              </div>
-              <p className="interest-detail">{detail}</p>
-            </div>
-          ))}
+        <p className="section-label">profile · 紹介</p>
+        <div className="text-block">
+          <p>
+            I write under the name Alëksis Arendt. This site is where I keep mathematical notes,
+            selected writings, and small academic projects that I want to organize more carefully.
+            Vietnamese is my native language, while English is the language I use most for textbooks,
+            proofs, and longer mathematical writing.
+          </p>
+
+          <p>
+            I am also learning German with graduate study in Europe in mind, and Japanese remains
+            a separate cultural interest. Most of my serious writing is LaTeX-first. Code, web tools,
+            and small systems are mostly there to support notes, organization, and presentation.
+          </p>
         </div>
       </div>
 
-      {/* Currently studying */}
       <div className="section">
-        <p className="section-label">currently studying</p>
-        <div className="study-list-academic">
-          {STUDY.map(({ topic, text, note }) => (
-            <div key={topic} className="study-row-academic">
-              <div className="study-left">
-                <h3 className="study-topic-academic">{topic}</h3>
-                <p className="study-note-academic">{note}</p>
-              </div>
-              <p className="study-text-academic">{text}</p>
-            </div>
-          ))}
+        <p className="section-label">interests · 関心</p>
+        <div className="text-block">
+          <p>
+            My mathematical interests are mostly around analysis and geometry: harmonic analysis,
+            geometric measure theory, PDE, discrete geometry, and the combinatorial methods that
+            appear inside analytic problems. I like questions where estimates, dimension, incidence,
+            and scale decomposition all start to interact.
+          </p>
+
+          <p>
+            Outside mathematics, I read philosophy and listen to a lot of guitar-driven music.
+            Nietzsche, Marx, Kant, Arendt, and Kierkegaard are some recurring names in my reading.
+            Musically, I tend to stay around J-Rock, math rock, post-hardcore, shoegaze, Midwest emo,
+            and darker alternative sounds.
+          </p>
         </div>
       </div>
 
-      {/* Recent posts */}
+      <div className="section">
+        <p className="section-label">currently studying · 学習中</p>
+        <div className="text-block">
+          <p>
+            Right now I am working through measure theory, Fourier analysis, functional analysis,
+            PDE, geometric measure theory, and some supporting combinatorics. The main analytic
+            references around my desk are Evans–Gariepy, Cohn, Bogachev, Stein–Shakarchi, and Brezis.
+          </p>
+
+          <p>
+            Alongside that, I am slowly building a discrete-geometric toolkit: incidence methods,
+            polynomial methods, extremal arguments, and finite-scale reasoning. The point is to
+            understand how continuous problems in analysis and GMT often turn into structured
+            counting, covering, and decomposition problems.
+          </p>
+        </div>
+      </div>
+
       <div className="section">
         <div className="section-header">
-          <p className="section-label" style={{ marginBottom: 0 }}>recent posts</p>
+          <p className="section-label" style={{ marginBottom: 0 }}>recent posts · 最近の記録</p>
           <Link href="/blog" className="section-more">all posts →</Link>
         </div>
         <div className="post-list">
@@ -154,7 +119,6 @@ export default function HomePage() {
           ))}
         </div>
       </div>
-
     </div>
   )
 }

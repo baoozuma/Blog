@@ -19,14 +19,16 @@ export default function AboutPage() {
           <p className={styles.sectionLabel}>research interests</p>
 
           <p className={styles.paragraph}>
-            Harmonic analysis, geometric measure theory, and partial differential equations,
-            with a growing interest in combinatorial methods inside geometric and analytic problems.
+            My current interests lie in harmonic analysis, geometric measure theory, and related
+            problems in PDE, with a growing focus on the role of combinatorial and discrete-geometric
+            methods in analytic questions.
           </p>
 
           <p className={styles.paragraph}>
-            I am especially drawn to questions where Fourier-analytic ideas, geometric structure,
-            and discrete or combinatorial arguments meet — particularly in problems related to
-            oscillation, dimension, incidence, and singular behavior.
+            I am especially drawn to problems where Fourier-analytic estimates, geometric structure,
+            dimension theory, and incidence-type arguments interact. This includes themes around
+            Kakeya-type problems, Furstenberg sets, projection phenomena, and finite-scale geometric
+            decompositions.
           </p>
         </section>
 
@@ -35,11 +37,12 @@ export default function AboutPage() {
 
           <div className={styles.studyList}>
             {[
-              ['Measure Theory', 'Evans–Gariepy, Cohn'],
-              ['Fourier Analysis', 'Stein–Shakarchi'],
-              ['Functional Analysis', 'Brezis'],
-              ['PDE Theory', 'Elliptic and variational foundations'],
-              ['Geometric Measure Theory', 'Building steadily from analysis'],
+              ['Measure Theory', 'Evans–Gariepy, Cohn, Bogachev'],
+              ['Fourier Analysis', 'Stein–Shakarchi, harmonic analysis foundations'],
+              ['Functional Analysis', 'Hilbert spaces, Banach spaces, Brezis'],
+              ['PDE Theory', 'Elliptic, variational, and weak-solution foundations'],
+              ['Geometric Measure Theory', 'Hausdorff measure, rectifiability, covering arguments'],
+              ['Combinatorics', 'Discrete geometry, incidence methods, polynomial method'],
             ].map(([topic, detail]) => (
               <div key={topic} className={styles.studyRow}>
                 <span className={styles.studyTopic}>{topic}</span>
@@ -53,15 +56,18 @@ export default function AboutPage() {
           <p className={styles.sectionLabel}>academic path</p>
 
           <p className={styles.paragraph}>
-            My present graduate trajectory is centered first on Pisa, followed by Copenhagen,
-            Helsinki, and Vienna. The goal is to build a strong master’s foundation in analysis
-            before moving toward more specialized research in harmonic analysis, GMT, and related PDE.
+            My present graduate direction is centered on building a strong European master’s foundation
+            in analysis, with possible destinations including Pisa, Copenhagen, Helsinki, Vienna, Bonn,
+            LMU Munich, and Bern. The priority is not only institutional prestige, but the presence of
+            strong analysis groups, active seminars, and a research environment connected to harmonic
+            analysis, GMT, PDE, and geometric problems.
           </p>
 
           <p className={styles.paragraph}>
-            Long-term, I want to work in areas where analytic techniques interact with geometry
-            and combinatorial structure, while keeping enough breadth to move between pure analysis,
-            geometric problems, and modern Fourier-analytic methods.
+            Long-term, I want to move toward research in areas where analytic techniques interact
+            seriously with geometry and combinatorial structure. The aim is to develop enough breadth
+            to move between pure analysis, geometric measure theory, Fourier-analytic methods, and
+            finite-scale combinatorial ideas.
           </p>
         </section>
 
@@ -69,15 +75,16 @@ export default function AboutPage() {
           <p className={styles.sectionLabel}>broader direction</p>
 
           <p className={styles.paragraph}>
-            Beyond core analysis, I am interested in the interface between harmonic analysis,
-            geometric phenomena, and combinatorial ideas — especially the kind of problems where
-            local structure, scale, and decomposition matter as much as formal computation.
+            Beyond core analysis, I am interested in the interface between continuous and discrete
+            methods: how geometric problems can be reduced to finite-scale estimates, how incidence
+            geometry appears inside analysis, and how combinatorial tools such as pigeonholing,
+            covering, energy estimates, and polynomial methods enter modern analytic arguments.
           </p>
 
           <p className={styles.paragraph}>
             This direction is still evolving, but the general aim is clear: rigorous analysis first,
-            then deeper movement into modern problems where geometry, Fourier methods, and sharp estimates
-            genuinely interact.
+            then deeper movement into modern problems where geometry, Fourier methods, dimension,
+            and sharp estimates genuinely interact.
           </p>
         </section>
 
@@ -85,15 +92,15 @@ export default function AboutPage() {
           <p className={styles.sectionLabel}>about this blog</p>
 
           <p className={styles.paragraph}>
-            These notes are part of an ongoing attempt to study seriously and write clearly.
-            Most entries begin with a theorem, an estimate, or a structural question, and then
-            develop outward through proofs, counterexamples, and related ideas.
+            These notes are part of an ongoing attempt to study seriously and write clearly. Most
+            entries begin with a theorem, an estimate, or a structural question, and then develop
+            outward through proofs, examples, counterexamples, and related ideas.
           </p>
 
           <p className={styles.paragraph}>
             The purpose is not to produce polished exposition too early, but to document real
-            understanding in progress: reconstructing arguments, isolating key mechanisms,
-            and tracing how different parts of analysis connect.
+            understanding in progress: reconstructing arguments, isolating key mechanisms, and
+            tracing how different parts of analysis, geometry, and combinatorics connect.
           </p>
         </section>
 

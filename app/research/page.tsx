@@ -13,50 +13,87 @@ type Subarea = {
   desc: string
   refs: string[]
 }
-
 const researchData = [
   {
     tag: 'Geometric Measure Theory',
     banner: '/tags/measure.jpg',
     img: '/tags/measure-icon.jpg',
-    short: 'Covering lemmas, rectifiable sets, currents, varifolds, minimal surfaces, fractal geometry.',
-    long: `Geometric Measure Theory sits at the intersection of measure theory, differential geometry, and the calculus of variations. The central objects are rectifiable sets — sets that admit approximate tangent planes almost everywhere — and currents, which generalize oriented surfaces to allow singularities and multiplicities.
+    short: 'Hausdorff measure, covering arguments, rectifiability, dimension, and geometric structure at small scales.',
+    long: `This is one of the main directions I am building toward. I am interested in GMT not only as a theory of generalized surfaces, but as a way of turning geometric irregularity into precise measure-theoretic statements.
 
-The field originated with Besicovitch's work on sets of finite perimeter and was developed into a complete theory by Federer and Fleming in the 1960s. Their compactness theorem for integral currents resolved Plateau's problem in all dimensions: every closed curve in ℝⁿ bounds a surface of minimal area.
+At the moment, my focus is on Hausdorff measure, dimension, rectifiability, covering theorems, density, and the basic language of Radon measures. I am especially interested in how these tools appear in problems about projections, Kakeya-type phenomena, Furstenberg sets, and fractal geometry.
 
-Key tools include the Hausdorff measure, the area and coarea formulas, Rademacher's theorem on differentiability of Lipschitz maps, and the regularity theory for minimizers of geometric variational problems.`,
+What attracts me most is the mixture of analysis and geometry: one often has to understand a set through coverings, scales, density estimates, tangent objects, and dimension bounds rather than through smooth parametrizations alone.`,
     refs: [
       'Evans & Gariepy — Measure Theory and Fine Properties of Functions',
+      'Mattila — Geometry of Sets and Measures in Euclidean Spaces',
       'Leon Simon — Lectures on Geometric Measure Theory',
       'Federer — Geometric Measure Theory',
     ],
     status: 'active',
     subareas: [
       {
-        name: 'Minimal Surfaces',
-        banner: '/subareas/minimal.jpg',
-        img: '/subareas/minimal-icon.jpg',
-        desc: `Minimal surfaces are surfaces that locally minimize area — their mean curvature vanishes identically. The classical examples are the catenoid, helicoid, and Enneper surface, but the theory extends far beyond explicit examples.
-
-Plateau's problem asks: given a closed curve in space, does it bound a surface of minimal area? The answer is yes, proved by Douglas and Radó in the 1930s using conformal mappings. In higher dimensions, the existence theory requires GMT — smooth minimizers may not exist, and one must work with integral currents or varifolds.
-
-The regularity theory asks: how smooth are minimal surfaces? In dimensions up to 7, area-minimizing hypersurfaces are smooth. In dimension 8, singularities can occur — the Simons cone is area-minimizing in ℝ⁸.`,
-        refs: [
-          'Colding & Minicozzi — A Course in Minimal Surfaces',
-          'Osserman — A Survey of Minimal Surfaces',
-        ],
-      },
-      {
         name: 'Fractal Geometry',
         banner: '/subareas/fractal.jpg',
         img: '/subareas/fractal-icon.jpg',
-        desc: `Fractal geometry studies sets whose complexity persists at every scale — sets that are too irregular to be described by classical differential geometry. The central concept is the Hausdorff dimension, which assigns a non-integer dimension to sets like the Cantor set or the Koch snowflake.
+        desc: `Fractal geometry is the part of GMT that currently feels closest to my interests in dimension, projection, and Kakeya-type problems.
 
-In GMT, fractal sets arise naturally as boundaries of minimizers and as limit sets of geometric flows. The dimension theory of rectifiable sets — the distinction between rectifiable sets and purely unrectifiable sets — is one of the central structural results of the field.
+I am mainly interested in Hausdorff dimension, Frostman measures, projection theorems, Cantor-type constructions, Furstenberg sets, and examples where the geometry of a set is visible only after looking at many scales. The point is not just to compute dimensions, but to understand which geometric configurations force a set to be large.
 
-Besicovitch's projection theorem: a purely unrectifiable set in ℝ² has zero projection onto almost every line. This connects fractal geometry to harmonic analysis and the Kakeya problem.`,
+This direction also connects naturally with harmonic analysis and additive or incidence combinatorics, especially when continuous geometric questions are discretized into estimates involving tubes, balls, directions, and coverings.`,
         refs: [
           'Falconer — Fractal Geometry',
+          'Mattila — Geometry of Sets and Measures in Euclidean Spaces',
+          'Wolff — Lectures on Harmonic Analysis',
+        ],
+      },
+      {
+        name: 'Minimal Surfaces',
+        banner: '/subareas/minimal.jpg',
+        img: '/subareas/minimal-icon.jpg',
+        desc: `Minimal surfaces are not my immediate focus, but they are an important long-term reason for learning GMT.
+
+I am interested in them mainly through the variational side: area minimization, weak notions of surface, compactness, regularity, and the way singularities force one to move beyond classical differential geometry. This is where currents and varifolds become natural rather than decorative.
+
+For now, I treat this as a later direction, after building more measure theory, Sobolev space theory, and calculus of variations.`,
+        refs: [
+          'Leon Simon — Lectures on Geometric Measure Theory',
+          'Colding & Minicozzi — A Course in Minimal Surfaces',
+          'Giusti — Minimal Surfaces and Functions of Bounded Variation',
+        ],
+      },
+    ] as Subarea[],
+  },
+  {
+    tag: 'Harmonic Analysis',
+    banner: '/tags/analysis.jpg',
+    img: '/tags/analysis-icon.jpg',
+    short: 'Fourier methods, oscillation, singular integrals, Kakeya-type estimates, and analytic structure across scales.',
+    long: `Harmonic analysis is the analytic side of the direction I want to develop. I am currently approaching it through Fourier analysis, Hilbert space methods, oscillatory estimates, and the connection between frequency, geometry, and scale.
+
+The parts that interest me most are not isolated computations of Fourier series, but the way Fourier-analytic ideas enter geometric questions: restriction, Kakeya, maximal estimates, projection phenomena, and the analysis of singular behavior.
+
+This is also where combinatorics becomes relevant. Many modern arguments in harmonic analysis use decompositions into tubes, caps, scales, directions, or wave packets, and the resulting estimates often have a strong discrete-geometric component.`,
+    refs: [
+      'Stein & Shakarchi — Fourier Analysis',
+      'Stein — Harmonic Analysis',
+      'Wolff — Lectures on Harmonic Analysis',
+      'Guth — Polynomial Methods in Combinatorics',
+    ],
+    status: 'active',
+    subareas: [
+      {
+        name: 'Kakeya-type Problems',
+        banner: '/subareas/fractal.jpg',
+        img: '/subareas/fractal-icon.jpg',
+        desc: `Kakeya-type problems are one of the main reasons I am interested in the meeting point of harmonic analysis, GMT, and combinatorics.
+
+The basic theme is simple to state: how large must a set be if it contains line segments, tubes, or directions in a sufficiently rich family? But the methods quickly become deep, involving dimension estimates, tube configurations, incidence geometry, polynomial methods, and Fourier-analytic estimates.
+
+For my current stage, I am treating Kakeya as a guiding problem rather than a narrow specialization: it tells me which pieces of analysis, GMT, and discrete geometry are worth learning seriously.`,
+        refs: [
+          'Wolff — Lectures on Harmonic Analysis',
+          'Guth — Polynomial Methods in Combinatorics',
           'Mattila — Geometry of Sets and Measures in Euclidean Spaces',
         ],
       },
@@ -66,48 +103,48 @@ Besicovitch's projection theorem: a purely unrectifiable set in ℝ² has zero p
     tag: 'Functional Analysis',
     banner: '/tags/functional.jpg',
     img: '/tags/functional-icon.jpg',
-    short: 'Hilbert and Sobolev spaces, duality, Hahn-Banach, spectral theory.',
-    long: `Functional analysis studies infinite-dimensional vector spaces of functions and the linear operators acting on them. The foundational objects are Banach spaces — complete normed vector spaces — and Hilbert spaces, which carry an inner product structure generalizing Euclidean geometry to infinite dimensions.
+    short: 'Hilbert spaces, Banach spaces, duality, weak convergence, operators, and Sobolev-space foundations.',
+    long: `I study functional analysis mainly as the structural language behind PDE, Fourier analysis, and modern analysis.
 
-The three pillars of the subject are the Hahn-Banach theorem, the open mapping theorem, and the uniform boundedness principle. Together they govern the geometry of infinite-dimensional spaces.
+The immediate focus is on Hilbert spaces, projections, Riesz representation, bounded linear operators, Banach spaces, duality, weak convergence, and compactness principles. I am interested in how abstract results become usable tools in analysis rather than staying as isolated formalism.
 
-Sobolev spaces Wᵏ,ᵖ are the natural setting for PDE theory — they allow weak derivatives and encode both function values and their regularity in a single norm.`,
+This subject is also a bridge into Sobolev spaces and PDE. Concepts like weak convergence, reflexivity, compact embeddings, and dual spaces are necessary for understanding variational methods and weak solutions.`,
     refs: [
       'Brezis — Functional Analysis, Sobolev Spaces and Partial Differential Equations',
       'Conway — A Course in Functional Analysis',
-      'Rudin — Functional Analysis',
+      'Kreyszig — Introductory Functional Analysis with Applications',
     ],
     status: 'active',
     subareas: [] as Subarea[],
   },
   {
-    tag: 'Mathematical Physics',
+    tag: 'PDE and Variational Methods',
     banner: '/tags/physics.jpg',
     img: '/tags/physics-icon.jpg',
-    short: 'Classical mechanics, electrodynamics, relativity — via geometry and analysis.',
-    long: `Mathematical physics studies physical theories through rigorous mathematical frameworks.
+    short: 'Weak solutions, elliptic equations, Sobolev spaces, energy methods, and the calculus of variations.',
+    long: `My interest in PDE is mostly through analysis and geometry rather than physical modeling alone.
 
-Classical mechanics leads naturally to symplectic geometry and the calculus of variations. Electrodynamics becomes cleaner through differential forms. General relativity turns geometry itself into the language of physics.
+I am currently most interested in elliptic PDE, weak solutions, Sobolev spaces, variational methods, and the direct method in the calculus of variations. These tools appear naturally in GMT, minimal surfaces, harmonic maps, and geometric variational problems.
 
-The deepest connections often pass through gauge theory, variational structures, and geometric analysis.`,
+The direction I want to build is not computation-heavy PDE at first, but the analytic framework: existence, compactness, regularity, energy estimates, and how PDE arguments interact with geometry.`,
     refs: [
-      'Nakahara — Geometry, Topology and Physics',
-      'Landau & Lifshitz — Course of Theoretical Physics',
-      'Arnold — Mathematical Methods of Classical Mechanics',
+      'Evans — Partial Differential Equations',
+      'Brezis — Functional Analysis, Sobolev Spaces and Partial Differential Equations',
+      'Dacorogna — Direct Methods in the Calculus of Variations',
     ],
-    status: 'upcoming',
+    status: 'active',
     subareas: [
       {
         name: 'Elliptic PDEs',
         banner: '/subareas/elliptic.jpg',
         img: '/subareas/elliptic-icon.jpg',
-        desc: `Elliptic PDEs describe equilibrium states — systems where there is no preferred time direction and solutions are as regular as the data allows. The prototype is the Laplace equation Δu = 0, whose solutions (harmonic functions) are real analytic.
+        desc: `Elliptic PDEs are important to me because they provide a clean entry point into weak solutions, regularity, Sobolev spaces, and energy methods.
 
-The variational approach to elliptic PDE — finding solutions as minimizers of energy functionals — unifies existence theory with regularity. The Lax-Milgram theorem provides existence in Hilbert spaces; Sobolev embedding controls pointwise behavior; the maximum principle controls the range of solutions.
+I am interested in the basic model problems first: Laplace and Poisson equations, weak formulations, Lax-Milgram, maximum principles, and elliptic regularity. These ideas later reappear in geometric analysis and variational problems.
 
-Interior and boundary regularity are the central technical concerns: if f ∈ Lᵖ, how smooth is the solution u of −Δu = f? Calderón-Zygmund theory answers this via singular integral operators.`,
+The goal is to understand elliptic PDE as a structural tool in analysis, not merely as a list of equations to solve.`,
         refs: [
-          'Evans — Partial Differential Equations, Ch. 6',
+          'Evans — Partial Differential Equations',
           'Gilbarg & Trudinger — Elliptic Partial Differential Equations of Second Order',
         ],
       },
@@ -115,82 +152,33 @@ Interior and boundary regularity are the central technical concerns: if f ∈ L�
         name: 'Calculus of Variations',
         banner: '/subareas/variation.jpg',
         img: '/subareas/variation-icon.jpg',
-        desc: `The calculus of variations asks: among all functions satisfying given constraints, which minimizes a given energy functional? The Euler-Lagrange equation is the necessary condition for a minimizer — it is the PDE that governs the problem.
+        desc: `The calculus of variations is one of the bridges between analysis, PDE, and geometry.
 
-Classical examples include geodesics (minimizing length), minimal surfaces (minimizing area), and harmonic maps (minimizing the Dirichlet energy). In each case, the variational structure dictates both the existence theory and the regularity of solutions.
+I am interested in energy functionals, minimizers, weak compactness, lower semicontinuity, Euler-Lagrange equations, and the direct method. These ideas are essential for understanding minimal surfaces, harmonic maps, and many geometric variational problems.
 
-The direct method — showing sequential compactness in an appropriate Sobolev space, then proving lower semicontinuity of the energy — is the standard existence argument. It requires the functional to be coercive and weakly lower semicontinuous.`,
+For now, I treat it as a foundation to build slowly alongside Sobolev spaces and elliptic PDE.`,
         refs: [
           'Dacorogna — Direct Methods in the Calculus of Variations',
           'Evans — Weak Convergence Methods for Nonlinear PDEs',
         ],
       },
-      {
-        name: 'Ricci Flow',
-        banner: '/subareas/ricci.jpg',
-        img: '/subareas/ricci-icon.jpg',
-        desc: `The Ricci flow, introduced by Hamilton in 1982, deforms a Riemannian metric in the direction of its Ricci curvature. This is a nonlinear heat equation on the space of metrics — it smooths out irregularities in the curvature, analogously to how the heat equation smooths out irregularities in a function.
-
-Hamilton's program was to use Ricci flow to prove the Poincaré conjecture: every simply connected closed 3-manifold is homeomorphic to S³. The flow may develop singularities which must be understood and surgically removed.
-
-Perelman completed this program in 2002-2003, introducing new monotonicity formulas and the notion of Ricci flow with surgery — one of the great achievements of 21st century mathematics.`,
-        refs: [
-          'Chow & Knopf — The Ricci Flow: An Introduction',
-          'Morgan & Tian — Ricci Flow and the Poincaré Conjecture',
-        ],
-      },
     ] as Subarea[],
   },
   {
-    tag: 'Differential Geometry',
-    banner: '/tags/diffgeo.jpg',
-    img: '/tags/diffgeo-icon.jpg',
-    short: 'Manifolds, curvature, Riemannian metrics, differential forms, and the geometric language behind modern analysis and physics.',
-    long: `Differential geometry studies smooth manifolds: spaces that locally resemble Euclidean space, but may carry rich global structure. Its basic objects are tangent vectors, differential forms, Riemannian metrics, and connections.
-
-A Riemannian metric equips each tangent space with an inner product, making it possible to define lengths, angles, geodesics, and curvature. The curvature tensor measures how far a manifold is from being flat.
-
-The subject connects naturally with analysis through the Laplace-Beltrami operator, Hodge theory, harmonic maps, and geometric flows. It also provides the natural language of general relativity, gauge theory, and much of modern mathematical physics.`,
-    refs: [
-      'do Carmo — Riemannian Geometry',
-      'Lee — Introduction to Smooth Manifolds',
-      'Spivak — A Comprehensive Introduction to Differential Geometry',
-    ],
-    status: 'upcoming',
-    subareas: [] as Subarea[],
-  },
-  {
-    tag: 'Metric Geometry',
+    tag: 'Discrete Geometry',
     banner: '/tags/metric.jpg',
     img: '/tags/metric-icon.jpg',
-    short: 'Metric spaces, geodesics, curvature bounds, and convergence of spaces beyond the smooth category.',
-    long: `Metric geometry studies spaces equipped only with a distance function. Unlike differential geometry, it does not begin with coordinates, smoothness, or linear structure.
+    short: 'Incidence geometry, finite configurations, polynomial methods, extremal arguments, and combinatorial structure.',
+    long: `I study discrete geometry as a supporting language for GMT and harmonic analysis.
 
-The central notions are geodesics, comparison geometry, and convergence of spaces. The Gromov-Hausdorff distance makes it possible to compare entire metric spaces as geometric objects.
+Many continuous problems become clearer after discretization: sets become collections of balls, directions become separated families, and geometric conditions become incidence or covering estimates. This is especially visible in Kakeya-type problems, Furstenberg sets, projection questions, and polynomial-method arguments.
 
-Alexandrov spaces, CAT(k) spaces, and spaces with Ricci curvature bounds in a synthetic sense all belong to this broader framework, linking geometry to analysis, topology, and group theory.`,
+The point is not to leave analysis for combinatorics, but to learn the finite-scale tools that modern analysis often requires: pigeonholing, incidence counting, extremal estimates, polynomial methods, and geometric decompositions.`,
     refs: [
-      'Burago, Burago & Ivanov — A Course in Metric Geometry',
-      'Bridson & Haefliger — Metric Spaces of Non-Positive Curvature',
-      'Gromov — Metric Structures for Riemannian and Non-Riemannian Spaces',
-    ],
-    status: 'upcoming',
-    subareas: [] as Subarea[],
-  },
-  {
-    tag: 'Classical Analysis',
-    banner: '/tags/analysis.jpg',
-    img: '/tags/analysis-icon.jpg',
-    short: 'Limits, continuity, differentiation, integration, and the rigorous foundations of modern analysis.',
-    long: `Classical analysis begins with the study of limits, continuity, differentiation, and integration on the real line. Its real importance lies in the habits of thought it imposes: precision, estimation, and control of approximation.
-
-The subject includes the structure of the real numbers, sequences and series, uniform convergence, power series, and the basic theory of functions of one and several variables.
-
-Although often treated as introductory, classical analysis is not merely preliminary technique. It provides the conceptual discipline behind measure theory, functional analysis, differential equations, and geometry.`,
-    refs: [
-      'Rudin — Principles of Mathematical Analysis',
-      'Stein & Shakarchi — Real Analysis',
-      'Tao — Analysis I & II',
+      'Matoušek — Lectures on Discrete Geometry',
+      'Guth — Polynomial Methods in Combinatorics',
+      'Matoušek — Thirty-three Miniatures',
+      'Pach & Sharir — Combinatorial Geometry and Its Algorithmic Applications',
     ],
     status: 'active',
     subareas: [] as Subarea[],
