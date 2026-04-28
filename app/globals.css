@@ -31,7 +31,7 @@
   --text: #ffffff;
   --text-muted: #ffffff;
   --text-dim: #e8e1e1;
-  --gold: #00ddff;
+  --gold: #9be9f5;
   --gold-dim: rgba(0, 221, 255, 0.15);
   --gold-glow: rgba(0, 221, 255, 0.06);
   --font-serif: 'Satoshi', serif;
@@ -43,13 +43,13 @@
 
 /* ── Variables: Light ── */
 [data-theme="light"] {
-  --bg: #efeee9;
-  --bg-card: #f6f4ee;
-  --border: #d4d0c8;
+  --bg: #ffffff;
+  --bg-card: #fffefe;
+  --border: #e2dfd8;
   --text: #1a1a1a;
   --text-muted: #1a1a1a;
   --text-dim: #4a4845;
-  --gold: #0077aa;  
+  --gold: #00425f;  
   --gold-dim: rgba(0, 119, 170, 0.15);
   --gold-glow: rgba(0, 119, 170, 0.06);
   color-scheme: light;
@@ -78,14 +78,15 @@ body {
 
 h1 {
   font-size:2rem;
-  background: linear-gradient(135deg, #a5c7f0 0%, #e0e0e0 40%, #ffdd00 100%);
+  color: var(--gold);
+    background: linear-gradient(135deg, #a5c7f0 0%, #e0e0e0 40%, #ffdd00 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 [data-theme="light"] h1 {
-  background: linear-gradient(135deg, #0055aa 0%, #334466 40%, #aa7700 100%);
+  background: linear-gradient(135deg, #000000 0%, #162549 40%, #010f5e 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -127,13 +128,13 @@ nav {
   top: 0; left: 0; right: 0;
   z-index: 50;
   border-bottom: 1px solid var(--border);
-  background: rgba(14, 14, 15, 0.2);
+  background: rgba(14, 14, 15, 0);
   backdrop-filter: blur(2px);
   animation: fadeUp 0.4s ease forwards;
 }
 
 [data-theme="light"] nav {
-  background: rgba(245, 244, 240, 0.7);
+  background: rgba(245, 244, 240, 0);
 }
 
 .nav-inner {
@@ -511,8 +512,7 @@ nav {
   width: 200px; height: 200px;
   border-radius: 12px;
   overflow: hidden;
-  border: 1px solid var(--border);
-  position: relative;
+  position: relative; 
 }
 
 .avatar-deco {
