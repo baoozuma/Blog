@@ -61,7 +61,7 @@ export default function HomePage() {
         <p className="section-label">interests · 関心</p>
         <div className="text-block">
           <p>
-            Outside mathematics, I would like to go for some rock show and mosh pit. I usually listen to some Post Hardcore, Midwest Emo and Math Rock, where 7UPPERCUTS, Đá Số Tới, Ling Tosite Sigure, Hitohira (ひとひら) and ACDC are my cup of tea. Say some Pop and R&B, i'm the only fan with Vu Thanh Van.
+            Outside of mathematics, I would like to attend a rock show and participate in a mosh pit. I usually listen to Post Hardcore, Midwest Emo, and Math Rock, where 7UPPERCUTS, Đá Số Tới, Ling Tosite Sigure, Hitohira (ひとひら), and ACDC are my favorites. Say some Pop and R&B, I'm the only fan with Vu Thanh Van.
           </p>
         </div>
       </div>
