@@ -16,21 +16,21 @@ export default function HomePage() {
     <div className="home">
       <div className="hero">
         <div className="hero-text">
-          <p className="hero-label">Pure Mathematics · Analysis · Geometry</p>
+          {/* <p className="hero-label">Pure Mathematics · Analysis · Geometry</p> */}
           <h1 className="hero-title">
             Alëksis Arendt
-            <span className="name-alt">（ファム・バオ）</span>
+            <span className="name-alt">（ファム バオ）</span>
           </h1>
-          <p className="hero-desc">
+          {/* <p className="hero-desc">
             I don't mythologize math, it's just a job.
-          </p>
+          </p> */}
 
-          <div className="cta-row">
+          {/* <div className="cta-row">
             <Link href="/blog" className="btn-primary">Selected writings</Link>
             <Link href="/about" className="btn-secondary">Profile</Link>
-          </div>
+          </div> */}
 
-          <div className="social-line">
+          {/* <div className="social-line">
             {SOCIAL.map(({ href, label }) => (
               <a key={label} href={href} target="_blank" rel="noopener noreferrer" className="social-link">
                 {label}
@@ -38,29 +38,21 @@ export default function HomePage() {
             ))}
             <CopyEmail />
           </div>
-        </div>
-
-        <div className="hero-avatar">
+        */}
+    </div> 
+        {/* <div className="hero-avatar">
           <div className="avatar-img">
             <Image src="/avatar.png" alt="Aleksis" fill style={{ objectFit: 'cover' }} />
           </div>
         </div>
-      </div>
-
+      */}
+    </div> 
       <div className="section">
-        <p className="section-label">profile · 紹介</p>
+        <p className="section-label">introduction · 紹介</p>
         <div className="text-block">
           <p>
-            I write under the name Alëksis Arendt. This site is where I keep mathematical notes,
-            selected writings, and small academic projects that I want to organize more carefully.
-            Vietnamese is my native language, while English is the language I use most for textbooks,
-            proofs, and longer mathematical writing.
-          </p>
+            Hi! My full name is Pham Ngoc Gia Bao, but people prefer to call me Alëksis. I'm interested in finding out the relation between Combinatorics and Harmonic Analysis. For example, how can we investigate some kind of analysis problem by discretizing into pieces of tubes, spheres or rectangles? This site is where I keep mathematical notes, selected writings, and small academic projects that I want to organize more carefully.
 
-          <p>
-            I am also learning German with graduate study in Europe in mind, and Japanese remains
-            a separate cultural interest. Most of my serious writing is LaTeX-first. Code, web tools,
-            and small systems are mostly there to support notes, organization, and presentation.
           </p>
         </div>
       </div>
@@ -69,38 +61,11 @@ export default function HomePage() {
         <p className="section-label">interests · 関心</p>
         <div className="text-block">
           <p>
-            My mathematical interests are mostly around analysis and geometry: harmonic analysis,
-            geometric measure theory, PDE, discrete geometry, and the combinatorial methods that
-            appear inside analytic problems. I like questions where estimates, dimension, incidence,
-            and scale decomposition all start to interact.
-          </p>
-
-          <p>
-            Outside mathematics, I read philosophy and listen to a lot of guitar-driven music.
-            Nietzsche, Marx, Kant, Arendt, and Kierkegaard are some recurring names in my reading.
-            Musically, I tend to stay around J-Rock, math rock, post-hardcore, shoegaze, Midwest emo,
-            and darker alternative sounds.
+            Outside mathematics, I would like to go for some rock show and mosh pit. I usually listen to some Post Hardcore, Midwest Emo and Math Rock, where 7UPPERCUTS, Đá Số Tới, Ling Tosite Sigure, Hitohira (ひとひら) and ACDC are my cup of tea. Say some Pop and R&B, i'm the only fan with Vu Thanh Van.
           </p>
         </div>
       </div>
 
-      <div className="section">
-        <p className="section-label">currently studying · 学習中</p>
-        <div className="text-block">
-          <p>
-            Right now I am working through measure theory, Fourier analysis, functional analysis,
-            PDE, geometric measure theory, and some supporting combinatorics. The main analytic
-            references around my desk are Evans–Gariepy, Cohn, Bogachev, Stein–Shakarchi, and Brezis.
-          </p>
-
-          <p>
-            Alongside that, I am slowly building a discrete-geometric toolkit: incidence methods,
-            polynomial methods, extremal arguments, and finite-scale reasoning. The point is to
-            understand how continuous problems in analysis and GMT often turn into structured
-            counting, covering, and decomposition problems.
-          </p>
-        </div>
-      </div>
 
       <div className="section">
         <div className="section-header">

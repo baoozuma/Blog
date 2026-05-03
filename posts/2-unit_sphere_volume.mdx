@@ -1,62 +1,62 @@
 ---
 title: "Surface area and volume of a sphere in finite Euclidean space"
 date: "2025-04-06"
-description: "The method of calculation in two ways, the first using Fubini's theorem and the second by switching to spherical coordinates, from which the surface area of the sphere appears naturally in the equation."
+description: "A derivation of the volume of the Euclidean unit ball and the surface area of the unit sphere via spherical coordinates, induced metrics, and the Gaussian integral."
 thumbnail: "/thumbnails/sphere.jpg"
 tags: ['Measure Theory', 'Classical Analysis']
 ---
 
 ## Motivation
 
-As we know, in the two-dimensional space $\mathbb{R}^2$, the circumference and area of the circle $2 S_1 = (O, r)$ is calculated using the formula
+In $\mathbb{R}^2$, the circumference of the circle of radius $r$ and the area of the disk it bounds are
 
 $$
-|S_1| = 2\pi r \quad \text{và} \quad [S_1] = \pi r^2.
+2\pi r,\qquad \pi r^2.
 $$
 
-We also have the sphere's volume and surface area in three dimensions. $2 S_2 = (O, r)$:
+In $\mathbb{R}^3$, the surface area of the sphere of radius $r$ and the volume of the ball it bounds are
 
 $$
-|S_2| = 4\pi r^2 \quad \text{và} \quad [S_2] = \frac{4}{3}\pi r^3.
+4\pi r^2,\qquad \frac{4}{3}\pi r^3.
 $$
 
-Thus, a question arises: how can we calculate the surface area (coarea) and volume of a sphere $S_{n-1}$ in the space $\mathbb{R}^n$ for any $n \in \mathbb{N}$?
+The problem is to compute, for arbitrary $n\in\mathbb{N}$, the Lebesgue volume of the unit ball $B(0,1)\subset\mathbb{R}^n$ and the Riemannian surface area of its boundary $\mathbb{S}^{n-1}$.
 
 ---
 
 ## Overview of Lebesgue Measure
 
-But first, we need a standard definition of the area or volume of any set. In this article, I will use the Lebesgue measure, other measures can also be calculated in a similar way. Let $\mathcal{P}(\mathbb{R}^n)$ be the collection of subsets of $\mathbb{R}^n$, *an outer Lebesgue measure* is a function $\lambda^*: \mathcal{P}(\mathbb{R}^n) \to [0, +\infty]$ is defined as follows
+Let $\mathcal{P}(\mathbb{R}^n)$ denote the collection of subsets of $\mathbb{R}^n$. The outer Lebesgue measure is the function $\lambda^*:\mathcal{P}(\mathbb{R}^n)\to[0,+\infty]$ defined by
 
 $$
-\lambda^*(A) = \inf\left\{\sum |R_i| \;\Big|\; \{R_i\} \text{ is a countable collection covering } A\right\}.
+\lambda^*(A) = \inf_{\{R_i\} \supseteq A} \sum_i |R_i|.
 $$
 
-A *half cube* $C$ is any Cartesian product of the form $C = \prod_{i=1}^n [a_i, b_i)$ with $a_i < b_i$ are real numbers, and its volume is $|C| = \prod_{i=1}^n (b_i - a_i)$. A set $A$ is called *Lebesgue measurable* if
+Here each $R_i$ is a half-open rectangle covering part of $A$, and $|R_i|$ is its usual $n$-dimensional volume. A set $A$ is *Lebesgue measurable* if
 
 $$
 \lambda^*(E) = \lambda^*(A \cap E) + \lambda^*(E \setminus A), \quad \text{for all } E \subseteq \mathbb{R}^n,
 $$
 
-and we write $|A| = \lambda^*(A)$.
+and for such a set write $|A|=\lambda^*(A)$.
 
-The properties as well as theorems about Lebesgue measure and integration will be presented in another article. We only need to know that to measure a set, we may approximate outside that set with half cubes whose volume is given by the above formula, and the integrals used in the article are conventionally Riemann integrals. Additionally, to calculate the measure of a surface, we will reduce it to a lower-dimensional space — otherwise, it would yield a measure of $0$, which does not make sense for surface area.
+Only the full-dimensional volume role of Lebesgue measure is used below. Surface area is lower-dimensional and is computed from the Riemannian area element $d\sigma$ induced on the sphere.
 
-Now back to the main problem. We observe that when moving any set, its volume (or measure) remains unchanged, or when multiplying the elements of that set by any real number $\alpha$, its measure will increase by a factor of $|\alpha|^n$. This is an invariant property of the Lebesgue measure and is not immediately obvious; it will be proven in detail later. In general, if we know the measure of the unit ball $B(0,1)$ in $\mathbb{R}^n$, we can easily calculate the measure of any other ball. In this article, we will standardize the terminology.
+Lebesgue measure is translation invariant and satisfies the scaling law $|\alpha A|=|\alpha|^n|A|$ for measurable $A\subseteq\mathbb{R}^n$. Hence the volume of every ball is determined by the volume of the unit ball. Throughout this article,
 
 $$
 B(0,1) = \{x \in \mathbb{R}^n \mid \|x\| < 1\}
-\quad \text{và} \quad
+\quad \text{and} \quad
 \mathbb{S}^{n-1} = \{x \in \mathbb{R}^n \mid \|x\| = 1\}.
 $$
 
-We see something very interesting that $\mathbb{S}^{n-1}$ is the set of boundary points of $B(0,1)$.
+Thus $\mathbb{S}^{n-1}=\partial B(0,1)$.
 
 ---
 
 ## Necessary Tools
 
-Before diving into the calculations, we need to prepare two important results that will appear very naturally in this article.
+Two elementary analytic tools are used repeatedly.
 
 ### Gaussian Integral
 
@@ -67,39 +67,35 @@ $$
 </Lemma>
 
 <Proof>
-Let $I = \int_{-\infty}^\infty e^{-x^2}\,dx$. Since $e^{-x^2} > 0$, then $I > 0$. We calculate $I^2$ by writing the product of two independent integrals:
+Let $I=\int_{-\infty}^{\infty}e^{-x^2}\,dx$. Since $e^{-x^2}>0$, $I>0$. Then
 
 $$
 I^2 = \left(\int_{-\infty}^\infty e^{-x^2}\,dx\right)\left(\int_{-\infty}^\infty e^{-y^2}\,dy\right) = \int_{\mathbb{R}^2} e^{-(x^2+y^2)}\,dx\,dy.
 $$
 
-This is an integral over $\mathbb{R}^2$ with a function that has circular symmetry, so we switch to polar coordinates $x = r\cos\theta$, $y = r\sin\theta$ with the Jacobian $r$:
+Use polar coordinates $x=r\cos\theta$, $y=r\sin\theta$, whose Jacobian is $r$:
 
 $$
 I^2 = \int_0^{2\pi}\int_0^\infty e^{-r^2}\,r\,dr\,d\theta = 2\pi\int_0^\infty r e^{-r^2}\,dr.
 $$
 
-Let $t = r^2$, then $dt = 2r\,dr$, so
+With $t=r^2$ and $dt=2r\,dr$,
 
 $$
 I^2 = 2\pi \cdot \frac{1}{2}\int_0^\infty e^{-t}\,dt = \pi\cdot\bigl[-e^{-t}\bigr]_0^\infty = \pi.
 $$
 
-Because $I > 0$, we have $I = \sqrt{\pi}$.
+Since $I>0$, $I=\sqrt{\pi}$.
 </Proof>
 
 ### The Gamma Function
-
-<Definition label="Gamma Function">
-For $s > 0$, the *Gamma function* is defined by
+<Lemma label="Properties of the Gamma Function">
+ For $s > 0$, the *Gamma function* defined by
 
 $$
 \Gamma(s) = \int_0^\infty t^{s-1} e^{-t}\,dt.
 $$
-</Definition>
-
-<Lemma label="Properties of the Gamma Function">
-The Gamma function satisfies the following properties:
+satisfies the following properties:
 
 1. $\Gamma(1) = 1$.
 2. $\Gamma(s+1) = s\,\Gamma(s)$ for all $s > 0$.
@@ -108,9 +104,9 @@ The Gamma function satisfies the following properties:
 </Lemma>
 
 <Proof>
-*(i)* Direct computation: $\Gamma(1) = \int_0^\infty e^{-t}\,dt = \bigl[-e^{-t}\bigr]_0^\infty = 1$.
+*1.* Direct computation: $\Gamma(1) = \int_0^\infty e^{-t}\,dt = \bigl[-e^{-t}\bigr]_0^\infty = 1$.
 
-*(ii)* Integration by parts with $u = t^s$ and $dv = e^{-t}\,dt$:
+*2.* Integration by parts with $u = t^s$ and $dv = e^{-t}\,dt$:
 
 $$
 \Gamma(s+1) = \int_0^\infty t^s e^{-t}\,dt = \bigl[-t^s e^{-t}\bigr]_0^\infty + s\int_0^\infty t^{s-1}e^{-t}\,dt.
@@ -118,9 +114,9 @@ $$
 
 The boundary term vanishes since $t^s e^{-t} \to 0$ as $t \to 0^+$ and $t \to \infty$. Therefore $\Gamma(s+1) = s\,\Gamma(s)$.
 
-*(iii)* From (i) and (ii), induction gives $\Gamma(n+1) = n!$, i.e., $\Gamma(n) = (n-1)!$.
+*3.* From 1 and 2, induction gives $\Gamma(n+1) = n!$, i.e., $\Gamma(n) = (n-1)!$.
 
-*(iv)* Substituting $t = x^2$ in the definition,
+*4.* Substituting $t = x^2$ in the definition,
 
 $$
 \Gamma\!\left(\tfrac{1}{2}\right) = \int_0^\infty t^{-1/2} e^{-t}\,dt = 2\int_0^\infty e^{-x^2}\,dx = \int_{-\infty}^\infty e^{-x^2}\,dx = \sqrt{\pi}.
@@ -129,27 +125,13 @@ $$
 
 ---
 
-## Computing $|\mathbb{S}^{n-1}|$
+## Computing $|B(0,1)|$
 
-Let us compute $|\mathbb{S}^{n-1}|$ first. Consider the $n$-dimensional Gaussian integral
-
-$$
-I = \int_{\mathbb{R}^n} e^{-\|x\|^2}\,dx.
-$$
-
-We compute $I$ in two different ways.
-
-**Method 1 (Fubini).** Using the Gaussian integral computed above:
-
-$$
-\int_{\mathbb{R}^n} e^{-\|x\|^2}\,dx = \int_{\mathbb{R}^n} e^{-(x_1^2+\cdots+x_n^2)}\,dx_1\cdots dx_n = \left(\int_{-\infty}^\infty e^{-x^2}\,dx\right)^n = \pi^{n/2}.
-$$
-
-**Method 2 (Spherical coordinates).** A standard trick for multivariable integrals that resist direct computation is to switch to polar or spherical coordinates, at which point the surface area $|\mathbb{S}^{n-1}|$ appears very naturally.
+First write the volume of the unit ball as a spherical-coordinate integral. This expresses $|B(0,1)|$ in terms of the still-unknown surface area $|\mathbb{S}^{n-1}|$.
 
 ### Spherical Coordinates in $\mathbb{R}^n$
 
-Consider the equation $x_1^2 + \cdots + x_n^2 = 1$. Since $-1 \le x_1 \le 1$, we can set $x_1 = \cos\theta_1$. Then we need $x_2^2 + \cdots + x_n^2 = \sin^2\theta_1$. The idea is to keep exploiting the identity $\sin^2\theta + \cos^2\theta = 1$ and substitute iteratively. Since $-\sin\theta_1 \le x_2 \le \sin\theta_1$, set $x_2 = \sin\theta_1\cos\theta_2$, which gives $x_3^2 + \cdots + x_n^2 = \sin^2\theta_1\sin^2\theta_2$. Continuing in this fashion, for each $1 \le k \le n-1$ we set $x_k = \sin\theta_1\cdots\sin\theta_{k-1}\cos\theta_k$, yielding the system
+Start from $x_1^2+\cdots+x_n^2=1$. Since $-1\le x_1\le 1$, write $x_1=\cos\theta_1$. Then $x_2^2+\cdots+x_n^2=\sin^2\theta_1$. Next write $x_2=\sin\theta_1\cos\theta_2$, so $x_3^2+\cdots+x_n^2=\sin^2\theta_1\sin^2\theta_2$. Iterating this substitution gives
 
 $$
 \begin{cases}
@@ -164,29 +146,183 @@ $$
 
 ### Jacobian of the Change of Variables
 
-With the $\theta_i$ now arbitrary, define $\sigma(\theta_1,\dots,\theta_{n-1}) = (x_1,\dots,x_n)$. We write $x = r\sigma$. The Jacobian of this change of variables is
+Define $\sigma(\theta_1,\dots,\theta_{n-1})=(x_1,\dots,x_n)$. Points away from the origin are written as $x=r\sigma$. The Jacobian of $(r,\theta)\mapsto r\sigma(\theta)$ is
 
 $$
 J(r\sigma)(r,\theta_1,\dots,\theta_{n-1}) = \det\begin{pmatrix}\dfrac{\partial x}{\partial r},\; \dfrac{\partial x}{\partial\theta_1},\;\dots,\; \dfrac{\partial x}{\partial\theta_{n-1}}\end{pmatrix} = r^{n-1}\det\begin{pmatrix}\sigma,\; \dfrac{\partial\sigma}{\partial\theta_1},\;\dots,\; \dfrac{\partial\sigma}{\partial\theta_{n-1}}\end{pmatrix}.
 $$
 
-Expanding this determinant directly is quite messy and reveals no useful structure. So instead we use a trick: let $A = \left(\sigma,\; \frac{\partial\sigma}{\partial\theta_1},\;\dots,\; \frac{\partial\sigma}{\partial\theta_{n-1}}\right)$ and compute $A^T A$ rather than expanding $\det A$ head-on.
+The remaining determinant is evaluated through its Gram matrix. Set
+
+$$
+A=\left(\sigma,\frac{\partial\sigma}{\partial\theta_1},\dots,\frac{\partial\sigma}{\partial\theta_{n-1}}\right).
+$$
+
+Then $|\det A|^2=\det(A^TA)$.
 
 ### Induced Metric and Area Element
 
-When integrating over a hypersurface, the area element $d\sigma$ is defined through the *induced metric* pulled back from the ambient space $\mathbb{R}^n$ via $\sigma$. The tangent vectors of $\sigma$ at a point are $\frac{\partial\sigma}{\partial\theta_i}$, and the induced metric $G$ is the $(n-1) \times (n-1)$ matrix with entries
+The area element used above comes from the Riemannian volume form of the metric induced on the hypersurface.
+
+<Theorem label="Riemannian Volume Form">
+Let $(\Sigma^m,g)$ be an oriented Riemannian manifold. In any positively oriented smooth coordinates $(x^i)$,
+
+$$
+\omega_g = \sqrt{\det(g_{ij})}\,dx^1\wedge\cdots\wedge dx^m.
+$$
+</Theorem>
+
+<Proof>
+Recall that in local coordinates $(x^i)$,
+
+$$
+dx^{i_1}\wedge\cdots\wedge dx^{i_k}
+(\partial_{x^{j_1}},\ldots,\partial_{x^{j_k}})
+= \delta^{i_1\cdots i_k}_{j_1\cdots j_k}
+$$
+
+for all multi-indices $I=(i_1,\ldots,i_k)$ and $J=(j_1,\ldots,j_k)$.
+
+In positively oriented smooth coordinates, write
+
+$$
+\omega_g = f\,dx^1\wedge\cdots\wedge dx^m.
+$$
+
+Since $(\partial_{x^i}|_p)$ is a basis for $T_p\Sigma$, Gram-Schmidt gives a positively oriented local orthonormal frame $(E_k)$ and a transition matrix $C=[C_{ik}]$ such that
+
+$$
+\partial_{x^i}=\sum_{k=1}^m C_{ik}E_k.
+$$
+
+Let $(\varepsilon^k)$ be the dual coframe of $(E_k)$, so $\varepsilon^k(E_l)=\delta^k_l$. Since $\omega_g$ is multilinear and alternating, and $\omega_g(E_1,\ldots,E_m)=1$,
+
+$$
+f
+=\omega_g(\partial_{x^1},\ldots,\partial_{x^m})
+=\det\bigl(\varepsilon^k(\partial_{x^i})\bigr)
+=\det(C).
+$$
+
+Moreover, since $(E_k)$ is orthonormal,
+
+$$
+\begin{aligned}
+g_{ij}
+&=\langle \partial_{x^i},\partial_{x^j}\rangle \\
+&=\left\langle \sum_{k=1}^m C_{ik}E_k,\sum_{l=1}^m C_{jl}E_l\right\rangle \\
+&=\sum_{k=1}^m\sum_{l=1}^m C_{ik}C_{jl}\langle E_k,E_l\rangle \\
+&=\sum_{k=1}^m C_{ik}C_{jk}
+=(CC^T)_{ij}.
+\end{aligned}
+$$
+
+Thus $G=CC^T$, so
+
+$$
+\det(G)=\det(CC^T)=\det(C)^2.
+$$
+
+Since both $(\partial_{x^i})$ and $(E_k)$ are positively oriented, $\det(C)>0$. Hence $f=\sqrt{\det(G)}$.
+</Proof>
+
+<Definition label="Pullback Metric">
+Let $M^m,N^n$ be smooth manifolds and let $g$ be a Riemannian metric on $N$. For a smooth map $F:M\to N$, the pullback $F^*g$ is the smooth $(0,2)$-tensor field on $M$ defined by
+
+$$
+(F^*g)_p(X,Y)
+:=g_{F(p)}(dF_p(X),dF_p(Y)),
+\qquad X,Y\in T_pM.
+$$
+</Definition>
+
+Let $\Sigma\subseteq M$ be a Riemannian submanifold with the metric induced from $(M^{m+1},g)$, and let $F:U\subseteq\mathbb{R}^m\to\Sigma$ be a local parametrization. For the coordinate frame $(\partial_{x^i})$ on $U$,
+
+$$
+(F^*g)_p(\partial_{x^i},\partial_{x^j})
+=g_{F(p)}(dF_p(\partial_{x^i}),dF_p(\partial_{x^j}))
+=g_{F(p)}(\partial_{x^i}F,\partial_{x^j}F).
+$$
+
+Therefore, if $G=[(F^*g)_{ij}]$, the hypersurface area is computed locally by
+
+$$
+\mathcal{A}(\Sigma)
+=\int_{\Sigma}\omega_g
+=\int_{F^{-1}(\Sigma)}\sqrt{\det(G)}\,d\mathcal{L}^m.
+$$
+
+The ambient metric in the present computation is Euclidean, $g=\sum_{i,j}\delta_{ij}\,dx^i\otimes dx^j$. For the parametrization $\sigma$ of $\mathbb{S}^{n-1}$, the induced metric matrix is
 
 $$
 g_{ij} = \left\langle \frac{\partial\sigma}{\partial\theta_i},\, \frac{\partial\sigma}{\partial\theta_j}\right\rangle, \quad 1 \le i,j \le n-1.
 $$
 
-This is the Gram matrix of the tangent vectors. Geometrically, $\sqrt{|\det G|}$ measures how much $\sigma$ stretches area when mapping a small patch $d\theta_1\cdots d\theta_{n-1}$ in the parameter domain onto a piece of $\mathbb{S}^{n-1}$. This is why the area element on the sphere takes the form
+This is the Gram matrix of the tangent vectors. Therefore the area element on the sphere is
 
 $$
 d\sigma = \sqrt{|\det G|}\; d\theta_1\cdots d\theta_{n-1}.
 $$
 
-This formula is a direct consequence of the Riemannian metric and will be discussed more carefully later. For now, let us return to the trick with $A^T A$. Since $|\sigma| = 1$, we have $\langle\sigma, \sigma\rangle = 1$, and differentiating with respect to $\theta_j$ gives
+For the graph case, if $F:U\to\Sigma$ is given by
+
+$$
+F(x^1,\ldots,x^m)=(x^1,\ldots,x^m,f(x^1,\ldots,x^m)),
+$$
+
+then writing $f_i=\partial_{x^i}f$ gives
+
+$$
+\widetilde{g}_{ij}
+=\langle \partial_{x^i}F,\partial_{x^j}F\rangle
+=\delta_{ij}+f_if_j.
+$$
+
+Equivalently,
+
+$$
+\widetilde{G}=I_m+\nabla f^T\nabla f.
+$$
+
+To compute the determinant, observe that every eigenvalue of $\widetilde{G}$ has the form $1+\lambda$, where $\lambda$ is an eigenvalue of $\nabla f^T\nabla f$. If $\lambda\neq 0$ and $v\in E_\lambda(\nabla f^T\nabla f)$, then
+
+$$
+(\nabla f^T\nabla f)(v)
+=\begin{bmatrix}
+f_1\langle\nabla f,v\rangle\\
+f_2\langle\nabla f,v\rangle\\
+\vdots\\
+f_m\langle\nabla f,v\rangle
+\end{bmatrix}
+=\lambda v.
+$$
+
+Hence $v=\frac{\langle\nabla f,v\rangle}{\lambda}\nabla f$, so the nonzero eigenspace is spanned by $\nabla f$. Substituting $v=\nabla f$ gives
+
+$$
+(\nabla f^T\nabla f)(\nabla f)=|\nabla f|^2\nabla f.
+$$
+
+Thus $|\nabla f|^2$ is the unique nonzero eigenvalue. The zero eigenspace is $(\nabla f)^\perp$ when $\nabla f\neq 0$, and the conclusion is immediate when $\nabla f=0$. Therefore
+
+$$
+\operatorname{spec}(\nabla f^T\nabla f)=\{|\nabla f|^2,0,\ldots,0\},
+$$
+
+and so
+
+$$
+\det(\widetilde{G})=1+|\nabla f|^2.
+$$
+
+Thus the graph area formula is
+
+$$
+\mathcal{A}(\Sigma)
+=\int_{F^{-1}(\Sigma)}\sqrt{1+|\nabla f|^2}\,d\mathcal{L}^m.
+$$
+
+Return to the sphere. Since $|\sigma|=1$, $\langle\sigma,\sigma\rangle=1$. Differentiating with respect to $\theta_j$ gives
 
 $$
 \left\langle\sigma,\, \frac{\partial\sigma}{\partial\theta_j}\right\rangle = 0, \quad \forall\, 1 \le j \le n-1.
@@ -199,7 +335,7 @@ A^T A = \begin{bmatrix} 1 & 0 \\ 0 & G \end{bmatrix}
 \implies |\det A|^2 = \det(A^T A) = |\det G|,
 $$
 
-so $|\det A| = \sqrt{|\det G|}$, exactly as needed. The volume element now simplifies cleanly:
+so $|\det A|=\sqrt{|\det G|}$. Hence the Euclidean volume element in spherical coordinates is
 
 $$
 dx = r^{n-1}\sqrt{|\det G|}\; dr\,d\theta_1\cdots d\theta_{n-1} = r^{n-1}\,dr\,d\sigma.
@@ -207,13 +343,39 @@ $$
 
 ### Deriving the Formula
 
-Plugging back into the original integral:
+Using the volume element above on the unit ball,
+
+$$
+|B(0,1)| = \int_{B(0,1)} dx = \int_0^1\int_{\mathbb{S}^{n-1}} r^{n-1}\,d\sigma\,dr = |\mathbb{S}^{n-1}|\int_0^1 r^{n-1}\,dr = \frac{|\mathbb{S}^{n-1}|}{n}.
+$$
+
+Thus evaluation of $|B(0,1)|$ is reduced to evaluation of the surface area term $|\mathbb{S}^{n-1}|$.
+
+---
+
+## Computing $|\mathbb{S}^{n-1}|$
+
+To evaluate $|\mathbb{S}^{n-1}|$, use the $n$-dimensional Gaussian integral
+
+$$
+I = \int_{\mathbb{R}^n} e^{-\|x\|^2}\,dx.
+$$
+
+Compute $I$ in two ways.
+
+**Method 1 (Fubini).**
+
+$$
+\int_{\mathbb{R}^n} e^{-\|x\|^2}\,dx = \int_{\mathbb{R}^n} e^{-(x_1^2+\cdots+x_n^2)}\,dx_1\cdots dx_n = \left(\int_{-\infty}^\infty e^{-x^2}\,dx\right)^n = \pi^{n/2}.
+$$
+
+**Method 2 (Spherical coordinates).**
 
 $$
 I = \int_0^\infty\int_{\mathbb{S}^{n-1}} r^{n-1} e^{-r^2}\,d\sigma\,dr = |\mathbb{S}^{n-1}|\int_0^\infty r^{n-1} e^{-r^2}\,dr.
 $$
 
-One more substitution $t = r^2$ with $dt = 2r\,dr$ reveals the Gamma function:
+With $t=r^2$ and $dt=2r\,dr$,
 
 $$
 I = \frac{|\mathbb{S}^{n-1}|}{2}\int_0^\infty t^{(n-2)/2} e^{-t}\,dt = \frac{|\mathbb{S}^{n-1}|}{2}\,\Gamma(n/2).
@@ -225,79 +387,13 @@ $$
 \boxed{|\mathbb{S}^{n-1}| = \frac{2\pi^{n/2}}{\Gamma(n/2)}}.
 $$
 
----
-
-## Computing $|B(0,1)|$
-
-With the surface area in hand, the volume of the unit ball follows almost immediately — just apply the definition and switch to spherical coordinates:
-
-$$
-|B(0,1)| = \int_{B(0,1)} dx = \int_0^1\int_{\mathbb{S}^{n-1}} r^{n-1}\,d\sigma\,dr = |\mathbb{S}^{n-1}|\int_0^1 r^{n-1}\,dr = \frac{|\mathbb{S}^{n-1}|}{n}.
-$$
-
-Using the identity $\Gamma(n/2+1) = \frac{n}{2}\,\Gamma(n/2)$, this simplifies to
-
-$$
-|B(0,1)| = \frac{1}{n}\cdot\frac{2\pi^{n/2}}{\Gamma(n/2)} = \frac{\pi^{n/2}}{\frac{n}{2}\,\Gamma(n/2)}
-$$
+Substituting this into $|B(0,1)|=|\mathbb{S}^{n-1}|/n$ gives
 
 $$
 \boxed{|B(0,1)| = \frac{\pi^{n/2}}{\Gamma(n/2+1)}}.
 $$
 
----
-
-## Applications
-
-The reason we need to compute the measure of balls in high-dimensional space is that it appears everywhere in analysis. In measure theory, spherical partitions are sometimes more flexible and easier to work with than cubical ones — I will present those problems later. In probability and statistics, the Gaussian distribution
-
-$$
-\frac{1}{(2\pi)^{n/2}}e^{-\|x\|^2/2}
-$$
-
-is an essential consequence of exactly the kind of computation done above. The result also appears in differential geometry via the Gauss-Bonnet formula, in isoperimetric inequalities, and in many other places I will get to in due course.
-
----
-
-## Exercises
-
-**Exercise 1.** Without any change of coordinates, define the number $\pi$ as an integral involving the functions $y = \sqrt{1-x^2}$ and $y = -\sqrt{1-x^2}$.
-
-**Exercise 2.** Compute $|\mathbb{S}^{n-1}|$ and $|B(0,1)|$ explicitly for $n = 1, 2, 3, 4$ and verify against the geometric formulas you already know. Hint: for $n = 1$, what is $\mathbb{S}^0$?
-
-**Exercise 3.** Prove that
-$$
-\Gamma\!\left(\frac{2k+1}{2}\right) = \frac{(2k-1)!!}{2^k}\sqrt{\pi}, \quad k \in \mathbb{N},
-$$
-where $(2k-1)!! = 1 \cdot 3 \cdot 5 \cdots (2k-1)$ is the double factorial.
-
-**Exercise 4.** Prove that the unit ball $B(0,1)$ in $\mathbb{R}^n$ is Lebesgue measurable.
-
-**Exercise 5.** Prove that $\int_{-\infty}^\infty e^{-x^2}\,dx = \sqrt{\pi}$ using differentiation under the integral sign. Specifically, consider
-$$
-F(t) = \left(\int_0^t e^{-x^2}\,dx\right)^2, \quad G(t) = \int_0^1 \frac{e^{-t^2(1+s^2)}}{1+s^2}\,ds
-$$
-and prove that $F(t) + G(t) = \pi/4$ for all $t \ge 0$.
-
-**Exercise 6.** Let $\omega_n = |B(0,1)|$ in $\mathbb{R}^n$. Prove the recurrence
-$$
-\omega_n = \omega_{n-2} \cdot \frac{2\pi}{n}, \quad \omega_1 = 2,\quad \omega_2 = \pi,
-$$
-without using the Gamma function.
-
-**Exercise 7.** Prove that the ratio between the surface area of the sphere and the volume of the ball of radius $r$ in $\mathbb{R}^n$ satisfies
-$$
-\frac{|\mathbb{S}^{n-1}(r)|}{|B(0,r)|} = \frac{n}{r}.
-$$
-Explain why this identity is equivalent to $\frac{d}{dr}|B(0,r)| = |\mathbb{S}^{n-1}(r)|$.
-
-**Exercise 8.** Prove that $|B(0,1)| \to 0$ as $n \to \infty$. Moreover, find the dimension $n_0$ at which $|B(0,1)|$ achieves its maximum.
-
-**Exercise 9.** For fixed $\varepsilon > 0$, prove that
-$$
-\frac{|B(0,1) \setminus B(0,1-\varepsilon)|}{|B(0,1)|} = 1 - (1-\varepsilon)^n \to 1 \quad \text{as } n \to \infty.
-$$
-
+    
 ---
 
 ## References

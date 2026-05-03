@@ -77,7 +77,7 @@ body {
 }
 
 h1 {
-  font-size:2rem;
+  font-size:1.5rem;
   color: var(--gold);
     background: linear-gradient(135deg, #a5c7f0 0%, #e0e0e0 40%, #ffdd00 100%);
   -webkit-background-clip: text;
@@ -116,11 +116,12 @@ h3 {
   color: var(--text-dim);
 }
 .name-alt {
+  display: block;
   margin-top: 6px;
-  font-size: 2rem;
+  font-size: 1.5rem !important;
   font-weight: 500;
   letter-spacing: 0.04em;
-
+  line-height: 1.1;
 }
 /* ── Nav ── */
 nav {
@@ -387,7 +388,7 @@ nav {
 .math-proof { margin: 1.25rem 0; }
 .math-proof-tag {
   font-family: var(--font-mono);
-  font-size: 0.78rem;
+  font-size: 0.9rem;
   color: var(--text-dim);
   font-style: italic;
   margin-right: 0.4rem;
@@ -431,12 +432,15 @@ nav {
 
 .hero {
   display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 3rem;
+  grid-template-columns: 1fr;
   align-items: start;
-  margin-bottom: 5rem;
-  padding-bottom: 4rem;
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
   border-bottom: 1px solid var(--border);
+}
+
+.hero-text {
+  width: 100%;
 }
 
 .hero-label {
@@ -449,11 +453,12 @@ nav {
 }
 
 .hero-title {
-  font-size: 2.5rem;
+  font-size: 2rem;
   font-weight: 600;
-  letter-spacing: -0.04em;
+  letter-spacing: 0.05em;
   line-height: 1.05;
   margin-bottom: 1.5rem;
+  text-align: center;
 }
 
 .hero-desc {
@@ -751,7 +756,6 @@ nav {
 /* ── Wider layout ── */
 @media (min-width: 1280px) {
   :root { --content-width: 960px; }
-  .hero { grid-template-columns: 1fr 280px; gap: 4rem; }
   .avatar-img, .avatar-deco { width: 220px; height: 220px; }
 }
 
@@ -765,11 +769,12 @@ nav {
   .hero {
     grid-template-columns: 1fr;
     gap: 2rem;
-    margin-bottom: 3.5rem;
-    padding-bottom: 3rem;
+    margin-bottom: 2.5rem;
+    padding-bottom: 2rem;
   }
   .hero-avatar { order: 2; display: flex; justify-content: center; }
   .hero-title { font-size: 2.2rem; }
+  .name-alt { font-size: 1.2rem; }
   .hero-desc { max-width: 100%; font-size: 0.95rem; }
   .cta-row { flex-wrap: wrap; gap: 0.75rem; }
 
@@ -789,6 +794,7 @@ nav {
 
 @media (max-width: 400px) {
   .hero-title { font-size: 1.85rem; }
+  .name-alt { font-size: 1.2rem; }
   .avatar-img, .avatar-deco { width: 140px; height: 140px; }
   .nav-links { gap: 0.6rem; }
 }
