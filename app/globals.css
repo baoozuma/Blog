@@ -161,7 +161,9 @@ nav {
   font-family: var(--font-mono);
   transition: color 0.2s;
 }
-
+ p a {
+  color: rgb(180, 180, 251);
+}
 .nav-links a::after {
   content: '';
   position: absolute;
@@ -358,7 +360,9 @@ nav {
 [data-theme="light"] .math-lemma     { border: 2px solid #697e08;  }
 [data-theme="light"] .math-corollary { border: 2px solid #059669; }
 [data-theme="light"] .math-definition{ border: 2px solid #d97706; }
-
+ [data-theme="light"] p a {
+  color: rgb(36, 82, 146);
+}
 .math-block-tag {
   display: block;
   font-size: 0.8rem;
@@ -455,7 +459,7 @@ nav {
 .hero-title {
   font-size: 2rem;
   font-weight: 600;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.05aem;
   line-height: 1.05;
   margin-bottom: 1.5rem;
   text-align: center;

@@ -50,21 +50,46 @@ export default function HomePage() {
       <div className="section">
         <p className="section-label">introduction · 紹介</p>
         <div className="text-block">
-          <p>
-            Hi! My full name is Pham Ngoc Gia Bao, but people prefer to call me Alëksis. I'm interested in finding out the relation between Combinatorics and Harmonic Analysis. For example, how can we investigate some kind of analysis problem by discretizing into pieces of tubes, spheres or rectangles? This site is where I keep mathematical notes, selected writings, and small academic projects that I want to organize more carefully.
+        <p>
+          Hi! My full name is Pham Ngoc Gia Bao, but people prefer to call me
+          Alëksis. I am interested in the relation between Combinatorics and
+          Harmonic Analysis. For example, how can we investigate certain problems
+          in analysis by discretizing them into pieces such as tubes, spheres, or
+          rectangles? These questions motivate my interest in Projection Theory,
+          Incidence Geometry, and Geometric Measure Theory.
+        </p>
 
-          </p>
+        <p>
+          This site is where I keep mathematical notes, selected writings, and
+          small academic projects that I want to organize more carefully.
+        </p>
+
+        <p>
+          Currently, I am an undergraduate at{" "}
+          <a color="blue"
+            href="https://en.hcmus.edu.vn/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            HCMUS
+          </a>
+          . My email is{" "}
+          <a href="mailto:phambao0205@gmail.com">
+            phambao0205@gmail.com
+          </a>
+          .
+        </p>
         </div>
       </div>
 
-      <div className="section">
+      {/* <div className="section">
         <p className="section-label">interests · 関心</p>
         <div className="text-block">
           <p>
             Outside of mathematics, I would like to attend a rock show and participate in a mosh pit. I usually listen to Post Hardcore, Midwest Emo, and Math Rock, where 7UPPERCUTS, Đá Số Tới, Ling Tosite Sigure, Hitohira (ひとひら), and ACDC are my favorites. Say some Pop and R&B, I'm the only fan with Vu Thanh Van.
           </p>
         </div>
-      </div>
+      </div> */}
 
 
       <div className="section">
