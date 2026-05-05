@@ -50,35 +50,35 @@ export default function HomePage() {
       <div className="section">
         <p className="section-label">introduction · 紹介</p>
         <div className="text-block">
-        <p>
-          Hi! My full name is Pham Ngoc Gia Bao, but people prefer to call me
-          Alëksis. I am interested in the relation between Combinatorics and
-          Harmonic Analysis. For example, how can we investigate certain problems
-          in analysis by discretizing them into pieces such as tubes, spheres, or
-          rectangles? These questions motivate my interest in Projection Theory,
-          Incidence Geometry, and Geometric Measure Theory.
-        </p>
+       <p>
+        Hi! My full name is Pham Ngoc Gia Bao, though I usually go by
+        Alëksis. I am interested in the relationship between Combinatorics and
+        Harmonic Analysis. In particular, I am interested in how certain problems
+        in analysis can be studied by discretizing them into geometric pieces such
+        as tubes, spheres, or rectangles. These questions motivate my interest in
+        Projection Theory, Incidence Geometry, and Geometric Measure Theory.
+      </p>
 
-        <p>
-          This site is where I keep mathematical notes, selected writings, and
-          small academic projects that I want to organize more carefully.
-        </p>
+      <p>
+        This site is where I keep mathematical notes, selected writings, and small
+        academic projects that I want to organize more carefully.
+      </p>
 
-        <p>
-          Currently, I am an undergraduate at{" "}
-          <a color="blue"
-            href="https://en.hcmus.edu.vn/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            HCMUS
-          </a>
-          . My email is{" "}
-          <a href="mailto:phambao0205@gmail.com">
-            phambao0205@gmail.com
-          </a>
-          .
-        </p>
+      <p>
+        Currently, I am an undergraduate at{" "}
+        <a
+          href="https://en.hcmus.edu.vn/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          HCMUS
+        </a>
+        . My email is{" "}
+        <a href="mailto:phambao0205@gmail.com">
+          phambao0205@gmail.com
+        </a>
+        .
+      </p>
         </div>
       </div>
 

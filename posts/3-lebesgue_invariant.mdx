@@ -1,26 +1,65 @@
 ---
-title: "Linear map scaling property on Lebesgue measure"
+title: "Linear Transformations and the Scaling of Lebesgue Measure"
 date: "2025-04-06"
 description: "How the determinant controls volume distortion, and why translation invariance uniquely characterizes Lebesgue measure up to a scalar."
 thumbnail: "/thumbnails/lebesgue.jpg"
 tags: ['Measure Theory']
 ---
+## The problem
+Throughout this article, $|E|$ denotes the outer Lebesgue measure of a set
+$E$ in its ambient Euclidean space. When $E$ is a rectangle, ball, or other
+elementary region, this agrees with its usual volume. Thus the same notation
+is used whether or not the set has already been shown to be measurable.
 
-Let $\Phi: \mathbb{R}^n \to \mathbb{R}^n$ be a Lipschitz map, meaning that there is a $C > 0$ such that
-
-$$
-|\Phi(x) - \Phi(y)| \leq C|x - y|, \text{ for all } x,y \in \mathbb{R}^n.
-$$
-
-Let $E \subseteq \mathbb{R}^n$ be any set. We must determine the measure $|\Phi(E)|$ or investigate how $\Phi$ affects the measure of $E$. If $\Phi$ is linear, one intuitive conclusion is that
+Let $\Phi: \mathbb{R}^n \to \mathbb{R}^n$ be a linear map and $E \subseteq \mathbb{R}^n$ be any set. To determine $|\Phi(E)|$, we need to investigate how $\Phi$ affects the measure of $E$. One intuitive conclusion is that
 
 $$
 |\Phi(E)| = |\det\Phi||E|.
 $$
+Its first origin is not measure theory, but the geometric meaning of
+the determinant.
+
+From the geometric point of view, if $v_1,\ldots,v_n\in\mathbb{R}^n$, then $
+|\det(v_1,\ldots,v_n)|
+$ is the $n$-dimensional volume of the parallelepiped spanned by these vectors.
+Thus, if $A:\mathbb{R}^n\to\mathbb{R}^n$ is linear, then $A$ sends the unit
+cube to the parallelepiped spanned by the column vectors of $A$, and the volume
+of that parallelepiped is $|\det A|$.
+
+<figure className="math-figure">
+  <img
+    src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Determinant_parallelepiped.svg"
+    alt="The determinant as the volume of a parallelepiped"
+  />
+  <figcaption>
+    The determinant records the signed volume distortion of a linear map.
+    Image: Claudio Rocchini, Wikimedia Commons, CC BY 3.0/GFDL.
+  </figcaption>
+</figure>
+
+This is the finite-dimensional geometric core of the theorem.
+
+
+For rectangles, parallelepipeds, and simple polyhedral regions, the determinant
+already explains volume distortion. The deeper question is whether the same
+formula remains valid for an arbitrary set $E\subseteq\mathbb{R}^n$:
+
+$$
+|A(E)|=|\det A|\,|E|.
+$$
+
+This is no longer merely a problem of linear algebra. It requires a theory of
+volume that applies to irregular sets. This is exactly the role of Lebesgue
+measure. Lebesgue's measure-theoretic viewpoint makes it possible to assign
+volume not only to elementary regions, but also to much more complicated subsets
+of Euclidean space.
+
+Therefore, the theorem can be read as follows: the classical determinant
+formula for parallelepipeds extends to all subsets of Euclidean space, once
+volume is interpreted as outer Lebesgue measure.
 
 However, why does this make sense? We will demonstrate this fact in detail using two proofs: one extensively relies on analysis computation, and one is more elegant when we just want a few properties from the algebra of measure.
 
----
 
 ## First Proof
 
@@ -136,6 +175,25 @@ We state the SVD theorem, to be proved later using the spectral theorem.
 Let $A \in M_{m \times n}(\mathbb{R})$. Then there exist $U \in O(m)$, $V \in O(n)$, and a diagonal matrix $\Sigma$ with nonnegative entries such that $A = U\Sigma V^T$.
 </Theorem>
 
+<figure className="math-figure">
+  <img
+    src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Singular-Value-Decomposition.svg"
+    alt="Singular value decomposition as rotations and scaling"
+  />
+  <figcaption>
+    SVD decomposes a linear map into rotations and coordinate-axis scaling.
+    Image: Georg-Johann, Wikimedia Commons, CC BY-SA 3.0/GFDL.
+  </figcaption>
+</figure>
+
+Historically, this decomposition was discovered independently by Eugenio
+Beltrami in 1873 and Camille Jordan in 1874 in the context of bilinear forms.
+James Joseph Sylvester later arrived at a related decomposition for real square
+matrices and called the singular values the canonical multipliers of the matrix.
+In the twentieth century, the theory was extended and connected with integral
+operators by Schmidt and Weyl, while Eckart and Young made the decomposition
+central to low-rank approximation.
+
 With this theorem, it suffices to verify the result when $\Phi$ is a translation, rotation, or diagonal (scaling) matrix.
 
 **Case 1: $\Phi$ is a rotation**, i.e. $\Phi \in \{A: \mathbb{R}^n \to \mathbb{R}^n \mid A \cdot A^* = I_n\}$.
@@ -196,7 +254,7 @@ $$
 
 Since $\Phi$ is bijective, $\{R_i\}$ covers $E$ if and only if $\{\Phi(R_i)\}$ covers $\Phi(E)$. Therefore $|\Phi(E)| = |E|$.
 
-**Conclusion.** For any linear map $\Phi: \mathbb{R}^n \to \mathbb{R}^n$, the SVD theorem gives $\Phi = U\Sigma V^T$ with $U, V \in O(n)$ and $\Sigma$ diagonal. Let $E \subseteq \mathbb{R}^n$ be measurable. Since $U, V$ are isometries,
+**Conclusion.** For any linear map $\Phi: \mathbb{R}^n \to \mathbb{R}^n$, the SVD theorem gives $\Phi = U\Sigma V^T$ with $U, V \in O(n)$ and $\Sigma$ diagonal. Let $E \subseteq \mathbb{R}^n$ be arbitrary. Since $U, V$ are isometries,
 
 $$
 |\Phi(E)| = |U\Sigma V^T(E)| = |\Sigma V^T(E)| = |\det\Sigma| \cdot |V^T(E)| = |\det\Sigma| \cdot |E|.
@@ -212,23 +270,33 @@ $$
 
 ## Second Proof
 
-In this section, we need to define some special algebras that work quite effectively on measure.
+A more standard way to prove such a result is to begin with a small class of sets
+where the formula is transparent, and then extend it to a larger
+$\sigma$-algebra.
 
-<Definition label="pi-system">
+For example, one first verifies the formula on half-open rectangles or cubes.
+These sets generate the Borel $\sigma$-algebra of $\mathbb{R}^n$. Measure
+theory then supplies extension tools which allow a statement known on the
+generating class to be promoted first to Borel sets and then, by the outer
+measure definition, to all subsets.
+
+This is the conceptual role of the Carathéodory extension principle and related
+monotone-class or $\pi$-$\lambda$ arguments. In this section, we need to define some special algebras that work quite effectively on measure and will prove  one theorem and two lemmas in total.
+
 A nonempty collection of subsets $\mathcal{P} \subset 2^X$ is a **$\pi$-system** if
 
 $$
 A, B \in \mathcal{P} \quad \Rightarrow \quad A \cap B \in \mathcal{P}.
 $$
-</Definition>
 
-<Definition label="lambda-system">
+
+
 A collection of subsets $\mathcal{L} \subseteq 2^X$ is a **$\lambda$-system** if:
 
 1. $X \in \mathcal{L}$.
 2. $A, B \in \mathcal{L}$ and $A \subseteq B$ implies $B \setminus A \in \mathcal{L}$.
 3. If $\{A_k\} \subseteq \mathcal{L}$ and $A_k \subseteq A_{k+1}$ for all $k$, then $\bigcup_{k=1}^\infty A_k \in \mathcal{L}$.
-</Definition>
+
 
 <Theorem label="pi-lambda Theorem">
 If $\mathcal{P}$ is a $\pi$-system and $\mathcal{L}$ is a $\lambda$-system with $\mathcal{P} \subseteq \mathcal{L}$, then $\sigma(\mathcal{P}) \subseteq \mathcal{L}$.
@@ -257,7 +325,8 @@ Hence $\mathcal{S}$ is closed under finite intersections, i.e., a $\pi$-system.
 
 Therefore $\sigma(\mathcal{P}) \subseteq \sigma(\mathcal{S}) = \mathcal{S} \subseteq \mathcal{L}$.
 </Proof>
-
+Historically, this result is closely associated with Eugene Dynkin and is also
+known under the name Sierpiński-Dynkin theorem. 
 <Lemma>
 Let $A \subseteq \mathbb{R}^n$ be a compact subset whose intersection with $\{c\} \times \mathbb{R}^{n-1}$ has $(n-1)$-dimensional measure zero for every $c \in \mathbb{R}$. Then $A$ has measure zero.
 </Lemma>
@@ -265,7 +334,7 @@ Let $A \subseteq \mathbb{R}^n$ be a compact subset whose intersection with $\{c\
 <Proof>
 Since $A$ is compact, there exists a closed interval $[a,b]$ such that $A \subseteq [a,b] \times \mathbb{R}^{n-1}$. For each $c \in [a,b]$, denote $A_c = \{x \in \mathbb{R}^{n-1} \mid (c,x) \in A\}$.
 
-Let $\varepsilon > 0$ be arbitrary. Since $|A_c|_{n-1} = 0$, there exist finitely many $(n-1)$-dimensional open cubes $\{C_1, \dots, C_k\}$ covering $A_c$ with $\sum_i |C_i| < \varepsilon$. Set $U_c = C_1 \cup \cdots \cup C_k$.
+Let $\varepsilon > 0$ be arbitrary. Since $|A_c| = 0$ in $\mathbb{R}^{n-1}$, there exist finitely many $(n-1)$-dimensional open cubes $\{C_1, \dots, C_k\}$ covering $A_c$ with $\sum_i |C_i| < \varepsilon$. Set $U_c = C_1 \cup \cdots \cup C_k$.
 
 **Claim:** There exists an open interval $J_c \ni c$ such that $A \cap (J_c \times \mathbb{R}^{n-1}) \subseteq J_c \times U_c$.
 
@@ -300,25 +369,69 @@ $$
 So $V$ is the graph of the continuous function $F: \mathbb{R}^{n-1} \to \mathbb{R}$. We apply the previous lemma: for any $c \in \mathbb{R}$, the slice $V \cap (\{c\} \times \mathbb{R}^{n-1})$ consists of at most one point (since $x_i$ is uniquely determined by the remaining coordinates), which has $(n-1)$-dimensional measure zero. Since $V$ is closed and every closed set is a countable union of compact sets, and each compact slice has $(n-1)$-measure zero, it follows that $V$ has Lebesgue measure zero.
 </Proof>
 
-<Theorem label="Affine Invariant Theorem">
-Let $F: \mathbb{R}^n \to \mathbb{R}^n$ be an affine map $F(x) = Ax + b$, where $A \in M_n(\mathbb{R})$ and $b \in \mathbb{R}^n$. Then
+There is an even more structural interpretation. The Lebesgue measure $|E|$ is
+translation invariant:
+
 
 $$
-\lambda^*(F(U)) = |\det(A)|\,\lambda^*(U) \qquad \text{for all } U \subseteq \mathbb{R}^n.
+|E+x|=|E|.
 $$
-</Theorem>
+
+If $A\in GL(n,\mathbb{R})$ and we define
+
+$$
+\nu(E)=|AE|,
+$$
+
+then $\nu$ is again a translation-invariant measure on $\mathbb{R}^n$. Hence
+$\nu$ should be a constant multiple of Lebesgue measure:
+
+$$
+\nu(E)=c|E|.
+$$
+
+The constant is determined by evaluating both measures on the unit cube:
+
+$$
+c
+=
+\nu([0,1)^n)
+=
+|A[0,1)^n|
+=
+|\det A|.
+$$
+
+Thus,
+
+$$
+|AE|=|\det A|\,|E|.
+$$
+
+This viewpoint is closely related to Haar measure. On the additive group
+$(\mathbb{R}^n,+)$, Lebesgue measure is the canonical translation-invariant
+measure, unique up to multiplication by a positive constant.
+
+We now state the main theorem again and prove it. Let $\Phi: \mathbb{R}^n \to \mathbb{R}^n$ be
+an affine map $\Phi(x) = Ax + b$, where $A \in M_n(\mathbb{R})$ and
+$b \in \mathbb{R}^n$. Then
+
+$$
+|\Phi(U)| = |\det(A)|\,|U| \qquad \text{for all } U \subseteq \mathbb{R}^n.
+$$
+
 
 <Proof>
-**Reduction.** Since $F(U) = A(U) + b$ and Lebesgue measure is translation invariant, $\lambda^*(A(U) + b) = \lambda^*(A(U))$. So it suffices to prove $\lambda^*(A(U)) = |\det(A)|\,\lambda^*(U)$ for all $U \subseteq \mathbb{R}^n$.
+**Reduction.** Since $\Phi(U) = A(U) + b$ and outer Lebesgue measure is translation invariant, $|A(U) + b| = |A(U)|$. So it suffices to prove $|A(U)| = |\det(A)|\,|U|$ for all $U \subseteq \mathbb{R}^n$.
 
-**Case 1: $\det(A) = 0$.** Then $\operatorname{im}(A)$ is a proper affine subspace of $\mathbb{R}^n$, which has measure zero by the previous lemma. Since $A(U) \subseteq \operatorname{im}(A)$, monotonicity gives $\lambda^*(A(U)) = 0 = |\det(A)|\,\lambda^*(U)$.
+**Case 1: $\det(A) = 0$.** Then $\operatorname{im}(A)$ is a proper affine subspace of $\mathbb{R}^n$, which has measure zero by the previous lemma. Since $A(U) \subseteq \operatorname{im}(A)$, monotonicity gives $|A(U)| = 0 = |\det(A)|\,|U|$.
 
 **Case 2: $\det(A) \neq 0$.** Then $A$ is invertible. We proceed in five steps.
 
-**Step 1: Define a candidate measure $\nu$.** Let $\nu: \mathcal{B}(\mathbb{R}^n) \to [0, +\infty]$ be defined by $\nu(U) = \lambda^*(A(U))$. Clearly $\nu(\varnothing) = 0$. For any countable disjoint collection $\{U_i\} \subseteq \mathcal{B}(\mathbb{R}^n)$, since $A$ is a bijection,
+**Step 1: Define a candidate measure $\nu$.** Let $\nu: \mathcal{B}(\mathbb{R}^n) \to [0, +\infty]$ be defined by $\nu(U) = |A(U)|$. Clearly $\nu(\varnothing) = 0$. For any countable disjoint collection $\{U_i\} \subseteq \mathcal{B}(\mathbb{R}^n)$, since $A$ is a bijection,
 
 $$
-\nu\!\left(\bigsqcup_i U_i\right) = \lambda^*\!\left(\bigsqcup_i A(U_i)\right) = \sum_i \lambda^*(A(U_i)) = \sum_i \nu(U_i).
+\nu\!\left(\bigsqcup_i U_i\right) = \left|\bigsqcup_i A(U_i)\right| = \sum_i |A(U_i)| = \sum_i \nu(U_i).
 $$
 
 Hence $\nu$ is a measure on $\mathcal{B}(\mathbb{R}^n)$.
@@ -326,41 +439,41 @@ Hence $\nu$ is a measure on $\mathcal{B}(\mathbb{R}^n)$.
 **Step 2: $\nu$ is translation invariant.** For any $U \in \mathcal{B}(\mathbb{R}^n)$ and $x \in \mathbb{R}^n$, since $A$ is linear,
 
 $$
-\nu(U + x) = \lambda^*(A(U + x)) = \lambda^*(A(U) + Ax) = \lambda^*(A(U)) = \nu(U),
+\nu(U + x) = |A(U + x)| = |A(U) + Ax| = |A(U)| = \nu(U),
 $$
 
-where the third equality uses translation invariance of $\lambda$.
+where the middle equality uses translation invariance of outer measure.
 
-**Step 3: $\nu$ agrees with $|\det A|\,\lambda$ on half-open cubes.**
+**Step 3: $\nu$ agrees with $|\det A|\,|\cdot|$ on half-open cubes.**
 
 For any half-open cube $Q = \prod_{i=1}^n [a_i, b_i)$ of side length $s$, write $Q = a + s \cdot [0,1)^n$. By Step 2, $\nu(Q) = \nu(s \cdot [0,1)^n)$. Tile $[0,1)^n$ by $m^n$ disjoint half-open cubes $\{Q_j\}$ of side $\frac{1}{m}$. By translation invariance, all $\nu(Q_j)$ are equal, so $\nu([0,1)^n) = m^n \,\nu\!\left(\left[0,\tfrac{1}{m}\right)^n\right)$. A scaling argument gives $\nu([0,s)^n) = s^n\,\nu([0,1)^n)$ for rational $s$, and monotonicity extends this to all $s > 0$. The image $A([0,1)^n)$ is a parallelepiped whose volume is $|\det A|$ by the geometric interpretation of the determinant. Hence
 
 $$
-\nu(Q) = s^n\,|\det A| = |\det A|\,\lambda(Q).
+\nu(Q) = s^n\,|\det A| = |\det A|\,|Q|.
 $$
 
-**Step 4: Conclude $\nu = |\det A|\,\lambda$ on $\mathcal{B}(\mathbb{R}^n)$.** Both $\nu$ and $|\det A|\,\lambda$ are $\sigma$-finite Borel measures that agree on all half-open cubes. Half-open cubes form a $\pi$-system generating $\mathcal{B}(\mathbb{R}^n)$. Define
+**Step 4: Conclude $\nu(U) = |\det A|\,|U|$ on $\mathcal{B}(\mathbb{R}^n)$.** Both $\nu$ and $U\mapsto|\det A|\,|U|$ are $\sigma$-finite Borel measures that agree on all half-open cubes. Half-open cubes form a $\pi$-system generating $\mathcal{B}(\mathbb{R}^n)$. Define
 
 $$
-\mathcal{D} = \{U \in \mathcal{B}(\mathbb{R}^n) \mid \nu(U) = |\det A|\,\lambda(U)\}.
+\mathcal{D} = \{U \in \mathcal{B}(\mathbb{R}^n) \mid \nu(U) = |\det A|\,|U|\}.
 $$
 
 One checks that $\mathcal{D}$ is a $\lambda$-system: $\mathbb{R}^n \in \mathcal{D}$ by Step 3; if $U \subseteq V$ are in $\mathcal{D}$ and both have finite measure then $V \setminus U \in \mathcal{D}$ by additivity; and $\mathcal{D}$ is closed under increasing unions by monotone convergence. Since $\mathcal{D}$ contains the $\pi$-system of half-open cubes, the $\pi$-$\lambda$ theorem gives $\mathcal{B}(\mathbb{R}^n) = \sigma(\text{half-open cubes}) \subseteq \mathcal{D}$. Hence
 
 $$
-\nu(U) = |\det A|\,\lambda(U) \qquad \text{for all } U \in \mathcal{B}(\mathbb{R}^n).
+\nu(U) = |\det A|\,|U| \qquad \text{for all } U \in \mathcal{B}(\mathbb{R}^n).
 $$
 
 **Step 5: Extend to all subsets.** For arbitrary $U \subseteq \mathbb{R}^n$,
 
 $$
-\lambda^*(U) = \inf\{\lambda(V) \mid V \supseteq U,\ V \in \mathcal{B}(\mathbb{R}^n)\}.
+|U| = \inf\{|V| \mid V \supseteq U,\ V \in \mathcal{B}(\mathbb{R}^n)\}.
 $$
 
 Since $A$ is a bijection, $A$ maps Borel sets to Borel sets and $U \subseteq V \Rightarrow A(U) \subseteq A(V)$. Therefore
 
 $$
-\lambda^*(A(U)) = \inf\{\lambda(A(V)) \mid V \supseteq U,\ V \in \mathcal{B}(\mathbb{R}^n)\} = \inf\{|\det A|\,\lambda(V) \mid V \supseteq U,\ V \in \mathcal{B}(\mathbb{R}^n)\} = |\det A|\,\lambda^*(U).
+|A(U)| = \inf\{|A(V)| \mid V \supseteq U,\ V \in \mathcal{B}(\mathbb{R}^n)\} = \inf\{|\det A|\,|V| \mid V \supseteq U,\ V \in \mathcal{B}(\mathbb{R}^n)\} = |\det A|\,|U|.
 $$
 </Proof>
 
@@ -371,3 +484,35 @@ $$
 [1] J. Serra, *Analysis II*, ETH Zürich lecture notes.
 
 [2] J. M. Lee, *Introduction to Smooth Manifolds*, 2nd ed., Grad. Texts in Math., vol. 218, Springer, New York, 2013.
+
+[3] A.-L. Cauchy, “Mémoire sur les fonctions qui ne peuvent obtenir que deux
+valeurs égales et de signes contraires par suite des transpositions opérées
+entre les variables qu'elles renferment,” 1812.
+
+[4] H. Lebesgue, *Intégrale, longueur, aire*, Annali di Matematica Pura ed
+Applicata, 1902.
+
+[5] C. Carathéodory, *Vorlesungen über reelle Funktionen*, Teubner, 1918.
+
+[6] A. Haar, “Der Massbegriff in der Theorie der kontinuierlichen Gruppen,”
+Annals of Mathematics, 34 (1933), 147–169.
+
+[7] P. R. Halmos, *Measure Theory*, Springer, 1950.
+
+[8] G. B. Folland, *Real Analysis: Modern Techniques and Their Applications*,
+2nd ed., Wiley, 1999.
+
+[9] G. W. Stewart, “On the Early History of the Singular Value Decomposition,”
+SIAM Review, 35(4), 1993, pp. 551–566.
+
+[10] E. Beltrami, “Sulle funzioni bilineari,” Giornale di Matematiche ad Uso
+degli Studenti Delle Universita, 11, 1873, pp. 98–106.
+
+[11] C. Jordan, “Mémoire sur les formes bilinéaires,” Journal de Mathématiques
+Pures et Appliquées, 19, 1874, pp. 35–54.
+
+[12] C. Eckart and G. Young, “The approximation of one matrix by another of lower
+rank,” Psychometrika, 1, 1936, pp. 211–218.
+
+[13] G. H. Golub and C. Reinsch, “Singular Value Decomposition and Least Squares
+Solutions,” Numerische Mathematik, 14, 1970, pp. 403–420.

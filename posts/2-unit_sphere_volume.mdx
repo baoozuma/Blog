@@ -3,54 +3,149 @@ title: "Surface area and volume of a sphere in finite Euclidean space"
 date: "2025-04-06"
 description: "A derivation of the volume of the Euclidean unit ball and the surface area of the unit sphere via spherical coordinates, induced metrics, and the Gaussian integral."
 thumbnail: "/thumbnails/sphere.jpg"
-tags: ['Measure Theory', 'Classical Analysis']
+tags: ['Classical Analysis', 'Differential Geometry']
 ---
-
 ## Motivation
 
-In $\mathbb{R}^2$, the circumference of the circle of radius $r$ and the area of the disk it bounds are
+The computation of the area and volume of a sphere is one of the classical
+problems of geometry. In dimension two, the corresponding formulas are already
+familiar:
 
 $$
-2\pi r,\qquad \pi r^2.
+\operatorname{Length}(\partial B^2(0,r)) = 2\pi r,
+\qquad
+\operatorname{Area}(B^2(0,r)) = \pi r^2.
 $$
 
-In $\mathbb{R}^3$, the surface area of the sphere of radius $r$ and the volume of the ball it bounds are
+In dimension three, the standard formulas are
 
 $$
-4\pi r^2,\qquad \frac{4}{3}\pi r^3.
+\operatorname{Area}(\mathbb{S}^2_r)=4\pi r^2,
+\qquad
+\operatorname{Vol}(B^3(0,r))=\frac{4}{3}\pi r^3.
 $$
 
-The problem is to compute, for arbitrary $n\in\mathbb{N}$, the Lebesgue volume of the unit ball $B(0,1)\subset\mathbb{R}^n$ and the Riemannian surface area of its boundary $\mathbb{S}^{n-1}$.
+Historically, the three-dimensional case goes back to Archimedes. In "*On the
+Sphere and Cylinder*", Archimedes established the relation between a sphere and
+its circumscribed cylinder: the volume of the sphere is two-thirds the volume of
+the circumscribed cylinder, and the surface area of the sphere is equal to the
+lateral area of that cylinder.
 
+Thus, in low dimensions, the formulas look elementary and geometric. However,
+once we pass from $\mathbb{R}^2$ and $\mathbb{R}^3$ to arbitrary
+$\mathbb{R}^n$, the pattern is no longer obvious. One might expect powers of
+$\pi$, but the exact dependence on $n$ is more subtle. The answer involves
+the Gamma function:
+
+$$
+\operatorname{Vol}(B^n)
+=
+\frac{\pi^{n/2}}{\Gamma(n/2+1)},
+\qquad
+\operatorname{Area}(\mathbb{S}^{n-1})
+=
+\frac{2\pi^{n/2}}{\Gamma(n/2)}.
+$$
+
+This already suggests that the general $n$-dimensional problem is not merely
+a problem of elementary geometry, it belongs more naturally to analysis. The
+Gamma function itself arose from the problem of extending the factorial beyond
+integer values. This problem appeared already in the work of Wallis on
+quadrature, and was developed much further in the 18th century by Euler
+and Stirling. Euler's work on the so-called Eulerian integrals made it possible
+to treat expressions such as
+
+$$
+\Gamma(s)=\int_0^\infty t^{s-1}e^{-t}\,dt
+$$
+
+as a continuous analogue of the factorial.
+
+There is also a natural connection with the theory of multiple integrals. In the
+nineteenth century, Dirichlet studied methods for determining multiple
+integrals, and this analytic tradition is exactly the setting in which the
+volume of an $n$-dimensional ball becomes a clean calculation. Instead of
+trying to visualize a high-dimensional sphere, one evaluates an integral in two
+different ways: first by Fubini's theorem, and then by changing to spherical
+coordinates.
+
+The key example is the Gaussian integral
+
+$$
+\int_{\mathbb{R}^n} e^{-\|x\|^2}\,dx.
+$$
+
+On the one hand, Fubini's theorem reduces it to the one-dimensional Gaussian
+integral:
+
+$$
+\int_{\mathbb{R}^n} e^{-\|x\|^2}\,dx
+=
+\left(\int_{-\infty}^{\infty}e^{-x^2}\,dx\right)^n
+=
+\pi^{n/2}.
+$$
+
+On the other hand, spherical coordinates express the same integral as
+
+$$
+\int_{\mathbb{R}^n} e^{-\|x\|^2}\,dx
+=
+\int_0^\infty \int_{\mathbb{S}^{n-1}}
+e^{-r^2} r^{n-1}\,d\sigma\,dr.
+$$
+
+The radial part then becomes a Gamma integral. Comparing the two evaluations
+reveals the surface area of the unit sphere, and integrating once more in the
+radial variable gives the volume of the unit ball.
+
+Therefore, the goal of this article is to derive the formulas
+
+$$
+A_{n-1}
+=
+\operatorname{Area}(\mathbb{S}^{n-1})
+=
+\frac{2\pi^{n/2}}{\Gamma(n/2)}
+$$
+
+and
+
+$$
+V_n
+=
+\operatorname{Vol}(B^n)
+=
+\frac{\pi^{n/2}}{\Gamma(n/2+1)}
+$$
 ---
 
-## Overview of Lebesgue Measure
+## Conventions
 
-Let $\mathcal{P}(\mathbb{R}^n)$ denote the collection of subsets of $\mathbb{R}^n$. The outer Lebesgue measure is the function $\lambda^*:\mathcal{P}(\mathbb{R}^n)\to[0,+\infty]$ defined by
-
-$$
-\lambda^*(A) = \inf_{\{R_i\} \supseteq A} \sum_i |R_i|.
-$$
-
-Here each $R_i$ is a half-open rectangle covering part of $A$, and $|R_i|$ is its usual $n$-dimensional volume. A set $A$ is *Lebesgue measurable* if
+Throughout this article, we denote
 
 $$
-\lambda^*(E) = \lambda^*(A \cap E) + \lambda^*(E \setminus A), \quad \text{for all } E \subseteq \mathbb{R}^n,
-$$
-
-and for such a set write $|A|=\lambda^*(A)$.
-
-Only the full-dimensional volume role of Lebesgue measure is used below. Surface area is lower-dimensional and is computed from the Riemannian area element $d\sigma$ induced on the sphere.
-
-Lebesgue measure is translation invariant and satisfies the scaling law $|\alpha A|=|\alpha|^n|A|$ for measurable $A\subseteq\mathbb{R}^n$. Hence the volume of every ball is determined by the volume of the unit ball. Throughout this article,
-
-$$
-B(0,1) = \{x \in \mathbb{R}^n \mid \|x\| < 1\}
+B^n = B(0,1) = \{x \in \mathbb{R}^n \mid \|x\| < 1\}
 \quad \text{and} \quad
 \mathbb{S}^{n-1} = \{x \in \mathbb{R}^n \mid \|x\| = 1\}.
 $$
+The volume of the unit ball is defined by the ordinary coordinate integral
 
-Thus $\mathbb{S}^{n-1}=\partial B(0,1)$.
+$$
+V_n
+= \operatorname{Vol}(B^n)
+= \int_{B^n} dx_1\cdots dx_n.
+$$
+
+And the surface area of the unit sphere is defined by integrating the induced area element
+
+$$
+A_{n-1}
+= \operatorname{Area}(\mathbb{S}^{n-1})
+= \int_{\mathbb{S}^{n-1}} d\sigma.
+$$
+
+The goal is to compute $V_n$ and $A_{n-1}$ explicitly.
 
 ---
 
@@ -58,7 +153,6 @@ Thus $\mathbb{S}^{n-1}=\partial B(0,1)$.
 
 Two elementary analytic tools are used repeatedly.
 
-### Gaussian Integral
 
 <Lemma label="Gaussian Integral">
 $$
@@ -87,8 +181,6 @@ $$
 
 Since $I>0$, $I=\sqrt{\pi}$.
 </Proof>
-
-### The Gamma Function
 <Lemma label="Properties of the Gamma Function">
  For $s > 0$, the *Gamma function* defined by
 
@@ -125,13 +217,9 @@ $$
 
 ---
 
-## Computing $|B(0,1)|$
+## Computing $V_n$
 
-First write the volume of the unit ball as a spherical-coordinate integral. This expresses $|B(0,1)|$ in terms of the still-unknown surface area $|\mathbb{S}^{n-1}|$.
-
-### Spherical Coordinates in $\mathbb{R}^n$
-
-Start from $x_1^2+\cdots+x_n^2=1$. Since $-1\le x_1\le 1$, write $x_1=\cos\theta_1$. Then $x_2^2+\cdots+x_n^2=\sin^2\theta_1$. Next write $x_2=\sin\theta_1\cos\theta_2$, so $x_3^2+\cdots+x_n^2=\sin^2\theta_1\sin^2\theta_2$. Iterating this substitution gives
+We will start by changing variables into polar coordinates. Consider the equation $x_1^2+\cdots+x_n^2=1$. Since $-1\le x_1\le 1$, write $x_1=\cos\theta_1$. Then $x_2^2+\cdots+x_n^2=\sin^2\theta_1$. Next write $x_2=\sin\theta_1\cos\theta_2$, so $x_3^2+\cdots+x_n^2=\sin^2\theta_1\sin^2\theta_2$. Iterating this substitution gives
 
 $$
 \begin{cases}
@@ -144,7 +232,7 @@ x_n = \sin\theta_1\cdots\sin\theta_{n-2}\sin\theta_{n-1}
 \quad \theta_1,\dots,\theta_{n-2} \in [0,\pi),\quad \theta_{n-1} \in [0,2\pi).
 $$
 
-### Jacobian of the Change of Variables
+
 
 Define $\sigma(\theta_1,\dots,\theta_{n-1})=(x_1,\dots,x_n)$. Points away from the origin are written as $x=r\sigma$. The Jacobian of $(r,\theta)\mapsto r\sigma(\theta)$ is
 
@@ -161,8 +249,34 @@ $$
 Then $|\det A|^2=\det(A^TA)$.
 
 ### Induced Metric and Area Element
+The geometric origin of the induced metric is classical. For a surface
+parametrized by $X(u,v)\subseteq \mathbb{R}^3$, Gauss studied the quadratic
+expression
 
-The area element used above comes from the Riemannian volume form of the metric induced on the hypersurface.
+$$
+ds^2
+=
+E\,du^2+2F\,du\,dv+G\,dv^2,
+$$
+
+where
+
+$$
+E=\langle X_u,X_u\rangle,\qquad
+F=\langle X_u,X_v\rangle,\qquad
+G=\langle X_v,X_v\rangle.
+$$
+
+This is the first fundamental form of the surface. In modern language, it is
+the metric induced on the surface by the Euclidean inner product of the ambient
+space. Thus the basic idea of an induced metric goes back to Gauss's theory of
+surfaces.
+
+Riemann later abstracted this idea. Instead of studying only surfaces embedded
+in Euclidean space, he considered $n$-dimensional manifolds equipped with an
+intrinsic line element. This is the origin of Riemannian geometry: a manifold is
+given a smoothly varying inner product on its tangent spaces, and geometric
+quantities such as length, angle, area, and volume are derived from this metric.
 
 <Theorem label="Riemannian Volume Form">
 Let $(\Sigma^m,g)$ be an oriented Riemannian manifold. In any positively oriented smooth coordinates $(x^i)$,
@@ -225,16 +339,21 @@ $$
 
 Since both $(\partial_{x^i})$ and $(E_k)$ are positively oriented, $\det(C)>0$. Hence $f=\sqrt{\det(G)}$.
 </Proof>
+Historically, this formula belongs to the Riemannian tradition, since the metric
+determines infinitesimal volume. However, the modern expression as a top-degree
+differential form belongs to the language of differential forms, developed
+systematically by Cartan and later by de Rham.
+The area element used above comes from the Riemannian volume form of the metric induced on the hypersurface.
 
-<Definition label="Pullback Metric">
-Let $M^m,N^n$ be smooth manifolds and let $g$ be a Riemannian metric on $N$. For a smooth map $F:M\to N$, the pullback $F^*g$ is the smooth $(0,2)$-tensor field on $M$ defined by
+Let $M^m,N^n$ be smooth manifolds and let $g$ be a Riemannian metric on $N$. For a smooth map $F:M\to N$, the pullback $F^*g$ on $M$ defined by
 
 $$
 (F^*g)_p(X,Y)
 :=g_{F(p)}(dF_p(X),dF_p(Y)),
 \qquad X,Y\in T_pM.
 $$
-</Definition>
+
+It's not hard to prove that $F^*g$ is also a Riemannian metric on $M$.
 
 Let $\Sigma\subseteq M$ be a Riemannian submanifold with the metric induced from $(M^{m+1},g)$, and let $F:U\subseteq\mathbb{R}^m\to\Sigma$ be a local parametrization. For the coordinate frame $(\partial_{x^i})$ on $U$,
 
@@ -249,7 +368,7 @@ Therefore, if $G=[(F^*g)_{ij}]$, the hypersurface area is computed locally by
 $$
 \mathcal{A}(\Sigma)
 =\int_{\Sigma}\omega_g
-=\int_{F^{-1}(\Sigma)}\sqrt{\det(G)}\,d\mathcal{L}^m.
+=\int_{F^{-1}(\Sigma)}\sqrt{\det(G)}\,dx^1\cdots dx^m.
 $$
 
 The ambient metric in the present computation is Euclidean, $g=\sum_{i,j}\delta_{ij}\,dx^i\otimes dx^j$. For the parametrization $\sigma$ of $\mathbb{S}^{n-1}$, the induced metric matrix is
@@ -319,7 +438,7 @@ Thus the graph area formula is
 
 $$
 \mathcal{A}(\Sigma)
-=\int_{F^{-1}(\Sigma)}\sqrt{1+|\nabla f|^2}\,d\mathcal{L}^m.
+=\int_{F^{-1}(\Sigma)}\sqrt{1+|\nabla f|^2}\,dx^1\cdots dx^m.
 $$
 
 Return to the sphere. Since $|\sigma|=1$, $\langle\sigma,\sigma\rangle=1$. Differentiating with respect to $\theta_j$ gives
@@ -341,21 +460,19 @@ $$
 dx = r^{n-1}\sqrt{|\det G|}\; dr\,d\theta_1\cdots d\theta_{n-1} = r^{n-1}\,dr\,d\sigma.
 $$
 
-### Deriving the Formula
-
 Using the volume element above on the unit ball,
 
 $$
-|B(0,1)| = \int_{B(0,1)} dx = \int_0^1\int_{\mathbb{S}^{n-1}} r^{n-1}\,d\sigma\,dr = |\mathbb{S}^{n-1}|\int_0^1 r^{n-1}\,dr = \frac{|\mathbb{S}^{n-1}|}{n}.
+V_n = \int_{B^n} dx = \int_0^1\int_{\mathbb{S}^{n-1}} r^{n-1}\,d\sigma\,dr = A_{n-1}\int_0^1 r^{n-1}\,dr = \frac{A_{n-1}}{n}.
 $$
 
-Thus evaluation of $|B(0,1)|$ is reduced to evaluation of the surface area term $|\mathbb{S}^{n-1}|$.
+Thus evaluation of $V_n$ is reduced to evaluation of the surface area term $A_{n-1}$.
 
 ---
 
-## Computing $|\mathbb{S}^{n-1}|$
+## Computing $A_{n-1}$
 
-To evaluate $|\mathbb{S}^{n-1}|$, use the $n$-dimensional Gaussian integral
+To evaluate $A_{n-1}$, use the $n$-dimensional Gaussian integral
 
 $$
 I = \int_{\mathbb{R}^n} e^{-\|x\|^2}\,dx.
@@ -372,25 +489,25 @@ $$
 **Method 2 (Spherical coordinates).**
 
 $$
-I = \int_0^\infty\int_{\mathbb{S}^{n-1}} r^{n-1} e^{-r^2}\,d\sigma\,dr = |\mathbb{S}^{n-1}|\int_0^\infty r^{n-1} e^{-r^2}\,dr.
+I = \int_0^\infty\int_{\mathbb{S}^{n-1}} r^{n-1} e^{-r^2}\,d\sigma\,dr = A_{n-1}\int_0^\infty r^{n-1} e^{-r^2}\,dr.
 $$
 
 With $t=r^2$ and $dt=2r\,dr$,
 
 $$
-I = \frac{|\mathbb{S}^{n-1}|}{2}\int_0^\infty t^{(n-2)/2} e^{-t}\,dt = \frac{|\mathbb{S}^{n-1}|}{2}\,\Gamma(n/2).
+I = \frac{A_{n-1}}{2}\int_0^\infty t^{(n-2)/2} e^{-t}\,dt = \frac{A_{n-1}}{2}\,\Gamma(n/2).
 $$
 
 Comparing both methods gives
 
 $$
-\boxed{|\mathbb{S}^{n-1}| = \frac{2\pi^{n/2}}{\Gamma(n/2)}}.
+\boxed{A_{n-1} = \frac{2\pi^{n/2}}{\Gamma(n/2)}}.
 $$
 
-Substituting this into $|B(0,1)|=|\mathbb{S}^{n-1}|/n$ gives
+Substituting this into $V_n=A_{n-1}/n$ gives
 
 $$
-\boxed{|B(0,1)| = \frac{\pi^{n/2}}{\Gamma(n/2+1)}}.
+\boxed{V_n = \frac{\pi^{n/2}}{\Gamma(n/2+1)}}.
 $$
 
     
@@ -403,3 +520,31 @@ $$
 [2] J. H. Hubbard and B. B. Hubbard, *Vector Calculus, Linear Algebra, and Differential Forms: A Unified Approach*, 5th ed., Matrix Editions, Ithaca, 2015.
 
 [3] J. M. Lee, *Introduction to Smooth Manifolds*, 2nd ed., Grad. Texts in Math., vol. 218, Springer, New York, 2013.
+
+[4] Archimedes, *On the Sphere and Cylinder*, in T. L. Heath (trans.),
+*The Works of Archimedes*, Cambridge University Press, 1897.
+
+[5] R. Roy, “The Gamma Function,” in *Sources in the Development of Mathematics*,
+Cambridge University Press, 2011.
+
+[6] P. G. Lejeune Dirichlet, “Sur une nouvelle méthode pour la détermination
+des intégrales multiples,” *Journal de Mathématiques Pures et Appliquées*,
+Série 1, Tome 4, 1839, pp. 164–168.
+
+[7] F. W. J. Olver, A. B. Olde Daalhuis, D. W. Lozier, B. I. Schneider,
+R. F. Boisvert, C. W. Clark, B. R. Miller, B. V. Saunders, H. S. Cohl,
+and M. A. McClain, eds., *NIST Digital Library of Mathematical Functions*,
+Chapter 5: Gamma Function.
+
+[8] C. F. Gauss, *Disquisitiones generales circa superficies curvas*, 1827.
+
+[9] B. Riemann, *Über die Hypothesen, welche der Geometrie zu Grunde liegen*,
+1854. English translation: *On the Hypotheses which lie at the Bases of
+Geometry*, translated by W. K. Clifford.
+
+[10] G. Ricci-Curbastro and T. Levi-Civita, “Méthodes de calcul différentiel
+absolu et leurs applications,” *Mathematische Annalen*, 54 (1900), 125–201.
+
+[11] É. Cartan, *Leçons sur les invariants intégraux*, Hermann, Paris, 1922.
+
+[12] G. de Rham, *Variétés différentiables*, Hermann, Paris, 1955.
