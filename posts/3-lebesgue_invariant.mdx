@@ -68,7 +68,7 @@ Suppose $\Phi: \mathbb{R}^n \to \mathbb{R}^n$ is a Lipschitz mapping. If $E \sub
 </Lemma>
 
 <Proof>
-**Step 1.** If $|E| = 0$, then $|\Phi(E)| = 0$. Let $\varepsilon > 0$ be arbitrary; there exist cubes $\{C_i\}$ covering $E$ such that
+**Step 1.** If $|E| = 0$, then $|\Phi(E)| = 0$. Let $\varepsilon > 0$ be arbitrary, there exist cubes $\{C_i\}$ covering $E$ such that
 
 $$
 \sum_{i} |C_i| < \frac{2^n}{\omega_n \sqrt{n} C}\varepsilon,
@@ -83,19 +83,35 @@ $$
 From the definition of diameter,
 
 $$
-\operatorname{diam} \Phi(C_i) = \sup\{\|x - y\| \mid x,y \in \Phi(C_i)\} = \sup\{\|\Phi(x) - \Phi(y)\| \mid x,y \in C_i\} \leq C \operatorname{diam}(C_i) = \sqrt{n}C(b_i - a_i).
+\begin{aligned}
+\operatorname{diam} \Phi(C_i)
+&= \sup\{\|x - y\| \mid x,y \in \Phi(C_i)\} \\
+&= \sup\{\|\Phi(x) - \Phi(y)\| \mid x,y \in C_i\} \\
+&\leq C \operatorname{diam}(C_i)
+= \sqrt{n}C(b_i - a_i).
+\end{aligned}
 $$
 
 Since $\Phi(C_i)$ is contained in a ball of radius $\frac{\operatorname{diam} C_i}{2}$,
 
 $$
-|\Phi(C_i)| \leq \omega_n \left(\frac{\operatorname{diam}(C_i)}{2}\right)^n \leq \frac{\omega_n \sqrt{n} C}{2^n}(b_i - a_i)^n = \frac{\omega_n \sqrt{n} C}{2^n}|C_i|.
+\begin{aligned}
+|\Phi(C_i)|
+&\leq \omega_n \left(\frac{\operatorname{diam}(C_i)}{2}\right)^n \\
+&\leq \frac{\omega_n \sqrt{n} C}{2^n}(b_i - a_i)^n
+= \frac{\omega_n \sqrt{n} C}{2^n}|C_i|.
+\end{aligned}
 $$
 
 Since $\{\Phi(C_i)\}$ covers $\Phi(E)$,
 
 $$
-|\Phi(E)| \leq \sum_i |\Phi(C_i)| \leq \frac{\omega_n \sqrt{n} C}{2^n} \sum_i |C_i| \leq \varepsilon.
+\begin{aligned}
+|\Phi(E)|
+&\leq \sum_i |\Phi(C_i)| \\
+&\leq \frac{\omega_n \sqrt{n} C}{2^n} \sum_i |C_i| \\
+&\leq \varepsilon.
+\end{aligned}
 $$
 
 Since $\varepsilon$ is arbitrary, $|\Phi(E)| = 0$.
@@ -143,13 +159,23 @@ $$
 By Step 1, $\Phi$ maps null sets to null sets, so $|\Phi(N)| = 0$. Then
 
 $$
-|\Phi(E) \cap A| = |[\Phi(H) \cup \Phi(N)] \cap A| \leq |\Phi(H) \cap A| + |\Phi(N) \cap A| \leq |\Phi(H) \cap A| + |\Phi(N)| = |\Phi(H) \cap A|.
+\begin{aligned}
+|\Phi(E) \cap A|
+&= |[\Phi(H) \cup \Phi(N)] \cap A| \\
+&\leq |\Phi(H) \cap A| + |\Phi(N) \cap A| \\
+&\leq |\Phi(H) \cap A| + |\Phi(N)| \\
+&= |\Phi(H) \cap A|.
+\end{aligned}
 $$
 
 Since $\Phi(H)$ is measurable, combining yields
 
 $$
-|\Phi(E) \cap A| + |\Phi(E)^c \cap A| \leq |\Phi(H) \cap A| + |\Phi(H)^c \cap A| = |A|.
+\begin{aligned}
+|\Phi(E) \cap A| + |\Phi(E)^c \cap A|
+&\leq |\Phi(H) \cap A| + |\Phi(H)^c \cap A| \\
+&= |A|.
+\end{aligned}
 $$
 
 The reverse inequality follows by monotonicity of outer measure. Hence $\Phi(E)$ satisfies the Carathéodory condition.
@@ -209,7 +235,13 @@ This implies $\|\Phi x\| = \|x\|$. Since $\Phi$ is invertible, $\Phi^{-1} \in O(
 *Step 2: $\Phi(B(x_i, r)) = B(\Phi(x_i), r)$ and covers are preserved.* Since $\Phi$ is invertible,
 
 $$
-\Phi(B(x_i, r)) = \{\Phi x \mid \|x - x_i\| < r\} = \{x \mid \|\Phi^{-1}(x) - x_i\| < r\} = \{x \mid \|x - \Phi x_i\| < r\} = B(\Phi(x_i), r).
+\begin{aligned}
+\Phi(B(x_i, r))
+&= \{\Phi x \mid \|x - x_i\| < r\} \\
+&= \{x \mid \|\Phi^{-1}(x) - x_i\| < r\} \\
+&= \{x \mid \|x - \Phi x_i\| < r\} \\
+&= B(\Phi(x_i), r).
+\end{aligned}
 $$
 
 It follows that $\{B(x_i, r)\}$ covers $E$ if and only if $\{B(\Phi(x_i), r)\}$ covers $\Phi(E)$.
@@ -217,13 +249,23 @@ It follows that $\{B(x_i, r)\}$ covers $E$ if and only if $\{B(\Phi(x_i), r)\}$ 
 *Step 3: $|\Phi(E)| = |E|$.* Let $\varepsilon > 0$. Choose open balls $\{B(x_i, r_1)\}$ covering $E$ such that $\sum_i |B(x_i, r_1)| < |E| + \varepsilon$. Then $\{B(\Phi(x_i), r_1)\}$ covers $\Phi(E)$. Since $\Phi$ is an isometry, $|B(\Phi(x_i), r_1)| = |B(x_i, r_1)|$, so
 
 $$
-|\Phi(E)| \leq \sum_i |B(\Phi(x_i), r_1)| = \sum_i |B(x_i, r_1)| \leq |E| + \varepsilon.
+\begin{aligned}
+|\Phi(E)|
+&\leq \sum_i |B(\Phi(x_i), r_1)| \\
+&= \sum_i |B(x_i, r_1)| \\
+&\leq |E| + \varepsilon.
+\end{aligned}
 $$
 
 Now choose open balls $\{B(y_i, r_2)\}$ covering $\Phi(E)$ such that $\sum_i |B(y_i, r_2)| < |\Phi(E)| + \varepsilon$. Then $\{B(\Phi^{-1}(y_i), r_2)\}$ covers $E$. Since $\Phi^{-1} \in O(n)$ is also an isometry,
 
 $$
-|E| \leq \sum_i |B(\Phi^{-1}(y_i), r_2)| = \sum_i |B(y_i, r_2)| < |\Phi(E)| + \varepsilon.
+\begin{aligned}
+|E|
+&\leq \sum_i |B(\Phi^{-1}(y_i), r_2)| \\
+&= \sum_i |B(y_i, r_2)| \\
+&< |\Phi(E)| + \varepsilon.
+\end{aligned}
 $$
 
 Since $\varepsilon$ is arbitrary, $|\Phi(E)| = |E|$.
@@ -243,7 +285,12 @@ $$
 Since $\Phi$ is bijective, $\{R_i\}$ covers $E$ if and only if $\{\Phi(R_i)\}$ covers $\Phi(E)$. Therefore
 
 $$
-|\Phi(E)| = \inf\left\{\sum |R_i| \;\middle|\; \{R_i\} \text{ covers } \Phi(E)\right\} = \inf\left\{\sum |\det\Phi| \cdot |\Phi^{-1}(R_i)| \;\middle|\; \{\Phi^{-1}(R_i)\} \text{ covers } E\right\} = |\det\Phi| \cdot |E|.
+\begin{aligned}
+|\Phi(E)|
+&= \inf\left\{\sum |R_i| \;\middle|\; \{R_i\} \text{ covers } \Phi(E)\right\} \\
+&= \inf\left\{\sum |\det\Phi| \cdot |\Phi^{-1}(R_i)| \;\middle|\; \{\Phi^{-1}(R_i)\} \text{ covers } E\right\} \\
+&= |\det\Phi| \cdot |E|.
+\end{aligned}
 $$
 
 **Case 3: $\Phi(x) = x + x_0$**, where $x_0 = (x_1, \dots, x_n) \in \mathbb{R}^n$. Let $R = \prod_{i=1}^n (a_i, b_i]$ be any rectangle. Then $\Phi(R) = \prod_{i=1}^n (a_i + x_i, b_i + x_i]$, and since $\Phi(R)$ is a rectangle,
@@ -254,10 +301,16 @@ $$
 
 Since $\Phi$ is bijective, $\{R_i\}$ covers $E$ if and only if $\{\Phi(R_i)\}$ covers $\Phi(E)$. Therefore $|\Phi(E)| = |E|$.
 
-**Conclusion.** For any linear map $\Phi: \mathbb{R}^n \to \mathbb{R}^n$, the SVD theorem gives $\Phi = U\Sigma V^T$ with $U, V \in O(n)$ and $\Sigma$ diagonal. Let $E \subseteq \mathbb{R}^n$ be arbitrary. Since $U, V$ are isometries,
+For any linear map $\Phi: \mathbb{R}^n \to \mathbb{R}^n$, the SVD theorem gives $\Phi = U\Sigma V^T$ with $U, V \in O(n)$ and $\Sigma$ diagonal. Let $E \subseteq \mathbb{R}^n$ be arbitrary. Since $U, V$ are isometries,
 
 $$
-|\Phi(E)| = |U\Sigma V^T(E)| = |\Sigma V^T(E)| = |\det\Sigma| \cdot |V^T(E)| = |\det\Sigma| \cdot |E|.
+\begin{aligned}
+|\Phi(E)|
+&= |U\Sigma V^T(E)| \\
+&= |\Sigma V^T(E)| \\
+&= |\det\Sigma| \cdot |V^T(E)| \\
+&= |\det\Sigma| \cdot |E|.
+\end{aligned}
 $$
 
 Since $|\det U| = |\det V| = 1$, we have $|\det\Phi| = |\det\Sigma|$. Hence
@@ -306,7 +359,13 @@ If $\mathcal{P}$ is a $\pi$-system and $\mathcal{L}$ is a $\lambda$-system with 
 Let
 
 $$
-\mathcal{S} = \bigcap_{\substack{\mathcal{L}' \supseteq \mathcal{P} \\ \mathcal{L}' \text{ is a } \lambda\text{-system}}} \mathcal{L}'
+\mathcal{S}
+=
+\bigcap_{\substack{
+  \mathcal{L}' \supseteq \mathcal{P} \\
+  \mathcal{L}' \text{ is a } \lambda\text{-system}
+}}
+\mathcal{L}'
 $$
 
 be the smallest $\lambda$-system containing $\mathcal{P}$. Then $\mathcal{P} \subseteq \mathcal{S} \subseteq \mathcal{L}$, and $\mathcal{S}$ is itself a $\lambda$-system by construction.
@@ -343,7 +402,12 @@ Suppose not. Then there exists a sequence $(c_i, x_i) \in A$ with $c_i \to c$ an
 Since $\{J_c\}_{c \in [a,b]}$ is an open cover of the compact set $[a,b]$, it admits a finite subcover $\{J_{c_1}, \dots, J_{c_m}\}$. If necessary, we can shrink overlapping parts so that $\sum_k |J_{c_k}| \leq 2(b-a)$. Then
 
 $$
-|A| \leq \sum_{k=1}^m |J_{c_k} \times U_{c_k}| = \sum_{k=1}^m |J_{c_k}| \cdot |U_{c_k}| \leq 2(b-a)\varepsilon.
+\begin{aligned}
+|A|
+&\leq \sum_{k=1}^m |J_{c_k} \times U_{c_k}| \\
+&= \sum_{k=1}^m |J_{c_k}| \cdot |U_{c_k}| \\
+&\leq 2(b-a)\varepsilon.
+\end{aligned}
 $$
 
 Since $\varepsilon$ is arbitrary, $|A| = 0$.
@@ -363,7 +427,11 @@ $$
 Fix $1 \leq i \leq n$ such that $a_i \neq 0$. For any $x \in V$,
 
 $$
-x_i = \frac{1}{a_i}\left(b - \sum_{j \neq i} a_j x_j\right) =: F(x_1, \dots, x_{i-1}, x_{i+1}, \dots, x_n).
+\begin{aligned}
+x_i
+&= \frac{1}{a_i}\left(b - \sum_{j \neq i} a_j x_j\right) \\
+&=: F(x_1, \dots, x_{i-1}, x_{i+1}, \dots, x_n).
+\end{aligned}
 $$
 
 So $V$ is the graph of the continuous function $F: \mathbb{R}^{n-1} \to \mathbb{R}$. We apply the previous lemma: for any $c \in \mathbb{R}$, the slice $V \cap (\{c\} \times \mathbb{R}^{n-1})$ consists of at most one point (since $x_i$ is uniquely determined by the remaining coordinates), which has $(n-1)$-dimensional measure zero. Since $V$ is closed and every closed set is a countable union of compact sets, and each compact slice has $(n-1)$-measure zero, it follows that $V$ has Lebesgue measure zero.
@@ -431,7 +499,12 @@ $$
 **Step 1: Define a candidate measure $\nu$.** Let $\nu: \mathcal{B}(\mathbb{R}^n) \to [0, +\infty]$ be defined by $\nu(U) = |A(U)|$. Clearly $\nu(\varnothing) = 0$. For any countable disjoint collection $\{U_i\} \subseteq \mathcal{B}(\mathbb{R}^n)$, since $A$ is a bijection,
 
 $$
-\nu\!\left(\bigsqcup_i U_i\right) = \left|\bigsqcup_i A(U_i)\right| = \sum_i |A(U_i)| = \sum_i \nu(U_i).
+\begin{aligned}
+\nu\!\left(\bigsqcup_i U_i\right)
+&= \left|\bigsqcup_i A(U_i)\right| \\
+&= \sum_i |A(U_i)| \\
+&= \sum_i \nu(U_i).
+\end{aligned}
 $$
 
 Hence $\nu$ is a measure on $\mathcal{B}(\mathbb{R}^n)$.
@@ -439,7 +512,13 @@ Hence $\nu$ is a measure on $\mathcal{B}(\mathbb{R}^n)$.
 **Step 2: $\nu$ is translation invariant.** For any $U \in \mathcal{B}(\mathbb{R}^n)$ and $x \in \mathbb{R}^n$, since $A$ is linear,
 
 $$
-\nu(U + x) = |A(U + x)| = |A(U) + Ax| = |A(U)| = \nu(U),
+\begin{aligned}
+\nu(U + x)
+&= |A(U + x)| \\
+&= |A(U) + Ax| \\
+&= |A(U)| \\
+&= \nu(U),
+\end{aligned}
 $$
 
 where the middle equality uses translation invariance of outer measure.
@@ -473,7 +552,12 @@ $$
 Since $A$ is a bijection, $A$ maps Borel sets to Borel sets and $U \subseteq V \Rightarrow A(U) \subseteq A(V)$. Therefore
 
 $$
-|A(U)| = \inf\{|A(V)| \mid V \supseteq U,\ V \in \mathcal{B}(\mathbb{R}^n)\} = \inf\{|\det A|\,|V| \mid V \supseteq U,\ V \in \mathcal{B}(\mathbb{R}^n)\} = |\det A|\,|U|.
+\begin{aligned}
+|A(U)|
+&= \inf\{|A(V)| \mid V \supseteq U,\ V \in \mathcal{B}(\mathbb{R}^n)\} \\
+&= \inf\{|\det A|\,|V| \mid V \supseteq U,\ V \in \mathcal{B}(\mathbb{R}^n)\} \\
+&= |\det A|\,|U|.
+\end{aligned}
 $$
 </Proof>
 
