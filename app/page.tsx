@@ -50,19 +50,27 @@ export default function HomePage() {
       <div className="section">
         <p className="section-label">introduction · 紹介</p>
         <div className="text-block">
-       <p>
-        Hi! My full name is Pham Ngoc Gia Bao, though I usually go by
-        Alëksis. I am interested in the relationship between Combinatorics and
-        Harmonic Analysis. In particular, I am interested in how certain problems
-        in analysis can be studied by discretizing them into geometric pieces such
-        as tubes, spheres, or rectangles. These questions motivate my interest in
-        Projection Theory, Incidence Geometry, and Geometric Measure Theory.
-      </p>
+    <p>
+      Hi! My full name is Pham Ngoc Gia Bao, though I usually go by
+      Alëksis. I am interested in the relationship between Combinatorics and
+      Harmonic Analysis. For example, how certain problems
+      in analysis can be studied by discretizing them into geometric pieces such
+      as tubes, spheres, or rectangles? These questions motivate my interest in
+      Projection Theory, Incidence Geometry, and Geometric Measure Theory.
+    </p>
 
-      <p>
-        This site is where I keep mathematical notes, selected writings, and small
-        academic projects that I want to organize more carefully.
-      </p>
+    <p>
+      I am also interested in mathematical physics, particularly analytical
+      mechanics and the use of differential geometry in relativity and
+      electrodynamics.
+    </p>
+
+    <p>
+      This site is where I keep mathematical notes, selected writings, and small
+      academic projects that I want to organize more carefully. I also enjoy
+      building web interfaces and designing UI/UX as a way to make technical
+      writing more readable and personal.
+    </p>
 
       <p>
         Currently, I am an undergraduate at{" "}
