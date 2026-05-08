@@ -61,7 +61,7 @@ export default function HomePage() {
 
     <p>
       I am also interested in mathematical physics, particularly analytical
-      mechanics and the use of differential geometry in relativity and
+      mechanics and the applications of differential geometry in relativity and
       electrodynamics.
     </p>
 
@@ -71,7 +71,13 @@ export default function HomePage() {
       building web interfaces and designing UI/UX as a way to make technical
       writing more readable and personal.
     </p>
-
+      
+    <p>
+  I also have a background in mathematical olympiads, and I still enjoy the
+  strange elegance of olympiad combinatorics. One project I am slowly building
+  is a collection of combinatorial problems viewed through linear algebra,
+  probability, classical analysis, and graph theory. I am especially interested in the recurring mechanisms behind IMO-style problems, especially the hidden changes of viewpoint that can make a difficult problem suddenly become almost transparent.
+</p>
       <p>
         Currently, I am an undergraduate at{" "}
         <a
