@@ -38,6 +38,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <NavLogo />
             <div className="nav-links">
               <a href="/blog">blog</a>
+              <a href="/cv.pdf" target="_blank" rel="noopener noreferrer">CV</a>
               {/*<a href="/about">about</a>*/}
               {/* <a href="/research">research</a> */}
               <ThemeToggle />
