@@ -50,34 +50,20 @@ export default function HomePage() {
       <div className="section">
         <p className="section-label">introduction · 紹介</p>
         <div className="text-block">
+
     <p>
-      Hi! My full name is Pham Ngoc Gia Bao, though I usually go by
-      Alëksis. I am interested in the relationship between Combinatorics and
-      Harmonic Analysis. For example, how certain problems
-      in analysis can be studied by discretizing them into geometric pieces such
-      as tubes, spheres, or rectangles? These questions motivate my interest in
-      Projection Theory, Incidence Geometry, and Geometric Measure Theory.
+      Hi! My full name is Pham Ngoc Gia Bao, though I usually go by Alëksis. Much of my current mathematical taste comes from the border between Combinatorics and Harmonic Analysis. I like the idea that certain problems in analysis can be studied by discretizing them into geometric pieces such as tubes, spheres, or rectangles. This perspective is what draws me toward Projection Theory, Incidence Geometry, and Geometric Measure Theory.
     </p>
 
     <p>
-      I am also interested in mathematical physics, particularly analytical
-      mechanics and the applications of differential geometry in relativity and
-      electrodynamics.
+     I also spend time with mathematical physics, particularly analytical mechanics and the applications of differential geometry to relativity and electrodynamics.
     </p>
-
     <p>
-      This site is where I keep mathematical notes, selected writings, and small
-      academic projects that I want to organize more carefully. I also enjoy
-      building web interfaces and designing UI/UX as a way to make technical
-      writing more readable and personal.
+      I have a background in mathematical olympiads, and I still enjoy the strange elegance of olympiad combinatorics. One project I am slowly building is a collection of combinatorial problems viewed through linear algebra, probability, classical analysis, and graph theory. I am especially drawn to the recurring mechanisms behind IMO-style problems, where a hidden change of viewpoint can make a difficult problem suddenly become almost transparent.
     </p>
-      
     <p>
-  I also have a background in mathematical olympiads, and I still enjoy the
-  strange elegance of olympiad combinatorics. One project I am slowly building
-  is a collection of combinatorial problems viewed through linear algebra,
-  probability, classical analysis, and graph theory. I am especially interested in the recurring mechanisms behind IMO-style problems, especially the hidden changes of viewpoint that can make a difficult problem suddenly become almost transparent.
-</p>
+    This site is where I keep mathematical notes, selected writings, and small academic projects that I want to organize more carefully. I also enjoy building web interfaces and designing UI/UX as a way to make technical writing more readable and personal.
+    </p>
       <p>
         Currently, I am an undergraduate at{" "}
         <a
