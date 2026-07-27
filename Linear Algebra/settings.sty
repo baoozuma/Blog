@@ -1,0 +1,263 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{settings}[2026/05/06 arXiv submission style]
+
+% This style follows the compact arXiv source provided in arXiv-2605.02988v1:
+% plain article layout, default title block, standard theorem numbering.
+
+\RequirePackage[utf8]{inputenc}
+\RequirePackage{amsmath,amssymb,amsfonts,latexsym}
+\RequirePackage[
+  letterpaper,
+  left=1.1in,
+  right=1.1in,
+  top=1.15in,
+  bottom=1.15in,
+  headheight=15pt,
+  headsep=24pt,
+  footskip=32pt
+]{geometry}
+\RequirePackage{graphicx}
+\RequirePackage{tikz}
+\RequirePackage[
+  colorlinks=false,
+  pdfborder={0 0 1},
+  linkbordercolor={1 0 0},
+  citebordercolor={1 0 0},
+  urlbordercolor={1 0 0}
+]{hyperref}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{fancyhdr}
+\emergencystretch=1em
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{4pt plus 1pt minus 1pt}
+\raggedbottom
+\usepackage{longtable}
+
+% Use the sans-serif family for bold text and section headings.
+\definecolor{sectionnumbergreenbrown}{RGB}{0,128,0}
+\definecolor{subsectionnumberblue}{RGB}{35,92,205}
+\definecolor{subsubsectionnumberred}{RGB}{178,45,45}
+\newcommand{\sectionnumbercolor}{\color{sectionnumbergreenbrown}}
+\newcommand{\subsectionnumbercolor}{\color{subsectionnumberblue}}
+\newcommand{\subsubsectionnumbercolor}{\color{subsubsectionnumberred}}
+\DeclareRobustCommand{\textbf}[1]{{\sffamily\bfseries #1}}
+\makeatletter
+\renewcommand\section{\@startsection {section}{1}{\z@}%
+                                   {-3.5ex \@plus -1ex \@minus -.2ex}%
+                                   {2.3ex \@plus.2ex}%
+                                   {\normalfont\sffamily\Large\bfseries}}
+\renewcommand\subsection{\@startsection{subsection}{2}{\z@}%
+                                     {-3.25ex\@plus -1ex \@minus -.2ex}%
+                                     {1.5ex \@plus .2ex}%
+                                     {\normalfont\sffamily\large\bfseries}}
+\renewcommand\subsubsection{\@startsection{subsubsection}{3}{\z@}%
+                                     {-3.25ex\@plus -1ex \@minus -.2ex}%
+                                     {1.5ex \@plus .2ex}%
+                                     {\normalfont\sffamily\normalsize\bfseries}}
+\renewcommand\paragraph{\@startsection{paragraph}{4}{\z@}%
+                                    {3.25ex \@plus1ex \@minus.2ex}%
+                                    {-1em}%
+                                    {\normalfont\sffamily\normalsize\bfseries}}
+\renewcommand\subparagraph{\@startsection{subparagraph}{5}{\parindent}%
+                                       {3.25ex \@plus1ex \@minus .2ex}%
+                                       {-1em}%
+                                      {\normalfont\sffamily\normalsize\bfseries}}
+\renewcommand{\@seccntformat}[1]{%
+  \begingroup
+  \sffamily\bfseries
+  \@ifundefined{#1numbercolor}{}{\csname #1numbercolor\endcsname}%
+  \csname the#1\endcsname.\quad
+  \endgroup
+}
+
+% Book-style chapter headings without changing theorem numbering.
+\def\@makechapterhead#1{%
+  \vspace*{36pt}%
+  {\parindent \z@ \raggedright \normalfont
+    \sffamily\bfseries\huge Chapter \thechapter
+    \par\nobreak
+    \vskip 12pt
+    \Huge #1\par\nobreak
+    \vskip 32pt
+  }%
+}
+\def\@makeschapterhead#1{%
+  \vspace*{36pt}%
+  {\parindent \z@ \raggedright
+    \normalfont\sffamily\bfseries\Huge #1\par\nobreak
+    \vskip 32pt
+  }%
+}
+\makeatother
+
+% Running headers for book documents.
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[R]{\sffamily\small\nouppercase{\rightmark}}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\fancypagestyle{plain}{%
+  \fancyhf{}
+  \fancyfoot[C]{\thepage}
+  \renewcommand{\headrulewidth}{0pt}
+}
+
+% Common notation, adapted from the Lazer notes.
+\newcommand{\mc}{\mathcal}
+\newcommand{\bb}{\mathbb}
+\newcommand{\ti}{\tilde}
+\newcommand{\clo}{\overline}
+\newcommand{\vect}{\overrightarrow}
+\newcommand{\pa}{\partial}
+\newcommand{\de}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\ome}{\omega}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\limit}{\displaystyle \lim}
+\newcommand{\ra}{\Rightarrow}
+\newcommand{\lra}{\Leftrightarrow}
+\newcommand{\dsum}{\displaystyle \sum}
+\newcommand{\dprof}{\displaystyle \prod}
+\newcommand{\nlim}{\displaystyle \lim_{n \to +\infty}}
+\newcommand{\series}{\dsum_{n = 1}^{\infty}}
+\newcommand{\dd}{\,\mathrm{d}}
+
+% Common operators.
+\newcommand{\supp}{\mathrm{supp}}
+\newcommand{\vol}{\mathrm{Vol}}
+\newcommand{\multi}{\mathrm{Multi}}
+\newcommand{\diam}{\mathrm{diam}}
+\newcommand{\rank}{\mathrm{rank}}
+\newcommand{\kernel}{\mathrm{ker}}
+\newcommand{\im}{\mathrm{Im}}
+\newcommand{\spann}{\mathrm{span}}
+\newcommand{\cl}{\mathrm{cl}}
+\newcommand{\inte}{\mathrm{Int}}
+\newcommand{\exte}{\mathrm{Ext}}
+\newcommand{\alt}{\mathrm{Alt}}
+\newcommand{\sng}{\mathrm{sgn}}
+\newcommand{\sgn}{\mathrm{sgn}}
+
+% Delimiters and spaces.
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\ip}[1]{\left\langle #1 \right\rangle}
+\newcommand{\circl}{\bb{S}}
+\newcommand{\real}{\bb{R}}
+\newcommand{\comple}{\bb{complex}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\NN}{\mathbf{N}}
+\newcommand{\RR}{\mathbf{R}}
+\newcommand{\CC}{\mathbf{C}}
+\newcommand{\ZZ}{\mathbf{Z}}
+
+% Shared theorem counter.
+\newcounter{theorem}[section]
+\renewcommand{\thetheorem}{\thesection.\arabic{theorem}}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{example}[theorem]{Example}
+
+\makeatletter
+\def\@begintheorem#1#2{\trivlist
+   \item[\hskip \labelsep{\sffamily\bfseries #1\ #2.}]}
+\def\@opargbegintheorem#1#2#3{\trivlist
+      \item[\hskip \labelsep{\sffamily\bfseries #1\ #2\ (#3).}]}
+\makeatother
+
+% Kept for compatibility with the existing source.
+\definecolor{theoremblue}{RGB}{0,0,255}
+\definecolor{definitionred}{RGB}{180,0,0}
+\definecolor{claimyellow}{RGB}{190,145,0}
+\definecolor{lemmaorange}{RGB}{230,115,0}
+\definecolor{remarkgreen}{RGB}{0,128,0}
+\definecolor{propositionviolet}{RGB}{110,70,170}
+\definecolor{problemyellow}{RGB}{255,204,0}
+\newsavebox{\envbodybox}
+\newlength{\envwidth}
+\newcommand{\envbegin}[4]{%
+  \par\vspace{8pt}%
+  \refstepcounter{theorem}%
+  \if\relax\detokenize{#2}\relax
+    \def\envtitle{#1\ \thetheorem.}%
+  \else
+    \def\envtitle{#1\ \thetheorem\ (#2).}%
+  \fi
+  \begingroup
+  \setlength{\fboxrule}{1pt}%
+  \setlength{\fboxsep}{0pt}%
+  \setlength{\envwidth}{\dimexpr\linewidth-2\fboxrule\relax}%
+  \begin{lrbox}{\envbodybox}%
+  \begin{minipage}{\envwidth}%
+  \colorbox{#3!20}{%
+    \parbox{\dimexpr\envwidth-2\fboxsep\relax}{%
+      \vspace{4pt}%
+      \hspace{8pt}{\sffamily\bfseries\envtitle}%
+      \vspace{4pt}%
+    }%
+  }%
+  \par\nointerlineskip\noindent{\color{#3}\rule{\envwidth}{1pt}}%
+  \par\noindent
+  \hspace{10pt}%
+  \begin{minipage}{\dimexpr\envwidth-20pt\relax}%
+  \vspace{6pt}%
+  #4%
+}
+\newcommand{\envend}[1]{%
+  \par\vspace{8pt}%
+  \end{minipage}%
+  \end{minipage}%
+  \end{lrbox}%
+  \noindent\fcolorbox{#1}{white}{\usebox{\envbodybox}}%
+  \endgroup
+  \par\vspace{8pt}%
+}
+\newenvironment{theorem}[1][]{\envbegin{Theorem}{#1}{theoremblue}{}}{\envend{theoremblue}}
+\newenvironment{definition}[1][]{\envbegin{Definition}{#1}{definitionred}{}}{\envend{definitionred}}
+\newenvironment{claim}[1][]{%
+  \par\vspace{8pt}%
+  \refstepcounter{theorem}%
+  \if\relax\detokenize{#1}\relax
+    \def\claimtitle{Claim\ \thetheorem.}%
+  \else
+    \def\claimtitle{Claim\ \thetheorem\ (#1).}%
+  \fi
+  \noindent{\sffamily\bfseries\claimtitle}\quad
+}{%
+  \par\vspace{8pt}%
+}
+\newenvironment{lemma}[1][]{\envbegin{Lemma}{#1}{lemmaorange}{}}{\envend{lemmaorange}}
+\newenvironment{remark}[1][]{\envbegin{Remark}{#1}{remarkgreen}{}}{\envend{remarkgreen}}
+\newenvironment{proposition}[1][]{\envbegin{Proposition}{#1}{propositionviolet}{}}{\envend{propositionviolet}}
+\newenvironment{boxedtheorem}[1][]{\begin{theorem}[#1]}{\end{theorem}}
+\newenvironment{boxeddefinition}[1][]{\begin{definition}[#1]}{\end{definition}}
+\newenvironment{boxedclaim}[1][]{\begin{claim}[#1]}{\end{claim}}
+\newenvironment{boxedlemma}[1][]{\begin{lemma}[#1]}{\end{lemma}}
+\newenvironment{boxedremark}[1][]{\begin{remark}[#1]}{\end{remark}}
+\newenvironment{boxedproposition}[1][]{\begin{proposition}[#1]}{\end{proposition}}
+% \newenvironment{problem}[1][]{\envbegin{Problem}{#1}{problemyellow}{}}{\envend{problemyellow}}
+\newenvironment{boxedproblem}[1][]{\begin{problem}[#1]}{\end{problem}}
+\newtheorem{problem}{Problem}[section]
+% A lightweight proof environment because this MiKTeX install is missing amsthm.
+\newenvironment{proof}[1][Proof]{%
+  \par\medskip\noindent{\it #1.}\enspace
+}{%
+  \hfill\(\square\)\par\medskip
+}
+\newenvironment{solution}{\begin{proof}[Solution]}{\end{proof}}
+\newenvironment{sol}{\begin{proof}[Solution]}{\end{proof}}
+
+% Keywords line after the abstract.
+\newcommand{\keywordname}{\textbf{\emph{Keywords}}}
+\newcommand{\keywords}[1]{%
+  \par\medskip\noindent\keywordname\enspace #1\par\medskip
+}
+
+\makeatletter
+\renewcommand*\l@chapter{\@dottedtocline{0}{0em}{1.8em}}
+\renewcommand*\l@section{\@dottedtocline{1}{1.5em}{2.3em}}
+\renewcommand*\l@subsection{\@dottedtocline{2}{3.8em}{3.2em}}
+\renewcommand*\l@subsubsection{\@dottedtocline{3}{7.0em}{4.1em}}
+\makeatother
+
+\endinput

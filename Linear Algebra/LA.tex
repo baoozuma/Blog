@@ -1,0 +1,483 @@
+﻿\documentclass[12pt]{article}
+
+\usepackage{settings}
+\title{\LARGE\textbf{Linear Algebra Notes}}
+\newcommand{\authorinfo}{Faculty of Mathematics and Computer Science; e-mail: \texttt{aleksisdg@gmail.com   }}
+\author{
+  \normalsize Aleksis Arendt\\
+  \normalsize Westfälische Wilhelms-Universität Münster \footnote{\authorinfo}
+}
+
+\date{\normalsize\today}
+
+\makeatletter
+\renewcommand{\@maketitle}{%
+  \newpage
+  \vspace*{2cm}%
+  \begin{center}%
+  \let \footnote \thanks
+    {\LARGE \@title \par}%
+    \vskip 1.5em%
+    {\large
+      \lineskip .5em%
+      \begin{tabular}[t]{c}%
+        \@author
+      \end{tabular}\par}%
+    \vskip 1em%
+    {\large \@date}%
+  \end{center}%
+  \par
+  \vskip 1.5em
+  \begin{center}
+    \includegraphics[width=0.2\textwidth]{muenster.png}\par    
+  \end{center}
+}
+\makeatother
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+\section{Jordan Forms}
+\begin{boxedproblem}
+Let 
+\[
+    A = \begin{pmatrix}
+        1 & 0 & 0\\
+        1 & 2 & 1\\
+        -1& 0 & 1\\
+    \end{pmatrix}.
+\]
+Find the minimal polymonial of $A$ and analyze $\bb{R}^3$ into a direct sum of eigenspaces.
+\end{boxedproblem}
+\begin{sol}
+One has 
+\begin{align*}
+    P_A(\lambda) &= \det(A - \lambda I) = \det \begin{pmatrix}
+        1 - \lambda & 0 & 0\\
+        1 & 2 - \lambda & 1\\
+        -1 & 0 & -1 -\lambda
+    \end{pmatrix}\\
+    &= (1 - \lambda)\det \begin{pmatrix}
+        2 - \lambda & 1\\
+        0 & -1 - \lambda
+    \end{pmatrix}\\
+    &= (1 - \lambda)(2 - \lambda)(-1 - \lambda)
+\end{align*}
+Since each root factor of P has degree 1, then $m_A(\lambda) = P_A(\lambda)$. Choose 
+\begin{align*}
+v_1 &= (2,-1,-1)\in \ker(A - I)\\
+v_2 &= (0,1,0) \in \ker(A - 2I)\\
+v_3 &= (0,-1,3) \in \ker(A + I),
+\end{align*}
+and let $P = (v_1,v_2,v_3)$. One can check that $\det P \neq 0$, so $(v_1,v_2,v_3)$ forms a basis for $\bb{R}^3$. Hence 
+\[
+    \bb{R}^3 = \bigoplus_{i = 1}^3 \ker(A - \lambda_i I).
+\]
+\end{sol}
+\begin{boxedproblem}
+    Find the Jordan (or diagonal) form of 
+    \[
+        A = \begin{pmatrix}
+            3 & -1 & 1\\
+            2 & 0 & 1\\
+            1 & -1 &2
+        \end{pmatrix},\quad B = \begin{pmatrix}
+            3 & 2 & -2\\
+            -1 & 0 & 1\\
+            1 & 1 & 0
+        \end{pmatrix}, \quad C = \begin{pmatrix}
+            3 & 1 & 0\\
+            -4 & -1 & 0\\
+            4  & -8 & -2
+        \end{pmatrix}
+    \]
+\end{boxedproblem}
+\begin{sol}
+    1. We have
+    \begin{align*}
+        m_{A}(\lambda) = P_A(\lambda) = \det\begin{pmatrix}
+            3 - \lambda & -1 & 1\\
+            2 & -\lambda & 1\\
+            1 & -1 & 2 - \lambda
+        \end{pmatrix} = -(1 - \lambda)(2 - \lambda)^2,
+    \end{align*}
+    Choose 
+    \begin{align*}
+        v_1 &= (0,1,1) \in \ker(A - I)\\
+        v_3 &= (1,1,1) \in \ker(A - 2I)^2 \backslash \ker(A - 2I)\\
+        v_2 &= (1,1,0)= (A - 2I)v_3  \in \ker(A - 2I).
+    \end{align*}
+    We obtain 
+    \[
+        \begin{pmatrix}
+            0 & 1 & 1\\
+            1 & 1 & 1\\
+            1 & 0 & 1
+        \end{pmatrix}^{-1}\begin{pmatrix}
+            3 & -1 & 1 \\
+            2 & 0 & 1\\
+            1 & -1 & 2
+        \end{pmatrix}
+        \begin{pmatrix}
+            0 & 1 & 1\\
+            1 & 1 & 1\\
+            1 & 0 & 1
+        \end{pmatrix}
+        = \begin{pmatrix}
+            1 & 0 & 0\\
+            0 & 2 & 1\\
+            0 & 0 & 1
+        \end{pmatrix}.
+    \]
+    2. We have 
+    \[
+        P_B(\lambda) = \det\begin{pmatrix}
+            3 - \lambda & 2 & -2\\
+            -1 & -\lambda & 1\\
+            1 & 1 & -\lambda
+        \end{pmatrix} = (1 - \lambda)^3,
+    \]
+    and 
+    \[
+        m_{B}(\lambda) = (\lambda - 1)^2.
+    \]
+    Choose 
+    \begin{align*}
+        v_1 &= (1,0,1) \in \ker(B - I)\\
+        v_3 &= (1,0,0) \in \ker(B - I)^2 \backslash \ker(B - I)\\
+        v_2 &= (2,-1,1) = (B - I)v_3 \in \ker(B - I).
+    \end{align*}
+    So 
+    \[
+        \begin{pmatrix}
+            1 & 2 & 1\\
+            0 & -1 & 0\\
+            1 & 1 & 0 
+        \end{pmatrix}^{-1}\begin{pmatrix}
+            3 & 2 & -2\\
+            -1 & 0 & 1\\
+            1 & 1 & 0
+        \end{pmatrix}
+        \begin{pmatrix}
+            1 & 2 & 1\\
+            0 & -1 & 0\\
+            1 & 1 & 0 
+        \end{pmatrix}
+        =\begin{pmatrix}
+            1 & 0 & 0\\
+            0 & 1 & 1\\
+            0 & 0 & 1
+        \end{pmatrix}.
+    \]
+    3. We have 
+    \[
+        m_C(\lambda) = P_C(\lambda) = \det\begin{pmatrix}
+            3 - \lambda & 1 & 0\\
+            -4 & -1 - \lambda & 0\\
+            4 & -8 & -2 -\lambda 
+        \end{pmatrix} = (-2 -\lambda)(1 - \lambda)^2.
+    \]
+    Choose 
+    \begin{align*}
+        v_1 &= (0,0,1) \in \ker(A + 2I)\\
+        v_3 &= (-11,7,0) \in \ker(A - I)^2 \backslash \ker(A - I) \\
+        v_2 &= (-15,30,-100) = (A - I)v_3 \in \ker(A - I) .
+    \end{align*}
+    We obtain 
+    \[
+        \begin{pmatrix}
+            0 & -15 & -11\\
+            0 & 30 & 7\\
+            1 & -100 & 0
+        \end{pmatrix}^{-1}
+        \begin{pmatrix}
+            3 & 1 & 0\\
+            -4 & -1 & 0\\
+            4 & -8 & -2
+        \end{pmatrix}
+        \begin{pmatrix}
+            0 & -15 & -11\\
+            0 & 30 & 7\\
+            1 & -100 & 0
+        \end{pmatrix} =\begin{pmatrix}
+            -2 & 0 & 0\\
+            0 & 1 & 1\\
+            0 & 0 & 1
+        \end{pmatrix}
+    \]
+\end{sol}
+\begin{boxedproblem}
+    Find a $3\times 3$ matrix $A$ such that $m_A(\lambda) = \lambda^2$.
+\end{boxedproblem}
+\begin{sol}
+Try $A = \begin{pmatrix}
+    0 & 1 & 0\\
+    0 & 0 & 0\\
+    0 & 0 & 0
+\end{pmatrix}$.
+\end{sol}
+\section{Matrix Theory}
+\subsection{Spectral Theorem for Matrix}
+We prove some version of spectral theorem, firstly the generalized version in finite Hermitian vector space, i.e a complex vector space with a positive definite inner product. Recall some definitions.
+\begin{definition}[Adjoint operator]
+    Let $V$ be a finite Hermitian vector space. Let $T: V \to V$ be a linear operator, we define the adjoint $T^*$ to be the operator satisfying 
+    \[
+        \ip{v, T^*w } = \ip{Tv,w}.
+    \]
+\end{definition}
+    An important property about such operator is that $T^*$ is linear, unique and if $T$ is a matrix, then $T^*$ is the conjugate tranpose matrix of $T$. We call $T$ \textit{normal} if $TT^* = T^*T$. 
+\begin{theorem}[First Spectral Theorem]
+    Let $T: V \to V$ be a normal linear operator. Then $T$ admits orthonormal eigenbasis for $V$. 
+    Consequently, if $\beta$ is any orthonormal basis for $V$ and $A = [T]_\beta$. Then there exists $P \in U(n)$ and diagonal $\Sigma$  such that $A = P \Sigma P^{-1}$.
+\end{theorem}
+\begin{proof}
+    We prove this theorem by induction by the dimension $n$ of $V$. Indeed, let $\beta$ be an orthonormal basis for $V$ and let $ A = [T]_{\beta}$.
+    
+    In $\bb{C}$, the characteristic polymonial $\mc{X}_A(\lambda) = \det(A - \lambda I_n)$ always has roots. Then one can find an eigenvector $u \in V$ such that $Tu = ku$ for $k \in \bb{C}$. 
+
+    Normalizing $\norm{u} = 1$ and defining $U = \spann(u)$, one has $V = U \oplus U^\bot$. We will show that $T$ can be restricted to $T|_{U^\bot}: U^\bot \to U^\bot$.
+    \begin{claim}
+        For any subspace $W \subseteq V$ such that $T(W) \subseteq W$. Then $T^*(W^\bot) \subseteq W^\bot$.
+    \end{claim}
+    \begin{proof}[Proof of the claim]
+        Let $v \in W^\bot$, then for all $w \in W$, we have $Tw \in W$, hence
+        \[
+            \ip{w, T^*v} = \ip{Tw, v} = 0.
+        \]
+    \end{proof}
+    \begin{claim}
+        If $Tw = \lambda w$, then $T^* w = \clo{\lambda}w$.
+    \end{claim}
+    \begin{proof}[Proof of the claim]
+        Let $S = T - \lambda \mathrm{Id}_V$, then one has $S^* = T^* - \clo{\lambda}\mathrm{Id}_V$ and 
+        \begin{align*}
+            SS^* &= (T - \lambda \mathrm{Id}_V)(T^* - \clo{\lambda}\mathrm{Id}_V)\\
+            &= TT^* - \lambda T^* - \clo{\lambda}T + |\lambda|^2 \mathrm{Id}_V\\
+            &= T^*T - \lambda T^* - \clo{\lambda}T + |\lambda|^2 \mathrm{Id}_V\\
+            &= (T^* - \clo{\lambda}\mathrm{Id}_V)(T - \lambda \mathrm{Id}_V)\\
+            &= S^*S
+        \end{align*}
+        Hence $S$ is normal. Since $Sw = 0$, we have 
+        \[
+            \ip{Sw,Sw} = \ip{w, S^*Sw} = \ip{w, SS^*w} = \ip{S^*w,S^*w}  = 0
+        \]
+        Therefore, $S^*w = 0$.
+    \end{proof}
+    \begin{claim}
+        One has $T(U^\bot) \subseteq U^\bot$.
+    \end{claim}
+    \begin{proof}[Proof of the claim]
+        Let $v \in U^\bot$, since $U = \spann(u)$, then $T^*u = \clo{k}u \in U$. Therefore
+        \[
+            \ip{Tv, u}  = \ip{v, T^*u}  = 0.
+        \]
+    \end{proof}
+     Since $T|_{U^\bot}: U^\bot \to U^\bot$ and  $T^*|_{U^\bot}: U^\bot \to U^\bot$, then $T|_{U^\bot}$ is also normal.
+ By the induction hypothesis, there exists an orthonormal eigenbasis $(u_1,\dots, u_{n - 1})$ for $U^\bot$. Let $u_n = u$, since $V = U \oplus U^\bot$, $(u_1,\dots, u_{n- 1},u_n)$ forms an orthonormal eigenbasis for $V$. Finally, let $P = [u_1,\dots, u_n]_{\beta}$, we will show that $P \in U(n)$. Indeed, one has 
+    \[
+        [P^*P]_{ij } = [\clo{P}^TP]_{ij} = \ip{ u_i, u_j} =  \delta_{ij}
+    \]
+    Hence $P^*P = I_n$, this completes the proof.
+\end{proof}
+\begin{theorem}[Second Spectral Theorem]
+    If $A: \bb{R}^n \to \bb{R}^n$ is a symmetric matrix, i.e $A^T = A$, then there exists $P \in O(n)$ and a diagonal matrix $\Sigma: \bb{R}^n \to \bb{R}^n$ such that 
+    \[
+        A = P\Sigma P^T.
+    \]
+\end{theorem}
+\begin{proof}
+    From the first theorem, it only suffices to prove some following claims.
+    \begin{claim}
+        Every eigenvalue  of $A$ is real.
+    \end{claim}
+    \begin{proof}[Proof of the claim]
+        Supppose $Av = \lambda v$ with $v \neq 0$, one has 
+        \[
+            \lambda \ip{v,v}=  \ip{ v,\lambda v} = \ip{v,Av} = \ip{v, A^*v} = \ip{Av, v} = \clo{\lambda}\ip{v, v} 
+        \]
+        Since $\ip{v,v} > 0$, we obtain $\lambda = \clo{\lambda}$.
+    \end{proof}
+    \begin{claim}
+        For each eigenvalue $\lambda$ of $A$, one can choose a correspoding real eigenvector $A v = \lambda v$.
+    \end{claim}
+    \begin{proof}[Proof of the claim]
+        Let $x + iy \in \bb{C}^n$ satisfies $A (x + iy)= \lambda (x + iy)$, then 
+        \[
+            Ax + i Ay = \lambda x + i \lambda y
+        \]
+        Choose $v = x$, we obtain that $v$ is real and $Av = \lambda v$.
+    \end{proof}
+\end{proof}
+\section{Inner Product Spaces}
+\subsection{Bilinear Forms}
+Under coordinate changes, the area and angle between two vectors are preserved, however, we cannot decribe them through linear transformations or determinants explicitly. Henceforth, we introduce the bilinear form, a concept that generalizes the inner product, and study how those changes affect this form.
+\begin{definition}
+    Let $V$ be a vector space, a \textit{bilinear form} is a map $B: V \times V \to \bb{R}$ that is multilinear, i.e,
+    \begin{align*}
+        B(\alpha u_1 + u_2, \beta v_1 + v_2) &= \alpha B(u_1, \beta v_1 + v_2) + B(u_2, \beta v_1 + v_2)\\
+        &= \beta B(\alpha u_1 + u_2, v_1) + B(\alpha u_1, u_2, v_2)
+    \end{align*}
+    for all $u_1,u_2,v_1,v_2 \in V$ and $\alpha, \beta \in \bb{R}$. 
+    We define the \textit{quadratic form of $B$} to be $Q_B(u) = B(u,u)$ for all $u \in V$.
+\end{definition}
+As we know, every linear map in a finite vector space can be represented by a matrix (or a basis). We introduce the Gram matrix, a formal way to represent any bilinear form.
+\begin{definition}
+    Let $B$ be a bilinear in $V$ and suppose $\beta = (w_1,\dots, w_n)$ is a basis of $V$. We define the \textit{Gram matrix of $B$ in basis $\beta$} to be
+    \[
+        [B]_\beta = \left[B(w_i,w_j)\right]_{1 \leq i,j \leq n}
+    \]
+
+    In particular, we define the \textit{Gram matrix of $Q_B$ in basis of $\beta$} to be
+    \[
+        [Q_B]_\beta = [Q_{B}]_{ij} =  \begin{cases}
+            \left[\dfrac{1}{2}Q_B(u_i + u_j) - Q_B(u_i) - Q_B(u_j)\right]_{ij}, &i \neq j\\
+            [Q_B(u_i)]_{ii}, & i = j
+        \end{cases}
+    \]
+\end{definition}
+If $Q_B$ is a quadratic form of $B$ and for any $u = (u_i)_{\beta_0}, v= (v_i)_{\beta_0}$, we write 
+    \begin{equation}\label{bilinear}
+        B(u,v) = \sum_{i, j}^n a_{ij}u_iv_j,    
+    \end{equation}
+    and 
+    \begin{equation}\label{quadratic}
+        Q_B(u) = \sum_{i = 1}^n a_{ii}u_i^2 + \sum_{i \neq j}^n (a_{ij} + a_{ji})u_{i}u_j.    
+    \end{equation}
+
+\begin{proposition}
+    Bilinear form is invariant under the changes of basis, i.e, one has 
+    \[
+        B(u,v) = [u]_{\beta}^T [B]_{\beta} [v]_{\beta}
+    \]
+    for any basis $\beta$.
+\end{proposition}
+\begin{lemma}
+    Let $B$ be a bilinear form and suppose $\beta_1$ and $\beta_2$ are basis of $V$, then 
+    \[
+        [B]_{\beta_2}  = [\beta_1 \to \beta_2]^*[B]_{\beta_1}[\beta_1 \to \beta_2],
+    \]
+    and consequently,
+    \[
+        [Q]_{\beta_2} = [\beta_1 \to \beta_2]^*[Q]_{\beta_1}[\beta_1 \to \beta_2].
+    \]
+\end{lemma}
+\begin{proof}
+    Let $u, v \in V$ be arbitrary. Then we have 
+    \[
+        [u]_{\beta_2} = [\beta_1 \to \beta_2][u]_{\beta_1} \quad \text{ and }\quad [v]_{\beta_2} = [\beta_1 \to \beta_2][v]_{\beta_1}
+    \]
+    From the definition of bilinear forms
+    \[
+        B(u,v) = [u]_{\beta_1}^T [B]_{\beta_1} [v]_{\beta_1} = [u]_{\beta_2}^T [B]_{\beta_2} [v]_{\beta_2}
+    \]
+    In particular,  
+    \[
+        [u]_{\beta_1}^T [B]_{\beta_1} [v]_{\beta_1} = [u]^T_{\beta_2} [\beta_1 \to \beta_2]^T [B]_{\beta_{1}} [\beta_1 \to \beta_2][v]_{\beta_2}
+    \]
+    Hence, 
+    \[
+    [u]^T_{\beta_2} [\beta_1 \to \beta_2]^T [B]_{\beta_{1}} [\beta_1 \to \beta_2][v]_{\beta_2} = [u]_{\beta_2}^T [B]_{\beta_2} [v]_{\beta_2}
+    \]
+    Since this is true for all $u,v \in V$, this proves the lemma.
+\end{proof}
+\subsection{Lagrange's Algorithm}
+In this section, we establish an algorithm that transforms any bilinear form into a full-square form, which is defined as follows.
+\begin{definition}
+    Let $B$ be a bilinear form, the quadratic form $Q_B$ is called \textit{Q-canonical} if there exists a basis $\beta$ such that for any $[u]_{\beta} = (u_1,\dots, u_n)$, one has 
+    \[
+        Q_B(u) = \sum_{i = 1}^n a_{ii} u_i^2, \quad \text{ for all }u \in V.
+    \]
+    The such basis $\beta$ is called a \textit{Q-canonical basis for $Q_B$}.
+\end{definition}
+\begin{theorem}[Lagrange's Algorithm]
+    Every quadratic form $Q$ is $Q$-canonical.
+\end{theorem}
+\begin{proof}
+If $Q = 0$ for all $u \in V$, then $Q$ is $Q$-canonical. Suppose that $Q \neq 0$, we prove the theorem by induction. Consider two cases:
+
+    \textbf{Case 1:} There is $1 \leq i_0 \leq n$ such that $a_{i_0 i_0} \neq 0$. Let $[u]_{\beta_0} = (u_1,\dots,u_n)$, we write 
+    \begin{align*}
+        Q(u) &= \sum_{i = 1}^n a_{ii}u^2_i + \sum_{i \neq j}^n a_{ij}u_iu_j\\
+                &= a_{i_0i_0}\left[ u_{i_0}^2 + 2u_{i_0}\left( \sum_{i \neq i_0} \frac{a_{ii_0} + a_{i_0i}}{a_{i_0i_0}}u_i  \right)  + \sum_{i \neq i_0}\left(\frac{a_{ii_0} + a_{i_0i} }{a_{i_0i_0}} u_i\right)^2\right]\\
+                &-a_{i_0i_0}\sum_{i \neq i_0}\left(\frac{a_{ii_0} + a_{i_0i} }{a_{i_0i_0}} u_i\right)^2 + \sum_{i \neq j \neq i_0}a_{ij}u_iu_j\\
+                &= a_{i_0i_0}\left(u_{i_0} + \sum_{i \neq i_0} \frac{a_{ii_0} + a_{i_0i}}{a_{i_0i_0}}u_i \right)^2 + \sum_{i , j \neq i_0 }b_{ij}y_iy_j\\
+                &= a_{i_0}y_{i_0}^2 + Q_1(u)
+    \end{align*}
+    where $Q_1$ is another quadratic form which excluded $u_{i_0}$ term, and 
+    \[
+    \begin{cases}
+        y^1_{1} = u_{i_0} + \sum_{i \neq i_0} \frac{a_{ii_0} + a_{i_0i}}{a_{i_0i_0}}u_i,\\
+        y^1_i = u_i, \forall i \geq 2.
+    \end{cases}
+    \]
+  
+The transformation matrix of these coordinate changes is invertable. 
+
+\textbf{Case 2:} $a_{ii} = 0$ for all $1 \leq i \leq n$. Then there is $1 \leq i_0,j_0 \leq n$ such that $a_{i_0j_0} \neq 0$. Let 
+\[
+    \begin{cases}
+        u_{1} = y^1_{i_0} - y^1_{j_0}\\
+        u_{2} = y^1_{i_0} + y^1_{j_0}\\
+        y^1_i = u_1, \forall i \geq 3.
+    \end{cases} 
+\]
+The transformation matrix of these coordinate changes is also invertable.
+\[
+    Q(u) = a_{i_0j_0}(y_{1}^2 - y^2_{2}) + \sum_{i \neq j,\\(i,j)\neq(i_0,j_0)} a_{ij}u_iu_j 
+\]
+Since $a_{i_0j_0} \neq 0$, we deduce to the first case.
+
+As $Q$ is an arbitrary bilinear form, we argue similarly to $Q_1$, and yield $Q_{n} = 0$ after $n$ steps. Thus we obtain
+\[
+    Q(u) = \sum_{i = 1}^n a_{ii}(y_i^n)^2.
+\]
+and the $n$-vector set $\beta$ that changes $(u_i)$ into $(y_i)$ defined above is a basis for $V$. 
+\end{proof}
+Since the Gram matrix of a quadratic form is symmetric, then one can relate to the \textit{Spectral Theorem}.
+
+\begin{proposition}
+    Let $Q$ be a quadratic form on $V$. Then there exists a $Q$-canonical basis for $Q$ that is orthonormal.
+\end{proposition}
+\begin{proof}
+    Let $\beta_0$ be any orthonormal basis for $V$, then the Gram matrix $[Q]_{\beta_0}$ is symmetric, the second spectral theorem guaraantes that there is $P \in O(n)$ and a scaling matrix $\Sigma: \bb{R}^n \to \bb{R}^n$ such that 
+    \[
+        \Sigma = P^T [Q]_{\beta_0}P
+    \]
+    Let $\beta$ be the basis satisfying $P = [\beta \to \beta_0]$. Then 
+    \[
+        [Q]_{\beta} = [\beta \to \beta_0]^T [Q]_{\beta_0}[\beta \to \beta_0] = P^T[Q]_{\beta_0}P = \Sigma.
+    \]
+    Hence $\beta$ is $Q$-canonical and we claim that $\beta$ is orthonormal. Indeed, let $u_i, u_j \in \beta$ be basis vectors. Note that since $P$ is isometry,
+    \[
+        \ip{u_i,u_j} = \ip{P u_i, Pu_j}
+    \]
+    Writing $u_i = a_{1i}v_1 + \dots + a_{ni}v_n$ and $u_j = a_{1j}v_1 + \dots + a_{nj}v_n$. Then 
+    \begin{align*}
+        Pu_i &= (a_{i1},\dots, a_{in})\\
+        Pu_j &= (a_{j1},\dots, a_{jn}),
+    \end{align*}
+    with 
+    \[
+        P = \begin{pmatrix}
+            a_{11} & a_{21}&\cdots &a_{n1}\\
+            a_{21} & a_{22} & \cdots & a_{n2}\\
+            \vdots & \cdots & \ddots & \vdots \\
+            a_{n1} & a_{n2} & \cdots & a_{nn}
+        \end{pmatrix}
+    \]
+    Since $PP^T = I_n$, we obtain $\ip{P u_i, Pu_j} = \delta_{ij}$. Hence $\ip{u_i,u_j} = \delta_{ij}$, which implies that $\beta$ is orthonormal.
+\end{proof}
+\section{Euclidean Product}
+\begin{definition}
+    Let $V$ be a finite vector space on $\bb{R}$. The mapping $\ip{,}:V \times V \to \bb{R}$
+    is called an \textit{inner product} if it is a symmetric and positive definite bilinear form. 
+    
+    Especially, we call $\ip{,}$ \textit{Euclidean product} if for all $x = (x_1,\dots, x_n), y = (y_1,\dots, y_n) \in \bb{R}^n$, one has 
+    \[
+        \ip{x,y} = x_1y_1 + \dots + x_ny_n.
+    \]
+\end{definition}
+\section{Lagrange Multiplier Method}
+
+\end{document}

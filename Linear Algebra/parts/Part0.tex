@@ -1,0 +1,251 @@
+\chapter{Basic Set Theory}
+\label{part:vector-spaces-scalars-quotients}
+
+
+\label{chap:foundations}
+
+\section{Sets and Operations}
+\label{sec:sets-basic-constructions}
+A \textit{set} is just a collection of things, denoted (in common) by one letter, and its items are listed in the bracket $\{\}$ and separated by commas, for example:
+\[
+    A = \{1,2,3, \text{ orange}, \text{ apple}, \text{ anything you want}\}.
+\]
+The set of sets $(G = \{A,B\})$ is a set, and the set of nothing ($X = \{\varnothing\}$) is a set, but nothing ($\varnothing$) is itself a set, but $\varnothing$ is different to $\{\varnothing\}$ (why?). A \textit{subset $B$ of the set $A$} is also a set (of course), and every item in $B$ is contained in $A$, for example, this is an subset of $A$:
+\[
+    B = \{1,3, \text{ orange}\},
+\]
+then we write $A \subseteq B$. If we want to emphasize that ""$A$ contains $B$"", we want to write $A \supseteq B$. On the other hand, this is not a subset of $A$: 
+\[
+    C = \{2,3, \text{orange}, \text{ strawberry}\},
+\]
+and we write $C \subsetneq A$. Finally, we write $A = B$ if $A \subseteq B$ and $B \subseteq A$, most of proofs we would like to use this definition.
+
+Now introduce some set operations: 
+\begin{enumerate}
+    \item $A \cap B$ denotes all items belonging to $A$ and $B$,
+    \item $A \cup B$ denotes all items belonging to $A$ or $B$,
+    \item $A \backslash B$ denotes all items belongis to $A$ but not belonging to $B$.
+    \item $2^A$ denotes the set of all subsets of $A$.
+\end{enumerate}  
+Before the next section, try to prove some statements, it's easy but necessary.
+\begin{enumerate}
+    \item  If $A \cap B = \varnothing$, then $A \backslash B = A$.
+    \item If $B \subseteq A$, then $A \backslash B = A \cap B$.
+    \item 
+\end{enumerate}
+
+\section{Set Products}
+\label{sec:ordered-pairs-products-relations}
+
+
+Let $a$ and $b$ be items. The \textit{Kuratowski ordered pair} $(a,b)$ is defined by
+\[
+  (a,b):=\{\{a\},\{a,b\}\}.
+\]
+The first entry is called the \emph{first coordinate}, and the second
+entry is called the \emph{second coordinate}.
+
+
+
+\begin{proposition}
+For any items \(a,b,x,y\), one has 
+$
+  (a,b)=(x,y)
+$
+if and only if
+$a = x$ and $b = y$.
+\end{proposition}
+
+\begin{proof}
+Assume first that $(a,b)=(x,y)$.
+By the definition of an ordered pair, one has
+\[
+  \bigl\{\{a\},\{a,b\}\bigr\}
+  =
+  \bigl\{\{x\},\{x,y\}\bigr\}.
+\]
+
+Suppose first that $a=b$. Then
+$
+  (a,b)=\{\{a\}\}.
+$ Hence $(x,y)$ must also contain only one
+element, so $\{x\} = \{x,y\}$, implying that $x = y$ and $a = b = x = y$.
+
+Now suppose that \(a\neq b\). Then
+$
+  \{a\}\neq\{a,b\},
+$
+so the set defining $(a,b)$ has two distinct elements. Since the singleton
+$\{x\} \neq \{a,b\}$, then $\{x\}=\{a\}$,
+and hence \(x=a\). It follows that
+$
+  \{x,y\}=\{a,b\}.
+$
+Since $x=a$ and $a \neq b$, then $y \neq x$ and $y = b$.
+
+Conversely, if \(a=x\) and \(b=y\), then the two ordered pairs are equal
+directly from the definition.
+\end{proof}
+Now we want to expand the ordered pair into the $n$-ordered tuple. Let $A$ and $B$ be sets. Their \textit{Cartesian product} is
+\[
+  A\times B
+  :=
+  \{(a,b):a\in A,\ b\in B\}.
+\]
+\begin{remark}
+In general,
+\[
+  A\times B\neq B\times A.
+\]
+Even when the same objects occur in both products, their coordinates
+appear in different positions.
+\end{remark}
+
+\begin{definition}[Cartesian powers]
+For a set \(A\), define
+\[
+  A^2:=A\times A.
+\]
+More generally,
+\[
+  A^n
+  :=
+  \underbrace{A\times\cdots\times A}_{n\text{ factors}}.
+\]
+Equivalently, one may define the powers recursively by
+\[
+  A^{n+1}:=A^n\times A.
+\]
+\end{definition}
+
+An element of \(A^n\) is written as
+\[
+  (a_1,\ldots,a_n),
+\]
+where every coordinate belongs to \(A\).
+
+\begin{example}
+If
+\[
+  A=\{1,\text{apple}\},
+\]
+then
+\[
+  A^2
+  =
+  \{
+    (1,1),
+    (1,\text{apple}),
+    (\text{apple},1),
+    (\text{apple},\text{apple})
+  \}.
+\]
+\end{example}
+
+\begin{proposition}
+Let \(A\), \(B\), and \(C\) be sets. Then
+\[
+  A\times(B\cup C)
+  =
+  (A\times B)\cup(A\times C).
+\]
+\end{proposition}
+
+\begin{proof}
+Take an element \(z\in A\times(B\cup C)\). Then \(z=(a,t)\) for some
+\(a\in A\) and some \(t\in B\cup C\). Hence \(t\) belongs to \(B\) or
+to \(C\). In the first case, \(z\in A\times B\); in the second case,
+\(z\in A\times C\). Therefore
+\[
+  z\in(A\times B)\cup(A\times C).
+\]
+
+For the reverse inclusion, take
+\[
+  z\in(A\times B)\cup(A\times C).
+\]
+If \(z\in A\times B\), then \(z=(a,b)\) with \(a\in A\) and
+\(b\in B\subseteq B\cup C\). Hence \(z\in A\times(B\cup C)\).
+The case \(z\in A\times C\) is identical.
+\end{proof}
+
+\begin{proposition}
+Let \(A\), \(B\), and \(C\) be sets. Then
+\[
+  A\times(B\cap C)
+  =
+  (A\times B)\cap(A\times C).
+\]
+\end{proposition}
+
+\begin{proof}
+An ordered pair \((a,t)\) belongs to \(A\times(B\cap C)\) precisely
+when \(a\in A\) and \(t\) belongs to both \(B\) and \(C\). This is
+exactly the condition that \((a,t)\) belong to both \(A\times B\) and
+\(A\times C\).
+\end{proof}
+
+\begin{proposition}
+For every set \(A\),
+\[
+  A\times\varnothing=\varnothing
+  \qquad\text{and}\qquad
+  \varnothing\times A=\varnothing.
+\]
+\end{proposition}
+
+\begin{proof}
+An ordered pair in \(A\times\varnothing\) would need a second coordinate
+belonging to the empty set, which is impossible. The proof for
+\(\varnothing\times A\) is the same.
+\end{proof}
+
+
+\section{Relations}
+\label{subsec:relations}
+
+\begin{definition}[Relation from one set to another]
+Let \(A\) and \(B\) be sets. A relation from \(A\) to \(B\) is a subset
+\[
+  R\subseteq A\times B.
+\]
+When \((a,b)\in R\), we write
+\[
+  a\,R\,b
+\]
+and say that \(a\) is related to \(b\) by \(R\).
+\end{definition}
+
+A relation is therefore a chosen collection of ordered pairs. It need
+not assign exactly one element of \(B\) to each element of \(A\); that
+additional requirement belongs to the definition of a function.
+
+\begin{example}
+Let \(A\) be a set of students and \(B\) a set of project topics. Define
+\(R\subseteq A\times B\) by declaring that
+\[
+  s\,R\,t
+\]
+whenever the student \(s\) is assigned to the topic \(t\). Then \(R\)
+is a relation from \(A\) to \(B\).
+\end{example}
+
+\begin{example}
+Let
+\[
+  A=[-1,1],
+  \qquad
+  B=\R.
+\]
+The set
+\[
+  R
+  =
+  \{(x,y)\in A\times B:x^2+y^2=1\}
+\]
+is a relation from $A$ to $B$. Geometrically, it is the unit circle
+viewed as a subset of the Cartesian plane.
+\end{example}
+
+
+

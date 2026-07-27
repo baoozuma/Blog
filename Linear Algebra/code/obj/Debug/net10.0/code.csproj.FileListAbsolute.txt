@@ -1,0 +1,15 @@
+D:\Pure Math\02 - Subjects\Linear Algebra\code\obj\Debug\net10.0\code.GeneratedMSBuildEditorConfig.editorconfig
+D:\Pure Math\02 - Subjects\Linear Algebra\code\obj\Debug\net10.0\code.AssemblyInfoInputs.cache
+D:\Pure Math\02 - Subjects\Linear Algebra\code\obj\Debug\net10.0\code.AssemblyInfo.cs
+D:\Pure Math\02 - Subjects\Linear Algebra\code\obj\Debug\net10.0\code.csproj.CoreCompileInputs.cache
+D:\Pure Math\02 - Subjects\Linear Algebra\code\obj\Debug\net10.0\code.sourcelink.json
+D:\Pure Math\02 - Subjects\Linear Algebra\code\bin\Debug\net10.0\code.exe
+D:\Pure Math\02 - Subjects\Linear Algebra\code\bin\Debug\net10.0\code.deps.json
+D:\Pure Math\02 - Subjects\Linear Algebra\code\bin\Debug\net10.0\code.runtimeconfig.json
+D:\Pure Math\02 - Subjects\Linear Algebra\code\bin\Debug\net10.0\code.dll
+D:\Pure Math\02 - Subjects\Linear Algebra\code\bin\Debug\net10.0\code.pdb
+D:\Pure Math\02 - Subjects\Linear Algebra\code\obj\Debug\net10.0\code.dll
+D:\Pure Math\02 - Subjects\Linear Algebra\code\obj\Debug\net10.0\refint\code.dll
+D:\Pure Math\02 - Subjects\Linear Algebra\code\obj\Debug\net10.0\code.pdb
+D:\Pure Math\02 - Subjects\Linear Algebra\code\obj\Debug\net10.0\code.genruntimeconfig.cache
+D:\Pure Math\02 - Subjects\Linear Algebra\code\obj\Debug\net10.0\ref\code.dll

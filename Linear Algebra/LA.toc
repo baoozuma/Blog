@@ -1,0 +1,8 @@
+\contentsline {section}{\numberline {1}Jordan Forms}{2}{section.1}%
+\contentsline {section}{\numberline {2}Matrix Theory}{4}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Spectral Theorem for Matrix}{4}{subsection.2.1}%
+\contentsline {section}{\numberline {3}Inner Product Spaces}{6}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Bilinear Forms}{6}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Lagrange's Algorithm}{7}{subsection.3.2}%
+\contentsline {section}{\numberline {4}Euclidean Product}{9}{section.4}%
+\contentsline {section}{\numberline {5}Lagrange Multiplier Method}{10}{section.5}%

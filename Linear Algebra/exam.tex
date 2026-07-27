@@ -1,0 +1,363 @@
+﻿\documentclass[12pt,a4paper]{article}
+
+
+\usepackage{settings}
+\usepackage{mathtools}
+\usepackage{enumitem}
+
+\setlength{\parskip}{2pt plus 0.5pt minus 0.5pt}
+\setlist{itemsep=1pt, topsep=2pt, parsep=0pt, partopsep=0pt}
+\setlength{\abovedisplayskip}{5pt plus 1pt minus 1pt}
+\setlength{\belowdisplayskip}{5pt plus 1pt minus 1pt}
+\setlength{\abovedisplayshortskip}{3pt plus 1pt minus 1pt}
+\setlength{\belowdisplayshortskip}{3pt plus 1pt minus 1pt}
+
+\providecommand{\C}{\mathbb{C}}
+\providecommand{\K}{\mathbb{K}}
+\providecommand{\N}{\mathbb{N}}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\Imv}{Im}
+\DeclareMathOperator{\Span}{span}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\proj}{proj}
+\DeclareMathOperator{\dist}{dist}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\Id}{Id}
+\DeclareMathOperator{\spec}{spec}
+
+\begin{document}
+
+\begin{center}
+    {\Large\textbf{TRƯỜNG X -- KHOA TOÁN}}\par
+    \vspace{4pt}
+    {\large\textbf{ ĐỀ TỰ LUYỆN ĐẠI SỐ 2A}}\par
+    \vspace{4pt}
+    {\textbf{ Đại số tuyến tính II: Jordan, Dạng toàn phương, Không gian Euclid và SVD}}\par
+    \vspace{8pt}
+    \begin{tabular}{ll}
+        Thời gian: & 5 giờ 30 phút \\
+        Tổng điểm: & 100 điểm = 10 điểm cuối kỳ \\
+        Hình thức: & Tự luận, được phép sử dụng máy tính \\
+    \end{tabular}
+\end{center}
+
+\vspace{4pt}
+\hrule
+\vspace{8pt}
+
+\textbf{Quy ước.} Mọi không gian vectơ là hữu hạn chiều. Nếu không nói rõ trường cơ sở, ta làm việc trên $\R$. Khi xét dạng Jordan, được phép mở rộng trường cơ sở sang $\C$. Tích vô hướng chuẩn trên $\R^n$ được ký hiệu bởi $\langle x,y\rangle=x^Ty$.
+
+\textbf{Tinh thần đề.} Các định nghĩa cơ bản được cho ngay trong đề. Thí sinh không cần chép lại định nghĩa. Điểm tập trung vào chứng minh, vận dụng, nhận diện cấu trúc và tính toán có kiểm soát.
+
+\textbf{Các định nghĩa dùng chung.}
+\begin{itemize}
+    \item Nếu $A\in M_n(\R)$ đối xứng, dạng toàn phương liên kết với $A$ là $q_A(x)=x^TAx$. Dạng cực của $q_A$ là dạng song tuyến tính đối xứng $B_A(u,v)=u^TAv$; tương đương, $B_A(u,v)=\frac{1}{2}\big(q_A(u+v)-q_A(u)-q_A(v)\big)$.
+    \item $A$ xác định dương nếu $x^TAx>0$ với mọi $x\ne0$.
+    \item Hai ma trận đối xứng $A,B$ gọi là đồng dư nếu tồn tại ma trận khả nghịch $P$ sao cho $B=P^TAP$.
+    \item Với ma trận vuông $A$, một đa thức $p$ tác động lên $A$ bởi $p(A)$ theo cách thay biến $t$ bằng $A$.
+    \item $\Span(S)$ là không gian con sinh bởi $S$; $\Ker T$ và $\Imv T$ lần lượt là hạt nhân và ảnh của ánh xạ tuyến tính $T$; $\rank A$ là hạng của ma trận $A$; $\Id_V$ là ánh xạ đồng nhất trên $V$.
+    \item Nếu $W$ là không gian con của một không gian Euclid thì $W^\perp$ là phần bù trực giao của $W$, $\proj_W(u)$ là hình chiếu trực giao của $u$ lên $W$, và $\dist(u,W)=\min_{w\in W}\|u-w\|$.
+    \item $O_n(\R)=\{A\in M_n(\R):A^TA=I\}$ là nhóm các ma trận trực giao. Chuẩn Frobenius được ký hiệu bởi $\|A\|_F=\sqrt{\tr(A^TA)}$.
+    \item Phân rã giá trị suy biến thu gọn của ma trận $M$ được viết $M=U\Sigma V^T$, trong đó các số dương trên đường chéo của $\Sigma$ là các giá trị suy biến của $M$.
+\end{itemize}
+\newpage
+\section[Dạng Jordan, đa thức tối tiểu và chéo hóa]{Dạng Jordan, đa thức tối tiểu và chéo hóa - 25 điểm}
+
+Cho
+\[
+A=
+\begin{pmatrix}
+-1&1&1&0\\
+-1&2&1&-1\\
+5&-3&-2&5\\
+4&-2&-2&3
+\end{pmatrix}.
+\]
+
+Với $T:V\to V$ trên $\C$ và $n=\dim V$, không gian riêng suy rộng ứng với $\lambda$ là $G_\lambda(T)=\Ker(T-\lambda I)^n$. Đa thức tối tiểu $m_T(t)$ là đa thức đơn hệ bậc nhỏ nhất sao cho $m_T(T)=0$.
+
+Trong bài này, được phép thừa nhận kết quả sau: nếu dạng Jordan của \(T\) có các trị riêng
+\(\lambda_1,\ldots,\lambda_r\), thì bậc của nhân tử \((t-\lambda_i)\) trong đa thức tối tiểu
+\(m_T(t)\) bằng kích thước của khối Jordan lớn nhất ứng với trị riêng \(\lambda_i\).
+
+\begin{problem}[8 điểm]
+
+
+\begin{enumerate}[label=(\alph*)]
+    \item Tính đa thức đặc trưng $\chi_A(t)$.
+\item  Dùng kết quả được thừa nhận về đa thức tối tiểu và kích thước khối Jordan lớn nhất để chứng minh rằng \(T\) chéo hóa được khi và chỉ khi \(m_T(t)\) có nghiệm đơn. Từ đó kết luận \(A\) có chéo hóa được hay không.
+    \item Viết dạng Jordan $J$ của $A$ và tìm một ma trận khả nghịch $P$ sao cho $PJP^{-1} = A$.
+\end{enumerate}
+
+\end{problem}
+\begin{problem}[6 điểm]
+
+Đặt
+$
+x_0=
+\begin{pmatrix}
+-2,
+-5,
+0,
+-1
+\end{pmatrix}.
+$
+\begin{enumerate}[label=(\alph*)]
+\item Tính \(A^n x_0\) với mọi \(n\ge 0\).
+\item Khảo sát sự bị chặn của dãy \(\norm{A^n x_0}\). Tìm bậc tăng trưởng chính của \(\norm{A^n x_0}\) khi \(n\to\infty\).
+\end{enumerate}
+
+\end{problem}
+\begin{problem}[4 điểm]
+
+Giải bài toán Cauchy
+\[
+X'(t)=AX(t),\qquad X(0) =(-3,-5,0,0).
+\]
+Có thể viết nghiệm dưới dạng vector hoặc dưới dạng tọa độ tường minh.
+
+\end{problem}
+
+\begin{problem}[7 điểm]
+
+
+Chứng minh các mệnh đề sau:
+\begin{enumerate}[label=(\alph*)]
+    \item Nếu \(S:V\to V\) là toán tử lũy linh, tức là tồn tại \(N\ge 1\) sao cho \(S^N=0\), thì mọi trị riêng của \(S\) đều bằng \(0\).
+    \item Gọi \(J_s(0)\) là khối Jordan lũy linh kích thước \(s\):
+    \[
+    J_s(0)=
+    \begin{pmatrix}
+    0&1&0&\cdots&0\\
+    0&0&1&\cdots&0\\
+    \vdots&\vdots&\vdots&\ddots&\vdots\\
+    0&0&0&\cdots&1\\
+    0&0&0&\cdots&0
+    \end{pmatrix}.
+    \]
+    Chứng minh rằng $J_s(0)^s=0$ và $J_s(0)^{s-1}\ne0$.
+
+    \item Giả sử \(S\) là toán tử lũy linh và $d_k=\dim\Ker S^k, d_0 = 0$. Chứng minh rằng  số khối Jordan của $S$ có kích thước ít nhất $k$ là $d_k-d_{k-1}$.
+    \end{enumerate}
+\end{problem}
+
+
+\section[Dạng toàn phương, Lagrange và quán tính]{Dạng toàn phương, Lagrange và quán tính - 25 điểm}
+
+Với $m\in\R$, xét dạng toàn phương trên $\R^3$
+\[
+Q_m(x_1,x_2,x_3)=2x_1^2+2x_2^2+2x_3^2
++2mx_1x_2+2mx_1x_3+2x_2x_3.
+\]
+Gọi $A_m$ là ma trận đối xứng sao cho $Q_m(x)=x^TA_mx$, và $B_m(u,v)=u^TA_mv$ là dạng cực của $Q_m$.
+
+\begin{problem}[5 điểm]
+
+Viết $A_m$. Dùng thuật toán Lagrange để tìm một cơ sở $Q_m$-chính tắc của $\R^3$ và dạng chéo tương ứng. Từ đó suy ra hạng, chỉ số dương, chỉ số âm của $Q_m$ theo $m$.
+
+\end{problem}
+
+\begin{problem}[4 điểm]
+
+Với $m=1$, dùng định lý phổ để tìm một cơ sở chính tắc trực giao, tức là một cơ sở trực chuẩn gồm các vectơ riêng của $A_1$. Viết dạng chính tắc trực chuẩn của $Q_1$.
+
+\end{problem}
+
+\begin{problem}[5 điểm]
+
+Tìm tất cả $m$ sao cho $Q_m$ không xác định dương cũng không xác định âm. Chọn một giá trị $m$ như vậy và tìm hai vectơ $u,v$ sao cho $Q_m(u)>0$, $Q_m(v)<0$.
+
+\end{problem}
+
+\begin{problem}[3 điểm]
+
+Với $m=1$, tìm giá trị nhỏ nhất của $Q_1(x)$ trên mặt cầu $\|x\|=1$ và các vectơ đơn vị đạt giá trị đó.
+
+\end{problem}
+
+
+
+
+\begin{problem}[4 điểm]
+Với $m = 2$, tìm tất cả các không gian con $W$ của $\R^3$ sao cho $\dim W=2$ và $Q_2(u)>0$ với mọi $u\in W\setminus\{0\}$.
+\end{problem}
+
+\begin{problem}[4 điểm]
+Cho \(Q\) là một dạng toàn phương thực trên \(V\), \(\dim V=n\). Giả sử trong cơ sở
+\(\mathcal B=(u_1,\ldots,u_n)\),
+ta có
+\[
+Q(u)
+=
+f_1(x)^2+\cdots+f_s(x)^2
+-
+f_{s+1}(x)^2-\cdots-f_{s+t}(x)^2,
+\]
+trong đó \(x=(x_1,\ldots,x_n)\), và \(f_i\in(\mathbb R^n)^*\) với mọi \(i=1,\ldots,s+t\).
+
+Nếu \((p,q)\) là quán tính của \(Q\), chứng minh rằng
+$
+p\le s, q\le t.
+$
+\end{problem}
+
+\section[Không gian Euclid và hình chiếu ]{Không gian Euclid và hình chiếu - 25 điểm}
+
+Trong không gian Euclid $\R^4$ với tích vô hướng chính tắc, cho $W=\Span(u_1,u_2,u_3)$, trong đó $u_1=(2,1,-2,4)$, $u_2=(-2,1,-1,-6)$, $u_3=(-2,3,-4,-8)$. Cho $u=(5,5,-3,1)\in\R^4$.
+
+
+\begin{problem}[6 điểm]
+
+
+Cho biết hình chiếu trực giao $\proj_W(u)$ là vectơ $p\in W$ sao cho $u-p\in W^\perp$.
+
+\begin{enumerate}[label=(\alph*)]
+    \item Chứng minh tồn tại duy nhất $p\in W$ sao cho $u-p\in W^\perp$.
+    \item Chứng minh $p$ là nghiệm duy nhất của bài toán cực tiểu $\min_{w\in W}\|u-w\|$.
+    \item Chứng minh toán tử chiếu $P_W$ thỏa $P_W^2=P_W$ và $P_W^T=P_W$.
+\end{enumerate}
+
+\end{problem}
+\begin{problem}[8 điểm]
+
+
+\begin{enumerate}[label=(\alph*)]
+    \item Dùng Gram--Schmidt để trực chuẩn hóa hệ đã cho.
+    \item Tìm một cơ sở cho mỗi không gian con $W$ và $W^\perp$.
+    \item Tìm hình chiếu trực giao $\proj_W(u)$ của $u$ xuống $W$ và tính khoảng cách $\dist(u,W)$.
+\end{enumerate}
+
+\end{problem}
+
+
+\begin{problem}[5 điểm]
+Cho \(v_1,\ldots,v_k\in \mathbb R^n\), với \(1\le k\le n\). Đặt
+\[
+G=(\langle v_i,v_j\rangle)_{1\le i,j\le k}.
+\]
+Gọi \(P(v_1,\ldots,v_k)\) là hình hộp \(k\)-chiều sinh bởi \(v_1,\ldots,v_k\), tức là
+\[
+P(v_1,\ldots,v_k)
+=
+\left\{
+t_1v_1+\cdots+t_kv_k:
+0\le t_i\le 1
+\right\}.
+\]
+
+\begin{enumerate}[label=(\alph*)]
+    \item Chứng minh rằng \(G\) là ma trận nửa xác định dương.
+
+    \item Chứng minh rằng $
+    \det G=0 $
+    khi và chỉ khi \(v_1,\ldots,v_k\) phụ thuộc tuyến tính.
+
+    \item Giả sử \(v_1,\ldots,v_k\) độc lập tuyến tính. Chứng minh rằng thể tích \(k\)-chiều của hình hộp \(P(v_1,\ldots,v_k)\) là
+    \[
+    \operatorname{Vol}_k(P(v_1,\ldots,v_k))
+    =
+    \sqrt{\det G}.
+    \]
+
+\end{enumerate}
+\end{problem}
+
+\begin{problem}[6 điểm]
+
+Cho $V$ là một không gian Euclid và $f$ là một phép biến đổi trực giao trên $V$.
+\begin{enumerate}[label=(\alph*)]
+    \item Chứng minh rằng $V = \ker(f) \oplus \ker(f)^\bot$.
+    \item Chứng minh rằng $\Ker(f-\Id_V)=\Imv(f-\Id_V)^\perp$.
+    \item Chứng minh rằng nếu $(f-\Id_V)^2=0$ thì $f=\Id_V$.
+\end{enumerate}
+
+\end{problem}
+
+\section{Thương Rayleigh và SVD - 25 điểm}
+
+Cho
+\[
+M=
+\begin{pmatrix}
+1&1&0\\
+1&0&1
+\end{pmatrix}.
+\]
+
+\begin{problem}[7 điểm]
+
+
+Với $A=A^T$, xét thương Rayleigh
+\[
+R_A(x)=\frac{x^TAx}{x^Tx},\qquad x\ne0.
+\]
+
+\begin{enumerate}[label=(\alph*)]
+    \item Chứng minh $R_A$ đạt giá trị lớn nhất và nhỏ nhất trên mặt cầu đơn vị $S^{n-1}$.
+    \item Dùng nhân tử Lagrange chứng minh nếu $u\in S^{n-1}$ là điểm cực trị của $x\mapsto x^TAx$ trên $S^{n-1}$, thì $u$ là vectơ riêng của $A$.
+    \item Suy ra
+    \[
+    \lambda_{\max}(A)=\max_{\|x\|=1}x^TAx,
+    \qquad
+    \lambda_{\min}(A)=\min_{\|x\|=1}x^TAx.
+    \]
+\end{enumerate}
+
+\end{problem}
+
+\begin{problem}[6 điểm]
+
+
+Cho biết SVD thu gọn của $A$ có dạng
+$
+A=U\Sigma V^T,
+$
+trong đó các cột của $U,V$ là các vectơ trực chuẩn và $\Sigma$ chứa các giá trị suy biến dương.
+
+\begin{enumerate}[label=(\alph*)]
+    \item Chứng minh các giá trị suy biến của $A$ là căn bậc hai của các trị riêng không âm của $A^TA$.
+    \item Chứng minh
+    $
+    \sigma_1=\max_{\|x\|=1}\|Ax\|.
+    $
+    \item Giải thích rằng SVD biến mặt cầu đơn vị thành một elipsoid như thế nào?
+\end{enumerate}
+
+\end{problem}
+
+\begin{problem}[7 điểm]
+
+
+\begin{enumerate}[label=(\alph*)]
+    \item Tính các giá trị suy biến của $M$.
+    \item Tìm một SVD thu gọn của $M$.
+    \item Viết ma trận hạng $1$ tốt nhất của $M$ theo chuẩn Frobenius.
+\end{enumerate}
+
+Được phép dùng định lý Eckart--Young:
+\[
+\min_{\rank B\le r}\|M-B\|_F^2=
+\sum_{j>r}\sigma_j^2.
+\]
+
+
+
+\end{problem}
+
+\begin{problem}[5 điểm]
+Cho \(B\in M_n(\mathbb R)\). Dùng SVD của \(B\) để chứng minh rằng
+\[
+\operatorname{Vol}_n(P(Bv_1,\ldots,Bv_n))
+=
+|\det B|\operatorname{Vol}_n(P(v_1,\ldots,v_n)).
+\]
+\end{problem}
+
+
+
+\end{document}
+
+
+
+
+

@@ -1,0 +1,217 @@
+\chapter{Abstract Concepts}
+\section{Vector Spaces}
+Let $\bb{F}$ be a field. A \textit{vector space} over $\bb{F}$ is a nonempty set $V$ that is closed under addition and scalar multiplication, and
+equipped with two operations:
+
+\[
+  V\times V\longrightarrow V,
+  \qquad
+  (u,v)\longmapsto u+v,
+\]
+
+called \emph{vector addition}, and 
+
+\[
+  \bb{F}\times V\longrightarrow V,
+  \qquad
+  (a,v)\longmapsto av,
+\]
+called \emph{scalar multiplication}.
+
+These operations are required to satisfy the following properties for
+all vectors $u,v,w\in V$ and all scalars $a,b\in \bb{F}$.
+
+\begin{enumerate}
+\item {\scshape Associativity}:
+  $
+    (u+v)+w=u+(v+w).
+  $
+
+\item {\scshape Commutativity}:
+  $
+    u+v=v+u.
+  $
+
+  \item {\scshape Identity}: There is a vector $0_V\in V$ such that
+  $
+    v+0_V=v.
+  $
+
+  \item {\scshape Inversion}: There is a vector $-v\in V$ such that
+  $
+    v+(-v)=0_V.
+  $
+
+  \item Scalar multiplication is compatible with multiplication in
+  $\bb{F}$:
+  $
+    a(bv)=(ab)v.
+  $
+
+  \item The multiplicative identity of $\bb{F}$ acts trivially:
+  $
+    1_{\bb{F}}v=v.
+  $
+
+  \item Scalar multiplication distributes over vector addition:
+  $
+    a(u+v)=au+av.
+  $
+
+  \item Scalar addition distributes over scalar multiplication:
+  $
+    (a+b)v=av+bv.
+  $
+\end{enumerate}
+
+The elements of $V$ are called \emph{vectors}, and the elements of
+$\bb{F}$ are called \emph{scalars}.
+
+If there is a linear bijection $f: V \to \bb{R}^n$, then we call $n$ the dimension of $V$, denoted by $\dim V = n$. 
+
+A subset $U \subseteq V$ is called a \textit{subspace of $V$} if $U$ is itself a vector space over $\bb{F}$.
+
+Given a field $\bb{F}$, define 
+\[
+  \bb{F}^n := \bb{F}\times \cdots \times \bb{F} = \{(x_1, x_2, \ldots, x_n) \mid x_i \in \bb{F}, i=1,2,\ldots,n\}.
+\]
+For every element $a \in \bb{F}^n$, the coordinates of $a$ are denoted by $a = (a_1, a_2, \ldots, a_n)$. 
+
+Let $V_1,\dots, V_n \subseteq V$ be subspaces of $V$. The \textit{sum} of $V_1,\dots, V_n$ is defined as
+\[
+  V_1 + \cdots + V_n := \{v_1 + \cdots + v_n \mid v_i \in V_i, i=1,\dots,n\}. 
+\]
+If for every $i\in\{1,\ldots,n\}$, one has 
+\[V_i \cap \left(V_1 + \cdots + V_{i - 1} + V_{i +1 } + \cdots + V_n\right) = \{0\},\] we call this sum \textit{direct sum} of $V_1,\dots, V_n$, denoted by 
+\[
+  V_1 \oplus \cdots \oplus V_n := V_1 + \cdots + V_n.
+\]
+\begin{proposition}
+  $V_1 + \cdots + V_n$ is the smallest subspace of $V$ containing $V_1,\dots, V_n$.
+\end{proposition}
+\begin{proof}
+  Clearly, $V_1 + \cdots + V_n$ is a subspace and contains every $V_i$. Let $U \subseteq V$ be any subspace containing $V_1,\dots, V_n$. Let $v_i \in V_i$ for all $i$. Since $U$ is a subspace, we have $v_1 + \dots + v_n \in U$. So $V_1 + \dots + V_n \subseteq U$. 
+\end{proof}
+\begin{proposition}
+  If $v \in V_1 \oplus \cdots \oplus V_n$, then $v$ can be written in only one way 
+  $
+    v = v_1 + \cdots + v_n,
+  $
+  where $v_i \in V_i$ for all $i$.
+\end{proposition}
+\begin{proof}
+  Suppose $v = v_1 + \cdots + v_n = u_1 + \cdots + u_n$, where $u_i \in V_i$ for all $i$. Then 
+  \[  
+   (u_1 - v_1) + \cdots + (u_n - v_n) = x_1 + \cdots + x_n = 0
+  \]
+  where $x_i = u_i - v_i \in V_i$. One has 
+  \[
+    x_1 = -x_2 - \cdots - x_n.
+  \]
+  Since the RHS vector belongs to $V_{2} \oplus \cdots \oplus V_n$, $x_{1} \in V_{1}$, and \[V_{1} \cap V_{2} \oplus \cdots \oplus V_n = \{0\}.\] Therefore, $x_{1} \notin V_{2} \oplus \cdots \oplus V_n$, contradiction.
+\end{proof}
+Now let $V$ be a vector space, $v_1,\dots, v_n \in V$ be nonzero vectors. The \textit{spanning space} of $v_1,\cdots, v_n$ is the vector space defined by
+\[
+  \ip{v_1,\dots,v_n} = \{a_1v_1 + \dots + a_nv_n \mid (a_1,\dots, a_n) \in \bb{F}^n\}.
+\]
+We call $v_1,\cdots, v_n$ \textit{linearly independent} if 
+\[
+  a_1v_1 + \dots + a_n v_n = 0 \lra a_1 = \cdots = a_n = 0.
+\]
+and \textit{linearly dependent} if there exists $i < n$ and $a_i,\dots, a_n \in \bb{F} \backslash \{0\}$ such that 
+\[
+  a_iv_i + \cdots a_n v_n = 0
+\]
+We call the set of vectors $\beta = \{v_1,\dots, v_n\}$ a \textit{basis of $V$} if $v_1,\dots, v_n$ are linearly independent and $\ip{v_1,\dots, v_n} = V$. The number $n$ is called \textit{the dimension of $V$}. Actually, every vector space has a basis, no matter if $V$ is finite or infinite, which can be proved using Zorn's lemma. But we need a more general definition of linearly independent. 
+
+Let $U \subseteq V$ be any set, we call the set $U$ \textit{linearly independent} if for any $n \in \bb{N}$ and $u_1,\dots, u_n \in U$, the vectors $u_1,\cdots, u_n$ are linearly independent.
+
+We call the set $U$ \textit{a spanning set of $V$} if for every $v \in V$, there exists a sequence of (finite or countable) vectors $(v_k)_{k \in \bb{N}} \subseteq U$ and a corresponding sequence $(a_k)_{k \in \bb{N}} \subseteq \bb{F}^n$ such that 
+\[
+  v = a_1v_1 + a_2 v_2 + \dots = \sum_{k = 1}^\infty a_kv_k.
+\]
+\begin{lemma}[Zorn's Lemma]
+
+Let $(\mc{P},\leq)$ be a partially ordered set. Suppose that every chain
+$
+  \mc{C}\subseteq \mc{P}
+$
+has an upper bound in \(P\). Then \(P\) contains a maximal element (meaning that there are no element greater than it).
+\end{lemma}
+The rigorous proof is complicated, see its elementary proof \href{https://arxiv.org/pdf/2305.10258}{here} if you want to be an IMO participant. 
+\begin{theorem}[Hamel's Theorem]
+Every vector space $V$ has a basis.
+\end{theorem}
+\begin{proof}
+  Let 
+  \[
+    \mc{P} = \{S \subseteq V \mid S \text{ is linearly independent}\}.
+  \]
+  We have $\varnothing \in \mc{P}$.
+  Suppose $\mc{C} \subseteq \mc{P}$ is a chain of $\mc{P}$, let 
+  \[
+    P = \bigcup_{S \in \mc{C}} S.
+  \]
+  
+  \begin{claim}[Proof of the claim]
+      $P$  is linearly independent, or $P \in \mc{P}$.
+  \end{claim}
+  \begin{proof}
+    Let $u_1,\dots, u_m \in P$ and suppose 
+    \[
+      a_1u_1 + \cdots + a_mu_m = 0.
+    \]
+    Observe that for every $i$, there exists $S_i \in \mc{C}$ such that $u_i \in S_i$. Then one can assume that $S_1 \leq \cdots \leq S_m$. So $u_i \in S_m$ for all $i$. Hence $u_1,\cdots, u_m$ are linearly independent, which implies $P$ is linearly independent.
+  \end{proof}
+  By this claim, $P$ is an upper bound of the claim $\mc{C}$. By the Zorn lemma, $\mc{P}$ attains a maximal element $\mc{M}$. 
+  \begin{claim}
+    $\ip{\mc{M}} = V$.
+  \end{claim}
+  \begin{proof}[Proof of the claim]
+    Suppose $\ip{\mc{M}} \varsubsetneq V$. Let $v \in V \backslash \ip{\mc{M}}$ and $v \neq 0$. We will show that $\{v\} \cup \mc{M}$ is linearly independent. Indeed, let $u_1,\dots, u_m \in \mc{M}$. Suppose that 
+    \[
+      av + a_1u_1 + \dots + a_mu_m = 0
+    \]
+    If $a \neq 0$, then 
+    \[
+      v = -\frac{a_1}{a} u_1 - \dots - \frac{a_m}{a}u_m.
+    \]
+    Hence, $v \in \ip{M}$, contradiction. So $a = 0$, then $a_1u_1 + \dots + a_mu_m = 0$. Since $u_1,\dots, u_m$ are linearly independent, we obtain $a = a_1 = \dots = a_m = 0$. Then $\{v\} \cup \mc{M} \in \mc{P}$ and $\{v\}\cup \mc{M} \varsupsetneq \mc{M}$. This is also contradiction since $\mc{M}$ is a maximal element of $\mc{P}$.
+  \end{proof}
+  This shows that $\mc{M}$ is a basis of $V$.
+\end{proof}
+\begin{theorem}[Steinitz's Exchange Lemma]
+  
+\end{theorem}
+\begin{corollary}
+  Let $V$ be a finite vector space and $U \subseteq V$ is a subspace. Then there exists a subspace $W \subseteq V$ such that $U \oplus W = V$.
+\end{corollary}
+\begin{proposition}
+  If $f: \bb{R}^m \to \bb{R}^n$ is a linear bijection, then $m = n$.
+\end{proposition}
+\begin{proof}
+  Let $e_1,\dots, e_m$ be standard bases of $\bb{R}^m$. Given $x \in \bb{R}^n$, one may check that $f(e_1),\dots, f(e_m)$ form a basis of $\bb{R}^n$. Indeed, let $y = f^{-1}(x) = y_1e_1 + \dots +y_m e_m$, then
+  \begin{align*}
+    x &= y_1 f(e_1) + \dots + y_m f(e_m)
+  \end{align*}
+  Thus $f(e_1),\dots, f(e_m)$ span $\bb{R}^n$. Now suppose 
+  \[
+    y_1 f(e_1) + \dots + y_mf(e_m) = 0.
+  \]
+  One has 
+  \[
+    f(y_1e_1 + \dots + y_me_m) = 0.
+  \]
+  Since $f$ is linear, we have 
+  \[
+    y_1e_1 + \dots +y_m e_m  = 0.
+  \]
+  Since $e_1,\dots, e_m$ is linearly independent, $y_1 = \cdots = y_m = 0$. Therefore, $f(e_1),\dots, f(e_m)$ form a basis of $\bb{R}^n$, which implies $m = n$.
+\end{proof}
+In an infinite dimension, two bases in a vector space also have the same cardinality.
+\begin{proposition}
+  Let $V$ be infinite-dimensional, if $\mc{A}$ and $\mc{B}$ are two bases of $V$, then $|\mc{A}| = |\mc{B}|$ in cardinality.
+\end{proposition}
+\begin{proof}
+  
+\end{proof}
