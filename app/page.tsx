@@ -58,7 +58,7 @@ export default function HomePage() {
       I have a background in mathematical olympiads, and I still enjoy the strange elegance of olympiad combinatorics. One project I am slowly building is a collection of combinatorial problems viewed through Linear Algebra, Probability, and Graph Theory.
     </p>
     <p> 
-      Additionally, my favorite mathematicians are June Huh and of course, Paul Erdős. I enjoy listening to shoegaze and experimental rock, with bands representative of these genres such as Whirr and Ling Tosite Sigure .
+      Additionally, my favorite mathematicians are June Huh and of course, Paul Erdős. I enjoy listening to shoegaze and experimental rock, with bands representative of these genres such as Whirr and Ling Tosite Sigure. I am learning Czech and really want to go to Prague and stay there for a long time.
     </p>
       <p>
         Currently, I am an undergraduate at{" "}
