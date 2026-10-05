@@ -1,0 +1,320 @@
+---
+title: "Vector Spaces"
+date: "2026-07-27"
+description: "A first pass through vector spaces: subspaces, direct sums, linear independence, bases, Zorn's lemma, and the existence of complements."
+tags: ['Linear Algebra', 'Algebra']
+---
+
+## Vector Spaces
+
+<Definition label="Vector Space">
+Let $\mathbb{F}$ be a field. A **vector space** over $\mathbb{F}$ is a nonempty set $V$ equipped with two operations
+
+$$
+V \times V \longrightarrow V,
+\qquad
+(u,v) \longmapsto u+v,
+$$
+
+called **vector addition**, and
+
+$$
+\mathbb{F} \times V \longrightarrow V,
+\qquad
+(a,v) \longmapsto av,
+$$
+
+called **scalar multiplication**.
+
+These operations satisfy the following axioms for all $u,v,w \in V$ and all $a,b \in \mathbb{F}$:
+
+1. $(u+v)+w = u+(v+w)$.
+2. $u+v = v+u$.
+3. There exists $0_V \in V$ such that $v+0_V = v$.
+4. For every $v \in V$, there exists $-v \in V$ such that $v+(-v)=0_V$.
+5. $a(bv)=(ab)v$.
+6. $1_{\mathbb{F}}v=v$.
+7. $a(u+v)=au+av$.
+8. $(a+b)v=av+bv$.
+</Definition>
+
+The elements of $V$ are called **vectors**, and the elements of $\mathbb{F}$ are called **scalars**.
+
+The standard example is
+
+$$
+\mathbb{F}^n
+=
+\mathbb{F}\times \cdots \times \mathbb{F}
+=
+\{(x_1,\ldots,x_n) \mid x_i \in \mathbb{F}\}.
+$$
+
+For $a \in \mathbb{F}^n$, we write its coordinates as $a=(a_1,\ldots,a_n)$.
+
+## Subspaces
+
+<Definition label="Subspace">
+A subset $U \subseteq V$ is called a **subspace** of $V$ if $U$ is itself a vector space over the same field $\mathbb{F}$, using the addition and scalar multiplication inherited from $V$.
+</Definition>
+
+Equivalently, a nonempty subset $U \subseteq V$ is a subspace if
+
+$$
+u,v \in U,\ a,b \in \mathbb{F}
+\quad\Longrightarrow\quad
+au+bv \in U.
+$$
+
+This single closure condition is usually the most efficient way to check that a subset is a subspace.
+
+## Sums and Direct Sums
+
+Let $V_1,\ldots,V_n \subseteq V$ be subspaces. Their **sum** is
+
+$$
+V_1+\cdots+V_n
+:=
+\{v_1+\cdots+v_n \mid v_i \in V_i,\ i=1,\ldots,n\}.
+$$
+
+If for every $i \in \{1,\ldots,n\}$,
+
+$$
+V_i \cap
+\left(V_1+\cdots+V_{i-1}+V_{i+1}+\cdots+V_n\right)
+=
+\{0\},
+$$
+
+then this sum is called a **direct sum**, and we write
+
+$$
+V_1 \oplus \cdots \oplus V_n
+=
+V_1+\cdots+V_n.
+$$
+
+<Theorem label="Minimality of the Sum">
+The subspace $V_1+\cdots+V_n$ is the smallest subspace of $V$ containing $V_1,\ldots,V_n$.
+</Theorem>
+
+<Proof>
+Clearly $V_1+\cdots+V_n$ is a subspace and contains every $V_i$.
+
+Now let $U \subseteq V$ be any subspace containing $V_1,\ldots,V_n$. If $v_i \in V_i$ for all $i$, then each $v_i \in U$. Since $U$ is closed under addition,
+
+$$
+v_1+\cdots+v_n \in U.
+$$
+
+Thus $V_1+\cdots+V_n \subseteq U$, so it is contained in every subspace containing all the $V_i$.
+</Proof>
+
+<Theorem label="Uniqueness in Direct Sums">
+If $v \in V_1 \oplus \cdots \oplus V_n$, then $v$ can be written in exactly one way as
+
+$$
+v=v_1+\cdots+v_n,
+\qquad
+v_i \in V_i.
+$$
+</Theorem>
+
+<Proof>
+Suppose
+
+$$
+v_1+\cdots+v_n
+=
+u_1+\cdots+u_n,
+\qquad
+u_i,v_i \in V_i.
+$$
+
+Then
+
+$$
+(u_1-v_1)+\cdots+(u_n-v_n)=0.
+$$
+
+Fix $i$. Rearranging gives
+
+$$
+u_i-v_i
+=
+-\sum_{j\neq i}(u_j-v_j).
+$$
+
+The left side lies in $V_i$, while the right side lies in $\sum_{j\neq i}V_j$. Since the sum is direct,
+
+$$
+V_i \cap \sum_{j\neq i}V_j = \{0\}.
+$$
+
+Hence $u_i-v_i=0$. This holds for every $i$, so $u_i=v_i$ for all $i$.
+</Proof>
+
+## Span and Linear Independence
+
+Let $V$ be a vector space and let $v_1,\ldots,v_n \in V$. The **span** of these vectors is
+
+$$
+\operatorname{span}(v_1,\ldots,v_n)
+=
+\{a_1v_1+\cdots+a_nv_n \mid a_i \in \mathbb{F}\}.
+$$
+
+The vectors $v_1,\ldots,v_n$ are **linearly independent** if
+
+$$
+a_1v_1+\cdots+a_nv_n=0
+\quad\Longrightarrow\quad
+a_1=\cdots=a_n=0.
+$$
+
+They are **linearly dependent** if there is a nontrivial relation
+
+$$
+a_1v_1+\cdots+a_nv_n=0
+$$
+
+with at least one coefficient $a_i$ nonzero.
+
+<Definition label="Basis">
+A set $\beta=\{v_1,\ldots,v_n\}$ is a **basis** of $V$ if it is linearly independent and
+
+$$
+\operatorname{span}(\beta)=V.
+$$
+
+When $V$ has a finite basis with $n$ elements, we call $n$ the **dimension** of $V$ and write $\dim V=n$.
+</Definition>
+
+More generally, a subset $U \subseteq V$ is linearly independent if every finite subset of $U$ is linearly independent. It is a spanning set of $V$ if every vector $v \in V$ can be written as a finite linear combination of elements of $U$.
+
+For arbitrary vector spaces, bases need not be finite. Such bases are often called **Hamel bases**.
+
+## Zorn's Lemma and Hamel Bases
+
+<Lemma label="Zorn's Lemma">
+Let $(\mathcal{P},\leq)$ be a partially ordered set. Suppose every chain $\mathcal{C}\subseteq\mathcal{P}$ has an upper bound in $\mathcal{P}$. Then $\mathcal{P}$ contains a maximal element.
+</Lemma>
+
+Zorn's lemma is one of the standard forms of the axiom of choice. It is exactly the kind of tool that lets us prove existence theorems where no explicit construction is available.
+
+<Theorem label="Hamel's Theorem">
+Every vector space $V$ has a basis.
+</Theorem>
+
+<Proof>
+Let
+
+$$
+\mathcal{P}
+=
+\{S \subseteq V \mid S \text{ is linearly independent}\},
+$$
+
+ordered by inclusion. Since $\varnothing$ is linearly independent, $\mathcal{P}$ is nonempty.
+
+Let $\mathcal{C}\subseteq\mathcal{P}$ be a chain, and define
+
+$$
+P=\bigcup_{S\in\mathcal{C}}S.
+$$
+
+We claim that $P$ is linearly independent. Indeed, take finitely many vectors $u_1,\ldots,u_m \in P$ and suppose
+
+$$
+a_1u_1+\cdots+a_mu_m=0.
+$$
+
+For each $i$, choose $S_i \in \mathcal{C}$ such that $u_i \in S_i$. Since $\mathcal{C}$ is a chain, among the finitely many $S_i$ there is one that contains all the others. Hence all $u_i$ lie in a single linearly independent set from the chain, so $a_1=\cdots=a_m=0$.
+
+Thus $P\in\mathcal{P}$ and $P$ is an upper bound for $\mathcal{C}$. By Zorn's lemma, $\mathcal{P}$ has a maximal element $\mathcal{M}$.
+
+We now show that $\operatorname{span}(\mathcal{M})=V$. Suppose not. Choose
+
+$$
+v \in V \setminus \operatorname{span}(\mathcal{M}).
+$$
+
+Then $\mathcal{M}\cup\{v\}$ is linearly independent: if
+
+$$
+av+a_1u_1+\cdots+a_mu_m=0,
+\qquad
+u_i\in\mathcal{M},
+$$
+
+and $a\neq 0$, then
+
+$$
+v=-\frac{a_1}{a}u_1-\cdots-\frac{a_m}{a}u_m,
+$$
+
+which would put $v$ in $\operatorname{span}(\mathcal{M})$, a contradiction. Therefore $a=0$, and the independence of $\mathcal{M}$ forces $a_1=\cdots=a_m=0$.
+
+So $\mathcal{M}\cup\{v\}$ is a strictly larger linearly independent set, contradicting the maximality of $\mathcal{M}$. Hence $\mathcal{M}$ spans $V$, and therefore it is a basis of $V$.
+</Proof>
+
+## Exchange and Complements
+
+<Theorem label="Steinitz Exchange Lemma">
+Let $V$ be a vector space. Suppose $U\subseteq V$ is linearly independent and $W\subseteq V$ spans $V$. Then there exists a subset $W'\subseteq W$ such that
+
+$$
+U\cup W'
+$$
+
+is a basis of $V$.
+</Theorem>
+
+<Proof>
+Consider the partially ordered set
+
+$$
+\mathcal{P}
+=
+\{S\subseteq W \mid U\cup S \text{ is linearly independent}\},
+$$
+
+ordered by inclusion. By the same chain-union argument used in Hamel's theorem, every chain in $\mathcal{P}$ has an upper bound in $\mathcal{P}$. Zorn's lemma gives a maximal element $W'\subseteq W$.
+
+We claim $U\cup W'$ spans $V$. If not, since $W$ spans $V$, there must be some $w\in W$ not lying in $\operatorname{span}(U\cup W')$. Then
+
+$$
+U\cup W'\cup\{w\}
+$$
+
+is still linearly independent, contradicting the maximality of $W'$. Therefore $U\cup W'$ is both linearly independent and spanning, so it is a basis of $V$.
+</Proof>
+
+<Corollary label="Complements of Subspaces">
+Let $V$ be a finite-dimensional vector space and let $U\subseteq V$ be a subspace. Then there exists a subspace $W\subseteq V$ such that
+
+$$
+U\oplus W=V.
+$$
+</Corollary>
+
+<Proof>
+Choose a basis $\{u_1,\ldots,u_k\}$ of $U$. Since this set is linearly independent in $V$, the exchange lemma extends it to a basis
+
+$$
+\{u_1,\ldots,u_k,w_1,\ldots,w_m\}
+$$
+
+of $V$. Define
+
+$$
+W=\operatorname{span}(w_1,\ldots,w_m).
+$$
+
+Every vector in $V$ is a sum of something in $U$ and something in $W$, so $U+W=V$. The intersection $U\cap W$ is trivial because the displayed basis is linearly independent. Hence
+
+$$
+U\oplus W=V.
+$$
+</Proof>
